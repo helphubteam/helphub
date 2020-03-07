@@ -1,15 +1,11 @@
-class ArticlePresenter
-  def initialize(article)
-    @article = article
-  end
+# frozen_string_literal: true
 
-  attr_reader :article
-
+class ArticlePresenter < BasePresenter
   def call
-    {
-      name: article.name,
-      text: article.content,
-      type: article.kind
-    }
+    super.merge({
+                  name: target.name,
+                  text: target.content,
+                  kind: target.kind
+                })
   end
 end
