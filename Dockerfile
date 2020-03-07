@@ -35,7 +35,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY ./Gemfile /app/Gemfile
 COPY ./Gemfile.lock /app/Gemfile.lock
+ENV RAILS_ENV=development
 RUN bundle install
 COPY . /app
-ENV RAILS_ENV=production
 CMD ./start.sh
