@@ -40,8 +40,8 @@ module Api
 
       def permit_params(params)
         keys = [:stories] +
-              ArticlesSearcher::SEARCH_PARAMS +
-              StoriesSearcher::SEARCH_PARAMS
+               ArticlesSearcher::SEARCH_PARAMS +
+               StoriesSearcher::SEARCH_PARAMS
         params.permit(*keys)
       end
     end
