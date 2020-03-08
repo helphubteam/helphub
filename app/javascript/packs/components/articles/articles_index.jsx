@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { observer } from 'mobx-react';
+
+import articlesStore from '../../stores/articles_store';
+//import filtersStore from '../../stores/filters_store';
 
 import Api from 'packs/lib/api'
 import { buildItemComponent } from 'packs/lib/helpers'
@@ -21,10 +25,9 @@ const renderItems = (items) => (
   items.map(buildItemComponent)
 )
 
-const ArticlesIndex = () => {
-  const [items, setitems] = useState([])
+const ArticlesIndex = observer(() => {
   useEffect(() => {
-    fetchArticles({}, setitems)
+    fetchArticles({}, articlesStore.setitems)
   }, [] )
 
   const fetchArticlesOnFiltering = (filters) =>
@@ -33,14 +36,14 @@ const ArticlesIndex = () => {
   return (
     <div className='row' id='articles-index'>
       <div className='col-lg-6'>
-        {renderItems(items)}
+        {renderItems(articlesStore.items)}
       </div>
       <div className='col-lg-6'>
         <ArticlesFilter filterCallback={fetchArticlesOnFiltering}/>
       </div>
     </div>
   )
-}
+})
 
 ArticlesIndex.defaultProps = {
 }
