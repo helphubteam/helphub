@@ -3,7 +3,7 @@
 class ArticlesSearcher < BaseSearcher
   SEARCH_PARAMS = %i[query limit sort group].freeze
   GROUP_PARAM = :group
-  AVAILABLE_GROUP_VALUES = %i[name content kind].freeze
+  AVAILABLE_GROUP_VALUES = %i[name content kind created_at updated_at].freeze
   QUERY_FIELDS = %i[name content].freeze
 
   def call
