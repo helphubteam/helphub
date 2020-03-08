@@ -1,12 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { truncate } from 'packs/lib/helpers'
+
+const MAX_CONTENT_SIZE = 200
+
+const KIND_LABELS = {
+  post: 'label-success',
+  tweet: 'label-info',
+  facebook: 'label-primary',
+  blog: 'label-danger',
+}
 
 const ArticleItem = ({ target }) => {
   return (
-    <div id='article-item'>
-      <div>{target.kind}</div>
-      <div>{target.name}</div>
-      <p>{target.content}</p>
+    <div className='col-lg-12 mx-auto article-item'>
+      <span className={"label " + KIND_LABELS[target.kind]}>{target.kind}</span>
+      <h4>{target.name}</h4>
+      <p>{truncate(target.content, MAX_CONTENT_SIZE)}</p>
     </div>
   )
 }

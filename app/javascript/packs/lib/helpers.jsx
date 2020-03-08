@@ -20,3 +20,10 @@ export const buildItemComponent = (item) => {
       return <ArticlesGroupItem  key={item.value} target={item} />
   }
 }
+
+export const truncate = (input, number) => {
+  if (input.length > number)
+     return input.substring(0,number) + '...';
+  else
+     return input;
+};
