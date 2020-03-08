@@ -16,6 +16,7 @@ const ArticleItem = ({ target }) => {
   return (
     <div className='col-lg-12 mx-auto article-item'>
       <span className={cn("label", KIND_LABELS[target.kind])}>{target.kind}</span>
+      <span className={cn('label', 'label-default', 'timestamp')}>{target.created_at}</span>
       <h4>{target.name}</h4>
       <p>{truncate(target.content, MAX_CONTENT_SIZE)}</p>
     </div>
