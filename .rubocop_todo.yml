@@ -55,21 +55,6 @@ Layout/SpaceInsideArrayLiteralBrackets:
     - 'config/environments/production.rb'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: final_newline, final_blank_line
-Layout/TrailingEmptyLines:
-  Exclude:
-    - 'db/seeds.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'db/seeds/stories.rb'
-
-# Offense count: 1
 Metrics/AbcSize:
   Max: 17
 
@@ -85,16 +70,6 @@ Metrics/MethodLength:
 # Offense count: 1
 Metrics/PerceivedComplexity:
   Max: 8
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/api/articles_controller.rb'
-    - 'test/channels/application_cable/connection_test.rb'
-    - 'test/test_helper.rb'
 
 # Offense count: 17
 Style/Documentation:
@@ -146,12 +121,6 @@ Style/NumericLiterals:
 Style/PerlBackrefs:
   Exclude:
     - 'bin/bundle'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/RandomWithOffset:
-  Exclude:
-    - 'db/seeds/stories.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

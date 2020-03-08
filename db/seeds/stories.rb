@@ -14,12 +14,12 @@ unless Story.any?
 
   if Article.any?
     def pluck_articles
-      count = rand(10) + 1
+      count = rand(1..10)
       Article.order(Arel.sql('RANDOM()')).first(count)
     end
 
     Story.find_each do |story|
       story.articles = pluck_articles
-    end    
+    end
   end
 end
