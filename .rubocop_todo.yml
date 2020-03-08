@@ -97,19 +97,6 @@ Style/IfUnlessModifier:
     - 'bin/bundle'
 
 # Offense count: 1
-Style/MultilineBlockChain:
-  Exclude:
-    - 'app/searchers/articles_searcher.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: literals, strict
-Style/MutableConstant:
-  Exclude:
-    - 'app/searchers/articles_searcher.rb'
-
-# Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: MinDigits, Strict.
 Style/NumericLiterals:
