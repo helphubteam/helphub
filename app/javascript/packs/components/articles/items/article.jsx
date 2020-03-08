@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import cn from 'classnames'
 import { truncate } from 'packs/lib/helpers'
 
 const MAX_CONTENT_SIZE = 200
@@ -14,7 +15,7 @@ const KIND_LABELS = {
 const ArticleItem = ({ target }) => {
   return (
     <div className='col-lg-12 mx-auto article-item'>
-      <span className={"label " + KIND_LABELS[target.kind]}>{target.kind}</span>
+      <span className={cn("label", KIND_LABELS[target.kind])}>{target.kind}</span>
       <h4>{target.name}</h4>
       <p>{truncate(target.content, MAX_CONTENT_SIZE)}</p>
     </div>
