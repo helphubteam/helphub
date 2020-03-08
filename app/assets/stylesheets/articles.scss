@@ -2,7 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.article-item {
+.article-item, .story-item {
   border-bottom:  1px solid #888;
-  margin-top: 20px
+  margin-top: 20px;
+  position: relative;
+
+  .timestamp {
+    position: absolute;
+    top: 0;
+    right: 20px;
+  }
+}
+
+.input-group, .btn-group {
+  margin-top: 20px;
+  margin-left: 20px;
 }
