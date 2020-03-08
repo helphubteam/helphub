@@ -5,7 +5,8 @@ class ArticlesGroupPresenter < BasePresenter
     {
       field: target[:field],
       value: target[:value],
-      articles: articles
+      articles: articles,
+      type: 'articles_group'
     }
   end
 

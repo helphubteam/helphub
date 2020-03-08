@@ -4,7 +4,7 @@ class ArticlePresenter < BasePresenter
   def call
     super.merge({
                   name: target.name,
-                  text: target.content,
+                  content: target.content,
                   kind: target.kind
                 })
   end
