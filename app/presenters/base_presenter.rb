@@ -10,8 +10,8 @@ class BasePresenter
   def call
     {
       id: target.id,
-      created_at: I18n.l(target.created_at),
-      updated_at: I18n.l(target.updated_at),
+      created_at: I18n.l(target.created_at, format: :short),
+      updated_at: I18n.l(target.updated_at, format: :short),
       type: target.class.name.underscore
     }
   end
