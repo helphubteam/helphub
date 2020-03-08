@@ -23,8 +23,4 @@ class BaseSearcher
   def apply_limit(scope, value)
     scope.limit(value.to_i)
   end
-
-  def ilike_scope(scope, field, value)
-    scope.where("#{field} ilike '%#{value}%'")
-  end
 end
