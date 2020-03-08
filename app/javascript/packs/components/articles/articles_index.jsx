@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 
 import Api from 'packs/lib/api'
 import { buildItemComponent } from 'packs/lib/helpers'
+import ArticlesFilter from './articles_filter'
 
-const fetchArticles = (updateItems) => {
+const fetchArticles = (data, updateItems) => {
   fetch(Api.articles, { 
+    ...data,
     headers: {
       'Content-Type': 'application/json',
     }
@@ -22,17 +24,25 @@ const renderItems = (items) => (
 const ArticlesIndex = () => {
   const [items, setitems] = useState([])
   useEffect(() => {
-    fetchArticles(setitems)
+    fetchArticles({}, setitems)
   }, [] )
+
+  const fetchArticlesOnFiltering = (filters) =>
+    fetchArticles(filters, setitems)
+
   return (
-    <div id='articles-index'>
-      {renderItems(items)}
+    <div className='row' id='articles-index'>
+      <div className='col-lg-6'>
+        {renderItems(items)}
+      </div>
+      <div className='col-lg-6'>
+        <ArticlesFilter filterCallback={fetchArticlesOnFiltering}/>
+      </div>
     </div>
   )
 }
 
 ArticlesIndex.defaultProps = {
-  name: 'David'
 }
 
 ArticlesIndex.propTypes = {
