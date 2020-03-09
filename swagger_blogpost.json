@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Articles API reference",
+    "version": "1.0.0",
+    "title": "BlogPost API Refence",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "m2lxkuz@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Articles",
+      "description": "Articles list"
+    },
+    {
+      "name": "Articles Groups",
+      "description": "Grouped Articles by any field"
+    },
+    {
+      "name": "Stories",
+      "description": "Stories list"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/articles": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Find articles",
+        "description": "Returns list of items",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search phrase into article name and content",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Articles count",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Stories sort rule",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "created_at asc",
+              "created_at desc",
+              "name desc",
+              "name asc"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Articles"
+            }
+          }
+        }
+      }
+    },
+    "/articles.html": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Find stories",
+        "description": "Returns list of items",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search phrase into article name and content",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Stories count",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Stories sort rule",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "created_at asc",
+              "created_at desc",
+              "name desc",
+              "name asc"
+            ],
+            "format": "int64"
+          },
+          {
+            "name": "stories",
+            "in": "query",
+            "default": true,
+            "description": "Enable stories search",
+            "required": true,
+            "type": "boolean",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Stories"
+            }
+          }
+        }
+      }
+    },
+    "/articles.json": {
+      "get": {
+        "tags": [
+          "Articles Groups"
+        ],
+        "summary": "Find articles grouped by kind field",
+        "description": "Returns list of items",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search phrase into article name and content",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Articles count",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "default": "kind",
+            "description": "Articles count",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Stories sort rule",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "created_at asc",
+              "created_at desc",
+              "name desc",
+              "name asc"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ArticlesGroups"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Articles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Article"
+      }
+    },
+    "Stories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Story"
+      }
+    },
+    "ArticlesGroups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ArticlesGroup"
+      }
+    },
+    "Article": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "default": "article"
+        },
+        "name": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Article type",
+          "enum": [
+            "blog",
+            "post",
+            "tweet",
+            "facebook"
+          ]
+        },
+        "content": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "Story": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "default": "article"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "articles_count": {
+          "type": "integer"
+        },
+        "last_article": {
+          "$ref": "#/definitions/Article"
+        },
+        "articles": {
+          "$ref": "#/definitions/Articles"
+        }
+      }
+    },
+    "ArticlesGroup": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "articles_group"
+        },
+        "field": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "articles": {
+          "$ref": "#/definitions/Articles"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Repo github path",
+    "url": "https://github.com/lxkuz/blogpost"
+  }
+}
