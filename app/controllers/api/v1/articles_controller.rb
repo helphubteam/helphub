@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ArticlesController < ApplicationController
+    class ArticlesController < BaseController
       def index
         search_params = permit_params(params)
         searcher = build_searcher(search_params)
