@@ -29,7 +29,6 @@ class ArticlesStore {
   }
 
   setFilter(name, value) {
-    console.log('setFilter', name, value)
     this.filters = {...this.filters, [name]: value}
   }
 
@@ -44,11 +43,19 @@ class ArticlesStore {
 
   fetchItems() {
     axios.get(Api.articles, { 
-      params: this.filters,
+      params: this.buildParams(this.filters),
       headers: { 'Content-Type': 'application/json' },
       responseType: 'json'
     }).
     then(response => this.items = response.data)
+  }
+
+  buildParams(filters) {
+    const params = { ...filters }
+    if (params.stories && params.group) {
+      delete params.group
+    }
+    return params
   }
 }
 
