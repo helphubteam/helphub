@@ -19,11 +19,13 @@ const ArticlesFilter = observer(() => (
       <ArticlesSortSelect />
     </div>
     <div className="input-group">
-      <ArticlesGroupSelect />
-    </div>
-    <div className="input-group">
       <ArticlesStorySearchCheckbox />
     </div>
+    {
+      !articlesStore.filters.stories && <div className="input-group">
+        <ArticlesGroupSelect />
+      </div>
+    }
     <div className="btn-group" role="group">
       <button className='btn btn-primary' onClick={ () => articlesStore.fetchItems() }>Apply Filters</button>
       <button className='btn btn-danger' onClick={ () => articlesStore.cleanFilters() }>Clean Filters</button>
