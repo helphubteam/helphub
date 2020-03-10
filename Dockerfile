@@ -38,4 +38,6 @@ COPY ./Gemfile.lock /app/Gemfile.lock
 ENV RAILS_ENV=development
 RUN bundle install
 COPY . /app
+RUN yarn install --check-files
+RUN bundle exec rake assets:precompile
 CMD ./start.sh
