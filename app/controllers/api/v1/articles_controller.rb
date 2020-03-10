@@ -15,7 +15,7 @@ module Api
       private
 
       def build_searcher(search_params)
-        if search_params[:stories] && !search_params[:group]
+        if search_params[:stories] == 'true' && search_params[:group].blank?
           StoriesSearcher
         else
           ArticlesSearcher
@@ -23,9 +23,9 @@ module Api
       end
 
       def build_presenter(search_params)
-        if search_params[:group]
+        if search_params[:group].present?
           ArticlesGroupPresenter
-        elsif search_params[:stories]
+        elsif search_params[:stories] == 'true'
           StoryPresenter
         else
           ArticlePresenter
