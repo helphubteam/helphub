@@ -5,12 +5,12 @@ import ArticleItem from './article'
 const ArticlesGroupItem = ({ target }) => {
   return (
     <div className='col-lg-12 mx-auto story-item articles-group-item'>
-      <div>{target.field}: <b>{target.value}</b></div>
-      <div>
+      <div className='articles-group-item__label'>{target.field}: <b>{target.value}</b></div>
+      <div className='articles-group-item__articles'>
         { 
           target.articles.map(article => {
             return (
-              <ArticleItem target={article} />
+              <ArticleItem key={article.id} target={article} />
             )
           })
         }

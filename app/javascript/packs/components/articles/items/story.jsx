@@ -7,7 +7,7 @@ const renderArticlesInfo = (data) =>
   Object.keys(data).map((key, index) => {
     const value = data[key]
     return (
-      <div id={index}>{key}&nbsp;<span className="badge">{value}</span></div>
+      <div key={index}>{key}&nbsp;<span className="badge">{value}</span></div>
     )
   });
 
