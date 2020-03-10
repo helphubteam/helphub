@@ -4,7 +4,10 @@ import Api from 'packs/lib/api'
 
 const DEFAULT_FILTERS = {
   limit: 10,
-  sort: 'created_at DESC'
+  sort: 'created_at DESC',
+  query: '',
+  group: '',
+  stories: false
 }
 
 export const SORT_OPTIONS = [
