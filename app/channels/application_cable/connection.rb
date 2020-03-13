@@ -2,7 +2,7 @@
 
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    def connect
+    def connect   
     end
   end
 end
