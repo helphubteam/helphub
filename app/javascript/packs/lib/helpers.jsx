@@ -10,20 +10,24 @@ export const ITEM_TYPES = {
   ARTICLES_GROUP: 'articles_group'
 }
 
-export const buildItemComponent = (item) => {
-  switch(item.type) {
+export const buildItemComponent = item => {
+  switch (item.type) {
     case ITEM_TYPES.ARTICLE:
       return <ArticleItem key={item.id} target={item} />
     case ITEM_TYPES.STORY:
       return <StoryItem key={item.id} target={item} />
     case ITEM_TYPES.ARTICLES_GROUP:
-      return <ArticlesGroupItem  key={item.value} target={item} />
+      return <ArticlesGroupItem key={item.value} target={item} />
+    default:
+      return ''  
   }
 }
 
 export const truncate = (input, number) => {
-  if (input.length > number)
-     return input.substring(0,number) + '...';
-  else
-     return input;
-};
+  const start = 0
+  if (input.length > number) {
+    return `${input.substring(start, number)}...`
+  }
+
+  return input
+}

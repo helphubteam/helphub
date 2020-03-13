@@ -4,7 +4,7 @@ import articlesStore, { SORT_OPTIONS } from '../../../stores/articles_store';
 
 const ArticlesSortSelect = observer(() => (
   <select
-    name='sort'
+    name="sort"
     value={articlesStore.filters.sort}
     className="form-control"
     onChange={ ev => articlesStore.setFilter('sort', ev.target.value) }

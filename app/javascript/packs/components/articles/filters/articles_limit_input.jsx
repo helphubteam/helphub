@@ -5,7 +5,7 @@ import articlesStore from '../../../stores/articles_store';
 const ArticlesLimitInput = observer(() => (
   <input
     type="text"
-    name='limit'
+    name="limit"
     value={articlesStore.filters.limit}
     className="form-control"
     onChange={ ev => articlesStore.setFilter('limit', ev.target.value) }

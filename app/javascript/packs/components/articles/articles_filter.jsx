@@ -8,7 +8,7 @@ import ArticlesGroupSelect from './filters/articles_group_select'
 import ArticlesStorySearchCheckbox from './filters/articles_story_search_checkbox'
 
 const ArticlesFilter = observer(() => (
-  <div className='row' id='articles-index'>
+  <div className="row" id="articles-index">
     <div className="input-group">
       <ArticlesQueryInput />
     </div>
@@ -27,8 +27,8 @@ const ArticlesFilter = observer(() => (
       </div>
     }
     <div className="btn-group" role="group">
-      <button className='btn btn-primary' onClick={ () => articlesStore.fetchItems() }>Apply Filters</button>
-      <button className='btn btn-danger' onClick={ () => articlesStore.cleanFilters() }>Clean Filters</button>
+      <button className="btn btn-primary" onClick={ () => articlesStore.fetchItems() }>Apply Filters</button>
+      <button className="btn btn-danger" onClick={ () => articlesStore.cleanFilters() }>Clean Filters</button>
     </div>
   </div>
 ))

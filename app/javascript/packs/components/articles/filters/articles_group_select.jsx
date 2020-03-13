@@ -4,7 +4,7 @@ import articlesStore, { GROUP_OPTIONS } from '../../../stores/articles_store';
 
 const ArticlesGroupSelect = observer(() => (
   <select
-    name='group'
+    name="group"
     value={articlesStore.filters.group}
     className="form-control"
     onChange={ ev => articlesStore.setFilter('group', ev.target.value) }

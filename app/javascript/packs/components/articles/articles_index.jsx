@@ -11,15 +11,15 @@ import ArticlesFilter from './articles_filter'
 const ArticlesIndex = observer(() => {
   useEffect(() => {
     articlesStore.fetchItems()
-  }, [] )
+  }, [])
 
   return (
-    <div className='row' id='articles-index'>
-      <div className='col-lg-4'>
+    <div className="row" id="articles-index">
+      <div className="col-lg-4">
         <h4>Filters:</h4>
         <ArticlesFilter />
       </div>
-      <div className='col-lg-8'>
+      <div className="col-lg-8">
         { articlesStore.items.map(buildItemComponent) }
       </div>
   </div>
@@ -29,6 +29,6 @@ const ArticlesIndex = observer(() => {
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <ArticlesIndex name="React" />,
-    document.getElementById('articles-container'),
+    document.getElementById('articles-container')
   )
 })
