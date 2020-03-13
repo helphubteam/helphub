@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
+import '../../channels/index'
 
 import articlesStore from '../../stores/articles_store';
 
