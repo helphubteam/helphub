@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cn from 'classnames'
-  import ArticleItem from './article'
+import ArticleItem from './article'
 
 const renderArticlesInfo = data => Object.keys(data).map((key, index) => {
     const value = data[key]
@@ -19,5 +18,11 @@ const StoryItem = ({ target }) => (
       <ArticleItem target={target.last_article} />
     </div>
   )
+
+StoryItem.defaultProps = {}
+
+StoryItem.propTypes = {
+  target: PropTypes.object
+}
 
 export default StoryItem
