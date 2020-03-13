@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { observer } from 'mobx-react'
 import '../../channels/index'
 
-import articlesStore from '../../stores/articles_store';
+import articlesStore from '../../stores/articles_store'
 
 import { buildItemComponent } from 'packs/lib/helpers'
 import ArticlesFilter from './articles_filter'
@@ -13,6 +13,9 @@ const ArticlesIndex = observer(() => {
     articlesStore.fetchItems()
   }, [])
 
+  const {items} = articlesStore
+  const noResults = items.length === 0
+
   return (
     <div className="row" id="articles-index">
       <div className="col-lg-4">
@@ -20,7 +23,8 @@ const ArticlesIndex = observer(() => {
         <ArticlesFilter />
       </div>
       <div className="col-lg-8">
-        { articlesStore.items.map(buildItemComponent) }
+        { noResults && <p><h4>No results found, please try different search params...</h4></p> }
+        { items.map(buildItemComponent) }
       </div>
   </div>
   )
