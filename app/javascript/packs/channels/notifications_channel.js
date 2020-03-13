@@ -1,5 +1,5 @@
 import consumer from "./consumer"
-import { articlesStore } from '../stores/articles_store'
+import articlesStore from '../stores/articles_store'
 
 consumer.subscriptions.create(
   "NotificationsChannel", {
