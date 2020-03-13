@@ -21,6 +21,7 @@ export const GROUP_OPTIONS = [
 ]
 class ArticlesStore {
   @observable items
+
   @observable filters
 
   constructor() {
@@ -43,18 +44,19 @@ class ArticlesStore {
 
   fetchItems() {
     axios.get(Api.articles, { 
-      params: this.buildParams(this.filters),
+      params: this.buildParams(),
       headers: { 'Content-Type': 'application/json' },
       responseType: 'json'
     }).
     then(response => this.items = response.data)
   }
 
-  buildParams(filters) {
-    const params = { ...filters }
+  buildParams() {
+    const params = { ...this.filters }
     if (params.stories && params.group) {
-      delete params.group
+      params.group = ''
     }
+
     return params
   }
 }
