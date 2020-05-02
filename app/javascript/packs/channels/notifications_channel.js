@@ -1,5 +1,4 @@
 import consumer from "./consumer"
-import articlesStore from '../stores/articles_store'
 
 consumer.subscriptions.create("NotificationsChannel", {
   connected() {
@@ -11,6 +10,5 @@ consumer.subscriptions.create("NotificationsChannel", {
   },
 
   received() {
-    articlesStore.fetchItems()
   }
 });
