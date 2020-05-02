@@ -1,5 +1,5 @@
 const Api = {
-  articles: '/api/v1/articles.json'
+  // TODO: register API URLs
 }
 
 export default Api

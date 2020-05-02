@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ArticlePresenter < BasePresenter
+class SamplePresenter < BasePresenter
   def call
     super.merge({
                   name: target.name,

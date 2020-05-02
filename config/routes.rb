@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :articles, only: :index
+      # TODO: API routes
     end
   end
 
-  resources :articles, only: :index
-  root to: 'articles#index'
+  namespace :admin do
+    # TODO: admin UI routes
+  end
+
+  #root to: 'something'
 end
