@@ -4,6 +4,7 @@ services:
     environment:
       - RAILS_ENV=development
       - RUBYOPT=-W0
+      - LANG=en_US.UTF-8
     build: .
     volumes:
       - .:/app
