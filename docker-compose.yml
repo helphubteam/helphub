@@ -12,6 +12,7 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+    command: ./start.sh
 
   postgres:
     image: postgres:9.6.12

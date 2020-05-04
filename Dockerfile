@@ -7,6 +7,7 @@ RUN apt-get update -qq \
     git \
     cron \
     vim \
+    postgresql-client \
   && apt-get clean \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
@@ -40,4 +41,3 @@ RUN bundle install
 COPY . /app
 RUN yarn install --check-files
 RUN bundle exec rake assets:precompile
-CMD ./start.sh
