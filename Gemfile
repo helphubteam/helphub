@@ -25,6 +25,8 @@ gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'activerecord-postgis-adapter'
+
 gem 'devise'
 
 # Use Active Storage variant

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_160035) do
+ActiveRecord::Schema.define(version: 2020_05_08_135843) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "help_requests", force: :cascade do |t|
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.string "phone"
+    t.text "address"
+    t.integer "state", default: 0, null: false
+    t.text "comment"
+    t.string "person"
+    t.boolean "mediated", default: false, null: false
+    t.boolean "meds_preciption_required"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
