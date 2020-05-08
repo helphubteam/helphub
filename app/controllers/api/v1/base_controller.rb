@@ -4,6 +4,7 @@ module Api
   module V1
     class BaseController < ApplicationController
       before_action :setup_headers
+      protect_from_forgery with: :null_session
 
       private
 
