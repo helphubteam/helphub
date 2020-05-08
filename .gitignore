@@ -35,3 +35,4 @@ yarn-debug.log*
 # my ignore
 .generators
 .rakeTasks
+.idea
