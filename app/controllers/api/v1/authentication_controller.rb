@@ -1,17 +1,16 @@
 module Api
   module V1
     class AuthenticationController < Api::V1::BaseController
-      before_action :authorize_request, except: :login
       before_action :set_user, only: :login
 
       # POST /login
       def login
-        if @user&.authenticate(params[:password])
+        if @user&.valid_password?(params[:password])
           token = JsonWebToken.encode(user_id: @user.id)
-          time = Time.now + 24.hours.to_i
+          time = Time.now + 24.hours.to_i # token lifetime
           render json: { token: token,
-                         exp: time.strftime('%m-%d-%Y %H:%M'),
-                         username: @user.username }, status: :ok
+                         expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+                         email: @user.email }, status: :ok
         else
           render json: { error: 'Unauthorized' }, status: :unauthorized
         end
