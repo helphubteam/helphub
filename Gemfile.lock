@@ -171,6 +171,8 @@ GEM
     rgeo-activerecord (6.2.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -255,6 +257,9 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   redis (~> 4.0)
+  rgeo
+  rgeo-activerecord
+  rgeo-geojson
   rubocop
   sass-rails (>= 6)
   selenium-webdriver
