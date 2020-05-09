@@ -6,6 +6,8 @@ module Api
       before_action :setup_headers
       protect_from_forgery with: :null_session
 
+      TOKEN_LIFETIME = 336.hours.to_i.freeze
+
       private
 
       def setup_headers

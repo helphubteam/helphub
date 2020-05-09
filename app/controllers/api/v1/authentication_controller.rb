@@ -7,7 +7,7 @@ module Api
       def login
         if @user&.valid_password?(params[:password])
           token = JsonWebToken.encode(user_id: @user.id)
-          time = Time.now + 24.hours.to_i # token lifetime
+          time = Time.now + TOKEN_LIFETIME
           render json: { token: token,
                          expiration_date: time.strftime('%m-%d-%Y %H:%M'),
                          email: @user.email }, status: :ok
