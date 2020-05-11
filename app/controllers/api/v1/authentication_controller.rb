@@ -2,6 +2,7 @@ module Api
   module V1
     class AuthenticationController < Api::V1::BaseController
       before_action :set_user, only: :login
+      skip_before_action :authorize_request, only: :login
 
       # POST /login
       def login

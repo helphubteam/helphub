@@ -1,7 +1,7 @@
 module Api
   module V1
     class AuthorizationController < Api::V1::BaseController
-      before_action :authorize_request, only: :profile
+      # before_action :authorize_request, only: :profile
 
       def authorize_request
         decoded = JsonWebToken.decode(http_auth_header)
