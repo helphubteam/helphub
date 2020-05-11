@@ -34,8 +34,6 @@ module Api
                status: status
       end
 
-      private
-
       def setup_headers
         headers['Access-Control-Allow-Origin'] = '*'
         headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
