@@ -13,14 +13,4 @@ class BaseSearcher
       search_params
     )
   end
-
-  protected
-
-  def apply_sort(scope, value)
-    scope.reorder(value)
-  end
-
-  def apply_limit(scope, value)
-    scope.limit(value.to_i)
-  end
 end

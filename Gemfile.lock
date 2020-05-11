@@ -47,6 +47,9 @@ GEM
       activesupport (= 6.0.2.1)
     activerecord-import (1.0.4)
       activerecord (>= 3.2)
+    activerecord-postgis-adapter (6.0.0)
+      activerecord (~> 6.0)
+      rgeo-activerecord (~> 6.0)
     activestorage (6.0.2.1)
       actionpack (= 6.0.2.1)
       activejob (= 6.0.2.1)
@@ -164,6 +167,12 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rgeo (2.1.1)
+    rgeo-activerecord (6.2.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -235,6 +244,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  activerecord-postgis-adapter
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
@@ -247,6 +257,9 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   redis (~> 4.0)
+  rgeo
+  rgeo-activerecord
+  rgeo-geojson
   rubocop
   sass-rails (>= 6)
   selenium-webdriver
