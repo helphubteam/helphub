@@ -8,6 +8,32 @@ module Api
 
       TOKEN_LIFETIME = 336.hours.to_i.freeze
 
+      def authorize_request
+        @current_user = User.find(decoded[:user_id])
+      rescue ActiveRecord::RecordNotFound => e
+        render_error_message(e, :unauthorized)
+      rescue JWT::DecodeError => e
+        render_error_message(e, :unauthorized)
+      end
+
+      private
+
+      attr_reader :current_user
+
+      def decoded
+        JsonWebToken.decode(http_auth_header)
+      end
+
+      def http_auth_header
+        header = @request.headers['Authorization']
+        header&.split(' ')&.last
+      end
+
+      def render_error_message(error, status)
+        render json: { errors: error.message },
+               status: status
+      end
+
       private
 
       def setup_headers
@@ -15,10 +41,6 @@ module Api
         headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
         headers['Access-Control-Request-Method'] = '*'
         headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-      end
-
-      def authorize_request
-        AuthorizationController.new.authorize_request
       end
     end
   end
