@@ -1,13 +1,19 @@
 module Api
   module V1
     class AuthorizationController < Api::V1::BaseController
+      before_action :authorize_request, only: :profile
+
       def authorize_request
-        @decoded = JsonWebToken.decode(http_auth_header)
-        @current_user = User.find(@decoded[:user_id])
+        decoded = JsonWebToken.decode(http_auth_header)
+        @current_user = User.find(decoded[:user_id])
       rescue ActiveRecord::RecordNotFound => e
         render_error_message(e, :unauthorized)
       rescue JWT::DecodeError => e
         render_error_message(e, :unauthorized)
+      end
+
+      def profile
+        render json: @current_user
       end
 
       private
