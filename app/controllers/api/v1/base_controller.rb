@@ -25,7 +25,7 @@ module Api
       end
 
       def http_auth_header
-        header = @request.headers['Authorization']
+        header = request.headers['Authorization']
         header&.split(' ')&.last
       end
 
