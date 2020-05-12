@@ -3,12 +3,36 @@
 module Api
   module V1
     class BaseController < ApplicationController
-      before_action :setup_headers
+      before_action :setup_headers, :authorize_request
       protect_from_forgery with: :null_session
 
       TOKEN_LIFETIME = 336.hours.to_i.freeze
 
+      def authorize_request
+        @current_user = User.find(decoded[:user_id])
+      rescue ActiveRecord::RecordNotFound => e
+        render_error_message(e, :unauthorized)
+      rescue JWT::DecodeError => e
+        render_error_message(e, :unauthorized)
+      end
+
       private
+
+      attr_reader :current_user
+
+      def decoded
+        JsonWebToken.decode(http_auth_header)
+      end
+
+      def http_auth_header
+        header = request.headers['Authorization']
+        header&.split(' ')&.last
+      end
+
+      def render_error_message(error, status)
+        render json: { errors: error.message },
+               status: status
+      end
 
       def setup_headers
         headers['Access-Control-Allow-Origin'] = '*'
