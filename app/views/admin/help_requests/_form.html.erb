@@ -1,0 +1,18 @@
+<%= form_for([:admin, help_request]) do |f| %>
+  <div>
+    <%= f.text_field :lonlat_geojson, placeholder: 'Точка на карте' %>
+  </div>
+  <div>
+    <%= f.text_area :address, placeholder: 'Адрес' %>
+  </div>
+  <div>
+    <%= f.text_field :phone, placeholder: 'Телефон' %>
+  </div>
+  <div>
+    <%= f.text_field :person, placeholder: 'ФИО' %>
+  </div>
+  <div>
+    <%= f.text_area :comment, placeholder: 'Комментарий' %>
+  </div>
+  <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+<% end %>

@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    # TODO: admin UI routes
+    resources :help_requests, only: %i[
+      index new
+      update edit
+      destroy create
+    ]
   end
 
-  root :to => redirect("/users/sign_in")
+  root to: redirect('/users/sign_in')
 end
