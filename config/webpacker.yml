@@ -54,6 +54,8 @@ development:
   compile: true
 
   # Verifies that correct packages and versions are installed by inspecting package.json, yarn.lock, and node_modules
+  # This flag responsible for calling "yarn check --integrity" command that is being deprecated. See: https://classic.yarnpkg.com/en/docs/cli/check/.
+  # ToDo: Consider removing (or set to false) this flag.
   check_yarn_integrity: true
 
   # Reference: https://webpack.js.org/configuration/dev-server/

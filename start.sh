@@ -6,6 +6,9 @@ until psql -h postgres -U postgres -c '\l'; do
 done
 echo "Postgres is up - executing command"
 rm -f tmp/pids/server.pid
-RUBYOPT='-W0' bundle install
-RUBYOPT='-W0' bundle exec rake db:create db:migrate db:seed
-RUBYOPT='-W0' bundle exec rails s -p 3000 -b 0.0.0.0
+
+export RUBYOPT='-W0'
+bundle install
+yarn install --check-files
+bundle exec rake db:create db:migrate db:seed
+bundle exec rails s -p 3000 -b 0.0.0.0
