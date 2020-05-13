@@ -12,6 +12,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: "position: absolute; top: 10px; right: 10px" %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
