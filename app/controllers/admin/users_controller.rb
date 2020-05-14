@@ -13,7 +13,7 @@ module Admin
     def create
       @user = User.new(user_params)
 
-      if @user.save!
+      if @user.invite!
         redirect_to action: :index
       else
         render :new
@@ -38,7 +38,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:email, :role, :password, :password_confirmation)
+      params.require(:user).permit(:email, :role)
     end
   end
 end
