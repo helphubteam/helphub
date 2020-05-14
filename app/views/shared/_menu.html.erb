@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Кабинет Администратора</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <%
+        menu = [
+          ["Заявки", admin_help_requests_path],
+          ["Пользователи", admin_users_path]
+        ]
+      %>
+      
+      <% menu.each do |(name, url)| %>
+        <li class="nav-item <%= request.path.include?(url) ? 'active' : ''%>">
+          <%= link_to name, url, class: 'nav-link' %>
+        </li>
+      <% end %>
+
+      <div style='position: absolute; right: 20px'>
+        <b class='mr-1'><%= current_user.email %></b>
+        <%= link_to "Выйти", destroy_user_session_path,
+          method: :delete,
+          class: 'btn btn-outline-danger align-self-end'
+        %>
+      </div>
+    </ul>
+  </div>
+</nav>

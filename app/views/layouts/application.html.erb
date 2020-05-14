@@ -13,13 +13,7 @@
 
   <body>
     <div class="container d-flex flex-column pt-5">
-      <% if current_user %>
-        <%= link_to "Выйти", destroy_user_session_path,
-          method: :delete,
-          class: 'btn btn-outline-danger align-self-end my-3',
-          style: "position: absolute; top: 20px;"
-        %>
-      <% end %>
+      <%= render partial: 'shared/menu' if current_user %>
       <%= yield %>
     </div>
   </body>
