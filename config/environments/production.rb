@@ -62,6 +62,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # ToDo: need proper SMTP configuration
   config.action_mailer.default_url_options = { host: "http://covihelp.herokuapp.com/" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
