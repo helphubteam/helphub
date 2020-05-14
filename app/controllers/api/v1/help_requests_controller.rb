@@ -14,7 +14,7 @@ module Api
       private
 
       def permitted_params
-        params.permit(:limit)
+        params.permit(:limit, :lonlat)
       end
     end
   end
