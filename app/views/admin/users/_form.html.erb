@@ -1,0 +1,15 @@
+<%= form_for([:admin, user]) do |f| %>
+  <div>
+    <%= f.text_field :email, placeholder: 'Email' %>
+  </div>
+  <div>
+    <%= f.select :role, options_for_select(User.roles.keys), placeholder: 'Роль' %>
+  </div>
+  <div>
+    <%= f.password_field :password, placeholder: 'Password' %>
+  </div>
+  <div>
+    <%= f.password_field :password_confirmation, placeholder: 'Password conf' %>
+  </div>
+  <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+<% end %>

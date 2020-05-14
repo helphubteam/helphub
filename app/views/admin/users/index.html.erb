@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Роль</th>
+    <th></th>
+  </tr>
+  <% @users.each do |record| %>
+    <tr>
+      <td><%= record.email %></td>
+      <td><%= record.role %></td>
+      <td><%= link_to('Редактировать', edit_admin_user_path(record), class: 'btn btn-primary') %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+<%= link_to('Новый пользователь', new_admin_user_path, class: 'btn btn-default') %>
+</p>
