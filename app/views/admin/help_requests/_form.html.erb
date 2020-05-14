@@ -1,18 +1,28 @@
-<%= form_for([:admin, help_request]) do |f| %>
-  <div>
-    <%= f.text_field :lonlat_geojson, placeholder: 'Точка на карте' %>
+<% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
+<h3><%= title %></h3>
+<%= form_for([:admin, help_request], html: { class: 'mr-5' }) do |f| %>
+  <div class="form-group">
+    <%= f.text_field :lonlat_geojson, class: 'form-control', placeholder: 'Точка на карте' %>
   </div>
-  <div>
-    <%= f.text_area :address, placeholder: 'Адрес' %>
+  <div class="form-group">
+    <%= f.text_area :address, class: 'form-control', placeholder: 'Адрес' %>
   </div>
-  <div>
-    <%= f.text_field :phone, placeholder: 'Телефон' %>
+  <div class="form-group">
+    <%= f.text_field :phone, class: 'form-control', placeholder: 'Телефон' %>
   </div>
-  <div>
-    <%= f.text_field :person, placeholder: 'ФИО' %>
+  <div class="form-group">
+    <%= f.text_field :person, class: 'form-control', placeholder: 'ФИО' %>
   </div>
-  <div>
-    <%= f.text_area :comment, placeholder: 'Комментарий' %>
+  <div class="form-group">
+    <%= f.text_area :comment, class: 'form-control', placeholder: 'Комментарий' %>
   </div>
   <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+  <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
+  <% unless help_request.new_record? %>
+    <%= link_to('Удалить', admin_help_request_path(@help_request), 
+      method: :delete,
+      data: { confirm: 'Вы уверены что хотите удалить заявку?' },
+      class: 'btn btn-outline-danger align-self-start') 
+    %>
+  <% end %>
 <% end %>
