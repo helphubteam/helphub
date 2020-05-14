@@ -2,10 +2,10 @@
 <h3><%= title %></h3>
 <%= form_for([:admin, user], html: { class: 'mr-5' }) do |f| %>
   <div class="form-group">
-    <%= f.text_field :email, placeholder: 'Email' %>
+    <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
   </div>
   <div class="form-group">
-    <%= f.select :role, options_for_select(User.roles.keys), placeholder: 'Роль' %>
+    <%= f.select :role, options_for_select(User.roles.keys), {}, class: 'form-control', placeholder: 'Роль' %>
   </div>
   <%= f.submit('Сохранить', class: 'btn btn-primary') %>
   <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
