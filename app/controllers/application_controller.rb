@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
   protected
   
   def after_sign_in_path_for(resource)
-    return admin_help_requests_path if resource.admin?
+    if resource.admin?
+      return admin_help_requests_path
+    else
+      # ToDo: render mobile link after attempt volonteer sign_in
+    end
     super
   end
 end
