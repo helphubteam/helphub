@@ -5,7 +5,10 @@
     <%= f.text_field :email, class: 'form-control', placeholder: 'Email' %>
   </div>
   <div class="form-group">
-    <%= f.select :role, options_for_select(User.roles.keys), {}, class: 'form-control', placeholder: 'Роль' %>
+    <%= f.select :role,
+                 options_for_select(User.roles.keys.map {|key| [I18n.t(key, scope: [:roles]), key]}),
+                 {},
+                 class: 'form-control', placeholder: 'Роль' %>
   </div>
   <%= f.submit(user.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
   <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>

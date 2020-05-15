@@ -1,0 +1,5 @@
+ru:
+  roles:
+    volunteer: 'Волонтер'
+    moderator: 'Модератор'
+    admin: 'Администратор'
