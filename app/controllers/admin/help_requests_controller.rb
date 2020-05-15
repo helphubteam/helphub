@@ -16,6 +16,11 @@ module Admin
       if @help_request.update_attributes(
         record_params
       )
+        if params[:activate] && @help_request.blocked?
+          @help_request.activate!
+        elsif params[:block] && !@help_request.blocked?
+          @help_request.block!
+        end
         redirect_to action: :index
       else
         render :edit

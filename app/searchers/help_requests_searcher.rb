@@ -5,11 +5,16 @@ class HelpRequestsSearcher < BaseSearcher
 
   def call
     scope = HelpRequest.limit(search_params[:limit] || 10)
+    scope = state_order(scope)
     scope = near_order(scope)
     scope
   end
 
   private
+
+  def state_order(scope)
+    scope.reorder(:state)
+  end
 
   def near_order(scope)
     return scope unless search_params[:lonlat]
