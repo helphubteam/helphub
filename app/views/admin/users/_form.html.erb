@@ -7,7 +7,7 @@
   <div class="form-group">
     <%= f.select :role, options_for_select(User.roles.keys), {}, class: 'form-control', placeholder: 'Роль' %>
   </div>
-  <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+  <%= f.submit(user.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
   <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
   <% unless user.new_record? %>
     <%= link_to('Удалить', admin_user_path(@user),
