@@ -2,8 +2,6 @@
 /* eslint-disable no-new */
 import Vue from 'vue/dist/vue.esm.js';
 import LeafletMap from '../components/LeafletMap'
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-draw/dist/leaflet.draw.css'
 
 // Known issue with missing marker icons. See: https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing.
 // eslint-disable-next-line
