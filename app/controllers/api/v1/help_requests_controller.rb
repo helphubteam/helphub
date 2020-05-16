@@ -6,7 +6,7 @@ module Api
       before_action :fill_help_request, only: [:assign, :submit, :refuse]
 
       def index
-        records = HelpRequestsSearcher.new(permitted_params).call
+        records = Api::HelpRequestsSearcher.new(permitted_params).call
         response = records.map do |record|
           HelpRequestPresenter.new(record).call
         end
