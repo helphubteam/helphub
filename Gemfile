@@ -33,6 +33,8 @@ gem 'rgeo-geojson'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 
+gem 'stateful_enum'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

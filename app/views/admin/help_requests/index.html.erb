@@ -2,6 +2,7 @@
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
     <tr>
+    <th scope="col" style="width: 15%">Статус</th>
     <th scope="col">Адрес</th>
     <th scope="col">Телефон</th>
     <th scope="col">ФИО</th>
@@ -11,11 +12,15 @@
   </thead>
   <% @help_requests.each do |record| %>
     <tr>
+      <td style="width: 15%">
+        <%= help_request_state_label(record).html_safe %>
+        <div>Заявка №<%= record.id %></div>
+      </td>
       <td><%= record.address %></td>
       <td><%= record.phone %></td>
       <td><%= record.person %></td>
       <td><%= record.comment %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(record), class: 'btn btn-primary') %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(record), class: 'btn btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
