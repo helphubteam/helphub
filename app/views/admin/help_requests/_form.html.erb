@@ -1,5 +1,6 @@
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
 <h3><%= title %></h3>
+<p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <%= form_for([:admin, help_request], html: { class: 'mr-5' }) do |f| %>
   <div class="form-group">
     <%= f.text_field :lonlat_geojson, class: 'form-control', placeholder: 'Точка на карте' %>
@@ -17,6 +18,8 @@
     <%= f.text_area :comment, class: 'form-control', placeholder: 'Комментарий' %>
   </div>
   <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+  <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') unless help_request.blocked? %>
+  <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
   <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
   <% unless help_request.new_record? %>
     <%= link_to('Удалить', admin_help_request_path(@help_request), 

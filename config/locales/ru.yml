@@ -1,0 +1,15 @@
+ru:
+  help_request_cases:
+    errors:
+      unactive: Заявка неактивна
+      assigned_already: Заявка уже взята Вами в работу
+      volunteer_role_only: Пользователь должен быть волонтером
+      unassigned: Заявка не взята в работу
+      not_own: Невозможно выполнить чужую заявку
+      submitted_already: Заявка уже выполненв
+  help_request:
+    states:
+      active: Новая
+      assigned: В работе
+      submitted: Выполнена
+      blocked: Отменена

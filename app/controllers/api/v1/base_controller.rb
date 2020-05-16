@@ -9,16 +9,18 @@ module Api
       TOKEN_LIFETIME = 336.hours.to_i.freeze
 
       def authorize_request
-        @current_user = User.find(decoded[:user_id])
+        @current_api_user = User.find(decoded[:user_id])
       rescue ActiveRecord::RecordNotFound => e
         render_error_message(e, :unauthorized)
       rescue JWT::DecodeError => e
         render_error_message(e, :unauthorized)
       end
 
-      private
+      protected
 
-      attr_reader :current_user
+      attr_reader :current_api_user
+
+      private
 
       def decoded
         JsonWebToken.decode(http_auth_header)

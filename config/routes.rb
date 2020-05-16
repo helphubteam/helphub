@@ -5,7 +5,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'authentication#login'
       get '/profile', to: 'profiles#show'
-      resources :help_requests, only: :index
+      resources :help_requests, only: :index do
+        member do
+          post :assign
+          post :submit
+          post :refuse
+        end
+      end
     end
   end
 
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
       update edit
       destroy create
     ]
+
     resources :users, only: %i[
       index new
       update edit
