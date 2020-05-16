@@ -6,7 +6,7 @@ class UserPresenter < BasePresenter
                   role: target.role,
                   email: target.email,
                   created_at: target.created_at.to_i,
-                  updated_at: target.updated_at.to_i
+                  updated_at: target.updated_at.try(:to_i)
                 })
   end
 end
