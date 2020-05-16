@@ -11,8 +11,8 @@
     <% end %>
 <% end %>
 <%= form_for([:admin, help_request], html: { class: 'mr-5' }) do |f| %>
-  <div class="form-group">
-    <%= f.text_field :lonlat_geojson, class: 'form-control', placeholder: 'Точка на карте' %>
+  <div id="vue-app">
+    <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
   </div>
   <div class="form-group">
     <%= f.text_area :address, class: 'form-control', placeholder: 'Адрес' %>

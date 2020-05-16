@@ -11,12 +11,17 @@
     "axios": "^0.19.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "classnames": "^2.2.6",
+    "leaflet": "^1.6.0",
+    "leaflet-draw": "^1.0.4",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "turbolinks": "^5.2.0"
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.2",
+    "vue-template-compiler": "^2.6.11",
+    "vue2-leaflet": "^2.5.2"
   },
   "version": "0.1.0",
   "devDependencies": {
