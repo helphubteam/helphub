@@ -1,4 +1,8 @@
 ru:
+  roles:
+    volunteer: 'Волонтер'
+    moderator: 'Модератор'
+    admin: 'Администратор'
   help_request_cases:
     errors:
       unactive: Заявка неактивна

@@ -24,6 +24,7 @@ module Admin
 
     def update
       @user.update(user_params)
+      redirect_to action: :index
     end
 
     def destroy
