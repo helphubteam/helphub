@@ -1,6 +1,15 @@
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
 <h3><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
+<% if (help_request.assigned? || help_request.submitted?) %>
+  <% volunteer = help_request.volunteer %>
+  <% if volunteer %>
+    <div class="alert alert-info mr-5" role="alert">
+      <strong>Волонтер:</strong>
+      <%= link_to volunteer.email, edit_admin_user_path(volunteer) %>
+    </div>
+    <% end %>
+<% end %>
 <%= form_for([:admin, help_request], html: { class: 'mr-5' }) do |f| %>
   <div class="form-group">
     <%= f.text_field :lonlat_geojson, class: 'form-control', placeholder: 'Точка на карте' %>
