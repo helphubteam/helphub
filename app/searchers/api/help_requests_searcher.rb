@@ -7,7 +7,8 @@ module Api
       offset: 0,
       lonlat: nil,
       sort: 'created_at DESC',
-      taken: false
+      taken: false,
+      distance: 400
     }.freeze
 
     attr_reader :search_params, :current_api_user
@@ -62,8 +63,13 @@ module Api
       return scope unless search_params[:lonlat]
 
       long, lat = search_params[:lonlat].split('_').map(&:to_f)
-      order_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})')) ASC"
-      scope.reorder(order_query)
+      distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
+      distance_order_query = "#{distance_query} ASC"
+      distance_limit_query = "#{distance_query} < #{(search_params[:distance].to_i * 1000)}"
+
+      scope.
+        where(distance_limit_query).
+        reorder(distance_order_query)
     end
   end
 end
