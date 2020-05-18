@@ -32,4 +32,5 @@ class HelpRequest < ApplicationRecord
   end
 
   scope :active, -> { where(state: :active) }
+  scope :assigned, -> { where(state: :assigned) }
 end
