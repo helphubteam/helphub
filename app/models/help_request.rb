@@ -5,13 +5,13 @@ class HelpRequest < ApplicationRecord
 
   belongs_to :volunteer, class_name: 'User', optional: true
 
-  enum state: {active: 0, assigned: 1, submitted: 2, blocked: 3} do
+  enum state: { active: 0, assigned: 1, submitted: 2, blocked: 3 } do
     event :assign do
-      transition :active => :assigned
+      transition active: :assigned
     end
 
     event :submit do
-      transition :assigned => :submitted
+      transition assigned: :submitted
     end
 
     event :refuse do
@@ -19,11 +19,11 @@ class HelpRequest < ApplicationRecord
         self.volunteer = nil
       end
 
-      transition :assigned => :active
+      transition assigned: :active
     end
 
     event :activate do
-      transition :blocked => :active
+      transition blocked: :active
     end
 
     event :block do
@@ -32,4 +32,5 @@ class HelpRequest < ApplicationRecord
   end
 
   scope :active, -> { where(state: :active) }
+  scope :assigned, -> { where(state: :assigned) }
 end

@@ -32,7 +32,11 @@ module Api
       end
 
       def render_error_message(error, status)
-        render json: { errors: error.message },
+        render json: {
+          errors: [
+            { message: error.message }
+          ]
+        },
                status: status
       end
 
