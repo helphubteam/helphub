@@ -55,6 +55,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'rubocop'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :test do
