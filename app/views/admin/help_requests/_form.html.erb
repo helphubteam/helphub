@@ -19,7 +19,19 @@
     <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
   </div>
   <div class="form-group">
-    <%= f.text_area :address, class: 'form-control', placeholder: 'Адрес' %>
+    <%= f.text_area :city, class: 'form-control', placeholder: 'Город' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :district, class: 'form-control', placeholder: 'Район' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :street, class: 'form-control', placeholder: 'Улица' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :house, class: 'form-control', placeholder: 'Дом' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :apartment, class: 'form-control', placeholder: 'Квартира' %>
   </div>
   <div class="form-group">
     <%= f.text_field :phone, class: 'form-control', placeholder: 'Телефон' %>

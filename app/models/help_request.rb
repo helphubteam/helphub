@@ -38,6 +38,43 @@ class HelpRequest < ApplicationRecord
     end
   end
 
+  def addressString
+    result=''
+    if !city.blank?
+      result += 'г. ' + city
+    end
+
+    if !district.blank?
+      result += ', район ' + district
+    end
+    if !street.blank?
+      result += ', ул. ' + street
+    end
+    if !house.blank?
+      result += ', д. ' + house
+    end
+    if !apartment.blank?
+      result += ', кв. ' + apartment
+    end
+  end
+
+  def addressSearchString
+    result=''
+    if !city.blank?
+      result += 'г. ' + city
+    end
+
+    if !district.blank?
+      result += ', район ' + district
+    end
+    if !street.blank?
+      result += ', ул. ' + street
+    end
+    if !house.blank?
+      result += ', д. ' + house
+    end
+  end
+
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
   
