@@ -31,7 +31,7 @@ module Api
 
     def map_scope(scope)
       scope
-        .active
+        .where(state: [:active, :assigned])
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
         .yield_self(&method(:apply_sort))
