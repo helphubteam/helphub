@@ -1,0 +1,17 @@
+<%= form_tag admin_help_requests_path, method: 'GET', class: 'mb-4' do %>
+  <div class='row'>
+    <div class='col-9'>
+      <div class="field control-group float-left">
+        <%= text_field_tag :search, params[:search], placeholder: 'Поиск...', class: 'form-input' %>
+      </div>
+      <div class="field form-check ml-4 float-left">
+        <%= check_box_tag :overdue, true, params[:overdue], class: 'form-check-input' %>
+        <%= label_tag :overdue, 'Показать просроченные заявки' %>
+      </div>
+    </div>
+    <div class='col-3'>
+      <%= submit_tag 'Фильтровать', class: 'btn btn-sm float-right ml-2 btn-outline-success' %>
+      <%= link_to 'Сбросить', admin_help_requests_path, class: 'btn btn-sm float-right btn-outline-secondary' %>
+    </div>
+  </div>
+<% end %>
