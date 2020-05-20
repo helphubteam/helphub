@@ -29,6 +29,12 @@ Rails.application.routes.draw do
       update edit
       destroy create
     ]
+
+    resources :organizations, only: %i[
+      index new show
+      update edit
+      destroy create
+    ]
   end
 
   root to: redirect('/users/sign_in')
