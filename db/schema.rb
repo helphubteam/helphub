@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_193935) do
+ActiveRecord::Schema.define(version: 2020_05_19_182949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 2020_05_15_193935) do
     t.integer "volunteer_id"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "country"
+    t.string "city"
+    t.string "site"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
@@ -47,9 +56,12 @@ ActiveRecord::Schema.define(version: 2020_05_15_193935) do
     t.integer "invitation_limit"
     t.integer "invited_by_id"
     t.string "invited_by_type"
+    t.bigint "organization_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "users", "organizations"
 end

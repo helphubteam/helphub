@@ -1,0 +1,29 @@
+<h3>Организации</h3>
+<table class="table table-bordered table-hover">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Наименование</th>
+    <th scope="col">Страна</th>
+    <th scope="col">Город</th>
+    <th scope="col">Сайт</th>
+    <th scope="col" style="width: 10%"></th>
+  </tr>
+  </thead>
+  <% @organizations.each do |record| %>
+    <tr>
+      <td>
+        <a href=<%= admin_organization_path(record)%>><%= record.title %></a>
+      </td>
+      <td><%= record.country %></td>
+      <td><%= record.city %></td>
+      <td><%= record.site %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_organization_path(record), class: 'btn btn-primary') %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+  <%= link_to('Новая организация',
+              new_admin_organization_path,
+              class: 'btn btn-outline-secondary align-self-start my-3')
+  %>
+</p>

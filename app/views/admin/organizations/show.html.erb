@@ -1,0 +1,22 @@
+<h3><%= @organization.title %></h3>
+<p class="font-weight-lighter"><%= @organization.city %>, <%= @organization.country %></p>
+<p class="font-weight-light"><%= @organization.site %></p>
+
+<h4> Пользователи </h4>
+<table class="table table-bordered table-hover">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Email</th>
+    <th scope="col">Роль</th>
+    <th scope="col" style="width: 10%"></th>
+  </tr>
+  </thead>
+  <% @users.each do |record| %>
+    <tr>
+      <td><%= record.email %></td>
+      <td><%= I18n.t(record.role, scope: [:roles]) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to('Назад', admin_organizations_path, class: 'btn btn-outline-secondary align-self-start') %>
+

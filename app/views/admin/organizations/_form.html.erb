@@ -1,0 +1,25 @@
+<% title = organization.new_record? ? "Новая организация" : "Организация: #{organization.title}" %>
+<h3><%= title %></h3>
+<%= form_for([:admin, organization], html: { class: 'mr-5' }) do |f| %>
+  <div class="form-group">
+    <%= f.text_field :title, class: 'form-control', placeholder: 'Наименование' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :country, class: 'form-control', placeholder: 'Страна' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :city, class: 'form-control', placeholder: 'Город' %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :site, class: 'form-control', placeholder: 'Сайт' %>
+  </div>
+  <%= f.submit(organization.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
+  <%= link_to('Отмена', admin_organizations_path, class: 'btn btn-outline-secondary align-self-start') %>
+  <% unless organization.new_record? %>
+    <%= link_to('Удалить', admin_organization_path(organization),
+                method: :delete,
+                data: { confirm: 'Вы уверены что хотите удалить организацию?' },
+                class: 'btn btn-outline-danger align-self-start')
+    %>
+  <% end %>
+<% end %>
