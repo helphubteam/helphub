@@ -15,6 +15,7 @@
   <body>
     <div class="container d-flex flex-column">
       <%= render partial: 'shared/menu' if current_user %>
+      <%= bootstrap_flash %>
       <%= yield %>
     </div>
   </body>
