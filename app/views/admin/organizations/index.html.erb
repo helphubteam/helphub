@@ -6,6 +6,8 @@
     <th scope="col">Страна</th>
     <th scope="col">Город</th>
     <th scope="col">Сайт</th>
+    <th scope="col">Участники</th>
+    <th scope="col">Заявки</th>
     <th scope="col" style="width: 10%"></th>
   </tr>
   </thead>
@@ -17,6 +19,8 @@
       <td><%= record.country %></td>
       <td><%= record.city %></td>
       <td><%= record.site %></td>
+      <td style="width: 10%"><%= record.users.count %></td>
+      <td style="width: 10%"><%= record.help_requests.count %></td>
       <td style="width: 10%"><%= link_to('Редактировать', edit_admin_organization_path(record), class: 'btn btn-primary') %></td>
     </tr>
   <% end %>

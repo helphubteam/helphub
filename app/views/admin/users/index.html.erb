@@ -15,7 +15,7 @@
         <% if record.organization%>
           <a href=<%= admin_organization_path(record.organization)%>><%= record.organization.title %></a>
         <% else %>
-          <%= 'Организация не назначена' %>
+          <div class="font-italic">Организация не назначена</div>
         <% end %>
       </td>
       <td><%= I18n.t(record.role, scope: [:roles]) %></td>
