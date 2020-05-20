@@ -1,6 +1,6 @@
 unless Organization.any?
   Organization.create!(
-      title: 'Новая организация',
+      title: 'Орзанизация_1',
       country: 'Беларусь',
       city: 'Минск',
       site: 'new_site.by'
