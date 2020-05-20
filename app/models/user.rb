@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable,
          :rememberable, :validatable,
          :invitable #, invite_for: 2.weeks # the period the generated invitation token is valid
+  belongs_to :organization, optional: true # ToDo: add conditions = true only admin
 
   enum role: { volunteer: 0, moderator: 1, admin: 2 }
 
