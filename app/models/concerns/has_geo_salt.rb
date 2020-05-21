@@ -15,6 +15,8 @@ module HasGeoSalt
     end
 
     def lonlat_with_geo_salt(source_point)
+      return nil unless source_point
+
       point = JSON.parse(source_point)
       point['coordinates'].map! do |value|
         value + GEO_SALT_SIZE * rand(-50..49) / 100.0
