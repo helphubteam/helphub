@@ -12,7 +12,7 @@
   </div>
   <div class="form-group">
     <%= f.select :organization_id,
-                 options_for_select(Organization.all.map {|record| [record.title, record.id]}),
+                 options_for_select(Organization.pluck(:title, :id)),
                  {},
                  class: 'form-control', placeholder: 'Организация' %>
   </div>

@@ -13,9 +13,7 @@
   </thead>
   <% @organizations.each do |record| %>
     <tr>
-      <td>
-        <a href=<%= admin_organization_path(record)%>><%= record.title %></a>
-      </td>
+      <td><%= record.title %></td>
       <td><%= record.country %></td>
       <td><%= record.city %></td>
       <td><%= record.site %></td>

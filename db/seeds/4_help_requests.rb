@@ -10,7 +10,8 @@ unless HelpRequest.any?
       lonlat_geojson: { type: 'Point', coordinates: coordinates }.to_json,
       address: "Moscow, Lenina street, #{index + 1}",
       person: 'Some Test Person',
-      phone: '+79221111111'
+      phone: '+79221111111',
+      organization: Organization.first
     )
   end
 end

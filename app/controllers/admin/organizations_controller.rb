@@ -1,9 +1,10 @@
 module Admin
   class OrganizationsController < Admin::BaseController
-    before_action :set_organization, only: %i[show edit update destroy]
+    before_action :set_organization, only: %i[edit update destroy]
 
     def index
       @organizations = Organization.all
+                                   .includes(:users, :help_requests)
     end
 
     def new
@@ -18,10 +19,6 @@ module Admin
       else
         render :new
       end
-    end
-
-    def show
-      @users = @organization.users
     end
 
     def edit; end

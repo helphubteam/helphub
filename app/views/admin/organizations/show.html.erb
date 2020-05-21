@@ -1,9 +1,0 @@
-<h3><%= @organization.title %></h3>
-<p class="font-weight-lighter"><%= @organization.city %>, <%= @organization.country %></p>
-<p class="font-weight-light"><%= @organization.site %></p>
-
-<%= render 'organization_users', users: @organization.users %>
-<%= render 'organization_help_requests', help_requests: @organization.help_requests %>
-
-<%= link_to('Назад', :back, class: 'btn btn-outline-secondary align-self-start') %>
-

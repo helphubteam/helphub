@@ -29,6 +29,7 @@ module Admin
 
     def create
       @help_request = HelpRequest.new
+      @help_request.organization = current_organization
       if @help_request.update_attributes(
         record_params
       )
@@ -52,7 +53,7 @@ module Admin
     def record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :address, :state, :comment,
-        :person, :mediated, :meds_preciption_required, :organization_id
+        :person, :mediated, :meds_preciption_required
       )
     end
 
