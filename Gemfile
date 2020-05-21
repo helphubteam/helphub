@@ -32,6 +32,7 @@ gem 'rgeo-geojson'
 
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
+gem 'pundit'
 
 gem 'stateful_enum'
 
