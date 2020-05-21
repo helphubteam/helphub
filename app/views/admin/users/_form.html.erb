@@ -10,6 +10,12 @@
                  {},
                  class: 'form-control', placeholder: 'Роль' %>
   </div>
+  <div class="form-group">
+    <%= f.select :organization_id,
+                 options_for_select(Organization.pluck(:title, :id)),
+                 {},
+                 class: 'form-control', placeholder: 'Организация' %>
+  </div>
   <%= f.submit(user.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
   <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
   <% unless user.new_record? %>

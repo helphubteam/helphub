@@ -3,6 +3,7 @@
   <thead class="thead-light">
   <tr>
     <th scope="col">Email</th>
+    <th scope="col">Организация</th>
     <th scope="col">Роль</th>
     <th scope="col" style="width: 10%"></th>
   </tr>
@@ -10,6 +11,13 @@
   <% @users.each do |record| %>
     <tr>
       <td><%= record.email %></td>
+      <td>
+        <% if record.organization%>
+          <a href=<%= admin_organization_path(record.organization)%>><%= record.organization.title %></a>
+        <% else %>
+          <div class="font-italic">Организация не назначена</div>
+        <% end %>
+      </td>
       <td><%= I18n.t(record.role, scope: [:roles]) %></td>
       <td style="width: 10%"><%= link_to('Редактировать', edit_admin_user_path(record), class: 'btn btn-primary') %></td>
     </tr>

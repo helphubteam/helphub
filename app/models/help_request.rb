@@ -4,6 +4,7 @@ class HelpRequest < ApplicationRecord
   geojson_accessor :lonlat
 
   belongs_to :volunteer, class_name: 'User', optional: true
+  belongs_to :organization
 
   enum state: { active: 0, assigned: 1, submitted: 2, blocked: 3 } do
     event :assign do

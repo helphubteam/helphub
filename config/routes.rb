@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     ]
 
     resources :organizations, only: %i[
-      index new show
+      index new
       update edit
       destroy create
     ]

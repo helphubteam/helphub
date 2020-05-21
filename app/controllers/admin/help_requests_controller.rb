@@ -31,6 +31,7 @@ module Admin
 
     def create
       @help_request = HelpRequest.new
+      @help_request.organization = current_organization
       if @help_request.update_attributes(
         record_params
       )
