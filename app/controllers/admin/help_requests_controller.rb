@@ -62,7 +62,7 @@ module Admin
     end
 
     def search_params
-      params.permit(:limit, :offset)
+      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys)
     end
   end
 end
