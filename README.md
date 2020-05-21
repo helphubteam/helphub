@@ -33,7 +33,7 @@ docker-compose up -d
 and open `http://localhost:3000` in browser
 
 - Heroku for production mode
-https://covihelp.herokuapp.com/
+https://helphubstaging.herokuapp.com/
 
 
 

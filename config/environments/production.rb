@@ -62,7 +62,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "http://covihelp.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: "http://helphubstaging.herokuapp.com/" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
