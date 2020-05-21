@@ -22,8 +22,10 @@ module Admin
           @help_request.block!
         end
         redirect_to action: :index
+        flash[:notice] = 'Заявка изменена!'
       else
         render :edit
+        flash[:error] = 'Не удалось изменить заявку!'
       end
     end
 
@@ -33,14 +35,17 @@ module Admin
         record_params
       )
         redirect_to action: :index
+        flash[:notice] = 'Создана новая заявка!'
       else
         render :edit
+        flash[:error] = 'Заявка не создана!'
       end
     end
 
     def destroy
       @help_request.destroy
       redirect_to action: :index
+      flash[:notice] = 'Заявка удалена!'
     end
 
     private

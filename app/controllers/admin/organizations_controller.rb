@@ -15,8 +15,10 @@ module Admin
 
       if @organization.save
         redirect_to action: :index
+        flash[:notice] = 'Создана новая организация!'
       else
         render :new
+        flash[:error] = 'Организация не создана!'
       end
     end
 
@@ -27,13 +29,19 @@ module Admin
     def edit; end
 
     def update
-      @organization.update(organization_params)
-      redirect_to action: :index
+      if @organization.update(organization_params)
+        redirect_to action: :index
+        flash[:notice] = 'Организация изменена!'
+      else
+        render :edit
+        flash[:error] = 'Не удалось изменить организацию!'
+      end
     end
 
     def destroy
       @organization.destroy
       redirect_to action: :index
+      flash[:notice] = 'Организация удалена!'
     end
 
     private

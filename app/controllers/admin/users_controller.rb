@@ -15,21 +15,29 @@ module Admin
 
       if @user.invite!
         redirect_to action: :index
+        flash[:notice] = 'Создан новый пользователь!'
       else
         render :new
+        flash[:error] = 'Пользователь не создан!'
       end
     end
 
     def edit; end
 
     def update
-      @user.update(user_params)
-      redirect_to action: :index
+      if @user.update(user_params)
+        redirect_to action: :index
+        flash[:notice] = 'Пользователь изменен!'
+      else
+        render :edit
+        flash[:error] = 'Не удалось изменить пользователя!'
+      end
     end
 
     def destroy
       @user.destroy
       redirect_to action: :index
+      flash[:notice] = 'Пользователь удален!'
     end
 
     private
