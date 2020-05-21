@@ -1,11 +1,30 @@
 # frozen_string_literal: true
 
-class HelpRequestPresenter < BasePresenter
+class HelpRequestPresenter
+  def initialize(target, current_user)
+    @target = target
+    @current_user = current_user
+  end
+
   def call
     target.attributes.merge({
-      lonlat: JSON.parse(target.lonlat_geojson),
-      created_at: target.created_at.to_i,
-      updated_at: target.updated_at.try(:to_i)
-    })
+                              lonlat: lonlat_geojson,
+                              geo_salt: geo_salt?,
+                              created_at: target.created_at.to_i,
+                              updated_at: target.updated_at.try(:to_i)
+                            })
+  end
+
+  private
+
+  attr_reader :target, :current_user
+
+  def geo_salt?
+    target.active? || target.volunteer != current_user
+  end
+
+  def lonlat_geojson
+    lonlat = geo_salt? ? target.lonlat_with_salt_geojson : target.lonlat_geojson
+    JSON.parse(lonlat)
   end
 end

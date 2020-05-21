@@ -1,7 +1,8 @@
 class HelpRequest < ApplicationRecord
   include GeojsonAccessor
+  geojson_accessor :lonlat, :lonlat_with_salt
 
-  geojson_accessor :lonlat
+  include HasGeoSalt
 
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
