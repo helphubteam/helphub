@@ -8,6 +8,7 @@ class HelpRequest < ApplicationRecord
   belongs_to :organization
 
   validates :number, presence: true, uniqueness: {scope: :organization_id}
+  validates :lonlat, presence: true
 
   after_initialize :fill_default_number
 
