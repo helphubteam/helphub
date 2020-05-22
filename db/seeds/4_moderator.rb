@@ -1,6 +1,6 @@
-unless User.volunteers.any?
+unless User.any?
   User.create!(
-      role: :volunteer,
+      role: :moderator,
       email: 'moderator@covihelp.ru',
       password: 'covihelp19',
       password_confirmation: 'covihelp19',
