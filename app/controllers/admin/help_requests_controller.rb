@@ -21,11 +21,11 @@ module Admin
         elsif params[:block] && !@help_request.blocked?
           @help_request.block!
         end
-        redirect_to action: :index
         flash[:notice] = 'Заявка изменена!'
+        redirect_to action: :index
       else
+        flash.now[:error] = 'Не удалось изменить заявку!'
         render :edit
-        flash[:error] = 'Не удалось изменить заявку!'
       end
     end
 
@@ -35,11 +35,11 @@ module Admin
       if @help_request.update_attributes(
         record_params
       )
-        redirect_to action: :index
         flash[:notice] = 'Создана новая заявка!'
+        redirect_to action: :index
       else
+        flash.now[:error] = "Заявка не создана! #{@help_request.errors.messages.inspect}" 
         render :edit
-        flash[:error] = 'Заявка не создана!'
       end
     end
 
@@ -58,7 +58,7 @@ module Admin
     def record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :address, :state, :comment,
-        :person, :mediated, :meds_preciption_required
+        :person, :mediated, :meds_preciption_required, :number
       )
     end
 

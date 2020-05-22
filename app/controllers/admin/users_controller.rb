@@ -11,14 +11,14 @@ module Admin
     end
 
     def create
-      @user = User.new(user_params)
-
-      if @user.invite!
-        redirect_to action: :index
-        flash[:notice] = 'Создан новый пользователь!'
-      else
+      response = UserCases::Invite.new(user_params).call
+      if response[:error]
+        flash.now[:error] = response[:message]
+        @user = response[:user]
         render :new
-        flash[:error] = 'Пользователь не создан!'
+      else
+        flash[:notice] = response[:message]
+        redirect_to action: :index
       end
     end
 

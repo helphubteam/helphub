@@ -8,6 +8,7 @@ class HelpRequestPresenter
     :state,
     :comment,
     :person,
+    :number,
     :mediated,
     :meds_preciption_required,
     :volunteer_id
