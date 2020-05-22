@@ -3,7 +3,7 @@ module Admin
     before_action :set_user, only: %i[edit update destroy]
 
     def index
-      @users = User.all
+      @users = policy_scope(User)
     end
 
     def new
@@ -15,6 +15,7 @@ module Admin
       if response[:error]
         flash.now[:error] = response[:message]
         @user = response[:user]
+        authorize @user
         render :new
       else
         flash[:notice] = response[:message]
@@ -25,6 +26,7 @@ module Admin
     def edit; end
 
     def update
+      authorize @user
       if @user.update(user_params)
         redirect_to action: :index
         flash[:notice] = 'Пользователь изменен!'
@@ -35,6 +37,7 @@ module Admin
     end
 
     def destroy
+      authorize @user
       @user.destroy
       redirect_to action: :index
       flash[:notice] = 'Пользователь удален!'
@@ -43,7 +46,7 @@ module Admin
     private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = policy_scope(User).find(params[:id])
     end
 
     def user_params

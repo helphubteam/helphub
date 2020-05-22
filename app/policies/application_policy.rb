@@ -43,7 +43,17 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      if user.admin?
+        scope.all
+      else
+        scope.where(organization: current_organization)
+      end
+    end
+
+    private
+
+    def current_organization
+      user.try(:organization)
     end
   end
 end
