@@ -3,7 +3,8 @@ module Admin
     before_action :fill_help_request, only: %i[edit update destroy]
 
     def index
-      @help_requests = HelpRequestsSearcher.new(search_params).call
+      # @help_requests = HelpRequestsSearcher.new(search_params).call
+      @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
     end
 
     def edit; end
@@ -13,6 +14,7 @@ module Admin
     end
 
     def update
+      authorize @help_request
       if @help_request.update_attributes(
         record_params
       )
@@ -32,6 +34,7 @@ module Admin
     def create
       @help_request = HelpRequest.new
       @help_request.organization = current_organization
+      authorize @help_request
       if @help_request.update_attributes(
         record_params
       )
@@ -44,6 +47,7 @@ module Admin
     end
 
     def destroy
+      authorize @help_request
       @help_request.destroy
       redirect_to action: :index
       flash[:notice] = 'Заявка удалена!'
@@ -53,6 +57,7 @@ module Admin
 
     def fill_help_request
       @help_request = HelpRequest.find(params[:id])
+      @help_request = policy_scope(HelpRequest).find(params[:id])
     end
 
     def record_params
