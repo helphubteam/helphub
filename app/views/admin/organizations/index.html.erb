@@ -19,7 +19,7 @@
       <td><%= record.site %></td>
       <td style="width: 10%"><%= record.users.count %></td>
       <td style="width: 10%"><%= record.help_requests.count %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_organization_path(record), class: 'btn btn-primary') %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_organization_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
