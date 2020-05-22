@@ -23,7 +23,7 @@
       <td><%= record.person %></td>
       <td><%= record.comment %></td>
       <td><%= l(record.updated_at || record.created_at, format: :short) %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(record), class: 'btn btn-outline-primary') %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
