@@ -27,18 +27,28 @@
   <div class="form-group">
     <%= f.text_field :person, class: 'form-control', placeholder: 'ФИО' %>
   </div>
+  <div class="field form-check">
+    <%= f.check_box :meds_preciption_required, class: 'form-check-input' %>
+    <%= f.label :meds_preciption_required, 'Нужны лекарства по рецепту' %>
+  </div>
   <div class="form-group">
     <%= f.text_area :comment, class: 'form-control', placeholder: 'Комментарий' %>
   </div>
-  <%= f.submit('Сохранить', class: 'btn btn-primary') %>
-  <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') unless help_request.blocked? %>
-  <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
-  <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
-  <% unless help_request.new_record? %>
-    <%= link_to('Удалить', admin_help_request_path(@help_request), 
-      method: :delete,
-      data: { confirm: 'Вы уверены что хотите удалить заявку?' },
-      class: 'btn btn-outline-danger align-self-start') 
-    %>
-  <% end %>
+  <div class="field form-check">
+    <%= f.check_box :mediated, class: 'form-check-input' %>
+    <%= f.label :mediated, 'Помощь для другого' %>
+  </div>
+  <div class="actions mt-3 mb-5">
+    <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+    <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') unless help_request.blocked? %>
+    <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
+    <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
+    <% unless help_request.new_record? %>
+      <%= link_to('Удалить', admin_help_request_path(@help_request), 
+        method: :delete,
+        data: { confirm: 'Вы уверены что хотите удалить заявку?' },
+        class: 'btn btn-outline-danger align-self-start') 
+      %>
+    <% end %>
+  </div>
 <% end %>
