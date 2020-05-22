@@ -13,17 +13,18 @@
     </tr>
   </thead>
   <% @help_requests.each do |record| %>
+    <% help_request = HelpRequestPresenter.new(record) %>
     <tr>
       <td style="width: 15%">
-        <%= help_request_state_label(record).html_safe %>
-        <div>Заявка №<%= record.number %></div>
+        <%= help_request_state_label(help_request).html_safe %>
+        <div>Заявка №<%= help_request.id %></div>
       </td>
-      <td><%= record.addressString %></td>
-      <td><%= record.phone %></td>
-      <td><%= record.person %></td>
-      <td><%= record.comment %></td>
-      <td><%= l(record.updated_at || record.created_at, format: :short) %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
+      <td><%= help_request.address %></td>
+      <td><%= help_request.phone %></td>
+      <td><%= help_request.person %></td>
+      <td><%= help_request.comment %></td>
+      <td><%= l(help_request.updated_at || help_request.created_at, format: :short) %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
