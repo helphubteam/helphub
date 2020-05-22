@@ -1,13 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <h3 class="navbar-brand">HelpHub</h3><span></span>
+  <% title = current_user.admin? ?  'HelpHub' : "HelpHub: #{current_user.organization.title}" %>
+  <a class="navbar-brand" href="#"><%= title %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
+      <% organizations_menu =  current_user.admin? ? ["Организации", admin_organizations_path] : ['', root_path]%>
       <%
         menu = [
-          ["Организации", admin_organizations_path],
+          organizations_menu,
           ["Пользователи", admin_users_path],
           ["Заявки", admin_help_requests_path]
         ]
