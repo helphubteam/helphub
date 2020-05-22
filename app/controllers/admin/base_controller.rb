@@ -3,7 +3,11 @@ module Admin
     before_action :authenticate_user!
 
     before_action do
-      redirect_to new_user_session_path unless current_user && current_user.admin?
+      redirect_to new_user_session_path unless current_user && can_use_application?
+    end
+
+    def can_use_application?
+      current_user.admin? || current_user.moderator?
     end
 
     def current_organization
