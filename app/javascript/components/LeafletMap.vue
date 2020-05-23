@@ -15,6 +15,7 @@
 <script>
 import { latLng } from "leaflet";
 import 'leaflet-draw';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
 export default {
@@ -25,51 +26,87 @@ export default {
   },
 
   props: ['marker'],
+  
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 16,
       center: [ 55.750979916446624, 37.628452777862556 ],
-      currentMarker: this.marker
+      currentMarker: this.marker,
+      editableLayers: null
     }
   },
 
   mounted() {
     const map = this.$refs.map.mapObject;
 
-    let editableLayers = new L.FeatureGroup();
-    map.addLayer(editableLayers);
+    this.editableLayers = new L.FeatureGroup();
+    map.addLayer(this.editableLayers);
 
+    this.updateCurrentMarker(this.currentMarker.coordinates); 
     if (this.currentMarker) {
-      editableLayers.addLayer(L.marker(this.currentMarker.coordinates));
       map.setView(this.currentMarker.coordinates, this.zoom);
     }
 
-    const drawControl = new L.Control.Draw({
-      position: 'topright',
-      draw: {
-        polyline: false,
-        polygon: false,
-        circlemarker: false,
-        circle: false,
-        rectangle: false,
-      }
+    map.addControl(this.getDrawControl());
+    map.on(L.Draw.Event.CREATED, e => this._replaceMarker(this.editableLayers, e.layer));
+    window.vueEventBus.$on('searchStringChanged', searchString => {
+      this.findByAddress(searchString).then(result => {
+        if (result.length) {
+          this.updateCurrentMarker([ result[0].y, result[0].x ]);
+          this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+        }
+      });
     });
-
-    map.addControl(drawControl);
-    map.on(L.Draw.Event.CREATED, e => this.replaceMarker(editableLayers, e.layer));
   },
 
   methods: {
-    replaceMarker(layerGroup, markerLayer) {
+    /**
+     * Updates current marker with new coorinates.
+     * @param {Array} coordinates Coordinates.
+     */
+    updateCurrentMarker(coordinates) {
       if (!this.currentMarker) {
         this.currentMarker = {
           type: 'Point'
         }
       };
-      this.currentMarker.coordinates = Object.values(markerLayer.getLatLng());
-      layerGroup.clearLayers();
-      layerGroup.addLayer(markerLayer);
+      this.currentMarker.coordinates = coordinates;
+
+      this.editableLayers.clearLayers();
+      this.editableLayers.addLayer(L.marker(coordinates));
+    },
+
+    /**
+     * Returns provider for searching by address.
+     */
+    getSearchProvider() {
+      return new OpenStreetMapProvider();
+    },
+
+    /**
+     * Return control for map toolbar.
+     */
+    getDrawControl() {
+      return new L.Control.Draw({
+        position: 'topright',
+        draw: {
+          polyline: false,
+          polygon: false,
+          circlemarker: false,
+          circle: false,
+          rectangle: false,
+        }
+      })
+    },
+
+    /**
+     * Finds point by address.
+     * @param {String} address Address to search.
+     * @returns Promise
+     */
+    findByAddress(address) {
+      return this.getSearchProvider().search({ query: address });
     }
   }
 }

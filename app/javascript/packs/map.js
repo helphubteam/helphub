@@ -15,10 +15,25 @@ L.Icon.Default.mergeOptions({
 })
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.vueEventBus = new Vue();
+
   new Vue({
     el: '#vue-app',
     components: {
       LeafletMap
     }
   });
+
+  const onChangeSearchString = () => {
+    const addressStrinValue = [
+      document.getElementById('help_request_city').value,
+      document.getElementById('help_request_street').value,
+      document.getElementById('help_request_house').value
+    ].join(' ');
+    window.vueEventBus.$emit('searchStringChanged', addressStrinValue);
+  };
+
+  document.getElementById('help_request_city').onchange = onChangeSearchString;
+  document.getElementById('help_request_street').onchange = onChangeSearchString;
+  document.getElementById('help_request_house').onchange = onChangeSearchString;
 });
