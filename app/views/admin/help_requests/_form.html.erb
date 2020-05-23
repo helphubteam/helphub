@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'map' %>
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
 <h3><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
