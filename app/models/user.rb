@@ -9,4 +9,5 @@ class User < ApplicationRecord
   enum role: { volunteer: 0, moderator: 1, admin: 2 }
 
   scope :volunteers, -> { where(role: :volunteer) }
+  scope :moderators, -> { where(role: :moderator) }
 end

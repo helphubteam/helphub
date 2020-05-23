@@ -1,4 +1,4 @@
-unless User.any?
+unless User.moderators.any?
   User.create!(
       role: :moderator,
       email: 'moderator@covihelp.ru',
