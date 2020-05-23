@@ -24,7 +24,7 @@
       <td><%= help_request.person %></td>
       <td><%= help_request.comment %></td>
       <td><%= l(help_request.updated_at || help_request.created_at, format: :short) %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request), class: 'btn btn-sm btn-outline-primary') %></td>
+      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request.id), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
