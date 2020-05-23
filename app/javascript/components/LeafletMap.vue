@@ -26,14 +26,15 @@ export default {
   },
 
   props: ['marker'],
-  
+
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 16,
       center: [ 55.750979916446624, 37.628452777862556 ],
       currentMarker: this.marker,
-      editableLayers: null
+      editableLayers: null,
+      isManualMarker: false
     }
   },
 
@@ -49,14 +50,20 @@ export default {
     }
 
     map.addControl(this.getDrawControl());
-    map.on(L.Draw.Event.CREATED, e => this._replaceMarker(this.editableLayers, e.layer));
+    map.on(L.Draw.Event.CREATED, e => {
+      this.updateCurrentMarker(Object.values(e.layer.getLatLng()));
+      this.isManualMarker = true;
+    });
+
     window.vueEventBus.$on('searchStringChanged', searchString => {
-      this.findByAddress(searchString).then(result => {
-        if (result.length) {
-          this.updateCurrentMarker([ result[0].y, result[0].x ]);
-          this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
-        }
-      });
+      if (!this.isManualMarker) {
+        this.findByAddress(searchString).then(result => {
+          if (result.length) {
+            this.updateCurrentMarker([ result[0].y, result[0].x ]);
+            this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+          }
+        });
+      }
     });
   },
 
