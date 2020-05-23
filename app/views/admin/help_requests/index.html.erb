@@ -28,11 +28,9 @@
     </tr>
   <% end %>
 </table>
-<% if !current_user.admin? %>
-  <p>
-    <%= link_to('Новая заявка',
-      new_admin_help_request_path,
-      class: 'btn btn-outline-secondary align-self-start my-3')
-    %>
-  </p>
-<% end %>
+<p>
+  <%= link_to('Новая заявка',
+    new_admin_help_request_path,
+    class: 'btn btn-outline-secondary align-self-start my-3')
+  %>
+</p>

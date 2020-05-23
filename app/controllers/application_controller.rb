@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def after_sign_in_path_for(resource)
-    return admin_help_requests_path if can_use_application?(resource)
+    return resource.admin? ? admin_organizations_path : admin_help_requests_path
 
     LADING_WEBSITE_URL
   end

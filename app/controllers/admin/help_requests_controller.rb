@@ -3,7 +3,6 @@ module Admin
     before_action :fill_help_request, only: %i[edit update destroy]
 
     def index
-      # @help_requests = HelpRequestsSearcher.new(search_params).call
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
     end
 

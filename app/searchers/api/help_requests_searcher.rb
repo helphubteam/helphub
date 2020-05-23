@@ -21,6 +21,7 @@ module Api
     end
 
     def call
+      # add pundit + правильно райзить сообще - у пользователя ---- по всех юз кейсах
       scope = HelpRequest
       return taken_scope(scope) if search_params[:taken] == 'true'
 

@@ -7,11 +7,12 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <% organizations_menu =  current_user.admin? ? ["Организации", admin_organizations_path] : ['', root_path]%>
+      <% help_requests_menu =  !current_user.admin? ? ["Заявки", admin_help_requests_path] : ['', root_path]%>
       <%
         menu = [
           organizations_menu,
           ["Пользователи", admin_users_path],
-          ["Заявки", admin_help_requests_path]
+          help_requests_menu
         ]
       %>
       
