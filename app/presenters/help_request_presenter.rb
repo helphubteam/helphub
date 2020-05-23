@@ -10,7 +10,9 @@ class HelpRequestPresenter
            :person,
            :mediated,
            :meds_preciption_required,
-           :volunteer_id, to: :target
+           :volunteer_id, 
+           :created_at,
+           :updated_at, to: :target
 
   def initialize(target)
     @target = target
