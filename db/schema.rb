@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2020_05_22_194614) do
   create_table "help_requests", force: :cascade do |t|
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.string "phone"
-    t.text "address"
     t.integer "state", default: 0, null: false
     t.text "comment"
     t.string "person"
@@ -29,8 +28,13 @@ ActiveRecord::Schema.define(version: 2020_05_22_194614) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "volunteer_id"
-    t.geography "lonlat_with_salt", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.string "city"
+    t.string "district"
+    t.string "street"
+    t.string "house"
+    t.string "apartment"
     t.bigint "organization_id"
+    t.geography "lonlat_with_salt", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.string "number"
     t.index ["organization_id"], name: "index_help_requests_on_organization_id"
   end

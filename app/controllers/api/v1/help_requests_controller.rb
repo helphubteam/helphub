@@ -11,7 +11,7 @@ module Api
         ).call
 
         response = records.map do |record|
-          HelpRequestPresenter.new(record, current_api_user).call
+          Api::HelpRequestPresenter.new(record, current_api_user).call
         end
         render json: response
       end
