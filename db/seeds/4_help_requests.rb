@@ -13,6 +13,7 @@ unless HelpRequest.any?
       street: "Lenina",
       house: "#{index + 1}",
       apartment: "1",
+      number: "#{index + 1}",
       person: 'Some Test Person',
       phone: '+79221111111',
       organization: Organization.first

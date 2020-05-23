@@ -6,6 +6,7 @@ class HelpRequestPresenter
            :address,
            :state,
            :comment,
+           :number,
            :person,
            :mediated,
            :meds_preciption_required,

@@ -5,9 +5,9 @@ module Api
     AVAILABLE_ATTRIBUTES = %i[
       id
       phone
-      address
       state
       comment
+      number
       person
       mediated
       meds_preciption_required
