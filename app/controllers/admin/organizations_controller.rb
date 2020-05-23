@@ -5,6 +5,7 @@ module Admin
     def index
       @organizations = Organization.all
                                    .includes(:users, :help_requests)
+      authorize @organizations
     end
 
     def new
@@ -13,6 +14,7 @@ module Admin
 
     def create
       @organization = Organization.new(organization_params)
+      authorize @organization
 
       if @organization.save
         redirect_to action: :index
@@ -26,6 +28,7 @@ module Admin
     def edit; end
 
     def update
+      authorize @organization
       if @organization.update(organization_params)
         redirect_to action: :index
         flash[:notice] = 'Организация изменена!'
@@ -36,6 +39,7 @@ module Admin
     end
 
     def destroy
+      authorize @organization
       @organization.destroy
       redirect_to action: :index
       flash[:notice] = 'Организация удалена!'

@@ -12,8 +12,8 @@
     <tr>
       <td><%= record.email %></td>
       <td>
-        <% if record.organization%>
-          <a href=<%= admin_organization_path(record.organization)%>><%= record.organization.title %></a>
+        <% if record.organization %>
+          <div><%= record.organization.title %></div>
         <% else %>
           <div class="font-italic">Организация не назначена</div>
         <% end %>
