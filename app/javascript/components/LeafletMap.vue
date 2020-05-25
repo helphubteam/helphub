@@ -44,8 +44,8 @@ export default {
     this.editableLayers = new L.FeatureGroup();
     map.addLayer(this.editableLayers);
 
-    this.updateCurrentMarker(this.currentMarker.coordinates); 
     if (this.currentMarker) {
+      this.updateCurrentMarker(this.currentMarker.coordinates); 
       map.setView(this.currentMarker.coordinates, this.zoom);
     }
 
@@ -73,15 +73,17 @@ export default {
      * @param {Array} coordinates Coordinates.
      */
     updateCurrentMarker(coordinates) {
-      if (!this.currentMarker) {
-        this.currentMarker = {
-          type: 'Point'
-        }
-      };
-      this.currentMarker.coordinates = coordinates;
+      if (coordinates) {
+        if (!this.currentMarker) {
+          this.currentMarker = {
+            type: 'Point'
+          }
+        };
+        this.currentMarker.coordinates = coordinates;
 
-      this.editableLayers.clearLayers();
-      this.editableLayers.addLayer(L.marker(coordinates));
+        this.editableLayers.clearLayers();
+        this.editableLayers.addLayer(L.marker(coordinates));
+      }
     },
 
     /**
