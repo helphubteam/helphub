@@ -6,16 +6,19 @@
   </div>
   <div class="form-group">
     <%= f.select :role,
-                 options_for_select(User.roles.keys.map {|key| [I18n.t(key, scope: [:roles]), key]}),
+                 options_for_select(User.roles.keys.map {|key| [I18n.t(key, scope: [:roles]), key]},
+                                    disabled: (:admin unless current_user.admin?)),
                  {},
                  class: 'form-control', placeholder: 'Роль' %>
   </div>
-  <div class="form-group">
-    <%= f.select :organization_id,
-                 options_for_select(Organization.pluck(:title, :id)),
-                 {},
-                 class: 'form-control', placeholder: 'Организация' %>
-  </div>
+  <% if current_user.admin? %>
+    <div class="form-group">
+      <%= f.select :organization_id,
+                   options_for_select(Organization.pluck(:title, :id)),
+                   {},
+                   class: 'form-control', placeholder: 'Организация' %>
+    </div>
+  <% end %>
   <%= f.submit(user.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
   <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
   <% unless user.new_record? %>

@@ -15,7 +15,6 @@ module Admin
       if response[:error]
         flash.now[:error] = response[:message]
         @user = response[:user]
-        authorize @user
         render :new
       else
         flash[:notice] = response[:message]
@@ -50,7 +49,9 @@ module Admin
     end
 
     def user_params
+      defaults = { organization_id: current_organization.id } if current_organization
       params.require(:user).permit(:email, :role, :organization_id)
+            .reverse_merge(defaults)
     end
   end
 end
