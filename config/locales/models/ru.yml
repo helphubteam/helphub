@@ -1,0 +1,31 @@
+ru:
+  activerecord:
+    models:
+      user: Пользователи
+    attributes:
+      user:
+        email: Электронная почта
+        password: Пароль
+        password_confirmation: Пароль
+        role: Роль
+        organization_id: Организация
+        organization: Организация
+      help_request:
+        number: Номер заявки
+        lonlat: Точка на карте
+        lonlat_geojson: Точка на карте
+        city: Город
+        district: Район
+        street: Улица
+        house: Дом
+        apartment: Квартира
+        phone: Телефон
+        person: ФИО
+        meds_preciption_required: Нужны лекарства по рецепту
+        comment: Комментарий
+        mediated: Помощь для другого
+      organization:
+        title: Наименование 
+        country: Страна 
+        city: Город 
+        site: Сайт

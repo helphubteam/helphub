@@ -1,0 +1,180 @@
+ru:
+  simple_form:
+    "yes": 'Да'
+    "no": 'Нет'
+    required:
+      text: 'обязательное'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Обнаружены следующие ошибки:"
+    # Labels and hints examples
+    labels:
+      defaults:
+       email: 'Электронная почта'
+       password: 'Пароль'
+      user:
+        _type: 'Тип'
+        remember_me: 'Запомнить'
+        password_confirmation: 'Подтверждение пароля'
+        current_password: 'Текущий пароль'
+      webmaster_profile:
+        first_name: 'Имя'
+        last_name: 'Фамилия'
+        person_state: 'Статус'
+        city: 'Город'
+        phone: 'Телефон'
+        payment_method: 'Метод оплаты'
+        wallet_wmr: 'WMR-Кошелёк'
+        recipient_bank: 'Банк получателя'
+        correspondent_account: 'Корреспондентский счёт'
+        bik: 'БИК'
+        payment_account: 'Рассчётный счёт'
+        inn: 'ИНН (получателя)'
+        ogrnip: 'ОГРНИП'
+        fio: 'ФИО'
+        recipient: 'Получатель'
+        kpp: 'КПП (получателя)'
+        juridical_address: 'Юридический адрес'
+        physical_address: 'Физический адрес'
+        email_offer_changes: 'Получать уведомления по электронной почте об изминениях у действующих офферов'
+        email_new_offers: 'Получать уведомления по электронной почте о новых офферах'
+      advertiser_profile:
+        company_name: 'Компания'
+        website: 'Веб-сайт'
+        contact_person: 'Контактное лицо'
+        contact_phone: 'Контактный телефон'
+        payment_method: 'Метод оплаты'
+        wallet_wmr: 'WMR-Кошелёк'
+        bank_name: 'Название банка'
+        correspondent_account: 'Корреспондентский счёт'
+        payment_account: 'Рассчётный счёт'
+        bik: 'БИК'
+        inn: 'ИНН'
+        kpp: 'КПП'
+        juridical_address: 'Юридический адрес'
+      ground:
+        category_id: 'Категория'
+        title: 'Название'
+        url: 'Ссылка'
+        type: 'Тип'
+        category: 'Категория'
+        rotator_mode: 'Режим ротатора'
+        ground_rotator_config:
+          categories: 'Категории'
+          block_adult: 'Блокировать объявления "для взослых"'
+          block_doubtful: 'Блокировать сомнительные объявления'
+      offer:
+        category_id: 'Категория'
+        title: 'Название'
+        description: 'Описание'
+        logo: 'Логотип'
+        url: 'Ссылка'
+        landing_url: 'Посадочная страница (landing page)'
+        cookie_time: 'Период учёта действий (дней)'
+        category: 'Категория'
+        auto_accept_grounds: 'Автоматически принимать площадки'
+        excepted_categories: 'Отклонять площадки следующих категорий'
+        excepted_ground_types: 'Отклонять площадки следующих видов'
+        is_adult: 'Для взрослых'
+        is_doubtful: 'Сомнительная'
+        redirect_options: 'Опции редиректа'
+        accept_custom_urls: 'Позволить вебмастерам указывать свои url в ссылках'
+        achievement_task_marker: 'Идетификатор для задачи для сбора достижений целей'
+        hash_key: 'Ключ для доступа к API'
+        active: 'Активна'
+      target:
+        title: 'Название'
+        repeatable: 'Повторяемая'
+        confirm_mode: 'Режим подтверждения'
+        confirm_url: 'Url для подтверждения достижения цели'
+        confirm_needs_auth: 'Требуется аутентификация'
+        confirm_auth_username: 'Имя пользователя'
+        confirm_auth_password: 'Пароль'
+        set_price_on_achievement: 'Задание цены при достижении цели'
+        fixed_price: 'Стоимость (руб.)'
+        fixed_price_cents: 'Стоимость (руб.)'
+        fixed_prices_bronze: 'Стоимость фиксированная (Бронза)'
+        fixed_prices_silver: 'Стоимость фиксированная (Серебро)'
+        fixed_prices_gold: 'Стоимость фиксированная (Золото)'
+        prc_price: 'Стоимость (процент от продажи)'
+        prc_prices_bronze: 'Стоимость процентная (Бронза)'
+        prc_prices_silver: 'Стоимость процентная (Серебро)'
+        prc_prices_gold: 'Стоимость процентная (Золото)'
+        price_text: 'Стоимость (текстом)'
+        hold: 'Холд (дней)'
+        cookieless_achievement: 'Достижение целей без использования cookie'
+        achievement_task_marker: 'Идетификатор для задачи для сбора достижений целей'
+        active: 'Активна'
+      article:
+        title: 'Название'
+        content: 'Содержимое'
+        active: 'Активна'
+        show_in_menu: 'Показывать в меню'
+      news:
+        title: 'Название'
+        content: 'Содержимое'
+        mini_content: 'Короткое содержимое'
+      discussion:
+        subject: 'Тема'
+        text: 'Текст'
+      banner:
+        url: 'Ссылка'
+        description: 'Описание'
+      banner_image:
+        image: 'Изображение'
+      filter:
+        date_total: 'За весь период'
+        date_start: 'От'
+        date_stop: 'До'
+        webmaster: 'Вемастер'
+        advertiser: 'Рекламодатель'
+        offer: 'Оффер'
+        ground: 'Площадка'
+        sub_id: 'Sub id'
+        group_by: 'Группировать по'
+        created_at_total: 'За весь период'
+        created_at_start: 'Достигнуто (от)'
+        created_at_stop: 'Достигнуто (до)'
+        state: 'Состояние'
+      payment:
+        amount: 'Сумма'
+        description: 'Описание'
+      payment_request:
+        wallet: 'Номер кошелька WEBMONEY'
+    options:
+      filter:
+        group_by:
+          date: 'Дата'
+          webmaster_id: 'Вемастер'
+          advertiser_id: 'Рекламодатель'
+          offer_id: 'Оффер'
+          ground_id: 'Площадка'
+          created_at: 'Достигнуто'
+          accepted_at: 'Одобрено'
+          amount: 'Стоимость'
+          webmaster_amount_cents: 'Стоимость для вебмастера'
+          advertiser_amount_cents: 'Стоимость для рекламодателя'
+          state: 'Статус'
+
+    hints:
+      ground:
+        ground_rotator_config:
+          categories: 'Если список категорий пуст, то будут отображаться объявления всех категорий'
+  mongoid:
+    models:
+      user: 'пользователя'
+      webmaster_profile: 'профиль'
+      advertiser_profile: 'профиль'
+      user: 'пользователя'
+      ground: 'площадку'
+      offer: 'рекламную кампанию'
+      banner_image: 'изображение'
+      target: 'цель'
+      article: 'статью'
+      banner: "банер"
+      news: "новость"
+      discussion: "сообшение"
+      payment: "платёж"
