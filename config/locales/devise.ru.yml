@@ -15,7 +15,22 @@ ru:
         other: "%{resource}: сохранение не удалось из-за %{count} ошибки"
 
   devise:
+    invitations:
+      send_instructions: "Приглашение отправлено на электронную почту: %{email}."
+      invitation_token_invalid: "Неправильный ключ приглашения!"
+      updated: "Ваш пароль был успешно установлен. Теперь вы вошли на сайт."
+      updated_not_active: "Ваш пароль был успешно установлен."
+      no_invitations_remaining: "Больше не осталось пришлашений"
+      invitation_removed: Ваше приглашение было удалено."
+      new:
+        header: "Отправка приглашений"
+        submit_button: "Отправить приглашение"
+      edit:
+        header: "Установите пароль"
+        submit_button: "Установить пароль"
     failure:
+      user:
+        not_found_in_database: "Пользователь не найден."
       already_authenticated: "Вы уже вошли в систему."
       unauthenticated: "Вам необходимо войти в систему или зарегистрироваться."
       unconfirmed: "Вы должны подтвердить вашу учётную запись."
