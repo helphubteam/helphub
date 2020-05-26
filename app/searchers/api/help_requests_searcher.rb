@@ -21,7 +21,6 @@ module Api
     end
 
     def call
-      # add pundit + правильно райзить сообще - у пользователя ---- по всех юз кейсах
       scope = HelpRequest
       return taken_scope(scope) if search_params[:taken] == 'true'
 
@@ -32,7 +31,8 @@ module Api
 
     def map_scope(scope)
       scope
-        .where(state: [:active, :assigned])
+        .where(state: [:active, :assigned],
+               organization: current_organization)
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
         .yield_self(&method(:apply_sort))
@@ -42,7 +42,9 @@ module Api
     def taken_scope(scope)
       scope
         .assigned
-        .where(volunteer: current_api_user)
+        .where(volunteer: current_api_user,
+               # не обязательный параметр выборки, в любом случаи будет проверка по волонтеру(который принадл организации)
+               organization: current_organization)
         .yield_self(&method(:apply_sort))
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
@@ -71,6 +73,10 @@ module Api
       scope.
         where(distance_limit_query).
         reorder(distance_order_query)
+    end
+
+    def current_organization
+      current_api_user.organization
     end
   end
 end

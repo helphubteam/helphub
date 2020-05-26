@@ -21,8 +21,7 @@ module Api
                                               help_request: @help_request,
                                               volunteer: current_api_user
                                             }).call
-        code = data[:errors] ? :not_acceptable : :ok
-        render json: data, code: code
+        render_data(data)
       end
 
       def submit
@@ -30,8 +29,7 @@ module Api
                                               help_request: @help_request,
                                               volunteer: current_api_user
                                             }).call
-        code = data[:errors] ? :not_acceptable : :ok
-        render json: data, code: code
+        render_data(data)
       end
 
       def refuse
@@ -39,11 +37,15 @@ module Api
                                               help_request: @help_request,
                                               volunteer: current_api_user
                                             }).call
-        code = data[:errors] ? :not_acceptable : :ok
-        render json: data, code: code
+        render_data(data)
       end
 
       private
+
+      def render_data(data)
+        code = data[:errors] ? :not_acceptable : :ok
+        render json: data, code: code
+      end
 
       def fill_help_request
         @help_request = HelpRequest.find(params[:id])

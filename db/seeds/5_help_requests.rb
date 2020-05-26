@@ -16,7 +16,8 @@ unless HelpRequest.any?
       number: "#{index + 1}",
       person: 'Some Test Person',
       phone: '+79221111111',
-      organization: Organization.first
+      organization: Organization.first,
+      comment: 'comment comment comment'
     )
   end
 end
