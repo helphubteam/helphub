@@ -2,6 +2,9 @@ module HelpRequestCases
   class Assign < HelpRequestCases::Base
     def call
       begin
+        unless @help_request.organization == volunteer.organization
+          raise_error(:only_user_organization)
+        end
         if @help_request.assigned? && @help_request.volunteer == volunteer
           raise_error(:assigned_already)
         end

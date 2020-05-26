@@ -278,7 +278,8 @@ ru:
       volunteer_role_only: Пользователь должен быть волонтером
       unassigned: Заявка не взята в работу
       not_own: Невозможно выполнить чужую заявку
-      submitted_already: Заявка уже выполненв
+      submitted_already: Заявка уже выполнена
+      only_user_organization: Нет доступа к заявкам других организаций
   help_request:
     states:
       active: Новая
