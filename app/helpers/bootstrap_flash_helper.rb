@@ -20,7 +20,13 @@ module BootstrapFlashHelper
           class: "alert alert-#{type} #{tag_class}"
       }.merge(options)
 
-      close_button = content_tag(:button, raw('&times;'), type: 'button', class: 'close', 'data-dismiss' => 'alert')
+      close_button = content_tag(
+        :button,
+        raw('&times;'),
+        type: 'button',
+        class: 'close',
+        'data-dismiss' => 'alert',
+        'onclick' => "document.getElementsByClassName('alert')[0].style.display='none';")
 
       Array(message).each do |msg|
         text = content_tag(:div, close_button + msg, tag_options)
