@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   scope :volunteers, -> { where(role: :volunteer) }
   scope :moderators, -> { where(role: :moderator) }
+
+  validates :role, presence: true
 end
