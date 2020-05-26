@@ -1,28 +1,23 @@
 <div class="container d-flex flex-column align-items-center">
-  <h2>HelpHub</h2>
+  <h2 class='mt-5'><%= site_name %></h2>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field form-group">
-      <%= f.label :email, 'Email' %><br />
-      <%= f.email_field :email, class: 'form-control', autofocus: true, autocomplete: "email" %>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
+      <%= f.input :password,
+                  required: false,
+                  input_html: { autocomplete: "current-password" } %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <%= render "devise/shared/links" %>
     </div>
 
-    <div class="field form-group">
-      <%= f.label :password, 'Пароль' %><br />
-      <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
-    </div>
-
-    <%= render "devise/shared/links" %>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="field form-check">
-        <%= f.check_box :remember_me, class: 'form-check-input' %>
-        <%= f.label :remember_me, 'Запомнить' %>
-      </div>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit "Войти", class: 'btn btn-primary mt-3' %>
+    <div class="form-actions">
+      <%= f.button :submit, "Войти", class: 'btn btn-primary mt-3' %>
     </div>
   <% end %>
+
+  
 </div>

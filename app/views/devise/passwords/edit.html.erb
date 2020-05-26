@@ -1,27 +1,30 @@
-<div class="container d-flex flex-column">
-  <h2 class="align-self-center my-5">Обновление пароля</h2>
+<div class="container d-flex flex-column align-items-center">
+  <h2>Смена пароля</h2>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "align-self-center w-35", method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <%= f.hidden_field :reset_password_token %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
 
-    <div class="field form-group">
-      <%= f.label :password, "Новый пароль" %><br />
-      <% if @minimum_password_length %>
-        <em>(Не менее <%= @minimum_password_length %> символов)</em><br />
-      <% end %>
-      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+    <%= f.input :reset_password_token, as: :hidden %>
+    <%= f.full_error :reset_password_token %>
+
+    <div class="form-inputs">
+      <%= f.input :password,
+                  label: "Новый пароль",
+                  required: true,
+                  autofocus: true,
+                  hint: ("минимальная длина пароля #{@minimum_password_length} символов" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  label: "Подтверждение пароля",
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
     </div>
 
-    <div class="field form-group">
-      <%= f.label :password_confirmation, "Подтвержение пароля" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-    </div>
-
-    <div class="actions form-group">
-      <%= f.submit "Сменить пароль", class: "btn btn-primary" %>
+    <div class="form-actions">
+      <%= f.button :submit, "Сменить пароль", class: "btn btn-primary" %>
     </div>
   <% end %>
 
   <%= render "devise/shared/links" %>
 </div>
+  
