@@ -17,33 +17,45 @@ module Api
       end
 
       def assign
-        data = HelpRequestCases::Assign.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user
-                                            }).call
-        code = data[:errors] ? :not_acceptable : :ok
-        render json: data, code: code
+        if match_organization?
+          data = HelpRequestCases::Assign.new({
+                                                help_request: @help_request,
+                                                volunteer: current_api_user
+                                              }).call
+          render_data(data)
+        end
       end
 
       def submit
-        data = HelpRequestCases::Submit.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user
-                                            }).call
-        code = data[:errors] ? :not_acceptable : :ok
-        render json: data, code: code
+        if match_organization?
+          data = HelpRequestCases::Submit.new({
+                                                help_request: @help_request,
+                                                volunteer: current_api_user
+                                              }).call
+          render_data(data)
+        end
       end
 
       def refuse
-        data = HelpRequestCases::Refuse.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user
-                                            }).call
+        if match_organization?
+          data = HelpRequestCases::Refuse.new({
+                                                help_request: @help_request,
+                                                volunteer: current_api_user
+                                              }).call
+          render_data(data)
+        end
+      end
+
+      private
+
+      def render_data(data)
         code = data[:errors] ? :not_acceptable : :ok
         render json: data, code: code
       end
 
-      private
+      def match_organization?
+        @help_request.organization == current_api_user.organization
+      end
 
       def fill_help_request
         @help_request = HelpRequest.find(params[:id])
