@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HelpRequestsSearcher
-  SEARCH_FIELDS = %i[id comment phone person].freeze
+  SEARCH_FIELDS = %i[id comment phone person city street house district apartment].freeze
 
   DEFAULT_SEARCH_PARAMS = {
     limit: 100,
@@ -32,7 +32,7 @@ class HelpRequestsSearcher
   end
 
   def apply_overdue(scope)
-    overdue_timeout = 7.hours.ago
+    overdue_timeout = 7.days.ago
     scope
       .where(state: %i[active assigned])
       .where('updated_at < ?', overdue_timeout)

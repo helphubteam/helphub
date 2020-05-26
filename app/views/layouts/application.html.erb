@@ -14,7 +14,7 @@
   <body>
     <div class="container d-flex flex-column">
       <%= render partial: 'shared/menu' if current_user %>
-      <%= bootstrap_flash %>
+      <%= bootstrap_flash unless action_name.to_sym.in?([:create, :update]) %>
       <%= yield %>
     </div>
   </body>

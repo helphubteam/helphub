@@ -34,6 +34,8 @@ gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'pundit'
 
+gem 'simple_form'
+
 gem 'stateful_enum'
 
 # Use Active Storage variant

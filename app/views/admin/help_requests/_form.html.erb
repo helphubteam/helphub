@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'map' %>
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
-<h3><%= title %></h3>
+<p><h3><%= title %></h3></p>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
   <% volunteer = help_request.volunteer %>
@@ -11,57 +11,44 @@
     </div>
     <% end %>
 <% end %>
-<%= form_for([:admin, help_request], html: { class: 'mr-5' }) do |f| %>
-  <div class="form-group">
-    <label for="number">Номер заявки</label>
-    <%= f.text_field :number, class: 'form-control', placeholder: 'Номер заявки' %>
+
+<%= simple_form_for [:admin, help_request], wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-6">
+      <%= f.input :number %>
+      <%= f.input :person %>
+      <%= f.input :city %>
+      <%= f.input :district %>
+      <%= f.input :street %>
+      <%= f.input :house %>
+      <%= f.input :apartment %>
+    </div>
+    <div class="col-6">
+      <%= f.input :phone %>  
+      <div id="vue-app">
+        <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
+      </div>
+      
+    </div>
   </div>
-  <div id="vue-app">
-    <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
-  </div>
-  <div class="form-group">
-    <%= f.text_area :city, class: 'form-control', placeholder: 'Город' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_area :district, class: 'form-control', placeholder: 'Район' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_area :street, class: 'form-control', placeholder: 'Улица' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_area :house, class: 'form-control', placeholder: 'Дом' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :apartment, class: 'form-control', placeholder: 'Квартира' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :phone, class: 'form-control', placeholder: 'Телефон' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :person, class: 'form-control', placeholder: 'ФИО' %>
-  </div>
-  <div class="field form-check">
-    <%= f.check_box :meds_preciption_required, class: 'form-check-input' %>
-    <%= f.label :meds_preciption_required, 'Нужны лекарства по рецепту' %>
-  </div>
-  <div class="form-group">
-    <%= f.text_area :comment, class: 'form-control', placeholder: 'Комментарий' %>
-  </div>
-  <div class="field form-check">
-    <%= f.check_box :mediated, class: 'form-check-input' %>
-    <%= f.label :mediated, 'Помощь для другого' %>
-  </div>
-  <div class="actions mt-3 mb-5">
-    <%= f.submit('Сохранить', class: 'btn btn-primary') %>
-    <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') unless help_request.blocked? %>
-    <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
-    <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
-    <% unless help_request.new_record? %>
-      <%= link_to('Удалить', admin_help_request_path(@help_request), 
-        method: :delete,
-        data: { confirm: 'Вы уверены что хотите удалить заявку?' },
-        class: 'btn btn-outline-danger align-self-start') 
-      %>
-    <% end %>
+  
+  <%= f.input :meds_preciption_required %>
+  <%= f.input :comment, as: :text %>
+  <%= f.input :mediated %>
+  <div class="form-group row mb-0">
+    <div class="col-sm-9 offset-sm-3">
+      <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+      <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') if !help_request.new_record? && !help_request.blocked? %>
+      <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
+      <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
+      <% unless help_request.new_record? %>
+        <%= link_to('Удалить', admin_help_request_path(@help_request), 
+          method: :delete,
+          data: { confirm: 'Вы уверены что хотите удалить заявку?' },
+          class: 'btn btn-outline-danger align-self-start') 
+        %>
+      <% end %>
+    </div>
   </div>
 <% end %>
