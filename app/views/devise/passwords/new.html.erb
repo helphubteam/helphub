@@ -1,15 +1,18 @@
-<div class="container d-flex flex-column">
-  <h2 class="align-self-center my-5">Забыли пароль?</h2>
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "align-self-center w-35", method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container d-flex flex-column align-items-center">
+  <h2>Забыли пароль?</h2>
 
-    <div class="field form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" } %>
     </div>
 
-    <div class="actions form-group">
-      <%= f.submit "Восстановить пароль", class: "btn btn-secondary" %>
+    <div class="form-actions">
+      <%= f.button :submit, "Отправить инструкции", class: "btn btn-primary"  %>
     </div>
   <% end %>
 

@@ -17,4 +17,8 @@ module ApplicationHelper
       I18n.t("help_request.states.#{record.state}")
     end
   end
+
+  def site_name
+    'HelpHub'
+  end
 end

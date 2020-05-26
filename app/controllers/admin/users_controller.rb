@@ -11,7 +11,7 @@ module Admin
     end
 
     def create
-      response = UserCases::Invite.new(user_params).call
+      response = UserCases::Invite.new(user_params, current_user).call
       if response[:error]
         flash.now[:error] = response[:message]
         @user = response[:user]
