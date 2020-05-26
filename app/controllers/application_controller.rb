@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     elsif resource.moderator?
       admin_help_requests_path
     else
+      sign_out(resource)
       LADING_WEBSITE_URL
     end
   end
