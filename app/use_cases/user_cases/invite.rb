@@ -17,6 +17,8 @@ module UserCases
 
     private
 
+    attr_reader :current_user
+
     def normalized_params
       @normalized_params ||= begin
         res = @user_params.dup
