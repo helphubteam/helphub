@@ -12,7 +12,7 @@ module HelpRequestCases
     attr_reader :options, :help_request, :volunteer
 
     def success_response
-      Api::HelpRequestPresenter.new(@help_request.reload).call
+      Api::HelpRequestPresenter.new(@help_request.reload, volunteer).call
     end
 
     def error_response(error_message)
