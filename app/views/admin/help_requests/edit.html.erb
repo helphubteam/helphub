@@ -1,1 +1,2 @@
 <%= render 'form', help_request: @help_request %>
+<%= render 'logs', logs: @help_request.logs.preload(:user) %>
