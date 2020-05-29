@@ -4,7 +4,7 @@ module HasGeoSalt
   extend ActiveSupport::Concern
 
   included do
-    GEO_SALT_SIZE = 0.001
+    GEO_SALT_SIZE = 0.002
 
     before_save :apply_salt!
 
