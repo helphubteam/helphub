@@ -19,8 +19,10 @@ module Admin
       )
         if params[:activate] && @help_request.blocked?
           @help_request.activate!
+          write_moderator_log(:activated)
         elsif params[:block] && !@help_request.blocked?
           @help_request.block!
+          write_moderator_log(:blocked)
         end
         flash[:notice] = 'Заявка изменена!'
         redirect_to action: :index
@@ -53,6 +55,14 @@ module Admin
     end
 
     private
+
+    # TODO: refactor this controller
+    def write_moderator_log(kind)
+      @help_request.logs.create!(
+        user: current_user,
+        kind: kind.to_s
+      )
+    end
 
     def fill_help_request
       @help_request = HelpRequest.find(params[:id])
