@@ -19,7 +19,8 @@ module Api
       def assign
         data = HelpRequestCases::Assign.new({
                                               help_request: @help_request,
-                                              volunteer: current_api_user
+                                              volunteer: current_api_user,
+                                              params: update_params
                                             }).call
         render_data(data)
       end
@@ -27,7 +28,8 @@ module Api
       def submit
         data = HelpRequestCases::Submit.new({
                                               help_request: @help_request,
-                                              volunteer: current_api_user
+                                              volunteer: current_api_user,
+                                              params: update_params
                                             }).call
         render_data(data)
       end
@@ -35,7 +37,8 @@ module Api
       def refuse
         data = HelpRequestCases::Refuse.new({
                                               help_request: @help_request,
-                                              volunteer: current_api_user
+                                              volunteer: current_api_user,
+                                              params: update_params
                                             }).call
         render_data(data)
       end
@@ -53,6 +56,10 @@ module Api
 
       def permitted_params
         params.permit(*Api::HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys)
+      end
+
+      def update_params
+        params.permit(:comment)
       end
     end
   end
