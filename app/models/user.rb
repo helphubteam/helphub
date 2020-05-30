@@ -12,4 +12,6 @@ class User < ApplicationRecord
   scope :moderators, -> { where(role: :moderator) }
 
   validates :role, presence: true
+
+  has_many :activity,  -> () { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 end

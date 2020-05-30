@@ -12,6 +12,7 @@ module HelpRequestCases
         raise_error(:volunteer_role_only) unless volunteer.volunteer?
         @help_request.volunteer = volunteer
         @help_request.assign!
+        write_log(:assigned)
       rescue HelpRequestCases::UseCaseError => e
         error_response(e.message)
       else

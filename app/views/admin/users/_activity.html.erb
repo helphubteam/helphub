@@ -1,0 +1,23 @@
+<div class='mt-5 mb-5'>
+  <h3>Активность</h3>
+  <table class='table table-bordered table-hover'>
+    <thead>
+      <tr>
+        <td>Заявка</td>
+        <td>Действие</td>
+        <td>Комментарий</td>
+        <td>Время</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% activity.each do |log| %>
+        <tr>
+          <td><%= link_to("Заявка №#{log.help_request.number}", edit_admin_help_request_path(log.help_request)) %></td>
+          <td><%= I18n.t("help_request_log.kind.#{log.kind}") %></td>
+          <td><%= log.comment %></td>
+          <td><%= I18n.l(log.created_at, format: :short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -10,6 +10,7 @@ module HelpRequestCases
           raise_error(:not_own)
         end
         help_request.refuse!
+        write_log(:refused)
       rescue HelpRequestCases::UseCaseError => e
         error_response(e.message)
       else

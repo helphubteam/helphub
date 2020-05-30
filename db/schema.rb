@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_194614) do
+ActiveRecord::Schema.define(version: 2020_05_29_192420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "help_request_logs", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "help_request_id", null: false
+    t.integer "kind", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["help_request_id"], name: "index_help_request_logs_on_help_request_id"
+    t.index ["user_id"], name: "index_help_request_logs_on_user_id"
+  end
 
   create_table "help_requests", force: :cascade do |t|
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false

@@ -1,1 +1,2 @@
 <%= render 'form', user: @user %>
+<%= render 'activity', activity: @user.activity.preload(:help_request) %>
