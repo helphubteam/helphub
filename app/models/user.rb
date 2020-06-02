@@ -14,4 +14,6 @@ class User < ApplicationRecord
   validates :role, presence: true
 
   has_many :activity,  -> () { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
+
+  paginates_per 20
 end
