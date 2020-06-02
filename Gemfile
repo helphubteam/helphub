@@ -40,6 +40,7 @@ gem 'stateful_enum'
 
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+gem 'sidekiq'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
