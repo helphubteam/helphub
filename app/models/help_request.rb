@@ -46,6 +46,6 @@ class HelpRequest < ApplicationRecord
   private
 
   def fill_default_number
-    self.number ||= "#{(HelpRequest.maximum(:id) || 0) + 1}"
+    self.number ||= "#{organization.help_requests.count + 1}" if organization
   end
 end

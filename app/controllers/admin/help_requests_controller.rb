@@ -9,7 +9,7 @@ module Admin
     def edit; end
 
     def new
-      @help_request = HelpRequest.new
+      @help_request = HelpRequest.new organization: current_organization
     end
 
     def update
