@@ -21,4 +21,10 @@ module ApplicationHelper
   def site_name
     'HelpHub'
   end
+
+  def print_datetime(datetime)
+    content_tag :span, class: "js-print-datetime hidden" do
+      datetime.to_s
+    end
+  end
 end
