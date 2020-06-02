@@ -9,8 +9,6 @@ Bundler.require(*Rails.groups)
 module App
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.active_job.queue_adapter = :sidekiq
-
     config.load_defaults 6.0
     config.autoload_paths << "#{Rails.root}/lib"
     config.i18n.default_locale = :ru
