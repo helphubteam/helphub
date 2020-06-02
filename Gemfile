@@ -42,6 +42,7 @@ gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'sidekiq'
 gem 'sinatra', require: false
+gem 'whenever', require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
