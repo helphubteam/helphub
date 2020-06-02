@@ -1,3 +1,7 @@
+<%= link_to('Новый пользователь',
+            new_admin_user_path,
+            class: 'btn btn-outline-secondary float-right my-3')
+%>
 <h3>Пользователи</h3>
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
@@ -23,9 +27,3 @@
     </tr>
   <% end %>
 </table>
-<p>
-  <%= link_to('Новый пользователь',
-              new_admin_user_path,
-              class: 'btn btn-outline-secondary align-self-start my-3')
-  %>
-</p>
