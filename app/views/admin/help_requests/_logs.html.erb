@@ -15,7 +15,7 @@
           <td><%= link_to(log.user.email, edit_admin_user_path(log.user)) %></td>
           <td><%= I18n.t("help_request_log.kind.#{log.kind}") %></td>
           <td><%= log.comment %></td>
-          <td><%= I18n.l(log.created_at, format: :short) %></td>
+          <td><%= print_datetime(log.created_at) %></td>
         </tr>
       <% end %>
     </tbody>
