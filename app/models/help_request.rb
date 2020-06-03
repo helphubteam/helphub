@@ -43,6 +43,7 @@ class HelpRequest < ApplicationRecord
 
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
+  scope :recurring, -> { where(schedule_set_at.present? && period.present?) }
   
   private
 
