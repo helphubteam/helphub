@@ -286,3 +286,10 @@ ru:
       assigned: В работе
       submitted: Выполнена
       blocked: Отменена
+
+  views:
+    pagination:
+      first: Первая страница
+      last: Последняя страница
+      next: Вперед
+      previous: Назад

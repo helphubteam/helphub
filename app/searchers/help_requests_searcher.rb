@@ -4,7 +4,7 @@ class HelpRequestsSearcher
   SEARCH_FIELDS = %i[id comment phone person city street house district apartment].freeze
 
   DEFAULT_SEARCH_PARAMS = {
-    limit: 100,
+    page: 1,
     overdue: false,
     search: ''
   }.freeze
@@ -28,7 +28,7 @@ class HelpRequestsSearcher
 
     scope
       .reorder(sort)
-      .limit(search_params[:limit])
+      .page(search_params[:page])
   end
 
   def apply_overdue(scope)

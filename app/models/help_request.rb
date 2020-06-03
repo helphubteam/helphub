@@ -6,8 +6,9 @@ class HelpRequest < ApplicationRecord
 
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
-  has_many :logs, -> () { reorder('created_at DESC') }, class_name: 'HelpRequestLog' do
-  end
+  has_many :logs, -> () { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
+
+  paginates_per 20
 
   validates :number, presence: true, uniqueness: {scope: :organization_id}
   validates :lonlat, :comment, :phone, :person, :city, :street, :house, presence: true
