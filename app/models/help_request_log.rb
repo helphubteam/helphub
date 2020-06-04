@@ -5,7 +5,8 @@ class HelpRequestLog < ApplicationRecord
   enum kind: { 
     actived: 0, assigned: 1,
     submitted: 2, refused: 3,
-    blocked: 4, activated: 5
+    blocked: 4, activated: 5,
+    refreshed: 6
   }
 
   validates :kind, presence: true

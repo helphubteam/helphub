@@ -11,12 +11,14 @@ class Recurring < ApplicationService
     update_recurring_help_requests
   end
 
+  private
+
   def update_recurring_help_requests
     recurring_help_requests.each do |help_request|
-      if check_need_start?(help_request) && !help_request.blocked?
+      if check_need_start?(help_request)
         help_request.update(state: :active)
         help_request.update(schedule_set_at: date_now)
-        write_recurring_log(help_request, :repeated) # ToDo: add repeated kind
+        write_recurring_log(help_request, :refreshed)
       end
     end
   end
@@ -27,8 +29,8 @@ class Recurring < ApplicationService
 
   def write_recurring_log(help_request, kind)
     help_request.logs.create!(
-        user: user, # ToDo: changed user?
-        kind: kind.to_s
+      user: user, # ToDo: changed user?
+      kind: kind.to_s
     )
   end
 end
