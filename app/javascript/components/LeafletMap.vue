@@ -7,7 +7,7 @@
       :zoom="zoom"
       :center="center"
     >
-      <l-tile-layer :url="url"/>
+      <l-tile-layer :url="url" />
     </l-map>
   </div>
 </template>
@@ -15,8 +15,8 @@
 <script>
 import { latLng } from "leaflet";
 import 'leaflet-draw';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import GeocoderFactory from '../map/geocoder-factory';
 
 export default {
   components: {
@@ -57,7 +57,8 @@ export default {
 
     window.vueEventBus.$on('searchStringChanged', searchString => {
       if (!this.isManualMarker) {
-        this.findByAddress(searchString).then(result => {
+        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.openStreetMap);
+        geocoder.findByAddress(searchString).then(result => {
           if (result.length) {
             this.updateCurrentMarker([ result[0].y, result[0].x ]);
             this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
@@ -87,13 +88,6 @@ export default {
     },
 
     /**
-     * Returns provider for searching by address.
-     */
-    getSearchProvider() {
-      return new OpenStreetMapProvider();
-    },
-
-    /**
      * Return control for map toolbar.
      */
     getDrawControl() {
@@ -109,14 +103,6 @@ export default {
       })
     },
 
-    /**
-     * Finds point by address.
-     * @param {String} address Address to search.
-     * @returns Promise
-     */
-    findByAddress(address) {
-      return this.getSearchProvider().search({ query: address });
-    }
   }
 }
 </script>
