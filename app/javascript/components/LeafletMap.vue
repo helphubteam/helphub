@@ -9,6 +9,11 @@
     >
       <l-tile-layer :url="url" />
     </l-map>
+    <select v-if="foundPoints.length > 1" class="browser-default custom-select" @change="onChangeCurrentPoint($event)">
+      <option v-for="point in foundPoints" :key="point.label" :value="JSON.stringify(point)">
+        {{point.label}}
+      </option>
+    </select>
   </div>
 </template>
 
@@ -33,6 +38,7 @@ export default {
       zoom: 16,
       center: [ 55.750979916446624, 37.628452777862556 ],
       currentMarker: this.marker,
+      foundPoints: [],
       editableLayers: null,
       isManualMarker: false
     }
@@ -62,6 +68,7 @@ export default {
           if (result.length) {
             this.updateCurrentMarker([ result[0].y, result[0].x ]);
             this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+            this.foundPoints = result;
           }
         });
       }
@@ -103,6 +110,14 @@ export default {
       })
     },
 
+    /**
+     * On change point event handler.
+     */
+    onChangeCurrentPoint(event) {
+      const pointData = JSON.parse(event.target.value);
+      this.updateCurrentMarker([ pointData.y, pointData.x ]);
+      this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+    }
   }
 }
 </script>
