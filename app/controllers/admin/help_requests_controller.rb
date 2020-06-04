@@ -39,6 +39,7 @@ module Admin
       if @help_request.update_attributes(
         record_params
       )
+        write_created_log(@help_request)
         flash[:notice] = 'Создана новая заявка!'
         redirect_to action: :index
       else
@@ -55,6 +56,13 @@ module Admin
     end
 
     private
+
+    def write_created_log(help_request)
+      help_request.logs.create!(
+          user: current_user,
+          kind: 'created'
+      )
+    end
 
     # TODO: refactor this controller
     def write_moderator_log(kind)

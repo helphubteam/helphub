@@ -16,10 +16,8 @@ class Recurring < ApplicationService
   def update_recurring_help_requests
     recurring_help_requests.each do |help_request|
       if check_need_start?(help_request)
-        help_request.update(state: :active)
-        help_request.user = nil unless help_request.active?
-        help_request.update(schedule_set_at: date_now)
-        write_recurring_log(help_request, :refreshed)
+        update_help_request(help_request)
+        write_recurring_log(help_request)
       end
     end
   end
@@ -28,10 +26,16 @@ class Recurring < ApplicationService
     (date_now - help_request.schedule_set_at).to_i == help_request.period
   end
 
-  def write_recurring_log(help_request, kind)
+  def update_help_request(help_request)
+    help_request.update(state: :active)
+    help_request.user = nil unless help_request.active?
+    help_request.update(schedule_set_at: date_now)
+  end
+
+  def write_recurring_log(help_request)
     help_request.logs.create!(
-      user: user, # ToDo: changed user?
-      kind: kind.to_s
+      user: help_request.author,
+      kind: 'refreshed'
     )
   end
 end
