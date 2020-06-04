@@ -1,4 +1,4 @@
-import BaseGeocoder from './empty-geocoder';
+import BaseGeocoder from './base-geocoder';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 export default class OpenStreetMapGeocoder extends BaseGeocoder {
