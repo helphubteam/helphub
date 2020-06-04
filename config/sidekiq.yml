@@ -1,0 +1,5 @@
+:schedule:
+  recurring_help_requests_worker:
+    every: 1h
+    class: RecurringHelpRequestsWorker
+    description: "This job refresh recurring help_requests"

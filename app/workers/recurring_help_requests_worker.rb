@@ -1,3 +1,5 @@
+require 'sidekiq-scheduler'
+
 class RecurringHelpRequestsWorker
   include Sidekiq::Worker
 
