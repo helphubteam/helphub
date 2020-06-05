@@ -15,7 +15,7 @@ module Admin
     def update
       authorize @help_request
       if @help_request.update_attributes(
-        record_params
+        update_record_params
       )
         if params[:activate] && @help_request.blocked?
           @help_request.activate!
@@ -37,7 +37,7 @@ module Admin
       @help_request.organization = current_organization
       authorize @help_request
       if @help_request.update_attributes(
-        record_params
+        create_record_params
       )
         flash[:notice] = 'Создана новая заявка!'
         redirect_to action: :index
@@ -69,10 +69,17 @@ module Admin
       @help_request = policy_scope(HelpRequest).find(params[:id])
     end
 
-    def record_params
+    def create_record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
         :person, :mediated, :meds_preciption_required, :number
+      )
+    end
+
+    def update_record_params
+      params.require(:help_request).permit(
+        :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
+        :person, :mediated, :meds_preciption_required
       )
     end
 
