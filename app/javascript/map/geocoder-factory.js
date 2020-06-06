@@ -1,4 +1,5 @@
-import OpenStreetMapGeocoder from './open-street-map-geocoder';
+import OpenStreetMapGeocoder from './geocoders/open-street-map-geocoder';
+import YandexGeocoder from './geocoders/yandex-geocoder';
 
 export default class GeocoderFactory {
 
@@ -6,7 +7,8 @@ export default class GeocoderFactory {
    * Types of geocoders that are available to create.
    */
   static TYPES = {
-    openStreetMap: 'openStreetMap'
+    openStreetMap: 'openStreetMap',
+    yandex: 'yandex'
   }
 
   /**
@@ -16,6 +18,8 @@ export default class GeocoderFactory {
    */
   static createGeocoder(type) {
     switch (type) {
+      case this.TYPES.yandex:
+        return new YandexGeocoder();
       case this.TYPES.openStreetMap:
       default:
         return new OpenStreetMapGeocoder();

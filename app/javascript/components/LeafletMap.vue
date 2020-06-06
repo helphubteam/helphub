@@ -63,7 +63,7 @@ export default {
 
     window.vueEventBus.$on('searchStringChanged', searchString => {
       if (!this.isManualMarker) {
-        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.openStreetMap);
+        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.yandex);
         geocoder.findByAddress(searchString).then(result => {
           if (result.length) {
             this.updateCurrentMarker([ result[0].lon, result[0].lat ]);
