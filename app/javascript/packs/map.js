@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const onChangeSearchString = () => {
-    const addressStrinValue = [
+    const addressStringValue = [
       document.getElementById('help_request_city').value,
       document.getElementById('help_request_street').value,
       document.getElementById('help_request_house').value
     ].join(' ');
-    window.vueEventBus.$emit('searchStringChanged', addressStrinValue);
+    window.vueEventBus.$emit('searchStringChanged', addressStringValue);
   };
 
   document.getElementById('help_request_city').onchange = onChangeSearchString;

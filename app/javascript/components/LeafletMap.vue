@@ -63,10 +63,10 @@ export default {
 
     window.vueEventBus.$on('searchStringChanged', searchString => {
       if (!this.isManualMarker) {
-        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.openStreetMap);
+        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.yandex);
         geocoder.findByAddress(searchString).then(result => {
           if (result.length) {
-            this.updateCurrentMarker([ result[0].y, result[0].x ]);
+            this.updateCurrentMarker([ result[0].lon, result[0].lat ]);
             this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
             this.foundPoints = result;
           }
@@ -115,7 +115,7 @@ export default {
      */
     onChangeCurrentPoint(event) {
       const pointData = JSON.parse(event.target.value);
-      this.updateCurrentMarker([ pointData.y, pointData.x ]);
+      this.updateCurrentMarker([ pointData.lon, pointData.lat ]);
       this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
     }
   }

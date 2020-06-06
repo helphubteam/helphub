@@ -10,5 +10,14 @@ export default class BaseGeocoder {
   findByAddress(address) {
     throw new Error('Method findByAddress is not implemented in BaseGeocoder class');
   }
+
+  /**
+   * Normalizes points.
+   * @param {Any} data Data.
+   * @returns {Array} Normalized points.
+   */
+  normalizePoints(data) {
+    throw new Error('Method normalizePoints is not implemented in BaseGeocoder class');
+  }
 }
 
