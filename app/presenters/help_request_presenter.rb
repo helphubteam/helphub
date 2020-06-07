@@ -12,6 +12,7 @@ class HelpRequestPresenter
            :meds_preciption_required,
            :volunteer_id, 
            :created_at,
+           :recurring,
            :updated_at, to: :target
 
   def initialize(target)
