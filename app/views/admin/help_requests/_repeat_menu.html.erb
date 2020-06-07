@@ -1,32 +1,8 @@
-<!--don't work collapse ???-->
-<p>
-  <a class="btn btn-outline-primary"
-     data-toggle="collapse"
-     href="#multiCollapse"
-     role="button"
-     aria-expanded="false"
-     aria-controls="multiCollapse">
-    Регулярная завка
-  </a>
-</p>
-<div class="row">
-  <div class="col">
-    <div class="collapse multi-collapse show" id="multiCollapse">
-      <div class="card card-body">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label"><%= forma.label :schedule_set_at %></label>
-          <div class="col-sm-10">
-            <p class="form-control-static" ><%= forma.date_field :schedule_set_at, label: :schedule_set_at %></p>
-          </div>
+<!--<%#= f.check_box :schedule_set_at, {}, Time.zone.now.to_date, nil %> Регулярная заявка(дн.)-->
+<%= f.check_box :recurring, {}, true, false %> Регулярная заявка(дн.)
 
-          <label class="col-sm-2 col-form-label"><%= forma.label :period %></label>
-          <div class="col-sm-2">
-            <p class="form-control-static" placeholder="Кол-во дней"><%= forma.input :period, label: false %></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col-sm-2">
+  <div class="form-control-static"><%= f.input :period, label: false %></div>
 </div>
 
 

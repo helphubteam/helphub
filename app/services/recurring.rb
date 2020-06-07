@@ -27,9 +27,8 @@ class Recurring < ApplicationService
   end
 
   def update_help_request(help_request)
-    help_request.update(state: :active)
+    help_request.update(params_to_update)
     help_request.user = nil unless help_request.active?
-    help_request.update(schedule_set_at: date_now)
   end
 
   def write_recurring_log(help_request)
@@ -37,5 +36,12 @@ class Recurring < ApplicationService
       user: help_request.author,
       kind: 'refreshed'
     )
+  end
+
+  def params_to_update
+    {
+        state: :active,
+        schedule_set_at: date_now
+    }
   end
 end

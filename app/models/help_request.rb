@@ -43,8 +43,11 @@ class HelpRequest < ApplicationRecord
 
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
-  scope :not_blocked, -> { where.not(state: :blocked) }
-  scope :recurring, -> { not_blocked.where.not(schedule_set_at: nil).where.not(period: nil) }
+  scope :recurring, -> {
+    where.not(state: :blocked)
+   .where.not(schedule_set_at: nil)
+   .where.not(period: nil)
+  }
 
   def author
     logs.where(state: :created).first.user
