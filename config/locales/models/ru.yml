@@ -24,7 +24,7 @@ ru:
         meds_preciption_required: Нужны лекарства по рецепту
         comment: Комментарий
         mediated: Помощь для другого
-        schedule_set_at: Начало периода повтора
+        recurring: Повторяющаяся заявка
         period: Период повтора
       organization:
         title: Наименование 
