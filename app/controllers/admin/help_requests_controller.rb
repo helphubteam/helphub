@@ -75,10 +75,17 @@ module Admin
       @help_request = policy_scope(HelpRequest).find(params[:id])
     end
 
-    def record_params
+    def create_record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
         :person, :mediated, :meds_preciption_required, :number, :recurring, :period
+      )
+    end
+
+    def update_record_params
+      params.require(:help_request).permit(
+        :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
+        :person, :mediated, :meds_preciption_required
       )
     end
 

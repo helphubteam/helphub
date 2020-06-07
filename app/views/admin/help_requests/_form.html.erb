@@ -16,16 +16,16 @@
   <%= f.error_notification %>
   <div class="row">
     <div class="col-6">
-      <%= f.input :number %>
+      <%= f.input :number if help_request.new_record? %>
       <%= f.input :person %>
       <%= f.input :city %>
       <%= f.input :district %>
       <%= f.input :street %>
       <%= f.input :house %>
       <%= f.input :apartment %>
+      <%= f.input :phone %>  
     </div>
     <div class="col-6">
-      <%= f.input :phone %>  
       <div id="vue-app">
         <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
       </div>

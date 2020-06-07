@@ -7,16 +7,21 @@
       :zoom="zoom"
       :center="center"
     >
-      <l-tile-layer :url="url"/>
+      <l-tile-layer :url="url" />
     </l-map>
+    <select v-if="foundPoints.length > 1" class="browser-default custom-select" @change="onChangeCurrentPoint($event)">
+      <option v-for="point in foundPoints" :key="point.label" :value="JSON.stringify(point)">
+        {{point.label}}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
 import { latLng } from "leaflet";
 import 'leaflet-draw';
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import GeocoderFactory from '../map/geocoder-factory';
 
 export default {
   components: {
@@ -33,6 +38,7 @@ export default {
       zoom: 16,
       center: [ 55.750979916446624, 37.628452777862556 ],
       currentMarker: this.marker,
+      foundPoints: [],
       editableLayers: null,
       isManualMarker: false
     }
@@ -57,10 +63,12 @@ export default {
 
     window.vueEventBus.$on('searchStringChanged', searchString => {
       if (!this.isManualMarker) {
-        this.findByAddress(searchString).then(result => {
+        const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.yandex);
+        geocoder.findByAddress(searchString).then(result => {
           if (result.length) {
-            this.updateCurrentMarker([ result[0].y, result[0].x ]);
+            this.updateCurrentMarker([ result[0].lon, result[0].lat ]);
             this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+            this.foundPoints = result;
           }
         });
       }
@@ -87,13 +95,6 @@ export default {
     },
 
     /**
-     * Returns provider for searching by address.
-     */
-    getSearchProvider() {
-      return new OpenStreetMapProvider();
-    },
-
-    /**
      * Return control for map toolbar.
      */
     getDrawControl() {
@@ -110,12 +111,12 @@ export default {
     },
 
     /**
-     * Finds point by address.
-     * @param {String} address Address to search.
-     * @returns Promise
+     * On change point event handler.
      */
-    findByAddress(address) {
-      return this.getSearchProvider().search({ query: address });
+    onChangeCurrentPoint(event) {
+      const pointData = JSON.parse(event.target.value);
+      this.updateCurrentMarker([ pointData.lon, pointData.lat ]);
+      this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
     }
   }
 }
