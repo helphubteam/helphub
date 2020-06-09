@@ -1,0 +1,9 @@
+<!--<%#= f.check_box :schedule_set_at, {}, Time.zone.now.to_date, nil %> Регулярная заявка(дн.)-->
+<%= f.check_box :recurring, {}, true, false %> Регулярная заявка(дн.)
+
+<div class="col-sm-2">
+  <div class="form-control-static"><%= f.input :period, label: false %></div>
+</div>
+
+
+

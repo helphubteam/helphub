@@ -1,7 +1,7 @@
 <h3>Список Заявок</h3>
 <%= link_to('Новая заявка',
   new_admin_help_request_path,
-  class: 'btn btn-sm btn-outline-secondary float-right mt-4')
+  class: 'btn btn-sm btn-success float-right mt-4')
 %>
 <%= render 'filters' %>
 <table class="table table-bordered table-hover">
@@ -12,6 +12,7 @@
     <th scope="col">Телефон</th>
     <th scope="col">ФИО</th>
     <th scope="col">Комментарий</th>
+    <th scope="col">Повтор, дн</th>
     <th scope="col">Последнее изменение</th>
     <th scope="col" style="width: 10%"></th>
     </tr>
@@ -27,6 +28,7 @@
       <td><%= help_request.phone %></td>
       <td><%= help_request.person %></td>
       <td><%= help_request.comment %></td>
+      <td><%= help_request.period %></td>
       <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
       <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request.id), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>

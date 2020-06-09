@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'map' %>
-<% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.number}" %>
-<p><h3><%= title %></h3></p>
+<% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
+<h3><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
   <% volunteer = help_request.volunteer %>
@@ -36,6 +36,9 @@
   <%= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%= f.input :mediated %>
+
+  <%= render 'repeat_menu', f: f %>
+
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit('Сохранить', class: 'btn btn-primary') %>
@@ -43,7 +46,7 @@
       <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
       <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
       <% unless help_request.new_record? %>
-        <%= link_to('Удалить', admin_help_request_path(@help_request), 
+        <%= link_to('Удалить', admin_help_request_path(@help_request),
           method: :delete,
           data: { confirm: 'Вы уверены что хотите удалить заявку?' },
           class: 'btn btn-outline-danger align-self-start') 

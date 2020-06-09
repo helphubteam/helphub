@@ -43,7 +43,16 @@ class HelpRequest < ApplicationRecord
 
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
-  
+  scope :recurring, -> {
+    where.not(state: :blocked)
+   .where.not(schedule_set_at: nil)
+   .where.not(period: nil)
+  }
+
+  def author
+    logs.where(state: :created).first.user
+  end
+
   private
 
   def fill_default_number
