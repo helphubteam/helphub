@@ -14,7 +14,7 @@ module Admin
 
     def update
       authorize @help_request
-      if @help_request.update(record_params)
+      if @help_request.update(update_record_params)
         if params[:activate] && @help_request.blocked?
           @help_request.activate!
           write_moderator_log(:activated)
@@ -35,7 +35,7 @@ module Admin
       set_recurring!
       @help_request.organization = current_organization
       authorize @help_request
-      if @help_request.update(record_params)
+      if @help_request.update(create_record_params)
         write_moderator_log(:created)
         flash[:notice] = 'Создана новая заявка!'
         redirect_to action: :index
@@ -55,7 +55,7 @@ module Admin
     private
 
     def set_recurring!
-      if record_params[:recurring] == 'true'
+      if create_record_params[:recurring] == 'true'
         @help_request.schedule_set_at = Time.zone.now.to_date
       else
         @help_request.period = nil
