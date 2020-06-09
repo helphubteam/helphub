@@ -42,7 +42,7 @@
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit('Сохранить', class: 'btn btn-primary') %>
-      <%= f.submit('Заблокировать', name: :block, class: 'btn btn-warning') if !help_request.new_record? && !help_request.blocked? %>
+      <%= f.submit('Отменить заявку', name: :block, class: 'btn btn-warning') if !help_request.new_record? && !help_request.blocked? %>
       <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
       <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
       <% unless help_request.new_record? %>
