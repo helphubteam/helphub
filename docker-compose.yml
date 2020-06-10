@@ -45,5 +45,6 @@ services:
       retries: 30
 
 volumes:
+  postgres:
   redis:
   bundle_path:
