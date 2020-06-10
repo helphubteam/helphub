@@ -2,31 +2,33 @@ version: '3.4'
 x-backend:
   &backend
   build: .
-  environment:
-    - RAILS_ENV=development
-    - RUBYOPT=-W0
-    - LANG=en_US.UTF-8
-    - REDIS_URL=redis://redis:6379
-    - BUNDLE_PATH=/bundle/vendor
+  env_file: .env
   volumes:
+    - ~/.ssh:/root/.ssh
     - .:/app
     - bundle_path:/bundle
-  depends_on:
-    - postgres
-    - redis
 services:
   app:
     <<: *backend
     ports:
       - "3000:3000"
     command: ./start.sh 
+    depends_on:
+      - postgres
+      - redis
   sidekiq:
     <<: *backend
     command: ./start_sidekiq.sh
+    depends_on:
+      - app
+      - postgres
+      - redis
+
   postgres:
+    container_name: db_helphub
     image: skywidesoft/postgres-hstore-postgis
     volumes:
-      - postgres:/var/lib/postgresql
+      - ./postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
   redis:
@@ -43,6 +45,5 @@ services:
       retries: 30
 
 volumes:
-  postgres:
   redis:
   bundle_path:
