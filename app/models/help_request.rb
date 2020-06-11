@@ -13,7 +13,7 @@ class HelpRequest < ApplicationRecord
   validates :number, presence: true, uniqueness: {scope: :organization_id}
   validates :lonlat, :comment, :phone, :person, :city, :street, :house, presence: true
 
-  after_initialize :fill_default_number
+  before_validation :fill_default_number
 
   enum state: { active: 0, assigned: 1, submitted: 2, blocked: 3 } do
     event :assign do

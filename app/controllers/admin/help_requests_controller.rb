@@ -78,7 +78,7 @@ module Admin
     def create_record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-        :person, :mediated, :meds_preciption_required, :number, :recurring, :period
+        :person, :mediated, :meds_preciption_required, :recurring, :period
       )
     end
 
