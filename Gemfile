@@ -35,6 +35,7 @@ gem 'devise_invitable', '~> 2.0.0'
 gem 'pundit'
 
 gem 'simple_form'
+gem 'bootstrap-glyphicons'
 
 gem 'stateful_enum'
 
