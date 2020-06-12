@@ -7,6 +7,5 @@ until psql -h postgres -U postgres -c '\l'; do
 done
 echo "Postgres is up - executing command"
 
-rm -f tmp/pids/server.pid
-
+bundle install
 bundle exec sidekiq
