@@ -30,15 +30,15 @@ set :linked_dirs,
   postgres-data
 ]
 
-after 'deploy:finishing', :docker_deploy
+# after 'deploy:finished', :docker_restart
 
-namespace :deploy do
-  after :finishing, :docker_deploy do
-    on roles(:app) do
-      within release_path do
-        execute :sudo, 'docker-compose', 'stop'
-        execute :sudo, 'docker-compose', 'up', '-d'  
-      end
-    end
-  end
-end
+# namespace :deploy do
+#   after :finished, :docker_restart do
+#     on roles(:app) do
+#       within current_path do
+#         execute :sudo, 'docker-compose', 'stop'
+#         execute :sudo, 'docker-compose', 'up', '-d'  
+#       end
+#     end
+#   end
+# end

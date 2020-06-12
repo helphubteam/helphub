@@ -10,14 +10,16 @@ x-backend:
 services:
   app:
     <<: *backend
+    container_name: app_helphub
     ports:
-      - "3000:3000"
+      - "${DOCKER_PORT}:3000"
     command: ./start.sh 
     depends_on:
       - postgres
       - redis
   sidekiq:
     <<: *backend
+    container_name: sidekiq_helphub
     command: ./start_sidekiq.sh
     depends_on:
       - app
@@ -43,6 +45,14 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.10.0.0/16
 
 volumes:
   postgres:

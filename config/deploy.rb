@@ -3,4 +3,4 @@ lock "~> 3.14.0"
 
 set :application, "helphub"
 set :repo_url, "git@github.com:helphubteam/helphub.git"
-set :branch, "master"
+set :branch, "deploy"

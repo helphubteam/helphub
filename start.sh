@@ -1,16 +1,17 @@
 #!/bin/bash
 set -e
 
+until psql -h postgres -U postgres -c '\l'; do
+  echo "Postgres is unavailable - sleeping for 5 seconds"
+  sleep 5
+done
+echo "Postgres is up - executing command"
+
+
 if [ $RAILS_ENV = 'production' ]
 then
-    bundle exec rake db:create db:migrate 
+  bundle exec rake db:create db:migrate 
 else
-  until psql -h postgres -U postgres -c '\l'; do
-    echo "Postgres is unavailable - sleeping for 5 seconds"
-    sleep 5
-  done
-  echo "Postgres is up - executing command"
-
   bundle exec rake db:create db:migrate db:seed 
 fi
 

@@ -36,7 +36,6 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY ./Gemfile /app/Gemfile
 COPY ./Gemfile.lock /app/Gemfile.lock
-COPY ./node_modules /app/node_modules
 
 COPY . /app
 RUN bundle install
