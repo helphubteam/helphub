@@ -1,6 +1,7 @@
 module Admin
   class HelpRequestsController < Admin::BaseController
     before_action :fill_help_request, only: %i[edit update destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
@@ -53,6 +54,24 @@ module Admin
     end
 
     private
+
+    def sortable_columns
+
+    end
+
+    def sortable_directions
+
+    end
+
+    def sort_column
+      %w[created_at updated_at period].
+          include?(params[:column]) ? params[:column] : 'id'
+    end
+
+    def sort_direction
+      %w[asc desc]
+          .include?(params[:direction]) ? params[:direction] : 'asc'
+    end
 
     def set_recurring!
       if create_record_params[:recurring] == 'true'
