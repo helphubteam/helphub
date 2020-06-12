@@ -25,7 +25,7 @@ class HelpRequestsSearcher
       scope = apply_overdue(scope)
       sort = [:state, 'updated_at ASC']
     else
-      sort = by_sorting
+      sort = by_sorting_params
     end
 
     scope
@@ -56,7 +56,7 @@ class HelpRequestsSearcher
     scope
   end
 
-  def by_sorting
-    [:state, "#{search_params[:column]} #{search_params[:direction]}"]
+  def by_sorting_params
+    ["#{search_params[:column]} #{search_params[:direction]}"]
   end
 end

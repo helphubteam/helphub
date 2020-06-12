@@ -55,16 +55,8 @@ module Admin
 
     private
 
-    def sortable_columns
-
-    end
-
-    def sortable_directions
-
-    end
-
     def sort_column
-      %w[created_at updated_at period].
+      %w[state created_at updated_at period].
           include?(params[:column]) ? params[:column] : 'id'
     end
 
@@ -104,7 +96,7 @@ module Admin
     def update_record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-        :person, :mediated, :meds_preciption_required
+        :person, :mediated, :meds_preciption_required, :recurring, :period
       )
     end
 
