@@ -10,7 +10,7 @@ echo "Postgres is up - executing command"
 rm -f tmp/pids/server.pid
 bundle install
 
-if [ $RAILS_ENV = 'production' ]
+if [ "$RAILS_ENV" = 'production' ]
 then
   bundle exec rake db:create db:migrate 
 else

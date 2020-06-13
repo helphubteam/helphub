@@ -21,11 +21,8 @@ set :linked_dirs,
   tmp/pids
   tmp/cache
   tmp/sockets
-  vendor/bundle
   public/system
   public/packs
-  public/downloads
-  node_modules
   storage
   postgres-data
 ]
