@@ -65,6 +65,10 @@ group :development do
   gem 'rubocop'
   gem 'letter_opener'
   gem 'letter_opener_web'
+
+  gem 'capistrano', '~> 3.11'
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 end
 
 group :test do

@@ -62,14 +62,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "http://helphubstaging.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: ENV['HOST_URL'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       domain:               'gmail.com',
       port:                 587,
-      user_name:            'moviescollectionIWMteam@gmail.com',  # need ENV variable -- ENV['SMTP_USERNAME']
-      password:             'moviesqwerty',                       # need ENV variable -- ENV['SMTP_PASSWORD']
+      user_name:            ENV['SMTP_USERNAME'],
+      password:             ENV['SMTP_PASSWORD'],                      
       authentication:       'plain',
       enable_starttls_auto: true
   }

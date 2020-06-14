@@ -2,38 +2,38 @@ version: '3.4'
 x-backend:
   &backend
   build: .
-  environment:
-    - RAILS_ENV=development
-    - RUBYOPT=-W0
-    - LANG=en_US.UTF-8
-    - REDIS_URL=redis://redis:6379
-    - BUNDLE_PATH=/bundle/vendor
+  env_file: .env
   volumes:
+    - ~/.ssh:/root/.ssh
     - .:/app
     - bundle_path:/bundle
-  depends_on:
-    - postgres
-    - redis
 services:
   app:
     <<: *backend
+    container_name: app_helphub
     ports:
-      - "3000:3000"
+      - "${DOCKER_PORT}:3000"
     command: ./start.sh 
+    depends_on:
+      - postgres
+      - redis
   sidekiq:
     <<: *backend
+    container_name: sidekiq_helphub
     command: ./start_sidekiq.sh
+    depends_on:
+      - app
+      - postgres
+      - redis
+
   postgres:
+    container_name: db_helphub
     image: skywidesoft/postgres-hstore-postgis
     volumes:
-      - postgres:/var/lib/postgresql
-    ports:
-      - 5432:5432
+      - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
   redis:
     image: redis:5.0.4-alpine
     command: ["redis-server", "--appendonly", "yes"]
-    ports:
-      - 6379:6379
     volumes:
       - redis:/data
     healthcheck:
@@ -41,6 +41,13 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.10.0.0/16
 
 volumes:
   postgres:

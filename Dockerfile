@@ -36,5 +36,7 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY ./Gemfile /app/Gemfile
 COPY ./Gemfile.lock /app/Gemfile.lock
-ENV RAILS_ENV=development
+
 COPY . /app
+RUN bundle install
+RUN yarn install --check-files
