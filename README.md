@@ -43,10 +43,16 @@ after first deploy need create database
 ```
 
 - Docker for development mode
-To start just run:
+To start run:
 ```bash
 docker-compose run app cap production deploy
 ```
+
+after then stop old container on server and build and run new container
+
+TODO:
+
+Need add task which stop old container (main problem, that container need to stop in previous release directory) and start new
 
 and open `production url` in browser
 

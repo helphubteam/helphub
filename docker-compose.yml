@@ -7,8 +7,6 @@ x-backend:
     - ~/.ssh:/root/.ssh
     - .:/app
     - bundle_path:/bundle
-    - ${STORAGE_PATH}:/app/storage
-    - ${NODE_MODULES_PATH}:/app/node_modules
 services:
   app:
     <<: *backend

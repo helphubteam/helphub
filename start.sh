@@ -12,7 +12,7 @@ bundle install
 
 if [ "$RAILS_ENV" = 'production' ]
 then
-  bundle exec rake db:create db:migrate 
+  bundle exec rake db:create db:migrate assets:precompile
 else
   bundle exec rake db:create db:migrate db:seed 
 fi
