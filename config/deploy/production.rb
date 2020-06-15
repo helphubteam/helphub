@@ -3,7 +3,7 @@ set :user, 'helphub'
 set :deploy_to, "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
 
 set :rails_env, 'production'
-set :branch, 'deploy'
+set :branch, 'master'
 
 set :ssh_options, forward_agent: true, user: fetch(:user)
 

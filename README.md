@@ -52,7 +52,7 @@ after then stop old container on server and build and run new container
 
 TODO:
 
-Need add task which stop old container (main problem, that container need to stop in previous release directory) and start new
+Need add task which down (stop and remove) old container (main problem, that container need to stop in previous release directory) and start new (before it, need to remove node_modules and yarn.lock)
 
 and open `production url` in browser
 
