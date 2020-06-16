@@ -13,6 +13,28 @@ set :linked_files,
     ]
 
 namespace :deploy do
+  before :cleanup, :cleanup_permissions
+    
+  desc 'Set permissions on old releases before cleanup'
+  task :cleanup_permissions do
+    on release_roles :all do |host|
+      releases = capture(:ls, '-x', releases_path).split
+      if releases.count >= fetch(:keep_releases)
+        info "Cleaning permissions on old releases"
+        directories = (releases - releases.last(1))
+        if directories.any?
+          directories.each do |release|
+            within releases_path.join(release) do
+                execute :sudo, :chown, '-R', 'helphub:helphub', '.'
+            end
+          end
+        else
+          info t(:no_old_releases, host: host.to_s, keep_releases: fetch(:keep_releases))
+        end
+      end
+    end
+  end
+  
   after :started, :docker_down do
     on roles(:app) do
       within current_path do

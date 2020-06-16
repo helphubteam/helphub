@@ -45,10 +45,14 @@ after first deploy need create database
 - Docker for development mode
 To start just run:
 ```bash
-docker-compose run app cap production deploy
+docker-compose run app bundle exec cap production deploy
 ```
 
-and open `production url` in browser
+and open `production url` in browser:
+https://app.helphub.ru
+
+NOTE: deploy DOES TAKE TIME (~15 mins) so be pacient
+
 
 - Heroku for production mode
 https://helphubstaging.herokuapp.com/
