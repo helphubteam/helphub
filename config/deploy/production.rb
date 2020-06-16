@@ -12,14 +12,23 @@ set :linked_files,
       .env
     ]
 
-# namespace :deploy do
-#   after :finished, :docker_restart do
-#     on roles(:app) do
-#       within current_path do
-#         execute :sudo, 'docker-compose', 'down'
-#         execute :sudo, 'docker', 'network', 'prune', '-f'
-#         execute :sudo, 'docker-compose', 'up', '-d', '--force-recreate', '--build'
-#       end
-#     end
-#   end
-# end
+namespace :deploy do
+  after :started, :docker_down do
+    on roles(:app) do
+      within current_path do
+        execute :sudo, 'docker-compose', 'down'
+        execute :sudo, 'docker', 'network', 'prune', '-f'
+      end
+    end
+  end
+
+  after :finished, :docker_up do
+    on roles(:app) do
+      within current_path do
+        execute :sudo, 'rm', '-f', 'node_modules'
+        execute :sudo, 'rm', '-f', 'yarn.lock'
+        execute :sudo, 'docker-compose', 'up', '-d', '--force-recreate', '--build'
+      end
+    end
+  end
+end
