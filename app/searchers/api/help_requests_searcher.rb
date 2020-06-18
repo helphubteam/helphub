@@ -31,7 +31,7 @@ module Api
 
     def map_scope(scope)
       scope
-        .where(state: [:active, :assigned],
+        .where(state: %i[active assigned],
                organization: current_organization)
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
@@ -70,9 +70,9 @@ module Api
       distance_order_query = "#{distance_query} ASC"
       distance_limit_query = "#{distance_query} < #{(search_params[:distance].to_i * 1000)}"
 
-      scope.
-        where(distance_limit_query).
-        reorder(distance_order_query)
+      scope.select("help_requests.*, #{distance_query} as distance")
+           .where(distance_limit_query)
+           .reorder(distance_order_query).group('help_requests.id').all
     end
 
     def current_organization
