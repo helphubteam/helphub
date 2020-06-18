@@ -45,7 +45,7 @@ module Api
           address: non_personal_address,
           detailed_address: detailed_non_personal_address,
           lonlat: JSON.parse(target.lonlat_with_salt_geojson),
-          distance: distance_label(target.distance),
+          distance: distance_label(target.try(:distance)),
           geo_salt: true,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
@@ -60,7 +60,7 @@ module Api
           address: full_address,
           detailed_address: detailed_full_address,
           lonlat: JSON.parse(target.lonlat_geojson),
-          distance: distance_label(target.distance),
+          distance: distance_label(target.try(:distance)),
           geo_salt: false,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
