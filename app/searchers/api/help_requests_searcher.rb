@@ -37,6 +37,7 @@ module Api
         .yield_self(&method(:apply_offset))
         .yield_self(&method(:apply_sort))
         .yield_self(&method(:apply_lonlat))
+        .yield_self(&method(:apply_distance))
     end
 
     def taken_scope(scope)
@@ -48,6 +49,7 @@ module Api
         .yield_self(&method(:apply_sort))
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
+        .yield_self(&method(:apply_distance))
     end
 
     def apply_limit(scope)
@@ -70,9 +72,17 @@ module Api
       distance_order_query = "#{distance_query} ASC"
       distance_limit_query = "#{distance_query} < #{(search_params[:distance].to_i * 1000)}"
 
-      scope.select("help_requests.*, #{distance_query} as distance")
-           .where(distance_limit_query)
-           .reorder(distance_order_query).group('help_requests.id').all
+      scope.where(distance_limit_query)
+           .reorder(distance_order_query)
+    end
+
+    def apply_distance(scope)
+      return scope unless search_params[:lonlat]
+
+      long, lat = search_params[:lonlat].split('_').map(&:to_f)
+      distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
+      
+      scope.select("help_requests.*, #{distance_query} as distance").group('help_requests.id').all
     end
 
     def current_organization
