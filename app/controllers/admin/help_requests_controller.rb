@@ -101,7 +101,7 @@ module Admin
     end
 
     def search_params
-      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys)
+      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []))
     end
   end
 end
