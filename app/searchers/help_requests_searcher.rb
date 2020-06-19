@@ -21,6 +21,7 @@ class HelpRequestsSearcher
 
   def call
     scope = apply_search(HelpRequest)
+    scope = apply_states(scope)
     if search_params[:overdue]
       scope = apply_overdue(scope)
       sort = [:state, 'updated_at ASC']
@@ -54,6 +55,18 @@ class HelpRequestsSearcher
               end
     end
     scope
+  end
+
+  def apply_states(scope)
+    states = search_params[:states]
+    return scope if states.blank?
+
+    filtered_scope = []
+    states.each do |state|
+      filtered_scope = scope.where(state: state)
+    end
+
+    filtered_scope
   end
 
   def by_sorting_params
