@@ -56,13 +56,12 @@ module Admin
     private
 
     def sort_column
-      %w[state created_at updated_at period].
-          include?(params[:column]) ? params[:column] : 'id'
+      HelpRequestsSearcher::SORT_COLUMN
+          .include?(params[:column]) ? params[:column] : 'id'
     end
 
     def sort_direction
-      %w[asc desc]
-          .include?(params[:direction]) ? params[:direction] : 'asc'
+      params[:direction] == 'desc' ? 'desc' : 'asc'
     end
 
     def set_recurring!

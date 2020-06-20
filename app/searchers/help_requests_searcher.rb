@@ -11,6 +11,8 @@ class HelpRequestsSearcher
     direction: 'desc'
   }.freeze
 
+  SORT_COLUMN = %w[state created_at updated_at period].freeze
+
   attr_reader :search_params
 
   def initialize(search_params)
@@ -59,14 +61,7 @@ class HelpRequestsSearcher
 
   def apply_states(scope)
     states = search_params[:states]
-    return scope if states.blank?
-
-    filtered_scope = []
-    states.each do |state|
-      filtered_scope = scope.where(state: state)
-    end
-
-    filtered_scope
+    states.blank? ? scope : scope.where(state: states)
   end
 
   def by_sorting_params
