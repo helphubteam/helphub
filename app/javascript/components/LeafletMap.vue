@@ -1,6 +1,12 @@
 <template>
-  <div style="height: 350px;">
-    <input type='hidden' :value="JSON.stringify(currentMarker)" name='help_request[lonlat_geojson]' />
+  <div style="height: 350px">
+    <input 
+      type="hidden" 
+      :value="JSON.stringify(currentMarker)" 
+      v-bind:class="[ isValid ? '' : 'is-invalid' ]" 
+      name='help_request[lonlat_geojson]' 
+    />
+    <div class="invalid-feedback">{{errorMessage}}</div>
     <l-map
       ref="map" 
       style="width: 100%"
@@ -30,7 +36,11 @@ export default {
     LMarker
   },
 
-  props: ['marker'],
+  props: {
+    marker: String,
+    isValid: Boolean,
+    errorMessage: String
+  },
 
   data() {
     return {
