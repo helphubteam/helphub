@@ -34,6 +34,7 @@ module ApplicationHelper
 
     icon = sort_direction == "asc" ? "glyphicon glyphicon-chevron-up" : "glyphicon glyphicon-chevron-down"
     icon = column == sort_column ? icon : ""
-    link_to "#{title} <span class='#{icon}'></span>".html_safe, {column: column, direction: direction}
+    link_to "#{title} <span class='#{icon}'></span>".html_safe,
+            params.merge(column: column, direction: direction).permit!
   end
 end
