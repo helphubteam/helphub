@@ -286,6 +286,8 @@ ru:
       assigned: В работе
       submitted: Выполнена
       blocked: Отменена
+    errors:
+      empty_point: Точка на карте должна быть указана
 
   views:
     pagination:
