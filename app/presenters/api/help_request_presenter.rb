@@ -22,7 +22,7 @@ module Api
       mediated
       meds_preciption_required
       volunteer_id
-    ]
+    ].freeze
 
     def initialize(target, current_user)
       @target = target
@@ -30,7 +30,7 @@ module Api
     end
 
     def call
-      return full_data if target.volunteer == current_user and target.assigned?
+      return full_data if (target.volunteer == current_user) && target.assigned?
 
       non_personal_data
     end
@@ -43,7 +43,9 @@ module Api
         .slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
         .merge(
           address: non_personal_address,
+          detailed_address: detailed_non_personal_address,
           lonlat: JSON.parse(target.lonlat_with_salt_geojson),
+          distance: distance_label(target.try(:distance)),
           geo_salt: true,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
@@ -56,7 +58,9 @@ module Api
         .slice(*FULL_ATTRIBUTES.map(&:to_s))
         .merge(
           address: full_address,
+          detailed_address: detailed_full_address,
           lonlat: JSON.parse(target.lonlat_geojson),
+          distance: distance_label(target.try(:distance)),
           geo_salt: false,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
@@ -69,10 +73,44 @@ module Api
       [target.city, target.district, target.street, target.house, target.apartment].compact.join(' ')
     end
 
+    def detailed_full_address
+      {
+        city: target.city,
+        district: target.district,
+        street: target.street,
+        house: target.house,
+        apartment: target.apartment
+      }
+    end
+
     def non_personal_address
-      non_personal_address = [ target.city, target.district, target.street]
+      non_personal_address = [target.city, target.district, target.street]
       non_personal_address.push(target.house) if target.apartment.present?
-      non_personal_address.compact.join(' ')      
+      non_personal_address.compact.join(' ')
+    end
+
+    def detailed_non_personal_address
+      {
+        city: target.city,
+        district: target.district,
+        street: target.street,
+        house: target.apartment.blank? && target.house || nil,
+        apartment: nil
+      }
+    end
+
+    def distance_label(distance)
+      return '' unless distance
+
+      if distance > 2000
+        "#{(distance / 1000).round} км"
+      elsif distance > 1000
+        "#{(distance / 1000).round(1)} км"
+      elsif distance > 100
+        "#{(distance.to_i / 100).round * 100} м"
+      else
+        "#{(distance.to_i / 10).round * 10} м"
+      end
     end
   end
 end

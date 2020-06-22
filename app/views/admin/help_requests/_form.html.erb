@@ -26,9 +26,11 @@
     </div>
     <div class="col-6">
       <div id="vue-app">
-        <leaflet-map :marker="<%= help_request.lonlat_geojson || 'null' %>" />
-      </div>
-      
+        <leaflet-map 
+          :marker="<%= help_request.lonlat_geojson || 'null' %>"
+          :is-valid="<%= !help_request.errors[:lonlat].any? %>"
+          error-message="<%= I18n.t("help_request.errors.empty_point") %>" />
+      </div>      
     </div>
   </div>
   

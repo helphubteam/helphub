@@ -6,8 +6,12 @@ class HelpRequestsSearcher
   DEFAULT_SEARCH_PARAMS = {
     page: 1,
     overdue: false,
-    search: ''
+    search: '',
+    column: 'updated_at',
+    direction: 'desc'
   }.freeze
+
+  SORT_COLUMN = %w[state created_at updated_at period].freeze
 
   attr_reader :search_params
 
@@ -19,11 +23,12 @@ class HelpRequestsSearcher
 
   def call
     scope = apply_search(HelpRequest)
+    scope = apply_states(scope)
     if search_params[:overdue]
       scope = apply_overdue(scope)
       sort = [:state, 'updated_at ASC']
     else
-      sort = [:state, 'updated_at DESC']
+      sort = by_sorting_params
     end
 
     scope
@@ -52,5 +57,14 @@ class HelpRequestsSearcher
               end
     end
     scope
+  end
+
+  def apply_states(scope)
+    states = search_params[:states]
+    states.blank? ? scope : scope.where(state: states)
+  end
+
+  def by_sorting_params
+    ["#{search_params[:column]} #{search_params[:direction]}"]
   end
 end
