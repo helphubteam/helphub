@@ -1,6 +1,7 @@
 module Admin
   class HelpRequestsController < Admin::BaseController
     before_action :fill_help_request, only: %i[edit update destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
@@ -54,6 +55,15 @@ module Admin
 
     private
 
+    def sort_column
+      HelpRequestsSearcher::SORT_COLUMN
+          .include?(params[:column]) ? params[:column] : 'id'
+    end
+
+    def sort_direction
+      params[:direction] == 'desc' ? 'desc' : 'asc'
+    end
+
     def set_recurring!
       if create_record_params[:recurring] == 'true'
         @help_request.schedule_set_at = Time.zone.now.to_date
@@ -85,12 +95,12 @@ module Admin
     def update_record_params
       params.require(:help_request).permit(
         :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-        :person, :mediated, :meds_preciption_required
+        :person, :mediated, :meds_preciption_required, :recurring, :period
       )
     end
 
     def search_params
-      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys)
+      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []))
     end
   end
 end
