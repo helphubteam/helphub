@@ -65,4 +65,4 @@ export RAILS_ENV=test
 bundle exec rspec spec
 ```
 
-<img src="https://img.shields.io/drone/build/helphubteam/helphub/dev?server=https%3A%2F%2Fdrone.pixelpoint.io"/>
+[![Build Status](https://drone.pixelpoint.io/api/badges/helphubteam/helphub/status.svg?ref=/refs/heads/dev)](https://drone.pixelpoint.io/helphubteam/helphub)
