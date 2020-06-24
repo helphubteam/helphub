@@ -271,6 +271,9 @@ ru:
     volunteer: 'Волонтер'
     moderator: 'Модератор'
     admin: 'Администратор'
+  authentication:
+    errors:
+      unauthorized: Неверные логин или пароль
   help_request_cases:
     errors:
       unactive: Заявка неактивна
