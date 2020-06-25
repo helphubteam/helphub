@@ -10,6 +10,7 @@ FactoryBot.define do
 
     trait :volunteer do
       role { 'volunteer' }
+      organization
     end
   end
 end
