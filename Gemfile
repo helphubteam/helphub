@@ -54,6 +54,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
+  gem 'rspec-default_http_header'
   gem 'factory_bot'
   gem 'database_cleaner-active_record'
 end
