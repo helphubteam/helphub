@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  prepend_before_action :require_no_authentication, only: [:new, :create]
+  prepend_before_action :require_no_authentication, only: %i[new create]
 
   def create
     super do

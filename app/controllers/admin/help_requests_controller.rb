@@ -41,7 +41,7 @@ module Admin
         flash[:notice] = 'Создана новая заявка!'
         redirect_to action: :index
       else
-        flash.now[:error] = "Заявка не создана! #{@help_request.errors.messages.inspect}" 
+        flash.now[:error] = "Заявка не создана! #{@help_request.errors.messages.inspect}"
         render :edit
       end
     end
@@ -56,8 +56,11 @@ module Admin
     private
 
     def sort_column
-      HelpRequestsSearcher::SORT_COLUMN
-          .include?(params[:column]) ? params[:column] : 'id'
+      if HelpRequestsSearcher::SORT_COLUMN.include?(params[:column])
+        params[:column]
+      else
+        'id'
+      end
     end
 
     def sort_direction

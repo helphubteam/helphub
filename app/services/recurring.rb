@@ -40,8 +40,8 @@ class Recurring < ApplicationService
 
   def params_to_update
     {
-        state: :active,
-        schedule_set_at: date_now
+      state: :active,
+      schedule_set_at: date_now
     }
   end
 end

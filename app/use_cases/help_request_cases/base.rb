@@ -17,7 +17,7 @@ module HelpRequestCases
     end
 
     def error_response(error_message)
-      { errors: [ { message: error_message } ] }
+      { errors: [{ message: error_message }] }
     end
 
     def within_error_handler

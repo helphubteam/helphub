@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  LADING_WEBSITE_URL = "http://helphub.ru"
+  LADING_WEBSITE_URL = 'http://helphub.ru'
 
   include Pundit
 
