@@ -23,7 +23,7 @@ RSpec.describe "Api::V1::Login", type: :request do
       it "responds unathorized error" do
         post api_v1_login_path, params: {email: email, password: wrong_password}
         expect(response).to have_http_status(401)
-        expect(JSON.parse(response.body)).to eq({"error" => 'Unauthorized'})
+        expect(JSON.parse(response.body)).to eq({"errors"=>[{"message"=>"Неверные логин или пароль"}]})
       end
     end
   end
