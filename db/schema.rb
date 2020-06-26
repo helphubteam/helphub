@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_133359) do
   end
 
   create_table "help_requests", force: :cascade do |t|
-    t.geography "lonlat", limit: { srid: 4326, type: "st_point", geographic: true }, null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.string "phone"
     t.integer "state", default: 0, null: false
     t.text "comment"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_133359) do
     t.string "house"
     t.string "apartment"
     t.bigint "organization_id"
-    t.geography "lonlat_with_salt", limit: { srid: 4326, type: "st_point", geographic: true }
+    t.geography "lonlat_with_salt", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.string "number"
     t.date "schedule_set_at"
     t.integer "period"
