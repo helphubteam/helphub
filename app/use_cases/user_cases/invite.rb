@@ -22,9 +22,7 @@ module UserCases
     def normalized_params
       @normalized_params ||= begin
         res = @user_params.dup
-        if res[:role] == 'admin' && !current_user.admin?
-          res[:role] ='moderator'
-        end
+        res[:role] = 'moderator' if res[:role] == 'admin' && !current_user.admin?
         res
       end
     end

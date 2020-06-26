@@ -10,7 +10,7 @@ class HelpRequestPresenter
            :person,
            :mediated,
            :meds_preciption_required,
-           :volunteer_id, 
+           :volunteer_id,
            :created_at,
            :period,
            :updated_at, to: :target
@@ -26,4 +26,4 @@ class HelpRequestPresenter
     private
 
   attr_reader :target
-  end
+end

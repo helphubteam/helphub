@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment should run in TEST mode!") unless Rails.env.test?
+abort('The Rails environment should run in TEST mode!') unless Rails.env.test?
 require 'rspec/rails'
 require 'database_cleaner/active_record'
 # Add additional requires below this line. Rails is not loaded until this point!
