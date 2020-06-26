@@ -164,4 +164,5 @@ Layout/LineLength:
 
 AllCops:
   Excludes:
-    - db/schema.rb
+    - db/**/*
+    - node_modules/**/*
