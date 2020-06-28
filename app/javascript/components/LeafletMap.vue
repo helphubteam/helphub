@@ -92,12 +92,10 @@ export default {
      */
     updateCurrentMarker(coordinates) {
       if (coordinates) {
-        if (!this.currentMarker) {
-          this.currentMarker = {
-            type: 'Point'
-          }
+        this.currentMarker = {
+          type: 'Point',
+          coordinates
         };
-        this.currentMarker.coordinates = coordinates;
 
         this.editableLayers.clearLayers();
         this.editableLayers.addLayer(L.marker(coordinates));

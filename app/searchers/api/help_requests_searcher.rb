@@ -81,7 +81,7 @@ module Api
 
       long, lat = search_params[:lonlat].split('_').map(&:to_f)
       distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
-      
+
       scope.select("help_requests.*, #{distance_query} as distance").group('help_requests.id').all
     end
 

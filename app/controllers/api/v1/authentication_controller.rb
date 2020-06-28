@@ -13,7 +13,8 @@ module Api
                          expiration_date: time.strftime('%m-%d-%Y %H:%M'),
                          email: @user.email }, status: :ok
         else
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: error_response(I18n.t('authentication.errors.unauthorized')),
+                 status: :unauthorized
         end
       end
 
@@ -26,7 +27,10 @@ module Api
       def login_params
         params.permit(:email, :password)
       end
+
+      def error_response(error_message)
+        { errors: [{ message: error_message }] }
+      end
     end
   end
 end
-
