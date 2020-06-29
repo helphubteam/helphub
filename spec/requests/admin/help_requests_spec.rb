@@ -25,7 +25,7 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
   describe 'POST /admin/help_requests' do
     let(:valid_create_params) do
       {
-        help_request: FactoryBot.attributes_for(:help_request, :active)
+        help_request: FactoryBot.attributes_for(:help_request)
       }
     end
 
