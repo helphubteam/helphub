@@ -1,4 +1,4 @@
-module Api::V1::UserCases
+module Admin::UserCases
   class Invite
     def initialize(user_params, current_user)
       @user_params = user_params
