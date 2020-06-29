@@ -17,7 +17,7 @@ module Api
       end
 
       def assign
-        data = HelpRequestCases::Assign.new({
+        data = Api::V1::HelpRequestCases::Assign.new({
                                               help_request: @help_request,
                                               volunteer: current_api_user,
                                               params: update_params
@@ -26,7 +26,7 @@ module Api
       end
 
       def submit
-        data = HelpRequestCases::Submit.new({
+        data = Api::V1::HelpRequestCases::Submit.new({
                                               help_request: @help_request,
                                               volunteer: current_api_user,
                                               params: update_params
@@ -35,7 +35,7 @@ module Api
       end
 
       def refuse
-        data = HelpRequestCases::Refuse.new({
+        data = Api::V1::HelpRequestCases::Refuse.new({
                                               help_request: @help_request,
                                               volunteer: current_api_user,
                                               params: update_params

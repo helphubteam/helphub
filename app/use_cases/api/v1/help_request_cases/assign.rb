@@ -1,5 +1,5 @@
-module HelpRequestCases
-  class Assign < HelpRequestCases::Base
+module Api::V1::HelpRequestCases
+  class Assign < Base
     def call
       raise_error(:only_user_organization) unless @help_request.organization == volunteer.organization
       raise_error(:assigned_already) if @help_request.assigned? && @help_request.volunteer == volunteer

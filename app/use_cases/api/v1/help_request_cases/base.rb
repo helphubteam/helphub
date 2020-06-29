@@ -1,4 +1,4 @@
-module HelpRequestCases
+module Api::V1::HelpRequestCases
   class UseCaseError < StandardError; end
   class Base
     def initialize(options)
