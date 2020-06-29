@@ -16,4 +16,9 @@ class User < ApplicationRecord
   has_many :activity, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
   paginates_per 20
+
+  def to_s
+    #TODO: add name fields
+    [email].join(' ')
+  end
 end

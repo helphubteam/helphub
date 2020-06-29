@@ -39,7 +39,10 @@
   <%#= f.input :mediated %>
 
   <%= render 'repeat_menu', f: f %>
-
+  <p>
+    <h4>Назначить волонтера</h3>
+    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [v.to_s, v.id]} %>
+  </p>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit('Сохранить', class: 'btn btn-primary') %>
