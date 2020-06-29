@@ -51,7 +51,7 @@ class HelpRequest < ApplicationRecord
   }
 
   def author
-    logs.where(state: :created).first.user
+    logs.where(kind: :created).first.user
   end
 
   private
