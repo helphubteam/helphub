@@ -33,7 +33,7 @@ module Admin
       @help_request = HelpRequest.new
       @help_request.organization = current_organization
       authorize @help_request
-      
+
       if Admin::HelpRequestCases::Create.new(
         @help_request, params, current_user
       ).call
@@ -70,7 +70,6 @@ module Admin
     def sort_direction
       params[:direction] == 'desc' ? 'desc' : 'asc'
     end
-
 
     def fill_help_request
       @help_request = HelpRequest.find(params[:id])

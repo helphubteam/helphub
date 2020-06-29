@@ -1,7 +1,7 @@
 # This will guess the User class
 FactoryBot.define do
   factory :help_request do
-    lonlat_geojson { "{\"type\":\"Point\",\"coordinates\":[37.54852294921875,55.77502825125135]}" }
+    lonlat_geojson { '{"type":"Point","coordinates":[37.54852294921875,55.77502825125135]}' }
     phone { '123123123' }
     city { 'Moscow' }
     district { 'Center' }

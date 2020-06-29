@@ -18,28 +18,28 @@ module Api
 
       def assign
         data = Api::V1::HelpRequestCases::Assign.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user,
-                                              params: update_params
-                                            }).call
+                                                       help_request: @help_request,
+                                                       volunteer: current_api_user,
+                                                       params: update_params
+                                                     }).call
         render_data(data)
       end
 
       def submit
         data = Api::V1::HelpRequestCases::Submit.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user,
-                                              params: update_params
-                                            }).call
+                                                       help_request: @help_request,
+                                                       volunteer: current_api_user,
+                                                       params: update_params
+                                                     }).call
         render_data(data)
       end
 
       def refuse
         data = Api::V1::HelpRequestCases::Refuse.new({
-                                              help_request: @help_request,
-                                              volunteer: current_api_user,
-                                              params: update_params
-                                            }).call
+                                                       help_request: @help_request,
+                                                       volunteer: current_api_user,
+                                                       params: update_params
+                                                     }).call
         render_data(data)
       end
 

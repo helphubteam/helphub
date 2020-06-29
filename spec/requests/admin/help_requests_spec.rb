@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Admin::HelpRequests', type: :request do
   let(:user) { create :user, :moderator, organization: organization }
   let(:organization) { create :organization }
- 
+
   before do
     sign_in user
   end
@@ -36,7 +36,7 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
   end
 
   describe 'PUT /admin/help_requests/:id' do
-    let!(:help_request) do 
+    let!(:help_request) do
       create(:help_request, :active, organization: organization, phone: old_phone)
     end
     let(:old_phone) { '0001' }
@@ -45,39 +45,39 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
     let(:valid_update_params) do
       {
         help_request: help_request.attributes.merge({
-          phone: new_phone
-        })
+                                                      phone: new_phone
+                                                    })
       }
     end
 
     it 'updates HelpRequest record' do
-      expect { put(admin_help_request_path(help_request), params: valid_update_params) }.
-      to change { help_request.reload.phone }.
-      from(old_phone).
-      to(new_phone)
+      expect { put(admin_help_request_path(help_request), params: valid_update_params) }
+        .to change { help_request.reload.phone }
+        .from(old_phone)
+        .to(new_phone)
       expect(response).to redirect_to(admin_help_requests_path)
     end
   end
 
   describe 'DELETE /admin/help_requests/:id' do
-    let!(:help_request) do 
+    let!(:help_request) do
       create(:help_request, :active, organization: organization)
     end
-    
+
     it 'destroys HelpRequest record' do
-      expect { delete admin_help_request_path(help_request) }.
-      to change { HelpRequest.count }.
-      from(1).
-      to(0)
+      expect { delete admin_help_request_path(help_request) }
+        .to change { HelpRequest.count }
+        .from(1)
+        .to(0)
       expect(response).to redirect_to(admin_help_requests_path)
     end
   end
 
   describe 'GET /admin/help_requests/:id/edit' do
-    let!(:help_request) do 
+    let!(:help_request) do
       create(:help_request, :active, organization: organization)
     end
-    
+
     it 'returns HelpRequest record edit page' do
       get edit_admin_help_request_path(help_request)
       expect(response).to have_http_status(200)
