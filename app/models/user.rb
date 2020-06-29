@@ -18,7 +18,7 @@ class User < ApplicationRecord
   paginates_per 20
 
   def to_s
-    #TODO: add name fields
+    # TODO: add name fields
     [email].join(' ')
   end
 end

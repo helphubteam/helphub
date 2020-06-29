@@ -5,7 +5,7 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
 
   let(:user) { create :user, :volunteer, organization: organization }
   let(:organization) { create :organization }
- 
+
   describe 'GET /api/v1/help_requests' do
     it 'returns empty array' do
       get api_v1_help_requests_path
