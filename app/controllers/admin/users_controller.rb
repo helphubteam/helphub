@@ -50,7 +50,7 @@ module Admin
 
     def user_params
       defaults = { organization_id: current_organization.id } if current_organization
-      params.require(:user).permit(:name, :surname, :phone, :email, :role, :organization_id)
+      params.require(:user).permit(:email, :role, :organization_id)
             .reverse_merge(defaults)
     end
   end
