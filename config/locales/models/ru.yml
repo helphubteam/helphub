@@ -4,6 +4,9 @@ ru:
       user: Пользователи
     attributes:
       user:
+        name: Имя
+        surname: Фамилия
+        phone: Телефон
         email: Электронная почта
         password: Пароль
         password_confirmation: Пароль
