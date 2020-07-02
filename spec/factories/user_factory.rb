@@ -12,5 +12,10 @@ FactoryBot.define do
       role { 'volunteer' }
       organization
     end
+
+    trait :moderator do
+      role { 'moderator' }
+      organization
+    end
   end
 end
