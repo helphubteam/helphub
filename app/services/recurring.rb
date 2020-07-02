@@ -23,12 +23,12 @@ class Recurring < ApplicationService
   end
 
   def check_need_start?(help_request)
-    (date_now - help_request.schedule_set_at).to_i == help_request.period
+    (date_now - help_request.schedule_set_at).to_i >= help_request.period
   end
 
   def update_help_request(help_request)
     help_request.update(params_to_update)
-    help_request.user = nil unless help_request.active?
+    help_request.volunteer = nil unless help_request.active?
   end
 
   def write_recurring_log(help_request)
@@ -40,8 +40,8 @@ class Recurring < ApplicationService
 
   def params_to_update
     {
-        state: :active,
-        schedule_set_at: date_now
+      state: :active,
+      schedule_set_at: date_now
     }
   end
 end

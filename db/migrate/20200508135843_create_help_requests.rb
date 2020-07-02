@@ -7,7 +7,7 @@ class CreateHelpRequests < ActiveRecord::Migration[6.0]
       t.integer :state, default: 0, null: false
       t.text :comment
       t.string :person
-      t.boolean :mediated, default: false, null: false 
+      t.boolean :mediated, default: false, null: false
       t.boolean :meds_preciption_required
       t.timestamps
     end

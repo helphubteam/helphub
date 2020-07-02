@@ -6,13 +6,13 @@ class HelpRequest < ApplicationRecord
 
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
-  has_many :logs, -> () { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
+  has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
   paginates_per 20
 
-  validates :number, presence: true, uniqueness: {scope: :organization_id}
+  validates :number, presence: true, uniqueness: { scope: :organization_id }
   validates :lonlat, :comment, :phone, :person, :city, :street, :house, presence: true
-  validates :period, numericality: {allow_blank: true, greater_than: 1}
+  validates :period, numericality: { allow_blank: true, greater_than: 0 }
 
   before_validation :fill_default_number
 
@@ -44,19 +44,19 @@ class HelpRequest < ApplicationRecord
 
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
-  scope :recurring, -> {
+  scope :recurring, lambda {
     where.not(state: :blocked)
-   .where.not(schedule_set_at: nil)
-   .where.not(period: nil)
+         .where.not(schedule_set_at: nil)
+         .where.not(period: nil)
   }
 
   def author
-    logs.where(state: :created).first.user
+    logs.where(kind: :created).first.user
   end
 
   private
 
   def fill_default_number
-    self.number ||= "#{organization.help_requests.count + 1}" if organization
+    self.number ||= (organization.help_requests.count + 1).to_s if organization
   end
 end

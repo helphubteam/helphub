@@ -57,5 +57,12 @@ NOTE: deploy DOES TAKE TIME (~15 mins) so be pacient
 - Heroku for production mode
 https://helphubstaging.herokuapp.com/
 
+### Run Tests
 
+```bash
+docker-compose run app bash
+export RAILS_ENV=test
+bundle exec rspec spec
+```
 
+[![Build Status](https://drone.pixelpoint.io/api/badges/helphubteam/helphub/status.svg?ref=/refs/heads/dev)](https://drone.pixelpoint.io/helphubteam/helphub)

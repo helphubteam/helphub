@@ -1,0 +1,32 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: lnikell/rails-pack-helphub
+    environment:
+      RAILS_ENV: test
+      LANG: en_US.UTF-8
+      BUNDLE_PATH: /bundle/vendor
+      SECRET_KEY_BASE: example
+      HOST_URL: http://helphubstaging.herokuapp.com/
+      SMTP_USERNAME: example
+      SMTP_PASSWORD: example
+      SMTP_DOMAIN: gmail.com
+      SMTP_ADDRESS: smtp.gmail.com
+      SMTP_PORT: 587
+      TEST_DATABASE_URL: postgis://postgres:postgres@database:5432/helphub
+    commands:
+      - bundle install
+      - yarn install --check-files
+      - bundle exec rails db:test:prepare
+      - bundle exec rspec spec
+      - bundle exec rubocop .
+
+services:
+  - name: database
+    image: skywidesoft/postgres-hstore-postgis
+
+trigger:
+  event:
+    - push

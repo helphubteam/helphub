@@ -1,7 +1,6 @@
 class UserPolicy < ApplicationPolicy
   def create?
     user.admin? || (user.moderator? && !set_user.admin?)
-
   end
 
   def update?
