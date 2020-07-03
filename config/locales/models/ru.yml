@@ -35,6 +35,10 @@ ru:
         country: Страна 
         city: Город 
         site: Сайт
+      help_request_kind:
+        name: Название
+        organization: Организация
+        organization_id: Организация
   help_request_log:
     kind:
       assigned: Волонтер взял заявку в работу
