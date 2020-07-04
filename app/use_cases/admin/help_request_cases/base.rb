@@ -46,8 +46,10 @@ module Admin
 
       def permitted_params
         result = params.require(:help_request).permit(
-          :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-          :person, :mediated, :meds_preciption_required, :recurring, :period, :volunteer_id
+          :lonlat_geojson, :phone, :city, :district, :street,
+          :house, :apartment, :state, :comment,
+          :person, :mediated, :meds_preciption_required, :recurring,
+          :period, :volunteer_id, :help_request_kind_id
         )
         apply_recurring(result)
       end

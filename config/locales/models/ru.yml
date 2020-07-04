@@ -30,6 +30,7 @@ ru:
         recurring: Повторяющаяся заявка
         period: Период повтора
         volunteer_id: Волонтер
+        help_request_kind_id: Тип заявки
       organization:
         title: Наименование 
         country: Страна 

@@ -16,6 +16,7 @@
   <%= f.error_notification %>
   <div class="row">
     <div class="col-6">
+      <%= f.input :help_request_kind_id, collection: help_request_kinds %>
       <%= f.input :person %>
       <%= f.input :city %>
       <%= f.input :district %>

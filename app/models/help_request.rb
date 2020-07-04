@@ -6,6 +6,8 @@ class HelpRequest < ApplicationRecord
 
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
+  belongs_to :help_request_kind, optional: true
+
   has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
   paginates_per 20
