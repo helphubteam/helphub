@@ -35,6 +35,18 @@ module Admin
         end
       end
 
+      def handle_kind_change!
+        covered_custom_fields = help_request.custom_values.pluck(:custom_field_id)
+        help_request
+          .custom_fields
+          .where.not(id: covered_custom_fields)
+          .each do |custom_field|
+          help_request.custom_values.create({
+            custom_field_id: custom_field.id
+          })
+        end
+      end
+
       def apply_recurring(result)
         if result[:recurring] == 'true'
           result[:schedule_set_at] = Time.zone.now.to_date
@@ -49,7 +61,8 @@ module Admin
           :lonlat_geojson, :phone, :city, :district, :street,
           :house, :apartment, :state, :comment,
           :person, :mediated, :meds_preciption_required, :recurring,
-          :period, :volunteer_id, :help_request_kind_id
+          :period, :volunteer_id, :help_request_kind_id,
+          custom_values_attributes: [ :value, :custom_field_id, :id ]
         )
         apply_recurring(result)
       end

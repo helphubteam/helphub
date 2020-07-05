@@ -11,19 +11,17 @@
     </div>
     <% end %>
 <% end %>
-
 <%= simple_form_for [:admin, help_request], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
   <div class="row">
     <div class="col-6">
-      <%= f.input :help_request_kind_id, collection: help_request_kinds %>
       <%= f.input :person %>
       <%= f.input :city %>
       <%= f.input :district %>
       <%= f.input :street %>
       <%= f.input :house %>
       <%= f.input :apartment %>
-      <%= f.input :phone %>  
+      <%= f.input :phone %>
     </div>
     <div class="col-6">
       <div id="vue-app">
@@ -34,16 +32,16 @@
       </div>      
     </div>
   </div>
-  
   <%= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%#= f.input :mediated %>
-
   <%= render 'repeat_menu', f: f %>
   <p>
     <h4>Назначить волонтера</h3>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [v.to_s, v.id]} %>
   </p>
+  <%= f.input :help_request_kind_id, collection: help_request_kinds %>
+  <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit('Сохранить', class: 'btn btn-primary') %>

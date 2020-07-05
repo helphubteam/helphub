@@ -6,6 +6,7 @@ module Admin
         if help_request.update(permitted_params)
           handle_blocking!
           handle_volunteer_manual_assign!(old_volunteer)
+          handle_kind_change!
           return true
         end
 
