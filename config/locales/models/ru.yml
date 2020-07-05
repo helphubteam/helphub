@@ -13,6 +13,8 @@ ru:
         role: Роль
         organization_id: Организация
         organization: Организация
+      custom_field:
+        name: Название
       help_request:
         number: Номер заявки
         lonlat: Точка на карте

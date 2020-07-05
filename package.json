@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "classnames": "^2.2.6",
+    "cocoon-js": "^0.0.5",
     "leaflet": "^1.6.0",
     "leaflet-draw": "^1.0.4",
     "leaflet-geosearch": "^3.0.0",

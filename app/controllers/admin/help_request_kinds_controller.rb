@@ -50,6 +50,8 @@ class Admin::HelpRequestKindsController < Admin::BaseController
   end
 
   def help_request_kind_params
-    params.require(:help_request_kind).permit(:name)
+    params.require(:help_request_kind).permit(
+      :name, custom_fields_attributes: [:id, :name, :_destroy]
+    )
   end
 end
