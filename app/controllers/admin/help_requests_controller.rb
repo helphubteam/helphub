@@ -74,7 +74,7 @@ module Admin
     def help_request_kinds
       @help_request_kinds ||= begin
         current_organization.help_request_kinds.map do |kind|
-          [ kind.name, kind.id ]
+          [kind.name, kind.id]
         end
       end
     end

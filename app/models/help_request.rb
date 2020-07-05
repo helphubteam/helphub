@@ -10,7 +10,7 @@ class HelpRequest < ApplicationRecord
 
   has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
   has_many :custom_fields, through: :help_request_kind
-  
+
   has_many :custom_values, -> { preload(:custom_field) }
   accepts_nested_attributes_for :custom_values, reject_if: :all_blank, allow_destroy: false
 

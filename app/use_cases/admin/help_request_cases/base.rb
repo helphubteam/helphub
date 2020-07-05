@@ -42,8 +42,8 @@ module Admin
           .where.not(id: covered_custom_fields)
           .each do |custom_field|
           help_request.custom_values.create({
-            custom_field_id: custom_field.id
-          })
+                                              custom_field_id: custom_field.id
+                                            })
         end
       end
 
@@ -62,7 +62,7 @@ module Admin
           :house, :apartment, :state, :comment,
           :person, :mediated, :meds_preciption_required, :recurring,
           :period, :volunteer_id, :help_request_kind_id,
-          custom_values_attributes: [ :value, :custom_field_id, :id ]
+          custom_values_attributes: %i[value custom_field_id id]
         )
         apply_recurring(result)
       end

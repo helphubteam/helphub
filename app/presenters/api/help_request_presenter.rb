@@ -3,25 +3,14 @@
 module Api
   class HelpRequestPresenter
     FULL_ATTRIBUTES = %i[
-      id
-      phone
-      state
-      comment
-      number
-      person
-      mediated
-      meds_preciption_required
+      id phone state comment number person
+      mediated meds_preciption_required
       volunteer_id
     ].freeze
 
     NON_PERSONAL_ATTRIBUTES = %i[
-      id
-      state
-      comment
-      number
-      mediated
-      meds_preciption_required
-      volunteer_id
+      id state comment number mediated
+      meds_preciption_required volunteer_id
     ].freeze
 
     def initialize(target, current_user)
@@ -120,7 +109,7 @@ module Api
       custom_fields.map do |custom_field|
         {
           name: custom_field.name,
-          value: custom_values.find{|cv| cv.custom_field == custom_field}.value
+          value: custom_values.find { |cv| cv.custom_field == custom_field }.value
         }
       end
     end
