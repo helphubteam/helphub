@@ -20,7 +20,7 @@ class CustomValuePolicy < ApplicationPolicy
       if user.admin?
         []
       else
-        scope.includes(:help_request).where(help_request: { organization: current_organization})
+        scope.includes(:help_request).where(help_request: { organization: current_organization })
       end
     end
   end

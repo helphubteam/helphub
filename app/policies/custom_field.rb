@@ -20,7 +20,7 @@ class CustomFieldPolicy < ApplicationPolicy
       if user.admin?
         []
       else
-        scope.includes(:help_request_kind).where(help_request_kinds: { organization: current_organization})
+        scope.includes(:help_request_kind).where(help_request_kinds: { organization: current_organization })
       end
     end
   end
