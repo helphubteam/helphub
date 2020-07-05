@@ -47,6 +47,7 @@ module Api
           lonlat: JSON.parse(target.lonlat_with_salt_geojson),
           distance: distance_label(target.try(:distance)),
           geo_salt: true,
+          custom_fields: custom_fields,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
         )
@@ -110,6 +111,17 @@ module Api
         "#{(distance.to_i / 100).round * 100} м"
       else
         "#{(distance.to_i / 10).round * 10} м"
+      end
+    end
+
+    def custom_fields
+      custom_values = target.custom_values
+      custom_fields = target.custom_fields
+      custom_fields.map do |custom_field|
+        {
+          name: custom_field.name,
+          value: custom_values.find{|cv| cv.custom_field == custom_field}.value
+        }
       end
     end
   end

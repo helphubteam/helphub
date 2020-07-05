@@ -21,7 +21,7 @@ module Api
     end
 
     def call
-      scope = HelpRequest
+      scope = HelpRequest.preload(:custom_values, :custom_fields)
       return taken_scope(scope) if search_params[:taken] == 'true'
 
       map_scope(scope)
