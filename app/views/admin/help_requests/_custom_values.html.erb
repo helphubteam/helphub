@@ -1,0 +1,17 @@
+<p>
+  <h4>Дополнительные поля</h4>
+  <%= f.input :help_request_kind_id, collection: help_request_kinds %>
+  <% if f.object.help_request_kind %>
+    <%= f.simple_fields_for :custom_values do |cvf| %>
+      <% custom_value = cvf.object %>
+      <% if custom_value %>
+        <% custom_field = custom_value.custom_field %>
+        <% #TODO I know it's very bad, but I didn't manage to compose correct has_many :custom_values association yet %>
+        <% if custom_field && custom_value.help_request.help_request_kind.custom_field_ids.include?(custom_field.id) %>
+          <%= cvf.input :value, as: :string, label: custom_field.name %>
+          <%= cvf.input :custom_field_id, as: :hidden %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</p>

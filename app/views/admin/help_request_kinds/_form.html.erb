@@ -1,0 +1,20 @@
+<% title = help_request_kind.new_record? ? "Новый тип заявки" : "Тип заявки: #{help_request_kind.name}" %>
+<p><h3><%= title %></h3></p>
+<%= simple_form_for [:admin, help_request_kind], wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= render 'custom_fields', f: f %>
+  <div class="form-group row mb-0">
+    <div class="col-sm-9 offset-sm-3">
+      <%= f.submit(help_request_kind.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
+      <%= link_to('Отмена', admin_help_request_kinds_path, class: 'btn btn-outline-secondary align-self-start') %>
+      <% unless help_request_kind.new_record? %>
+        <%= link_to('Удалить', admin_help_request_kind_path(help_request_kind),
+                    method: :delete,
+                    data: { confirm: 'Вы уверены что хотите удалить тип заявок?' },
+                    class: 'btn btn-outline-danger align-self-start')
+        %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

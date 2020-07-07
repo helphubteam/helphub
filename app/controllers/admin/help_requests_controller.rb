@@ -2,7 +2,7 @@ module Admin
   class HelpRequestsController < Admin::BaseController
     before_action :fill_help_request, only: %i[edit update destroy]
     before_action :fill_volunteers, only: %i[new edit]
-    helper_method :sort_column, :sort_direction
+    helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
@@ -69,6 +69,14 @@ module Admin
 
     def sort_direction
       params[:direction] == 'desc' ? 'desc' : 'asc'
+    end
+
+    def help_request_kinds
+      @help_request_kinds ||= begin
+        current_organization.help_request_kinds.map do |kind|
+          [kind.name, kind.id]
+        end
+      end
     end
 
     def fill_help_request
