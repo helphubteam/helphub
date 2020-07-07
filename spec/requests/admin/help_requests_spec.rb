@@ -65,9 +65,9 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
     end
 
     it "doesn't work" do
-      expect { 
-        delete admin_help_request_path(help_request) 
-      }.to raise_error(ActionController::RoutingError)
+      expect do
+        delete admin_help_request_path(help_request)
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 
