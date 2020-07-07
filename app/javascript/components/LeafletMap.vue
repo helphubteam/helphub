@@ -37,7 +37,7 @@ export default {
   },
 
   props: {
-    marker: String,
+    marker: Object,
     isValid: Boolean,
     errorMessage: String
   },

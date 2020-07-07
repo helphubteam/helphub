@@ -8,7 +8,9 @@ module Admin
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
     end
 
-    def edit; end
+    def edit
+      flash.now[:danger] = 'Заявка находится в архиве' if @help_request.blocked?
+    end
 
     def new
       @help_request = HelpRequest.new organization: current_organization
