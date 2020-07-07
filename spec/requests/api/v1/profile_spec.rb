@@ -9,6 +9,9 @@ RSpec.describe 'Api::V1::Profile', type: :request do
   let(:profile_response) do
     {
       'created_at' => user.created_at.to_i,
+      'name' => user.name,
+      'surname' => user.surname,
+      'phone' => user.phone,
       'email' => user.email,
       'id' => user.id,
       'organization' => organization.title,
