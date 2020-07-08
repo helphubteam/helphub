@@ -81,4 +81,15 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  context 'with admin user' do
+    let(:user) { create :user, :admin }
+
+    describe 'GET /admin/help_requests' do
+      xit 'returns access denied' do
+        get admin_help_requests_path
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
 end
