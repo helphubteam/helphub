@@ -64,12 +64,10 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
       create(:help_request, :active, organization: organization)
     end
 
-    it 'destroys HelpRequest record' do
-      expect { delete admin_help_request_path(help_request) }
-        .to change { HelpRequest.count }
-        .from(1)
-        .to(0)
-      expect(response).to redirect_to(admin_help_requests_path)
+    it "doesn't work" do
+      expect do
+        delete admin_help_request_path(help_request)
+      end.to raise_error(ActionController::RoutingError)
     end
   end
 

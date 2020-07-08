@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :help_requests, only: %i[
       index new
       update edit
-      destroy create
+      create
     ]
 
     resources :users, only: %i[

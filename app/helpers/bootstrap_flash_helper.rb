@@ -35,6 +35,7 @@ module BootstrapFlashHelper
         flash_messages << text if msg
       end
     end
+    flash_messages = [content_tag(:div, nil, class: 'mt-2')] + flash_messages if flash_messages.any?
     flash_messages.join("\n").html_safe
   end
   # rubocop:enable Metrics/MethodLength
