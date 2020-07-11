@@ -1,6 +1,6 @@
 module Admin
   class HelpRequestsController < Admin::BaseController
-    before_action :fill_help_request, only: %i[edit update destroy]
+    before_action :fill_help_request, only: %i[edit update destroy custom_fields]
     before_action :fill_volunteers, only: %i[new edit]
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
@@ -53,6 +53,34 @@ module Admin
       @help_request.destroy
       redirect_to action: :index
       flash[:notice] = 'Заявка удалена!'
+    end
+
+    def custom_fields
+      help_request_kind_id = params[:help_request_kind_id]
+      if help_request_kind_id.blank?
+        render json: []
+        return
+      end
+
+      existing_custom_values = @help_request.
+        custom_values.
+        pluck(:custom_field_id, :id, :value).
+        map do |(custom_field_id, id, value)|
+          [custom_field_id, {id: id, value: value, custom_field_id: custom_field_id}]
+        end.to_h
+      
+      custom_fields_data = CustomField.includes(:help_request_kind).
+        where(help_request_kinds: {organization: current_organization}).
+        where(help_request_kind_id: help_request_kind_id).map do |custom_field|
+        existing_custom_value = existing_custom_values[custom_field.id]
+        {
+          id: existing_custom_value.try(:[], :id),
+          value: existing_custom_value.try(:[], :value),
+          custom_field_id: custom_field.id,
+          name: custom_field.name
+        }
+      end
+      render json: custom_fields_data
     end
 
     private

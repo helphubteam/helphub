@@ -28,7 +28,11 @@ Rails.application.routes.draw do
       index new
       update edit
       create
-    ]
+    ] do
+      member do
+        get :custom_fields
+      end
+    end
 
     resources :users, only: %i[
       index new

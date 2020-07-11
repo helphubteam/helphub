@@ -6,7 +6,6 @@ module Admin
           write_moderator_log(:created)
           handle_volunteer_manual_assign!(nil)
           handle_blocking!
-          handle_kind_change!
           return true
         end
 

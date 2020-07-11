@@ -35,18 +35,6 @@ module Admin
         end
       end
 
-      def handle_kind_change!
-        covered_custom_fields = help_request.custom_values.pluck(:custom_field_id)
-        help_request
-          .custom_fields
-          .where.not(id: covered_custom_fields)
-          .each do |custom_field|
-          help_request.custom_values.create({
-                                              custom_field_id: custom_field.id
-                                            })
-        end
-      end
-
       def apply_recurring(result)
         if result[:recurring] == 'true'
           result[:schedule_set_at] = Time.zone.now.to_date
