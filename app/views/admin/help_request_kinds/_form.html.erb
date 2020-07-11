@@ -11,7 +11,7 @@
       <% unless help_request_kind.new_record? %>
         <%= link_to('Удалить', admin_help_request_kind_path(help_request_kind),
                     method: :delete,
-                    data: { confirm: 'Вы уверены что хотите удалить тип заявок?' },
+                    data: { confirm: 'ВНИМАНИЕ: Удаление повлечет за собой удаление дополнительных полей у всех заявок этого типа. Вы уверены в удалении?' },
                     class: 'btn btn-outline-danger align-self-start')
         %>
       <% end %>

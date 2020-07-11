@@ -1,6 +1,7 @@
 module Admin
+  # rubocop:disable Metrics/ClassLength
   class HelpRequestsController < Admin::BaseController
-    before_action :fill_help_request, only: %i[edit update destroy]
+    before_action :fill_help_request, only: %i[edit update destroy custom_fields]
     before_action :fill_volunteers, only: %i[new edit]
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
@@ -55,6 +56,39 @@ module Admin
       flash[:notice] = 'Заявка удалена!'
     end
 
+    # rubocop:disable Metrics/MethodLength
+    def custom_fields
+      help_request_kind_id = params[:help_request_kind_id]
+      if help_request_kind_id.blank?
+        render json: []
+        return
+      end
+
+      existing_custom_values = if @help_request.nil?
+                                 {}
+                               else
+                                 @help_request
+                                   .custom_values
+                                   .pluck(:custom_field_id, :id, :value)
+                                   .map do |(custom_field_id, id, value)|
+                                   [custom_field_id, { id: id, value: value, custom_field_id: custom_field_id }]
+                                 end.to_h
+                               end
+      custom_fields_data = CustomField.includes(:help_request_kind)
+                                      .where(help_request_kinds: { organization: current_organization })
+                                      .where(help_request_kind_id: help_request_kind_id).map do |custom_field|
+        existing_custom_value = existing_custom_values[custom_field.id]
+        {
+          id: existing_custom_value.try(:[], :id),
+          value: existing_custom_value.try(:[], :value),
+          custom_field_id: custom_field.id,
+          name: custom_field.name
+        }
+      end
+      render json: custom_fields_data
+    end
+    # rubocop:enable Metrics/MethodLength
+
     private
 
     def fill_volunteers
@@ -82,6 +116,8 @@ module Admin
     end
 
     def fill_help_request
+      return if params[:id].to_i.zero?
+
       @help_request = HelpRequest.find(params[:id])
       @help_request = policy_scope(HelpRequest).find(params[:id])
     end
@@ -90,4 +126,5 @@ module Admin
       params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []))
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end
