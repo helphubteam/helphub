@@ -19,8 +19,10 @@ module Admin
         return if help_request.volunteer == old_volunteer
 
         if help_request.volunteer
+          help_request.assign! if help_request.active?
           write_moderator_log(:manual_assign, 'Волонтер ' + help_request.volunteer.to_s)
         else
+          help_request.refuse! if help_request.assigned?
           write_moderator_log(:manual_unassign, 'Волонтер ' + old_volunteer.to_s)
         end
       end
@@ -28,6 +30,7 @@ module Admin
       def handle_blocking!
         if params[:activate] && help_request.blocked?
           help_request.activate!
+          help_request.assign! if help_request.volunteer
           write_moderator_log(:activated)
         elsif params[:block] && !help_request.blocked?
           help_request.block!
