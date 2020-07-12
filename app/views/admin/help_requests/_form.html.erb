@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'map' %>
 <%= javascript_pack_tag 'custom_fields' %>
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
-<h3><%= title %></h3>
+<h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
   <% volunteer = help_request.volunteer %>
