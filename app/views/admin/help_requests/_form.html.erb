@@ -1,6 +1,7 @@
 <%= javascript_pack_tag 'map' %>
+<%= javascript_pack_tag 'custom_fields' %>
 <% title = help_request.new_record? ? "Новая заявка" : "Заявка № #{help_request.id}" %>
-<h3><%= title %></h3>
+<h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
   <% volunteer = help_request.volunteer %>
@@ -11,7 +12,6 @@
     </div>
     <% end %>
 <% end %>
-
 <%= simple_form_for [:admin, help_request], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
   <div class="row">
@@ -22,7 +22,7 @@
       <%= f.input :street %>
       <%= f.input :house %>
       <%= f.input :apartment %>
-      <%= f.input :phone %>  
+      <%= f.input :phone %>
     </div>
     <div class="col-6">
       <div id="vue-app">
@@ -33,26 +33,28 @@
       </div>      
     </div>
   </div>
-  
   <%= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%#= f.input :mediated %>
-
   <%= render 'repeat_menu', f: f %>
-
+  <p>
+    <h4>Назначить волонтера</h3>
+    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [v.to_s, v.id]} %>
+  </p>
+  <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit('Сохранить', class: 'btn btn-primary') %>
-      <%= f.submit('Отменить заявку', name: :block, class: 'btn btn-warning') if !help_request.new_record? && !help_request.blocked? %>
+      <%= f.submit('Архивировать заявку', name: :block, class: 'btn btn-outline-danger') if !help_request.new_record? && !help_request.blocked? %>
       <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
       <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
-      <% unless help_request.new_record? %>
-        <%= link_to('Удалить', admin_help_request_path(@help_request),
+      <%# unless help_request.new_record? %>
+        <%#= link_to('Удалить', admin_help_request_path(@help_request),
           method: :delete,
           data: { confirm: 'Вы уверены что хотите удалить заявку?' },
           class: 'btn btn-outline-danger align-self-start') 
         %>
-      <% end %>
+      <%# end %>
     </div>
   </div>
 <% end %>

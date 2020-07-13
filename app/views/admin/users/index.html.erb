@@ -1,4 +1,3 @@
-<h3>Организации</h3>
 <%= link_to('Новый пользователь',
             new_admin_user_path,
             class: 'btn btn-sm btn-success float-right my-3')
@@ -6,6 +5,9 @@
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
   <tr>
+    <th scope="col">Фамилия</th>
+    <th scope="col">Имя</th>
+    <th scope="col">Телефон</th>
     <th scope="col">Email</th>
     <th scope="col">Организация</th>
     <th scope="col">Роль</th>
@@ -14,6 +16,9 @@
   </thead>
   <% @users.each do |record| %>
     <tr>
+      <td><%= record.surname %></td>
+      <td><%= record.name %></td>
+      <td><%= record.phone %></td>
       <td><%= record.email %></td>
       <td>
         <% if record.organization %>

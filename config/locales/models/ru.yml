@@ -4,12 +4,17 @@ ru:
       user: Пользователи
     attributes:
       user:
+        name: Имя
+        surname: Фамилия
+        phone: Телефон
         email: Электронная почта
         password: Пароль
         password_confirmation: Пароль
         role: Роль
         organization_id: Организация
         organization: Организация
+      custom_field:
+        name: Название
       help_request:
         number: Номер заявки
         lonlat: Точка на карте
@@ -26,11 +31,17 @@ ru:
         mediated: Помощь для другого
         recurring: Повторяющаяся заявка
         period: Период повтора
+        volunteer_id: Волонтер
+        help_request_kind_id: Тип заявки
       organization:
         title: Наименование 
         country: Страна 
         city: Город 
         site: Сайт
+      help_request_kind:
+        name: Название
+        organization: Организация
+        organization_id: Организация
   help_request_log:
     kind:
       assigned: Волонтер взял заявку в работу
@@ -40,4 +51,7 @@ ru:
       activated: Модератор активировал заявку
       refreshed: Повторяющаяся заявка обновлена
       created: Модератор создал заявку
+      manual_assign: Модератор назначил волонтера заявку
+      manual_unassign: Модератор снял волонтера с заявки
+      refreshed: Повторяющаяся заявка обновлена
 

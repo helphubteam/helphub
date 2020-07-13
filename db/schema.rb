@@ -10,12 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_133359) do
+ActiveRecord::Schema.define(version: 2020_07_05_091009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "custom_fields", force: :cascade do |t|
+    t.bigint "help_request_kind_id", null: false
+    t.string "name", null: false
+    t.string "data_type", default: "string", null: false
+    t.hstore "info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["help_request_kind_id"], name: "index_custom_fields_on_help_request_kind_id"
+  end
+
+  create_table "custom_values", force: :cascade do |t|
+    t.text "value"
+    t.bigint "help_request_id", null: false
+    t.bigint "custom_field_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["custom_field_id"], name: "index_custom_values_on_custom_field_id"
+    t.index ["help_request_id"], name: "index_custom_values_on_help_request_id"
+  end
+
+  create_table "help_request_kinds", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_help_request_kinds_on_organization_id"
+  end
 
   create_table "help_request_logs", force: :cascade do |t|
     t.text "comment"
@@ -50,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_133359) do
     t.date "schedule_set_at"
     t.integer "period"
     t.boolean "recurring"
+    t.integer "help_request_kind_id"
     t.index ["organization_id"], name: "index_help_requests_on_organization_id"
   end
 
@@ -79,6 +108,9 @@ ActiveRecord::Schema.define(version: 2020_06_07_133359) do
     t.integer "invited_by_id"
     t.string "invited_by_type"
     t.bigint "organization_id"
+    t.string "name"
+    t.string "surname"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"

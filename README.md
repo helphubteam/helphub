@@ -51,7 +51,7 @@ docker-compose run app bundle exec cap production deploy
 and open `production url` in browser:
 https://app.helphub.ru
 
-NOTE: deploy DOES TAKE TIME (~15 mins) so be pacient
+NOTE: deploy DOES TAKE TIME (~15 mins) so be patient
 
 
 - Heroku for production mode

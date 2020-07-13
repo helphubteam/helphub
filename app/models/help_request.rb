@@ -6,7 +6,13 @@ class HelpRequest < ApplicationRecord
 
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
+  belongs_to :help_request_kind, optional: true
+
   has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
+  has_many :custom_fields, through: :help_request_kind
+
+  has_many :custom_values, -> { preload(:custom_field) }
+  accepts_nested_attributes_for :custom_values, reject_if: :all_blank, allow_destroy: false
 
   paginates_per 20
 

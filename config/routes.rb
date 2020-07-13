@@ -27,8 +27,12 @@ Rails.application.routes.draw do
     resources :help_requests, only: %i[
       index new
       update edit
-      destroy create
-    ]
+      create
+    ] do
+      member do
+        get :custom_fields
+      end
+    end
 
     resources :users, only: %i[
       index new
@@ -37,6 +41,12 @@ Rails.application.routes.draw do
     ]
 
     resources :organizations, only: %i[
+      index new
+      update edit
+      destroy create
+    ]
+
+    resources :help_request_kinds, only: %i[
       index new
       update edit
       destroy create

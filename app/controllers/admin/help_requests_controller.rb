@@ -1,13 +1,17 @@
 module Admin
+  # rubocop:disable Metrics/ClassLength
   class HelpRequestsController < Admin::BaseController
-    before_action :fill_help_request, only: %i[edit update destroy]
-    helper_method :sort_column, :sort_direction
+    before_action :fill_help_request, only: %i[edit update destroy custom_fields]
+    before_action :fill_volunteers, only: %i[new edit]
+    helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
       @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
     end
 
-    def edit; end
+    def edit
+      flash.now[:danger] = 'Заявка находится в архиве' if @help_request.blocked?
+    end
 
     def new
       @help_request = HelpRequest.new organization: current_organization
@@ -15,17 +19,14 @@ module Admin
 
     def update
       authorize @help_request
-      if @help_request.update(update_record_params)
-        if params[:activate] && @help_request.blocked?
-          @help_request.activate!
-          write_moderator_log(:activated)
-        elsif params[:block] && !@help_request.blocked?
-          @help_request.block!
-          write_moderator_log(:blocked)
-        end
+
+      if Admin::HelpRequestCases::Update.new(
+        @help_request, params, current_user
+      ).call
         flash[:notice] = 'Заявка изменена!'
         redirect_to action: :index
       else
+        fill_volunteers
         flash.now[:error] = 'Не удалось изменить заявку!'
         render :edit
       end
@@ -33,14 +34,16 @@ module Admin
 
     def create
       @help_request = HelpRequest.new
-      set_recurring!
       @help_request.organization = current_organization
       authorize @help_request
-      if @help_request.update(create_record_params)
-        write_moderator_log(:created)
+
+      if Admin::HelpRequestCases::Create.new(
+        @help_request, params, current_user
+      ).call
         flash[:notice] = 'Создана новая заявка!'
         redirect_to action: :index
       else
+        fill_volunteers
         flash.now[:error] = "Заявка не создана! #{@help_request.errors.messages.inspect}"
         render :edit
       end
@@ -53,7 +56,44 @@ module Admin
       flash[:notice] = 'Заявка удалена!'
     end
 
+    # rubocop:disable Metrics/MethodLength
+    def custom_fields
+      help_request_kind_id = params[:help_request_kind_id]
+      if help_request_kind_id.blank?
+        render json: []
+        return
+      end
+
+      existing_custom_values = if @help_request.nil?
+                                 {}
+                               else
+                                 @help_request
+                                   .custom_values
+                                   .pluck(:custom_field_id, :id, :value)
+                                   .map do |(custom_field_id, id, value)|
+                                   [custom_field_id, { id: id, value: value, custom_field_id: custom_field_id }]
+                                 end.to_h
+                               end
+      custom_fields_data = CustomField.includes(:help_request_kind)
+                                      .where(help_request_kinds: { organization: current_organization })
+                                      .where(help_request_kind_id: help_request_kind_id).map do |custom_field|
+        existing_custom_value = existing_custom_values[custom_field.id]
+        {
+          id: existing_custom_value.try(:[], :id),
+          value: existing_custom_value.try(:[], :value),
+          custom_field_id: custom_field.id,
+          name: custom_field.name
+        }
+      end
+      render json: custom_fields_data
+    end
+    # rubocop:enable Metrics/MethodLength
+
     private
+
+    def fill_volunteers
+      @volunteers = User.volunteers.where(organization: current_organization)
+    end
 
     def sort_column
       if HelpRequestsSearcher::SORT_COLUMN.include?(params[:column])
@@ -67,43 +107,24 @@ module Admin
       params[:direction] == 'desc' ? 'desc' : 'asc'
     end
 
-    def set_recurring!
-      if create_record_params[:recurring] == 'true'
-        @help_request.schedule_set_at = Time.zone.now.to_date
-      else
-        @help_request.period = nil
+    def help_request_kinds
+      @help_request_kinds ||= begin
+        current_organization.help_request_kinds.map do |kind|
+          [kind.name, kind.id]
+        end
       end
     end
 
-    # TODO: refactor this controller
-    def write_moderator_log(kind)
-      @help_request.logs.create!(
-        user: current_user,
-        kind: kind.to_s
-      )
-    end
-
     def fill_help_request
+      return if params[:id].to_i.zero?
+
       @help_request = HelpRequest.find(params[:id])
       @help_request = policy_scope(HelpRequest).find(params[:id])
-    end
-
-    def create_record_params
-      params.require(:help_request).permit(
-        :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-        :person, :mediated, :meds_preciption_required, :recurring, :period
-      )
-    end
-
-    def update_record_params
-      params.require(:help_request).permit(
-        :lonlat_geojson, :phone, :city, :district, :street, :house, :apartment, :state, :comment,
-        :person, :mediated, :meds_preciption_required, :recurring, :period
-      )
     end
 
     def search_params
       params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []))
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

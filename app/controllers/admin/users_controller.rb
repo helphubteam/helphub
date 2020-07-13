@@ -11,7 +11,7 @@ module Admin
     end
 
     def create
-      response = UserCases::Invite.new(user_params, current_user).call
+      response = Admin::UserCases::Invite.new(user_params, current_user).call
       if response[:error]
         flash.now[:error] = response[:message]
         @user = response[:user]
@@ -50,7 +50,7 @@ module Admin
 
     def user_params
       defaults = { organization_id: current_organization.id } if current_organization
-      params.require(:user).permit(:email, :role, :organization_id)
+      params.require(:user).permit(:name, :surname, :phone, :email, :role, :organization_id)
             .reverse_merge(defaults)
     end
   end

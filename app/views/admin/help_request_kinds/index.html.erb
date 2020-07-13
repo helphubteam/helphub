@@ -1,0 +1,21 @@
+<h3>Типы Заявок</h3>
+<%= link_to('Новый тип заявок',
+            new_admin_help_request_kind_path,
+            class: 'btn btn-sm btn-success float-right my-3')
+%>
+<table class="table table-bordered table-hover">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Название</th>
+    <th></th>
+  </tr>
+  </thead>
+  <% @help_request_kinds.each do |record| %>
+    <tr>
+      <td><%= record.name %></td>
+      <td style="width: 10%">
+        <%= link_to('Редактировать', edit_admin_help_request_kind_path(record), class: 'btn btn-sm btn-outline-primary') %>
+      </td>
+    </tr>
+  <% end %>
+</table>

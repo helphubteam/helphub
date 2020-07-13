@@ -288,7 +288,7 @@ ru:
       active: Новая
       assigned: В работе
       submitted: Выполнена
-      blocked: Отменена
+      blocked: В архиве
     errors:
       empty_point: Точка на карте должна быть указана
 
