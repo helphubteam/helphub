@@ -1,4 +1,4 @@
-<%= link_to('Новая заявка',
+<%= link_to('Новая просьба',
   new_admin_help_request_path,
   class: 'btn btn-sm btn-success float-right mt-4')
 %>
@@ -22,7 +22,7 @@
     <tr>
       <td style="width: 15%">
         <%= help_request_state_label(help_request).html_safe %>
-        <div>Заявка №<%= help_request.number %></div>
+        <div>Просьба №<%= help_request.number %></div>
       </td>
       <td><%= print_datetime(help_request.created_at) %></td>
       <td><%= help_request.address %></td>

@@ -17,10 +17,10 @@ module Admin
 
       if @help_request_kind.save
         redirect_to action: :index
-        flash[:notice] = 'Создан новый тип заявок!'
+        flash[:notice] = 'Создан новый вид просьбы'
       else
         render :new
-        flash[:error] = 'Тип заявок не создан!'
+        flash[:error] = 'Вид просьбы не создан'
       end
     end
 
@@ -30,10 +30,10 @@ module Admin
       authorize @help_request_kind
       if @help_request_kind.update(help_request_kind_params)
         redirect_to action: :index
-        flash[:notice] = 'Тип заявок изменен!'
+        flash[:notice] = 'Вид просьбы изменен'
       else
         render :edit
-        flash[:error] = 'Не удалось изменить тип заявок!'
+        flash[:error] = 'Не удалось изменить вид просьбы'
       end
     end
 
@@ -41,7 +41,7 @@ module Admin
       authorize @help_request_kind
       @help_request_kind.destroy
       redirect_to action: :index
-      flash[:notice] = 'Тип заявок удален!'
+      flash[:notice] = 'Вид просьбы удален'
     end
 
     private
