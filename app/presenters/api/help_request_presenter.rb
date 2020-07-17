@@ -52,6 +52,7 @@ module Api
           lonlat: JSON.parse(target.lonlat_geojson),
           distance: distance_label(target.try(:distance)),
           geo_salt: false,
+          custom_fields: custom_fields,
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
         )
