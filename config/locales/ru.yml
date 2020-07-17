@@ -274,6 +274,7 @@ ru:
   authentication:
     errors:
       unauthorized: Неверные логин или пароль
+      expired_token: Ключ устарел, необходима авторизация
   help_request_cases:
     errors:
       unactive: Заявка неактивна
