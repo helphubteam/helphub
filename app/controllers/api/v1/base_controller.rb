@@ -32,12 +32,16 @@ module Api
       end
 
       def render_error_message(error, status)
+        message = if error.message == 'Signature has expired'
+                    I18n.t('authentication.errors.expired_token')
+                  else
+                    error.message
+                  end
         render json: {
           errors: [
-            { message: error.message }
+            { message: message }
           ]
-        },
-               status: status
+        }, status: status
       end
 
       def setup_headers
