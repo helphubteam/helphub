@@ -3,7 +3,7 @@
   <table class='table table-bordered table-hover'>
     <thead>
       <tr>
-        <td>Заявка</td>
+        <td>Просьба</td>
         <td>Действие</td>
         <td>Комментарий</td>
         <td>Время</td>
@@ -12,7 +12,7 @@
     <tbody>
       <% activity.each do |log| %>
         <tr>
-          <td><%= link_to("Заявка №#{log.help_request.number}", edit_admin_help_request_path(log.help_request)) %></td>
+          <td><%= link_to("Просьба №#{log.help_request.number}", edit_admin_help_request_path(log.help_request)) %></td>
           <td><%= I18n.t("help_request_log.kind.#{log.kind}") %></td>
           <td><%= log.comment %></td>
           <td><%= print_datetime(log.created_at) %></td>

@@ -10,7 +10,7 @@ module Admin
     end
 
     def edit
-      flash.now[:danger] = 'Заявка находится в архиве' if @help_request.blocked?
+      flash.now[:danger] = 'Просьба находится в архиве' if @help_request.blocked?
     end
 
     def new
@@ -23,11 +23,11 @@ module Admin
       if Admin::HelpRequestCases::Update.new(
         @help_request, params, current_user
       ).call
-        flash[:notice] = 'Заявка изменена!'
+        flash[:notice] = 'Просьба изменена'
         redirect_to action: :index
       else
         fill_volunteers
-        flash.now[:error] = 'Не удалось изменить заявку!'
+        flash.now[:error] = 'Не удалось изменить просьбу'
         render :edit
       end
     end
@@ -40,11 +40,11 @@ module Admin
       if Admin::HelpRequestCases::Create.new(
         @help_request, params, current_user
       ).call
-        flash[:notice] = 'Создана новая заявка!'
+        flash[:notice] = 'Создана новая просьба'
         redirect_to action: :index
       else
         fill_volunteers
-        flash.now[:error] = "Заявка не создана! #{@help_request.errors.messages.inspect}"
+        flash.now[:error] = "Просьба не создана #{@help_request.errors.messages.inspect}"
         render :edit
       end
     end
@@ -53,7 +53,7 @@ module Admin
       authorize @help_request
       @help_request.destroy
       redirect_to action: :index
-      flash[:notice] = 'Заявка удалена!'
+      flash[:notice] = 'Просьба удалена'
     end
 
     # rubocop:disable Metrics/MethodLength
