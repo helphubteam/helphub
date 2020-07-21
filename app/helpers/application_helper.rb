@@ -36,4 +36,13 @@ module ApplicationHelper
     link_to "#{title} <span class='#{icon}'></span>".html_safe,
             params.merge(column: column, direction: direction).permit!
   end
+
+  def user_format_by_fields(*fields)
+    user_fields = []
+    fields.each do |field|
+      user_fields << field
+    end
+
+    user_fields.join(' ')
+  end
 end
