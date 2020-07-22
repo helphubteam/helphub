@@ -6,4 +6,12 @@ class HelpRequestKind < ApplicationRecord
 
   validates :organization, :name, presence: true
   validates :name, uniqueness: { scope: :organization_id }
+
+  after_save :normalize_defaults
+
+  private
+
+  def normalize_defaults
+    organization.help_request_kinds.where.not(id: id).update_all default: false if default
+  end
 end

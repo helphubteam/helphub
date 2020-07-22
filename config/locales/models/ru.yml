@@ -40,6 +40,7 @@ ru:
         site: Сайт
       help_request_kind:
         name: Название
+        default: Применять по умолчанию
         organization: Организация
         organization_id: Организация
   help_request_log:

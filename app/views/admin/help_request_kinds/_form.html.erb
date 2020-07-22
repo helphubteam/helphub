@@ -3,6 +3,7 @@
 <%= simple_form_for [:admin, help_request_kind], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
   <%= f.input :name %>
+  <%= f.input :default %>
   <%= render 'custom_fields', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
