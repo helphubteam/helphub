@@ -8,7 +8,7 @@
   <%= f.input :name %>
   <%= f.input :phone %>
 
-  <%= f.input :email, input_html: { autocomplete: 'email' } %>
+  <%= f.input :email, required: true, input_html: { autocomplete: 'email' } %>
 
   <% 
     user_roles = User.roles.dup

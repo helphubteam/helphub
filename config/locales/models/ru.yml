@@ -16,7 +16,7 @@ ru:
       custom_field:
         name: Название
       help_request:
-        number: Номер заявки
+        number: Номер просьбы
         lonlat: Точка на карте
         lonlat_geojson: Точка на карте
         city: Город
@@ -29,10 +29,10 @@ ru:
         meds_preciption_required: Нужны лекарства по рецепту
         comment: Комментарий
         mediated: Помощь для другого
-        recurring: Повторяющаяся заявка
+        recurring: Повторяющаяся просьба
         period: Период повтора
         volunteer_id: Волонтер
-        help_request_kind_id: Тип заявки
+        help_request_kind_id: Вид просьбы
       organization:
         title: Наименование 
         country: Страна 
@@ -44,14 +44,14 @@ ru:
         organization_id: Организация
   help_request_log:
     kind:
-      assigned: Волонтер взял заявку в работу
-      submitted: Волонтер выполнил заявку
+      assigned: Волонтер взял просьбу в работу
+      submitted: Волонтер выполнил просьбу
       refused: Волонтер отказался от выполнения
-      blocked: Модератор заблокировал заявку
-      activated: Модератор активировал заявку
-      refreshed: Повторяющаяся заявка обновлена
-      created: Модератор создал заявку
-      manual_assign: Модератор назначил волонтера заявку
-      manual_unassign: Модератор снял волонтера с заявки
-      refreshed: Повторяющаяся заявка обновлена
+      blocked: Модератор заблокировал просьбу
+      activated: Модератор активировал просьбу
+      refreshed: Повторяющаяся просьба обновлена
+      created: Модератор создал просьбу
+      manual_assign: Модератор назначил волонтеру просьбу
+      manual_unassign: Модератор снял волонтера с просьбы
+      refreshed: Повторяющаяся просьба обновлена
 

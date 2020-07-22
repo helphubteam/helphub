@@ -2,8 +2,8 @@ class Recurring < ApplicationService
   attr_accessor :recurring_help_requests
   attr_reader :date_now
 
-  def initialize(scope)
-    @recurring_help_requests = scope
+  def initialize
+    @recurring_help_requests = HelpRequest.recurring
     @date_now = Time.zone.now.to_date
   end
 

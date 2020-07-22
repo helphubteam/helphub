@@ -274,15 +274,16 @@ ru:
   authentication:
     errors:
       unauthorized: Неверные логин или пароль
+      expired_token: Ключ устарел, необходима авторизация
   help_request_cases:
     errors:
-      unactive: Заявка неактивна
-      assigned_already: Заявка уже взята Вами в работу
+      unactive: Просьба неактивна
+      assigned_already: Просьба уже взята Вами в работу
       volunteer_role_only: Пользователь должен быть волонтером
-      unassigned: Заявка не взята в работу
-      not_own: Невозможно выполнить чужую заявку
-      submitted_already: Заявка уже выполнена
-      only_user_organization: Нет доступа к заявкам других организаций
+      unassigned: Просьба не взята в работу
+      not_own: Невозможно выполнить чужую просьбу
+      submitted_already: Просьба уже выполнена
+      only_user_organization: Нет доступа к просьбам других организаций
   help_request:
     states:
       active: Новая

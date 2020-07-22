@@ -57,6 +57,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-default_http_header'
   gem 'factory_bot'
+  gem 'faker'
+  gem 'timecop'
   gem 'database_cleaner-active_record'
 end
 
