@@ -14,7 +14,10 @@ module Admin
     end
 
     def new
-      @help_request = HelpRequest.new organization: current_organization
+      @help_request = HelpRequest.new(
+        organization: current_organization,
+        help_request_kind: current_organization.default_help_request_kind
+      )
     end
 
     def update
