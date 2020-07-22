@@ -36,4 +36,8 @@ module ApplicationHelper
     link_to "#{title} <span class='#{icon}'></span>".html_safe,
             params.merge(column: column, direction: direction).permit!
   end
+
+  def user_label(user)
+    [user.name.present? && user.surname.present? && [user.name, user.surname] || user.email, user.phone].flatten.join(' ').squeeze(' ').strip
+  end
 end
