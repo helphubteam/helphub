@@ -8,7 +8,7 @@
   <% if volunteer %>
     <div class="alert alert-info mr-5" role="alert">
       <strong>Волонтер:</strong>
-      <%= link_to user_format_by_fields(volunteer.name, volunteer.surname, volunteer.phone), edit_admin_user_path(volunteer) %>
+      <%= link_to user_label(volunteer), edit_admin_user_path(volunteer) %>
     </div>
     <% end %>
 <% end %>
@@ -39,7 +39,7 @@
   <%= render 'repeat_menu', f: f %>
   <p>
     <h4>Назначить волонтера</h4>
-    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_format_by_fields(v.name, v.surname, v.phone), v.id]} %>
+    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]} %>
   </p>
   <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">

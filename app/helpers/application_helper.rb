@@ -37,12 +37,11 @@ module ApplicationHelper
             params.merge(column: column, direction: direction).permit!
   end
 
-  def user_format_by_fields(*fields)
-    user_fields = []
-    fields.each do |field|
-      user_fields << field
+  def user_label(user)
+    if user.name.blank? && user.surname.blank?
+      user.email
+    else
+      [user.name, user.surname, user.phone].filter_map { |field| field if field.present? }.join(' ')
     end
-
-    user_fields.join(' ')
   end
 end
