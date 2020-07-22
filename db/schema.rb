@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_091009) do
+ActiveRecord::Schema.define(version: 2020_07_22_200719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2020_07_05_091009) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "default", default: false, null: false
     t.index ["organization_id"], name: "index_help_request_kinds_on_organization_id"
   end
 
