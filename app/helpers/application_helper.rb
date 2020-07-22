@@ -38,10 +38,6 @@ module ApplicationHelper
   end
 
   def user_label(user)
-    if user.name.blank? && user.surname.blank?
-      user.email
-    else
-      [user.name, user.surname, user.phone].filter_map { |field| field if field.present? }.join(' ')
-    end
+    [user.name.present? && user.surname.present? && [user.name, user.surname] || user.email, user.phone].flatten.join(' ').squeeze(' ').strip
   end
 end
