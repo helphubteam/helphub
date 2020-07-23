@@ -33,6 +33,7 @@ ru:
         period: Период повтора
         volunteer_id: Волонтер
         help_request_kind_id: Вид просьбы
+        score: Баллы
       organization:
         title: Наименование 
         country: Страна 
