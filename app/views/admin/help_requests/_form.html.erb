@@ -44,7 +44,7 @@
 
   <p>
     <h4>Установить баллы</h4>
-    <%= f.input :score, collection: 1..5 %>
+    <%= f.input :score, collection: 1..5, include_blank: false %>
   </p>
   <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">

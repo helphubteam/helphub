@@ -39,6 +39,7 @@ module Admin
       @help_request = HelpRequest.new
       @help_request.organization = current_organization
       authorize @help_request
+      
       if Admin::HelpRequestCases::Create.new(
         @help_request, params, current_user
       ).call
