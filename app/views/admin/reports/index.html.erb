@@ -1,0 +1,13 @@
+<%= render 'form', report: @report %>
+<table class="table table-bordered table-hover mt-5">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col">Название</th>
+  </tr>
+  </thead>
+  <% @reports.each do |record| %>
+    <tr>
+      <td><%= record.name %></td>
+    </tr>
+  <% end %>
+</table>

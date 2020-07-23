@@ -51,6 +51,8 @@ Rails.application.routes.draw do
       update edit
       destroy create
     ]
+
+    resources :reports, only: %i[index create]
   end
 
   root to: redirect('/users/sign_in')
