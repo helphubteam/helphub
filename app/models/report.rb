@@ -1,13 +1,11 @@
 class Report < ApplicationRecord
   belongs_to :organization
 
-  enum state: { new: 0, enqued: 1, processing: 2, finished: 3, errored: 4 } do
-    event :enqueue do
-      transition new: :enqued
-    end
+  paginates_per 20
 
+  enum state: { enqueued: 0, processing: 1, finished: 2, errored: 3 } do
     event :process do
-      transition enqued: :processing
+      transition enqueued: :processing
     end
 
     event :finish do
@@ -15,7 +13,7 @@ class Report < ApplicationRecord
     end
 
     event :break do
-      transition processing: :errored
+      transition all => :errored
     end
   end
 end

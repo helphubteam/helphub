@@ -2,7 +2,7 @@ module Admin
   class ReportsController < BaseController
 
     def index
-      @reports = current_organization.reports
+      @reports = current_organization.reports.page(params[:page]).reorder(created_at: :desc)
       @report = Report.new(organization: current_organization)
 
       authorize @reports
