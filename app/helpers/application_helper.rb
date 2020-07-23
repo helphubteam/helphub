@@ -38,6 +38,9 @@ module ApplicationHelper
   end
 
   def user_label(user)
-    [user.name.present? && user.surname.present? && [user.name, user.surname] || user.email, user.phone].flatten.join(' ').squeeze(' ').strip
+    # [user.name.present? && user.surname.present? && [user.name, user.surname] || user.email, user.phone].flatten.join(' ').squeeze(' ').strip
+    fields = [user.name, user.surname].all?(&:present?) ? [user.name, user.surname] : [user.email]
+    fields << user.phone if user.phone.present?
+    fields.join(' ')
   end
 end
