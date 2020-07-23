@@ -13,6 +13,7 @@ module Admin
       authorize @report
 
       if @report.save
+        GenerateReportWorker.perform_async(@report.id)
         redirect_to action: :index
         flash[:notice] = 'Генерация отчета началась!'
       else
