@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_190217) do
+ActiveRecord::Schema.define(version: 2020_07_23_190753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2020_07_23_190217) do
     t.string "site"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "name"
+    t.hstore "condition"
+    t.string "document"
+    t.integer "state", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_reports_on_organization_id"
   end
 
   create_table "users", force: :cascade do |t|
