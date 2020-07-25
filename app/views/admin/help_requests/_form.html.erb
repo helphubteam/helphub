@@ -41,6 +41,11 @@
     <h4>Назначить волонтера</h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]} %>
   </p>
+
+  <p>
+    <h4>Установить баллы</h4>
+    <%= f.input :score, collection: 1..5, include_blank: false %>
+  </p>
   <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
