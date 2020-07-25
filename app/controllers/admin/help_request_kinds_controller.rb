@@ -52,7 +52,7 @@ module Admin
 
     def help_request_kind_params
       params.require(:help_request_kind).permit(
-        :name, :default, custom_fields_attributes: %i[id name _destroy]
+        :name, :default, custom_fields_attributes: %i[id name data_type _destroy]
       )
     end
   end

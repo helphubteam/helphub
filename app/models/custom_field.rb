@@ -1,5 +1,5 @@
 class CustomField < ApplicationRecord
-  DATA_TYPES = %w[string text].freeze
+  DATA_TYPES = %w[string text integer float date datetime].freeze
 
   belongs_to :help_request_kind
 
