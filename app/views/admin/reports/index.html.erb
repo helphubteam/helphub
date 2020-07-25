@@ -10,7 +10,7 @@
   </thead>
   <% @reports.each do |report| %>
     <tr>
-      <td><%= I18n.l(report.created_at, format: :short) %></td>
+      <td><%= print_datetime(report.created_at) %></td>
       <td><%= report.name %></td>
       <td><%= report_state_label(report) %></td>
       <td><%= link_to('Скачать файл', report_document_path(report), class: 'btn btn-sm btn-success') if report.finished? %></td>
