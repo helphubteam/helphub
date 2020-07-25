@@ -27,7 +27,7 @@ export default class CustomFieldsPanel {
         <div class="col-sm-9">
           <input
             class="form-control string optional"
-            type="text"
+            type=${obj.data_type}
             name="help_request[custom_values_attributes][${index}][value]" 
             id="help_request_custom_values_attributes_${index}_value"
             value="${obj.value || ''}"
