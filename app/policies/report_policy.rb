@@ -28,5 +28,7 @@ class ReportPolicy < ApplicationPolicy
 
   private
 
-  def report; record; end
+  def report
+    record
+  end
 end

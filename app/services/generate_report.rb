@@ -5,7 +5,7 @@ class GenerateReport
       document = ComposeReportDocument.call(report)
       report.document = document
       report.save!
-    rescue StandardError => e 
+    rescue StandardError => e
       report.break!
       raise e
     end
