@@ -15,9 +15,6 @@ export default class CustomFieldsPanel {
     then(this.renderData.bind(this))
   }
 
-
-
-
   renderData(data) {
 
     function renderText(obj, index) {
@@ -29,7 +26,7 @@ export default class CustomFieldsPanel {
           ${obj.name}
         </label>
         <div class="col-sm-9">
-          <input id="x" type="hidden" name="content">
+          <input id="x" type="hidden" value="${obj.value}" name="content">
           <trix-editor input="x"></trix-editor>
         </div>
       </div>
@@ -41,7 +38,7 @@ export default class CustomFieldsPanel {
         type="hidden"
         value="${obj.id}"
         name="help_request[custom_values_attributes][${index}][id]"
-      />`}`
+      />` || ''}`
     }
 
     function renderString(obj, index) {
@@ -70,11 +67,69 @@ export default class CustomFieldsPanel {
         type="hidden"
         value="${obj.id}"
         name="help_request[custom_values_attributes][${index}][id]"
-      />`}`
+      />` || ''}`
+    }
+
+    function renderDate(obj, index) {
+      return `<div class="form-group row string optional help_request_custom_values_value">
+        <label
+          class="col-sm-3 col-form-label string optional"
+          :for="help_request_custom_values_attributes_${index}_value" 
+        >
+          ${obj.name}
+        </label>
+        <div class="col-sm-2">
+          <input
+            class="form-control string optional"
+            type="date"
+            name="help_request[custom_values_attributes][${index}][value]" 
+            id="help_request_custom_values_attributes_${index}_value"
+            value="${obj.value}"
+          />
+        </div>
+      </div>
+      <input
+        type="hidden"
+        value="${obj.custom_field_id}"
+        name="help_request[custom_values_attributes][${index}][custom_field_id]"
+      />${ obj.id && `<input
+        type="hidden"
+        value="${obj.id}"
+        name="help_request[custom_values_attributes][${index}][id]"
+      />` || ''}`
+    }
+
+    function renderCheckbox(obj, index) {
+      return `<div class="form-group row string optional help_request_custom_values_value">
+        <label
+          class="col-sm-3 col-form-label string optional"
+          :for="help_request_custom_values_attributes_${index}_value" 
+        >
+          ${obj.name}
+        </label>
+        <div class="col-sm-1">
+          <input
+            class="form-control string optional"
+            type="checkbox"
+            name="help_request[custom_values_attributes][${index}][value]" 
+            id="help_request_custom_values_attributes_${index}_value"
+            value="${obj.value}"
+          />
+        </div>
+      </div>
+      <input
+        type="hidden"
+        value="${obj.custom_field_id}"
+        name="help_request[custom_values_attributes][${index}][custom_field_id]"
+       />${ obj.id && `<input
+         type="hidden"
+         value="${obj.id}"
+         name="help_request[custom_values_attributes][${index}][id]"
+       />` || ''}`
     }
 
     this.container.innerHTML = data.map((obj, index) => {
-      let content1 = '';
+      let contentArr = [];
       let dtype = obj.data_type;
       // const checkboxValue = obj.data_type;
       // let val = '';
@@ -84,20 +139,18 @@ export default class CustomFieldsPanel {
       // eslint-disable-next-line default-case
       switch (dtype) {
         case 'string':
-          content1 = renderString(obj, index);
+          contentArr.push(renderString(obj, index));
           break;
         case 'textarea':
-          content1 = renderText(obj, index);
+          contentArr.push(renderText(obj, index));
+          break;
+        case 'date':
+          contentArr.push(renderDate(obj, index));
+          break;
+        case 'checkbox':
+          contentArr.push(renderCheckbox(obj, index));
+          break;
       }
-        // case 4:
-        //   alert( 'В точку!' );
-        //   break;
-        // case 5:
-        //   alert( 'Перебор' );
-        //   break;
-        // default:
-        //   alert( "Нет таких значений" );
-
     //   return `<div class="form-group row string optional help_request_custom_values_value">
     //     <label
     //       class="col-sm-3 col-form-label string optional"
@@ -126,7 +179,7 @@ export default class CustomFieldsPanel {
     //     name="help_request[custom_values_attributes][${index}][id]"
     //   />` || ''}`
     // }).join('')
-      return content1
+      return contentArr.join('')
   })
   }
 
