@@ -44,6 +44,9 @@ ru:
         default: Применять по умолчанию
         organization: Организация
         organization_id: Организация
+      report:
+        name: Название
+        document: Файл отчета
   help_request_log:
     kind:
       assigned: Волонтер взял просьбу в работу

@@ -292,7 +292,12 @@ ru:
       blocked: В архиве
     errors:
       empty_point: Точка на карте должна быть указана
-
+  reports:
+    state:
+      enqueued: Ожидает в очереди
+      processing: Идет обработка
+      finished: Отчет готов
+      errored: Возникли ошибки
   views:
     pagination:
       first: Первая страница
