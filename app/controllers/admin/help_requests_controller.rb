@@ -85,7 +85,8 @@ module Admin
           id: existing_custom_value.try(:[], :id),
           value: existing_custom_value.try(:[], :value),
           custom_field_id: custom_field.id,
-          name: custom_field.name
+          name: custom_field.name,
+          data_type: custom_field.data_type
         }
       end
       render json: custom_fields_data

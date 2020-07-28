@@ -305,3 +305,7 @@ ru:
       next: Вперед
       previous: Назад
       truncate: ...
+  simple_form:
+    labels:
+      custom_fields:
+        data_type: Формат

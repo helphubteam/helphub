@@ -1,5 +1,5 @@
 class CustomField < ApplicationRecord
-  DATA_TYPES = %w[string text].freeze
+  DATA_TYPES = %w[string textarea date checkbox].freeze
 
   belongs_to :help_request_kind
 
