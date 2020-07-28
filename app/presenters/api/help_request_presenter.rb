@@ -110,7 +110,7 @@ module Api
       custom_fields.map do |custom_field|
         {
           name: custom_field.name,
-          value: custom_values.find { |cv| cv.custom_field == custom_field }.try(:value)
+          value: custom_values.find { |cv| cv.custom_field == custom_field }.try(:value),
           type: custom_field.data_type
         }
       end
