@@ -11,6 +11,7 @@
       <%= f.submit(organization.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
       <%= link_to('Отмена', admin_organizations_path, class: 'btn btn-outline-secondary align-self-start') %>
       <% unless organization.new_record? %>
+        <%= link_to('Архивировать', archive_admin_organization_path, method: :post, class: 'btn btn-outline-secondary align-self-start') %>
         <%= link_to('Удалить', admin_organization_path(organization),
                     method: :delete,
                     data: { confirm: 'Вы уверены что хотите удалить организацию?' },

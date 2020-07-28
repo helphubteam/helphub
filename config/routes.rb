@@ -44,12 +44,17 @@ Rails.application.routes.draw do
       index new
       update edit
       destroy create
-    ]
+      archive
+    ] do
+      member do
+        post 'archive'
+      end
+    end
 
     resources :help_request_kinds, only: %i[
       index new
       update edit
-      destroy create
+      destroy
     ]
 
     resources :reports, only: %i[index create]
