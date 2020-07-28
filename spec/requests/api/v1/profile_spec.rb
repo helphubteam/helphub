@@ -14,6 +14,7 @@ RSpec.describe 'Api::V1::Profile', type: :request do
       'phone' => user.phone,
       'email' => user.email,
       'id' => user.id,
+      'score' => user.score,
       'organization' => organization.title,
       'role' => 'volunteer',
       'type' => 'user',

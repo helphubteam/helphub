@@ -39,14 +39,21 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
   end
 
   describe 'POST /api/v1/help_requests/:id/submit' do
-    let!(:help_request) { create :help_request, :assigned, volunteer: user, organization: organization }
+    let(:help_request) { create :help_request, :assigned, volunteer: user, organization: organization }
+    let(:score_result_after_submit) { 9 }
 
-    it 'refuses HelpRequest record' do
+    it 'submits HelpRequest record' do
       expect(help_request.volunteer).to eq(user)
       expect(help_request.state).to eq('assigned')
       post(submit_api_v1_help_request_path(help_request))
       expect(help_request.reload.volunteer).to eq(user)
       expect(help_request.state).to eq('submitted')
+    end
+
+    it "increments volunteer's score by help request's score" do
+      post(submit_api_v1_help_request_path(help_request))
+
+      expect(help_request.reload.volunteer.score).to eq(score_result_after_submit)
     end
   end
 end

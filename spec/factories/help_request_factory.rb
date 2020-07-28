@@ -11,6 +11,7 @@ FactoryBot.define do
     comment { 'test comment' }
     person { 'test person' }
     state { 'active' }
+    score { 5 }
     organization
 
     trait :assigned do
