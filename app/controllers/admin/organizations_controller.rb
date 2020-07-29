@@ -3,7 +3,7 @@ module Admin
     before_action :set_organization, only: %i[edit update destroy archive]
 
     def index
-      @organizations = Organization.all
+      @organizations = Organization.active
                                    .includes(:users, :help_requests)
       authorize @organizations
     end
@@ -49,6 +49,8 @@ module Admin
       authorize @organization
       @organization.archive = true
       @organization.save
+      redirect_to action: :index
+      flash[:notice] = 'Организация заархивирована!'
     end
 
     private
