@@ -40,7 +40,10 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
 
   describe 'POST /api/v1/help_requests/:id/submit' do
     let(:help_request) { create :help_request, :assigned, volunteer: user, organization: organization }
-    let(:score_result_after_submit) { 9 }
+
+    let(:user_with_score) { create :user, :volunteer, organization: organization, score: 3 }
+    let(:help_request_with_score) { create :help_request, :assigned, volunteer: user_with_score, organization: organization, score: 4 }
+    let!(:score_result_after_submit) { user_with_score.score + help_request_with_score.score }
 
     it 'submits HelpRequest record' do
       expect(help_request.volunteer).to eq(user)
@@ -51,9 +54,9 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
     end
 
     it "increments volunteer's score by help request's score" do
-      post(submit_api_v1_help_request_path(help_request))
+      post(submit_api_v1_help_request_path(help_request_with_score))
 
-      expect(help_request.reload.volunteer.score).to eq(score_result_after_submit)
+      expect(help_request_with_score.reload.volunteer.score).to eq(score_result_after_submit)
     end
   end
 end
