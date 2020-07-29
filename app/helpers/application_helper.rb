@@ -36,4 +36,31 @@ module ApplicationHelper
     link_to "#{title} <span class='#{icon}'></span>".html_safe,
             params.merge(column: column, direction: direction).permit!
   end
+
+  def user_label(user)
+    # [user.name.present? && user.surname.present? && [user.name, user.surname] || user.email, user.phone].flatten.join(' ').squeeze(' ').strip
+    fields = [user.name, user.surname].all?(&:present?) ? [user.name, user.surname] : [user.email]
+    fields << user.phone if user.phone.present?
+    fields.join(' ')
+  end
+
+  def report_state_label(report)
+    css = case report.state
+          when 'enqueued'
+            'badge-primary'
+          when 'errored'
+            'badge-danger'
+          when 'processing'
+            'badge-warning'
+          when 'finished'
+            'badge-success'
+          end
+    content_tag :span, class: "badge #{css}" do
+      I18n.t(".reports.state.#{report.state}")
+    end
+  end
+
+  def report_document_path(report)
+    "/#{report.document}"
+  end
 end

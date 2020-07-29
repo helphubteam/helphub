@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HelpRequestsSearcher
-  SEARCH_FIELDS = %i[id comment phone person city street house district apartment].freeze
+  SEARCH_FIELDS = %i[id comment phone person city street house district apartment score].freeze
 
   DEFAULT_SEARCH_PARAMS = {
     page: 1,

@@ -6,12 +6,18 @@
   <thead class="thead-light">
   <tr>
     <th scope="col">Название</th>
+    <th>Выбирается по умолчанию</th>
     <th></th>
   </tr>
   </thead>
   <% @help_request_kinds.each do |record| %>
     <tr>
       <td><%= record.name %></td>
+      <td>
+        <% if record.default? %>
+          <span class="glyphicon glyphicon-ok"></span>
+        <% end %>
+      </td>
       <td style="width: 10%">
         <%= link_to('Редактировать', edit_admin_help_request_kind_path(record), class: 'btn btn-sm btn-outline-primary') %>
       </td>

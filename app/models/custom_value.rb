@@ -6,4 +6,6 @@ class CustomValue < ApplicationRecord
   belongs_to :custom_field
 
   validates :help_request, presence: true, unless: :new_record?
+
+  has_rich_text :content
 end

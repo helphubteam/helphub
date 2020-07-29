@@ -19,6 +19,7 @@ class HelpRequest < ApplicationRecord
   validates :number, presence: true, uniqueness: { scope: :organization_id }
   validates :lonlat, :comment, :phone, :person, :city, :street, :house, presence: true
   validates :period, numericality: { allow_blank: true, greater_than: 0 }
+  validates :score, inclusion: 1..5
 
   before_validation :fill_default_number
 

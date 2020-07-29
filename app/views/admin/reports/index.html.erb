@@ -1,0 +1,20 @@
+<%= render 'form', report: @report %>
+<table class="table table-bordered table-hover mt-5">
+  <thead class="thead-light">
+  <tr>
+    <th>Время создания</th>
+    <th scope="col">Название</th>
+    <th>Статус</th>
+    <th>Файл</th>
+  </tr>
+  </thead>
+  <% @reports.each do |report| %>
+    <tr>
+      <td><%= print_datetime(report.created_at) %></td>
+      <td><%= report.name %></td>
+      <td><%= report_state_label(report) %></td>
+      <td><%= link_to('Скачать файл', report_document_path(report), class: 'btn btn-sm btn-success') if report.finished? %></td>
+    </tr>
+  <% end %>
+</table>
+<%= paginate @reports, theme: 'twitter-bootstrap-4' %>
