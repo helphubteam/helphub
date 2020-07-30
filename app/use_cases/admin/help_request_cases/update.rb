@@ -26,7 +26,7 @@ module Admin
         registration_ids = [ help_request.volunteer.device_token ]
         options = { 
           notification: {
-              title: "Заявка №#{help_request.number} обновлена модератором",
+              title: "Просьба №#{help_request.number} обновлена модератором",
               body: ""
           }
         }
