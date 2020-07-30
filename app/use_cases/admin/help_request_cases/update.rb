@@ -19,18 +19,18 @@ module Admin
         volunteer = help_request.volunteer
         secret_key = ENV['FCM_SECRET_KEY']
         return if !volunteer || !volunteer.device_token ||
-          !secret_key || !volunteer.android_device?
+                  !secret_key || !volunteer.android_device?
 
         fcm = FCM.new(secret_key)
-        
-        registration_ids = [ help_request.volunteer.device_token ]
-        options = { 
+
+        registration_ids = [help_request.volunteer.device_token]
+        options = {
           notification: {
-              title: "Просьба №#{help_request.number} обновлена модератором",
-              body: ""
+            title: "Просьба №#{help_request.number} обновлена модератором",
+            body: ''
           }
         }
-        response = fcm.send(registration_ids, options)
+        fcm.send(registration_ids, options)
       end
     end
   end
