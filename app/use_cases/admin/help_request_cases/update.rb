@@ -15,7 +15,7 @@ module Admin
 
       private
 
-      def invoke_notification!(help_request)
+      def invoke_notification!
         volunteer = help_request.volunteer
         secret_key = ENV['FCM_SECRET_KEY']
         return if !volunteer || !volunteer.device_token ||
