@@ -17,6 +17,14 @@ class User < ApplicationRecord
 
   paginates_per 20
 
+  def active_for_authentication?
+    super && account_active?
+  end
+
+  def account_active?
+    organization ? !organization.archive? : true
+  end
+
   def to_s
     # TODO: add name fields
     [email].join(' ')
