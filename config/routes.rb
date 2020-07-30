@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'authentication#login'
       get '/profile', to: 'profiles#show'
+      post '/subscribe', to: 'profiles#subscribe'
       resources :help_requests, only: :index do
         member do
           post :assign
