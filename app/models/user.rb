@@ -29,4 +29,8 @@ class User < ApplicationRecord
     # TODO: add name fields
     [email].join(' ')
   end
+
+  def android_device?
+    device_platform == 'android'
+  end
 end
