@@ -15,11 +15,14 @@ module Admin
 
       private
 
-      def invoke_notification!
+      def disallow_push_notifications?
         volunteer = help_request.volunteer
+        !volunteer || !volunteer.device_token || !volunteer.android_device?
+      end
+
+      def invoke_notification!
         secret_key = ENV['FCM_SECRET_KEY']
-        return if !volunteer || !volunteer.device_token ||
-                  !secret_key || !volunteer.android_device?
+        return if !secret_key || disallow_push_notifications?
 
         fcm = FCM.new(secret_key)
 

@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   validates :role, presence: true
 
+  DEVICE_PLATFORMS = %w[android ios].freeze
+
+  validates :device_platform, inclusion: { in: DEVICE_PLATFORMS, allow_blank: true }
+
   has_many :activity, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
   paginates_per 20

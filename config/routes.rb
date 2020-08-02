@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post '/login', to: 'authentication#login'
       get '/profile', to: 'profiles#show'
       post '/subscribe', to: 'profiles#subscribe'
+      delete '/unsubscribe', to: 'profiles#unsubscribe'
       resources :help_requests, only: :index do
         member do
           post :assign
