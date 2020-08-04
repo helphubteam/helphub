@@ -51,6 +51,7 @@ class HelpRequest < ApplicationRecord
 
   scope :active, -> { where(state: :active) }
   scope :assigned, -> { where(state: :assigned) }
+  scope :submitted, -> { where(state: :submitted) }
   scope :recurring, lambda {
     where.not(state: :blocked)
          .where.not(schedule_set_at: nil)
