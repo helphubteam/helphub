@@ -8,6 +8,7 @@ module Api
       lonlat: nil,
       sort: 'created_at DESC',
       taken: false,
+      submitted: false,
       distance: 400
     }.freeze
 
@@ -22,6 +23,7 @@ module Api
 
     def call
       scope = HelpRequest.preload(:custom_values, :custom_fields)
+      return submitted_scope(scope) if search_params[:submitted] == 'true'
       return taken_scope(scope) if search_params[:taken] == 'true'
 
       map_scope(scope)
@@ -50,6 +52,15 @@ module Api
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
         .yield_self(&method(:apply_distance))
+    end
+
+    def submitted_scope(scope)
+      scope
+        .submitted
+        .where(volunteer: current_api_user)
+        .yield_self(&method(:apply_sort))
+        .yield_self(&method(:apply_limit))
+        .yield_self(&method(:apply_offset))
     end
 
     def apply_limit(scope)
