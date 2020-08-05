@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  LADING_WEBSITE_URL = 'http://helphub.ru'
+  LANDING_WEBSITE_URL = 'http://helphub.ru'
 
   include Pundit
 
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       admin_help_requests_path
     else
       sign_out(resource)
-      LADING_WEBSITE_URL
+      LANDING_WEBSITE_URL
     end
   end
 
