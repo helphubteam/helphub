@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_190837) do
+ActiveRecord::Schema.define(version: 2020_07_30_195133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_190837) do
     t.string "site"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "archive", default: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -125,6 +126,8 @@ ActiveRecord::Schema.define(version: 2020_07_28_190837) do
     t.string "surname"
     t.string "phone"
     t.integer "score", default: 0, null: false
+    t.string "device_token"
+    t.string "device_platform"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
