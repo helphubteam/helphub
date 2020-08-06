@@ -15,11 +15,12 @@
                     method: :post,
                     data: { confirm: "Вы уверены, что хотите архивировать организацию?\nПользователи этой организации больше не смогут логиниться в HelpHub.\nЧтобы восстановить организацию после архивации, напишите разработчикам." },
                     class: 'btn btn-outline-secondary align-self-start') %>
-        <%= link_to('Удалить', admin_organization_path(organization),
+        <!-- вркменно отключено -->
+        <!--<%#= link_to('Удалить', admin_organization_path(organization),
                     method: :delete,
                     data: { confirm: 'Вы уверены что хотите удалить организацию?' },
                     class: 'btn btn-outline-danger align-self-start')
-        %>
+        %> -->
       <% end %>
     </div>
   </div>

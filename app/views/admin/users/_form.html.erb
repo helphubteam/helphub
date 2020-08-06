@@ -20,7 +20,7 @@
 
   <% if current_user.admin? %>
     <%= f.input :organization_id, 
-      collection: Organization.pluck(:title, :id)
+      collection: Organization.active.pluck(:title, :id)
     %>
   <% end %>
   <div class="form-group row mb-0">
