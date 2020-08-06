@@ -6,7 +6,7 @@ module Api
 
       # POST /login
       def login
-        if @user&.valid_password?(params[:password]) && @user.account_active?
+        if @user && @user.valid_password?(params[:password]) && @user.account_active?
           time = Time.now + TOKEN_LIFETIME
           token = JsonWebToken.encode({ user_id: @user.id, exp: time })
           render json: { token: token,
