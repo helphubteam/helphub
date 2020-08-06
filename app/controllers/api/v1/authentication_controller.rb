@@ -25,10 +25,10 @@ module Api
         time = Time.now + TOKEN_LIFETIME
         token = JsonWebToken.encode({ user_id: user.id, exp: time })
 
-        { 
+        {
           token: token,
           expiration_date: time.strftime('%m-%d-%Y %H:%M'),
-          email: user.email 
+          email: user.email
         }
       end
 

@@ -38,7 +38,7 @@ RSpec.describe 'Api::V1::Login', type: :request do
 
     context 'when authorized' do
       include_context 'jwt authenticated'
-      
+
       let(:user) { create :user, :volunteer, organization: organization }
       let(:organization) { create :organization }
 
