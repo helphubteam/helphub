@@ -38,14 +38,6 @@ module Admin
       end
     end
 
-    # временно отключено
-    # def destroy
-    #   authorize @organization
-    #   @organization.destroy
-    #   redirect_to action: :index
-    #   flash[:notice] = 'Организация удалена!'
-    # end
-
     def archive
       authorize @organization
       @organization.archive = true
