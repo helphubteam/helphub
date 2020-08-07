@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :organizations, only: %i[
       index new
       update edit
-      destroy create
+      create
     ] do
       member do
         post 'archive'
