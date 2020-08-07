@@ -6,19 +6,31 @@ module Api
 
       # POST /login
       def login
-        if @user && @user.valid_password?(params[:password]) && @user.account_active?
-          time = Time.now + TOKEN_LIFETIME
-          token = JsonWebToken.encode({ user_id: @user.id, exp: time })
-          render json: { token: token,
-                         expiration_date: time.strftime('%m-%d-%Y %H:%M'),
-                         email: @user.email }, status: :ok
+        if @user&.valid_password?(params[:password]) && @user&.account_active?
+          render json: generate_token_data(@user), status: :ok
         else
           render json: error_response(I18n.t('authentication.errors.unauthorized')),
-                 status: :unauthorized
+                 status: :forbidden
         end
       end
 
+      # POST /refresh_token
+      def refresh_token
+        render json: generate_token_data(current_api_user), status: :ok
+      end
+
       private
+
+      def generate_token_data(user)
+        time = Time.now + TOKEN_LIFETIME
+        token = JsonWebToken.encode({user_id: user.id, exp: time})
+
+        {
+            token: token,
+            expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+            email: user.email
+        }
+      end
 
       def set_user
         @user = User.find_by_email(params[:email])
@@ -29,7 +41,7 @@ module Api
       end
 
       def error_response(error_message)
-        { errors: [{ message: error_message }] }
+        {errors: [{message: error_message}]}
       end
     end
   end
