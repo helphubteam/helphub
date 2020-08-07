@@ -6,7 +6,7 @@ module Api
 
       # POST /login
       def login
-        if @user&.valid_password?(params[:password])
+        if @user&.valid_password?(params[:password]) && @user&.account_active?
           render json: generate_token_data(@user), status: :ok
         else
           render json: error_response(I18n.t('authentication.errors.unauthorized')),
