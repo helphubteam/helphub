@@ -6,7 +6,7 @@ module Api
 
       # POST /login
       def login
-        if @user&.valid_password?(params[:password]) && @user&.account_active?
+        if @user&.valid_password?(params[:password])
           render json: generate_token_data(@user), status: :ok
         else
           render json: error_response(I18n.t('authentication.errors.unauthorized')),
@@ -23,12 +23,12 @@ module Api
 
       def generate_token_data(user)
         time = Time.now + TOKEN_LIFETIME
-        token = JsonWebToken.encode({user_id: user.id, exp: time})
+        token = JsonWebToken.encode({ user_id: user.id, exp: time })
 
         {
-            token: token,
-            expiration_date: time.strftime('%m-%d-%Y %H:%M'),
-            email: user.email
+          token: token,
+          expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+          email: user.email
         }
       end
 
@@ -41,7 +41,7 @@ module Api
       end
 
       def error_response(error_message)
-        {errors: [{message: error_message}]}
+        { errors: [{ message: error_message }] }
       end
     end
   end

@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_195133) do
     t.string "name"
     t.string "surname"
     t.string "phone"
+    t.integer "score", default: 0, null: false
     t.string "device_token"
     t.string "device_platform"
     t.index ["email"], name: "index_users_on_email", unique: true

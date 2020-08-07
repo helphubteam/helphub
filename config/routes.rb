@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/login', to: 'authentication#login'
+      post '/refresh_token', to: 'authentication#refresh_token'
       get '/profile', to: 'profiles#show'
       post '/subscribe', to: 'profiles#subscribe'
       delete '/unsubscribe', to: 'profiles#unsubscribe'
