@@ -28,7 +28,7 @@
       <td><%= help_request.address %></td>
       <td><%= help_request.phone %></td>
       <td><%= help_request.person %></td>
-      <td><%= help_request.comment %></td>
+      <td><%= help_request.comment.size > 50 ? help_request.comment[0..50] << '...' : help_request.comment %></td>
       <td><%= help_request.period %></td>
       <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
       <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request.id), class: 'btn btn-sm btn-outline-primary') %></td>
