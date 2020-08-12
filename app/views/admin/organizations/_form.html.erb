@@ -11,11 +11,16 @@
       <%= f.submit(organization.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
       <%= link_to('Отмена', admin_organizations_path, class: 'btn btn-outline-secondary align-self-start') %>
       <% unless organization.new_record? %>
-        <%= link_to('Удалить', admin_organization_path(organization),
+        <%= link_to('Архивировать', archive_admin_organization_path,
+                    method: :post,
+                    data: { confirm: "Вы уверены, что хотите архивировать организацию?\nПользователи этой организации больше не смогут логиниться в HelpHub.\nЧтобы восстановить организацию после архивации, напишите разработчикам." },
+                    class: 'btn btn-outline-secondary align-self-start') %>
+        <!-- вркменно отключено -->
+        <!--<%#= link_to('Удалить', admin_organization_path(organization),
                     method: :delete,
                     data: { confirm: 'Вы уверены что хотите удалить организацию?' },
                     class: 'btn btn-outline-danger align-self-start')
-        %>
+        %> -->
       <% end %>
     </div>
   </div>

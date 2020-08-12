@@ -1,0 +1,5 @@
+<% if @resource.volunteer? %>
+  <%= render 'volunteer_invite' %>
+<% else %>
+  <%= render 'default_invite' %>
+<% end %>

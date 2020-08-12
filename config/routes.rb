@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/login', to: 'authentication#login'
+      post '/refresh_token', to: 'authentication#refresh_token'
       get '/profile', to: 'profiles#show'
+      post '/subscribe', to: 'profiles#subscribe'
+      delete '/unsubscribe', to: 'profiles#unsubscribe'
       resources :help_requests, only: :index do
         member do
           post :assign
@@ -43,8 +46,12 @@ Rails.application.routes.draw do
     resources :organizations, only: %i[
       index new
       update edit
-      destroy create
-    ]
+      create
+    ] do
+      member do
+        post 'archive'
+      end
+    end
 
     resources :help_request_kinds, only: %i[
       index new

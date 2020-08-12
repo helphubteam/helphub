@@ -1,9 +1,9 @@
 module Admin
   class OrganizationsController < Admin::BaseController
-    before_action :set_organization, only: %i[edit update destroy]
+    before_action :set_organization, only: %i[edit update destroy archive]
 
     def index
-      @organizations = Organization.all
+      @organizations = Organization.active
                                    .includes(:users, :help_requests)
       authorize @organizations
     end
@@ -38,11 +38,12 @@ module Admin
       end
     end
 
-    def destroy
+    def archive
       authorize @organization
-      @organization.destroy
+      @organization.archive = true
+      @organization.save
       redirect_to action: :index
-      flash[:notice] = 'Организация удалена!'
+      flash[:notice] = 'Организация заархивирована!'
     end
 
     private

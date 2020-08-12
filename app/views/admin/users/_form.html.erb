@@ -19,8 +19,14 @@
   <%= f.input :role, collection: user_roles_list %>
 
   <% if current_user.admin? %>
+    <%= f.input :score %>
+  <% else %>
+    <%= f.input :score, disabled: true%>
+  <% end %>
+
+  <% if current_user.admin? %>
     <%= f.input :organization_id, 
-      collection: Organization.pluck(:title, :id)
+      collection: Organization.active.pluck(:title, :id)
     %>
   <% end %>
   <div class="form-group row mb-0">

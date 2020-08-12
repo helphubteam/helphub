@@ -15,6 +15,10 @@ class OrganizationPolicy < ApplicationPolicy
     current_admin?
   end
 
+  def archive?
+    current_admin?
+  end
+
   private
 
   def current_admin?
