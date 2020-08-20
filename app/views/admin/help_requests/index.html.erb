@@ -14,7 +14,10 @@
     <th scope="col">Комментарий</th>
     <th scope="col"><%= sort_link 'period', 'Повтор, дн' %></th>
     <th scope="col"><%= sort_link 'updated_at', 'Последнее изменение' %></th>
-    <th scope="col" style="width: 10%"></th>
+    <th scope="col"><%= sort_link 'date_begin', 'Дата начала' %></th>
+    <th scope="col"><%= sort_link 'date_end', 'Дата окончания' %></th>
+
+      <th scope="col" style="width: 10%"></th>
     </tr>
   </thead>
   <% @help_requests.each do |record| %>
@@ -31,6 +34,8 @@
       <td><%= help_request.comment %></td>
       <td><%= help_request.period %></td>
       <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
+      <td><%= help_request.date_begin %></td>
+      <td><%= help_request.date_end %></td>
       <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request.id), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
