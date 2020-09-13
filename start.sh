@@ -9,6 +9,7 @@ echo "Postgres is up - executing command"
 
 rm -f tmp/pids/server.pid
 bundle install
+yarn --check-files
 
 if [ "$RAILS_ENV" = 'production' ]
 then
