@@ -35,6 +35,8 @@
   </div>
   <%= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
+  <%= f.input :date_begin, as: :string, input_html: { class: 'datetimepicker' } %>
+  <%= f.input :date_end, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :mediated %>
   <%= render 'repeat_menu', f: f %>
   <p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_195133) do
+ActiveRecord::Schema.define(version: 2020_08_20_175722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2020_07_30_195133) do
     t.boolean "recurring"
     t.integer "help_request_kind_id"
     t.integer "score", default: 1, null: false
+    t.datetime "date_begin"
+    t.datetime "date_end"
     t.index ["organization_id"], name: "index_help_requests_on_organization_id"
   end
 
