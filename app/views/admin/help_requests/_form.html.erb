@@ -35,16 +35,10 @@
   </div>
   <%= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
+  <%= f.input :date_begin, as: :string, input_html: { class: 'datetimepicker' } %>
+  <%= f.input :date_end, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :mediated %>
   <%= render 'repeat_menu', f: f %>
-  <p>
-  <h4>Дата начала:</h4>
-  <%= f.input :date_begin, as: :datetime, label: false %>
-  </p>
-  <p>
-  <h4>Дата окончания:</h4>
-  <%= f.input :date_end, as: :datetime, label: false %>
-  </p>
   <p>
     <h4>Назначить волонтера</h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]} %>

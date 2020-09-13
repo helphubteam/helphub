@@ -28,6 +28,8 @@ ru:
         person: ФИО
         meds_preciption_required: Нужны лекарства по рецепту
         comment: Комментарий
+        date_begin: Время начала события
+        date_end: Время окончания события
         mediated: Помощь для другого
         recurring: Повторяющаяся просьба
         period: Период повтора
