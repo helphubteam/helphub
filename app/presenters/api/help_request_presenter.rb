@@ -37,8 +37,10 @@ module Api
           distance: distance_label(target.try(:distance)),
           geo_salt: true,
           custom_fields: custom_fields,
-          created_at: target.created_at.to_i,
-          updated_at: target.updated_at.try(:to_i)
+          date_begin: timestamp(target.date_begin),
+          date_end: timestamp(target.date_end),
+          created_at: timestamp(target.created_at),
+          updated_at: timestamp(target.updated_at)
         )
     end
 
@@ -53,12 +55,18 @@ module Api
           distance: distance_label(target.try(:distance)),
           geo_salt: false,
           custom_fields: custom_fields,
+          date_begin: timestamp(target.date_begin),
+          date_end: timestamp(target.date_end),
           created_at: target.created_at.to_i,
           updated_at: target.updated_at.try(:to_i)
         )
     end
 
     attr_reader :target, :current_user
+
+    def timestamp(value)
+      value.try(:to_i)
+    end
 
     def full_address
       [target.city, target.district, target.street, target.house, target.apartment].compact.join(' ')
