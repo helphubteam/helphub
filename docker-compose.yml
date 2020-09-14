@@ -6,6 +6,7 @@ x-backend:
   volumes:
     - ~/.ssh:/root/.ssh
     - .:/app
+    - ../shared/public/reports:/reports
     - bundle_path:/bundle
 services:
   app:
