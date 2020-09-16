@@ -2,9 +2,9 @@
 
 module Api
   class HelpRequestPresenter
-    FULL_ATTRIBUTES = %i[id phone state comment number person mediated meds_preciption_required volunteer_id].freeze
+    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id].freeze
 
-    NON_PERSONAL_ATTRIBUTES = %i[id state comment number mediated meds_preciption_required volunteer_id].freeze
+    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id].freeze
 
     def initialize(target, current_user)
       @target = target
@@ -38,6 +38,7 @@ module Api
     def full_data
       target.attributes.slice(*FULL_ATTRIBUTES.map(&:to_s))
             .merge(
+              title,
               address: full_address,
               detailed_address: detailed_full_address,
               lonlat: render_lonlat(target.lonlat_geojson),

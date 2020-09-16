@@ -2,6 +2,7 @@
 
 class HelpRequestPresenter
   delegate :id,
+           :title,
            :phone,
            :address,
            :state,
