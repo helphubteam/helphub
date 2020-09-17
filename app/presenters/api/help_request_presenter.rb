@@ -38,7 +38,6 @@ module Api
     def full_data
       target.attributes.slice(*FULL_ATTRIBUTES.map(&:to_s))
             .merge(
-              title,
               address: full_address,
               detailed_address: detailed_full_address,
               lonlat: render_lonlat(target.lonlat_geojson),
