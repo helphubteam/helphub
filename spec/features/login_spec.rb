@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "login form", type: :feature do
+describe 'login form', type: :feature do
   let(:password) { '123qwe' }
   let(:wrong_password) { '123q@we' }
   let(:email) { 'someuser@email.ru' }
@@ -12,9 +12,9 @@ describe "login form", type: :feature do
   let(:error_message) { I18n.t('devise.failure.invalid') }
   let(:user_not_found_message) { I18n.t('devise.failure.user.not_found_in_database') }
 
-  it "signs me in" do
+  it 'signs me in' do
     visit '/users/sign_in'
-    within("#new_user") do
+    within('#new_user') do
       fill_in email_field, with: user.email
       fill_in password_field, with: password
     end
@@ -24,7 +24,7 @@ describe "login form", type: :feature do
 
   it "doesn't pass with wrong password" do
     visit '/users/sign_in'
-    within("#new_user") do
+    within('#new_user') do
       fill_in email_field, with: user.email
       fill_in password_field, with: wrong_password
     end
@@ -34,7 +34,7 @@ describe "login form", type: :feature do
 
   it "can't find unexisting user" do
     visit '/users/sign_in'
-    within("#new_user") do
+    within('#new_user') do
       fill_in email_field, with: wrong_email
       fill_in password_field, with: password
     end
