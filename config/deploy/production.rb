@@ -12,11 +12,6 @@ set :linked_files,
       .env
     ]
 
-set :linked_dirs,
-    %w[
-      public/reports
-    ]
-
 namespace :deploy do
   before :cleanup, :cleanup_permissions
 
