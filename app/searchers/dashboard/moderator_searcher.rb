@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Dashboard
   class ModeratorSearcher
     def initialize(user)
@@ -8,13 +9,12 @@ module Dashboard
 
     def call
       {
-        
+
       }
     end
 
     private
 
     attr_reader :user, :organization
-
   end
 end

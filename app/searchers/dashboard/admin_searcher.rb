@@ -2,9 +2,8 @@
 
 module Dashboard
   class AdminSearcher
-
     TECHNICAL_ORGANIZATIONS_IDS = [1].freeze
-    
+
     def initialize(user)
       @user = user
     end
@@ -36,7 +35,7 @@ module Dashboard
     def help_requests_scope
       non_technical_orgs(HelpRequest)
     end
-    
+
     def moderators_scope
       non_technical_orgs(User.moderators)
     end
@@ -47,8 +46,8 @@ module Dashboard
 
     def help_requests_submission_scope
       HelpRequestLog.includes(:help_request).where.not(help_requests: {
-        organization_id: TECHNICAL_ORGANIZATIONS_IDS
-      }).where(kind: :submitted).where("help_request_logs.created_at > ?", 1.week.ago)
+                                                         organization_id: TECHNICAL_ORGANIZATIONS_IDS
+                                                       }).where(kind: :submitted).where('help_request_logs.created_at > ?', 1.week.ago)
     end
 
     def non_technical_orgs(scope)
@@ -56,12 +55,11 @@ module Dashboard
     end
 
     def week(scope)
-      scope.where("created_at > ?", 1.week.ago)
+      scope.where('created_at > ?', 1.week.ago)
     end
 
     def count(scope)
       scope.count
     end
-
   end
 end
