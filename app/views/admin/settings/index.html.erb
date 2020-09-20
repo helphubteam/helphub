@@ -1,0 +1,23 @@
+<%= form_tag admin_settings_path, method: :put do %>
+  
+  <table class="table table-bordered table-hover mt-5">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Название</th>
+      <th>Значение</th>
+    </tr>
+    </thead>
+    <% Setting.keys.each do |key| %>
+      <tr>
+        <td><%= I18n.t("settings.#{key}") %></td>
+        <td>
+          <%= text_area_tag "settings[#{key}]", Setting.public_send(key), class: 'col-sm-9' %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag 'Сохранить изменения', 
+      class: 'btn btn-success float-right my-3',
+      data: { confirm: 'ВНИМАНИЕ: Мы меняем настройки всего сайта. Продолжить?' }
+  %>
+<% end %>

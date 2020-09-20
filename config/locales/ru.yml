@@ -309,3 +309,5 @@ ru:
     labels:
       custom_fields:
         data_type: Формат
+  settings:
+    analytics: Код аналитики
