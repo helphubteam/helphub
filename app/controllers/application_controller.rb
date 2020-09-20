@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.admin?
-      admin_organizations_path
+      admin_dashboard_path
     elsif resource.moderator?
       admin_help_requests_path
     else

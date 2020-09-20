@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+
     resources :help_requests, only: %i[
       index new
       update edit
