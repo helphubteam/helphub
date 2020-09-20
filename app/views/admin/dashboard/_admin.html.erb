@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Панель Администратора</h2>
+  <p>
+    <b>Статистика за все время</b>
+    <div class="row">
+      <% data[:full].each do |key, value| %>
+        <% title = t(".full.#{key}")%>
+        <%= dashboard_field(title, value).html_safe %>
+      <% end %>
+    </div>
+  </p>
+  <p>
+    <b>Статистика за последнюю неделю</b>
+    <div class="row">
+      <% data[:week].each do |key, value| %>
+        <% title = t(".week.#{key}")%>
+        <%= dashboard_field(title, value).html_safe %>
+      <% end %>
+    </div>
+  </p>
+</div>
