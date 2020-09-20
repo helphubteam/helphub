@@ -37,6 +37,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :settings, only: %i[index] do
+      collection do
+        put :update
+      end
+    end
+
     resources :users, only: %i[
       index new
       update edit

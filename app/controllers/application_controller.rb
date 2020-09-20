@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
   def can_use_application?(resource)
     resource.admin? || resource.moderator?
   end
+
+  rescue_from Pundit::NotAuthorizedError do
+    sign_out current_user if current_user
+    flash[:error] = 'У Вас нет прав на это действие'
+    redirect_to new_user_session_path
+  end
 end

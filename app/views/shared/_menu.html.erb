@@ -6,18 +6,20 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <% organizations_menu = current_user.admin? ? ["Организации", admin_organizations_path] : ['', root_path] %>
-      <% help_requests_menu = !current_user.admin? ? ["Просьбы", admin_help_requests_path] : ['', root_path] %>
-      <% help_request_kinds_menu = !current_user.admin? ? ["Виды просьб", admin_help_request_kinds_path] : ['', root_path] %>
-      <% reports_menu = !current_user.admin? ? ["Отчеты", admin_reports_path] : ['', root_path] %>
+      <% organizations_menu = current_user.admin? ? ["Организации", admin_organizations_path] : nil %>
+      <% help_requests_menu = !current_user.admin? ? ["Просьбы", admin_help_requests_path] : nil %>
+      <% help_request_kinds_menu = !current_user.admin? ? ["Виды просьб", admin_help_request_kinds_path] : nil %>
+      <% reports_menu = !current_user.admin? ? ["Отчеты", admin_reports_path] : nil %>
+      <% settings_menu = current_user.admin? ? ["Настройки", admin_settings_path] : nil %>
       <%
         menu = [
           organizations_menu,
           ["Пользователи", admin_users_path],
           help_requests_menu,
           help_request_kinds_menu,
-          reports_menu
-        ]
+          reports_menu,
+          settings_menu
+        ].compact
       %>
       
       <% menu.each do |(name, url)| %>
