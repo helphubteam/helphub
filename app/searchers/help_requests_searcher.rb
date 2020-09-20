@@ -22,6 +22,15 @@ class HelpRequestsSearcher
   end
 
   def call
+    {
+      base_scope: base_scope,
+      paged_scope: paged_scope
+    }
+  end
+
+  private
+
+  def base_scope
     scope = apply_search(HelpRequest)
     scope = apply_states(scope)
     if search_params[:overdue]
@@ -31,9 +40,11 @@ class HelpRequestsSearcher
       sort = by_sorting_params
     end
 
-    scope
-      .reorder(sort)
-      .page(search_params[:page])
+    scope.reorder(sort)
+  end
+
+  def paged_scope
+    base_scope.page(search_params[:page])
   end
 
   def apply_overdue(scope)

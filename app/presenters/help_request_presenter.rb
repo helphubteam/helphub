@@ -16,7 +16,8 @@ class HelpRequestPresenter
            :period,
            :date_begin,
            :date_end,
-           :updated_at, to: :target
+           :updated_at,
+           :volunteer, to: :target
 
   def initialize(target)
     @target = target
