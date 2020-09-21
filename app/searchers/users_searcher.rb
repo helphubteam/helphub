@@ -6,7 +6,7 @@ class UsersSearcher
   DEFAULT_SEARCH_PARAMS = {
     page: 1,
     overdue: false,
-    search: '',
+    search: ''
   }.freeze
 
   attr_reader :search_params
@@ -21,6 +21,8 @@ class UsersSearcher
     scope = apply_search(User)
     scope.page(search_params[:page])
   end
+
+  private
 
   def apply_search(scope)
     str = search_params[:search]
