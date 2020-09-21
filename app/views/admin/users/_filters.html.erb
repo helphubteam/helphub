@@ -1,0 +1,15 @@
+<%= form_tag admin_users_path, method: 'GET', class: 'mb-4' do %>
+  <div class='row'>
+    <div class='col-4'>
+      <div class="input-group ml-0">
+        <%= text_field_tag :search, params[:search], placeholder: 'Поиск...', class: 'form-control' %>
+        <div class="input-group-append">
+          <%= submit_tag 'Искать', class: 'btn btn-outline-success' %>
+        </div>
+      </div>
+    </div>
+    <div class='col-4 offset-4'>
+      <%= link_to 'Сбросить фильтры', admin_users_path, class: 'btn btn-sm float-right btn-outline-secondary mt-3' %>
+    </div>
+  </div>
+<% end %>

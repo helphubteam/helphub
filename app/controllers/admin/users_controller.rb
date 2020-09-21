@@ -3,7 +3,7 @@ module Admin
     before_action :set_user, only: %i[edit update destroy]
 
     def index
-      @users = policy_scope(User).page(params[:page])
+      @users = policy_scope(UsersSearcher.new(search_params).call)
     end
 
     def new
@@ -52,6 +52,10 @@ module Admin
       defaults = { organization_id: current_organization.id } if current_organization
       params.require(:user).permit(:name, :surname, :phone, :email, :role, :organization_id, :score)
             .reverse_merge(defaults)
+    end
+
+    def search_params
+      params.permit(*UsersSearcher::DEFAULT_SEARCH_PARAMS.keys)
     end
   end
 end
