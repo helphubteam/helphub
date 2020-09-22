@@ -14,9 +14,9 @@
 <% end %>
 <%= simple_form_for [:admin, help_request], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
-  <%= f.input :title %>
   <div class="row">
     <div class="col-6">
+      <%= f.input :title, hints: 'Не более 140 символов' %>
       <%= f.input :person %>
       <%= f.input :city %>
       <%= f.input :district %>
