@@ -6,7 +6,9 @@ module Admin
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
-      @help_requests = policy_scope(HelpRequestsSearcher.new(search_params).call)
+      data = HelpRequestsSearcher.new(search_params).call
+      @help_requests = policy_scope(data[:paged_scope])
+      @help_requests_count = policy_scope(data[:base_scope]).count
     end
 
     def edit

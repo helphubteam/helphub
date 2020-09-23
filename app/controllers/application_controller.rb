@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.admin?
-      admin_organizations_path
+      admin_dashboard_path
     elsif resource.moderator?
       admin_help_requests_path
     else
@@ -20,5 +20,11 @@ class ApplicationController < ActionController::Base
 
   def can_use_application?(resource)
     resource.admin? || resource.moderator?
+  end
+
+  rescue_from Pundit::NotAuthorizedError do
+    sign_out current_user if current_user
+    flash[:error] = 'У Вас нет прав на это действие'
+    redirect_to new_user_session_path
   end
 end

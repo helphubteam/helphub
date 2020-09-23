@@ -2,6 +2,7 @@
 
 class HelpRequestPresenter
   delegate :id,
+           :title,
            :phone,
            :address,
            :state,
@@ -13,7 +14,10 @@ class HelpRequestPresenter
            :volunteer_id,
            :created_at,
            :period,
-           :updated_at, to: :target
+           :date_begin,
+           :date_end,
+           :updated_at,
+           :volunteer, to: :target
 
   def initialize(target)
     @target = target

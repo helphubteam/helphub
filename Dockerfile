@@ -9,4 +9,3 @@ COPY . .
 
 RUN bundle install
 RUN apt-get update && apt-get install yarn
-RUN yarn install --check-files

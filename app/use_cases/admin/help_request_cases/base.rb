@@ -52,7 +52,7 @@ module Admin
           :lonlat_geojson, :phone, :city, :district, :street,
           :house, :apartment, :state, :comment,
           :person, :mediated, :meds_preciption_required, :recurring,
-          :period, :volunteer_id, :help_request_kind_id, :score,
+          :period, :volunteer_id, :help_request_kind_id, :score, :date_begin, :date_end, :title,
           custom_values_attributes: %i[value custom_field_id id]
         )
         apply_recurring(result)

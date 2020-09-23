@@ -309,3 +309,17 @@ ru:
     labels:
       custom_fields:
         data_type: Формат
+  settings:
+    analytics: Код аналитики
+  admin:
+    dashboard:
+      admin:
+        full:
+          organizations_count: Зарегистрировано фондов
+          help_requests_count: Создано заявок
+          moderators_count: Зарегистрировано администраторов фондов
+          volunteers_count: Зарегистрировано волонтеров
+        week:
+          help_requests_count: Создано заявок
+          volunteers_count: Зарегистрировано волонтеров
+          help_requests_submissions: Выполнено заявок

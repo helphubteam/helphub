@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+
     resources :help_requests, only: %i[
       index new
       update edit
@@ -34,6 +36,12 @@ Rails.application.routes.draw do
     ] do
       member do
         get :custom_fields
+      end
+    end
+
+    resources :settings, only: %i[index] do
+      collection do
+        put :update
       end
     end
 

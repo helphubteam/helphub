@@ -1,5 +1,5 @@
 <div class="container d-flex flex-column align-items-center">
-  <h2 class='mt-5'><%= site_name %></h2>
+  <h2 class='mt-5'><%= render partial: 'svg/logo' %></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">

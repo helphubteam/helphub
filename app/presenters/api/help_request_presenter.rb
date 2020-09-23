@@ -2,16 +2,9 @@
 
 module Api
   class HelpRequestPresenter
-    FULL_ATTRIBUTES = %i[
-      id phone state comment number person
-      mediated meds_preciption_required
-      volunteer_id
-    ].freeze
+    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id].freeze
 
-    NON_PERSONAL_ATTRIBUTES = %i[
-      id state comment number mediated
-      meds_preciption_required volunteer_id
-    ].freeze
+    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id].freeze
 
     def initialize(target, current_user)
       @target = target
@@ -27,38 +20,46 @@ module Api
     private
 
     def non_personal_data
-      target
-        .attributes
-        .slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
-        .merge(
-          address: non_personal_address,
-          detailed_address: detailed_non_personal_address,
-          lonlat: JSON.parse(target.lonlat_with_salt_geojson),
-          distance: distance_label(target.try(:distance)),
-          geo_salt: true,
-          custom_fields: custom_fields,
-          created_at: target.created_at.to_i,
-          updated_at: target.updated_at.try(:to_i)
-        )
+      target.attributes.slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
+            .merge(
+              address: non_personal_address,
+              detailed_address: detailed_non_personal_address,
+              lonlat: render_lonlat(target.lonlat_with_salt_geojson),
+              distance: distance_label(target),
+              geo_salt: true,
+              custom_fields: custom_fields,
+              date_begin: timestamp(target.date_begin),
+              date_end: timestamp(target.date_end),
+              created_at: timestamp(target.created_at),
+              updated_at: timestamp(target.updated_at)
+            )
     end
 
     def full_data
-      target
-        .attributes
-        .slice(*FULL_ATTRIBUTES.map(&:to_s))
-        .merge(
-          address: full_address,
-          detailed_address: detailed_full_address,
-          lonlat: JSON.parse(target.lonlat_geojson),
-          distance: distance_label(target.try(:distance)),
-          geo_salt: false,
-          custom_fields: custom_fields,
-          created_at: target.created_at.to_i,
-          updated_at: target.updated_at.try(:to_i)
-        )
+      target.attributes.slice(*FULL_ATTRIBUTES.map(&:to_s))
+            .merge(
+              address: full_address,
+              detailed_address: detailed_full_address,
+              lonlat: render_lonlat(target.lonlat_geojson),
+              distance: distance_label(target),
+              geo_salt: false,
+              custom_fields: custom_fields,
+              date_begin: timestamp(target.date_begin),
+              date_end: timestamp(target.date_end),
+              created_at: target.created_at.to_i,
+              updated_at: target.updated_at.try(:to_i)
+            )
     end
 
     attr_reader :target, :current_user
+
+    def render_lonlat(lonlat)
+      JSON.parse(lonlat)
+    end
+
+    def timestamp(value)
+      value.try(:to_i)
+    end
 
     def full_address
       [target.city, target.district, target.street, target.house, target.apartment].compact.join(' ')
@@ -90,7 +91,8 @@ module Api
       }
     end
 
-    def distance_label(distance)
+    def distance_label(target)
+      distance = target.try(:distance)
       return '' unless distance
 
       if distance > 2000
