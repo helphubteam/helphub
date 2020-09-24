@@ -37,4 +37,8 @@ class User < ApplicationRecord
   def android_device?
     device_platform == 'android'
   end
+
+  def ios_device?
+    device_platform == 'ios'
+  end
 end
