@@ -6,7 +6,7 @@ module Admin
         if help_request.update(permitted_params)
           handle_blocking!
           handle_volunteer_manual_assign!(old_volunteer)
-          invoke_notification! if help_request.volunteer?
+          invoke_notification! if help_request.volunteer
           return true
         end
 
@@ -16,10 +16,12 @@ module Admin
       private
 
       def invoke_notification!
-        Admin::Notifications::PushNotification.new(
+        Notifications::PushNotification.new(
           user: help_request.volunteer,
-          title: notification_title
+          title: notification_title,
+          body: ''
         ).call
+      end
         
       def notification_title
         "Просьба №#{help_request.number} обновлена модератором"
