@@ -1,7 +1,6 @@
 module Notifications
   module Platforms
     class Ios < ::Notifications::Base
-
       APP_ID = 'com.helphub'.freeze
 
       def call

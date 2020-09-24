@@ -22,7 +22,7 @@ module Admin
           body: ''
         ).call
       end
-        
+
       def notification_title
         "Просьба №#{help_request.number} обновлена модератором"
       end

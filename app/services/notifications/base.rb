@@ -1,17 +1,17 @@
-class Notifications::Base
+module Notifications
+  class Base
+    def initialize(title:, body:, user:)
+      @title = title
+      @body = body
+      @user = user
+    end
 
-  def initialize(title:, body:, user:)
-    @title = title
-    @body = body
-    @user = user
+    def call
+      raise NotImplemented
+    end
+
+    protected
+
+    attr_reader :title, :body, :user
   end
-
-  def call
-    raise NotImplemented
-  end
-
-  protected
-
-  attr_reader :title, :body, :user
-
 end
