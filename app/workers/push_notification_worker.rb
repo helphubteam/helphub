@@ -1,7 +1,7 @@
 class PushNotificationWorker
   include Sidekiq::Worker
 
-  # TODO we will use worker for push notifications later on
+  # TODO: We will use worker for push notifications later on
   # as our heroku staging doesn't support this
   def perform(*args)
     user_id, title, body = args
