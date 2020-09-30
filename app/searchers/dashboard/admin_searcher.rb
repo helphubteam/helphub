@@ -45,13 +45,13 @@ module Dashboard
     def help_requests_submission_scope
       HelpRequestLog
         .includes(help_request: :organization)
-        .where.not(organizations: {test: false, archive: false})
+        .where.not(organizations: { test: false, archive: false })
         .where(kind: :submitted)
         .where('help_request_logs.created_at > ?', 1.week.ago)
     end
 
     def non_technical_orgs(scope)
-      scope.includes(:organization).where(organizations: {test: false, archive: false})
+      scope.includes(:organization).where(organizations: { test: false, archive: false })
     end
 
     def week(scope)
