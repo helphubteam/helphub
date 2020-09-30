@@ -18,11 +18,21 @@ class UsersSearcher
   end
 
   def call
-    scope = apply_search(User)
-    scope.page(search_params[:page])
+    {
+      base_scope: base_scope,
+      paged_scope: paged_scope
+    }
   end
 
   private
+
+  def base_scope
+    apply_search(User)
+  end
+
+  def paged_scope
+    base_scope.page(search_params[:page])
+  end
 
   def apply_search(scope)
     str = search_params[:search]

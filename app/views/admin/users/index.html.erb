@@ -2,7 +2,7 @@
             new_admin_user_path,
             class: 'btn btn-sm btn-success float-right my-3')
 %>
-<%= render 'filters' %>
+<%= render 'filters', users_count: @users_count %>
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
   <tr>
