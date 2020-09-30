@@ -37,6 +37,15 @@ export default class CustomFieldsPanel {
       />` || ''}`
     }
 
+    function escapeHtml(unsafe) {
+      return unsafe
+           .replace(/&/g, "&amp;")
+           .replace(/</g, "&lt;")
+           .replace(/>/g, "&gt;")
+           .replace(/"/g, "&quot;")
+           .replace(/'/g, "&#039;");
+    }
+
     function renderText(obj, index) {
       return `<div class="form-group row help_request_custom_values_value">
         <label
@@ -46,7 +55,7 @@ export default class CustomFieldsPanel {
           ${obj.name}
         </label>
         <div class="col-sm-9">
-          <input id="x" type="hidden" value="${obj.value || ''}" name="${fieldName(index, 'value')}">
+          <input id="x" type="hidden" value="${escapeHtml(obj.value) || ''}" name="${fieldName(index, 'value')}">
           <trix-editor input="x"></trix-editor>
         </div>
         ${renderHiddenFields(obj, index)}
