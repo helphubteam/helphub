@@ -1,6 +1,6 @@
 unless User.volunteers.any?
   User.create!(
-    role: :volunteer,
+    roles: { 'volunteer' => true },
     email: 'volunteer@covihelp.ru',
     password: 'covihelp19',
     password_confirmation: 'covihelp19',
