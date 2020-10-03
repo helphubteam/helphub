@@ -3,17 +3,19 @@ require 'active_support/concern'
 module MobileDevices
   extend ActiveSupport::Concern
 
-  DEVICE_PLATFORMS = %w[android ios].freeze
+  ANDROID = 'android'.freeze
+  IOS = 'ios'.freeze
+  DEVICE_PLATFORMS = [ANDROID, IOS].freeze
 
   included do
     validates :device_platform, inclusion: { in: DEVICE_PLATFORMS, allow_blank: true }
 
     def android_device?
-      device_platform == 'android'
+      device_platform == ANDROID
     end
-  
+
     def ios_device?
-      device_platform == 'ios'
+      device_platform == IOS
     end
   end
 end
