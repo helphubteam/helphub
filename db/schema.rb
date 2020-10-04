@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_20_061355) do
+ActiveRecord::Schema.define(version: 2020_09_30_180502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_09_20_061355) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "archive", default: false
+    t.boolean "test", default: false
   end
 
   create_table "reports", force: :cascade do |t|

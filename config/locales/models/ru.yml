@@ -42,6 +42,7 @@ ru:
         country: Страна 
         city: Город 
         site: Сайт
+        test: Тестовый фонд
       help_request_kind:
         name: Название
         default: Применять по умолчанию

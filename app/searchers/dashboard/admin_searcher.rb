@@ -2,8 +2,6 @@
 
 module Dashboard
   class AdminSearcher
-    TECHNICAL_ORGANIZATIONS_IDS = [1].freeze
-
     def initialize(user)
       @user = user
     end
@@ -29,7 +27,7 @@ module Dashboard
     attr_reader :user, :organization
 
     def organizations_scope
-      Organization.where.not(id: TECHNICAL_ORGANIZATIONS_IDS)
+      Organization.active.where(test: false)
     end
 
     def help_requests_scope
@@ -45,17 +43,19 @@ module Dashboard
     end
 
     def help_requests_submission_scope
-      HelpRequestLog.includes(:help_request).where.not(help_requests: {
-                                                         organization_id: TECHNICAL_ORGANIZATIONS_IDS
-                                                       }).where(kind: :submitted).where('help_request_logs.created_at > ?', 1.week.ago)
+      HelpRequestLog
+        .includes(help_request: :organization)
+        .where.not(organizations: { test: false, archive: false })
+        .where(kind: :submitted)
+        .where('help_request_logs.created_at > ?', 1.week.ago)
     end
 
     def non_technical_orgs(scope)
-      scope.where.not(organization_id: TECHNICAL_ORGANIZATIONS_IDS)
+      scope.includes(:organization).where(organizations: { test: false, archive: false })
     end
 
     def week(scope)
-      scope.where('created_at > ?', 1.week.ago)
+      scope.where("#{scope.table_name}.created_at > ?", 1.week.ago)
     end
 
     def count(scope)

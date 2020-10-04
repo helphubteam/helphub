@@ -53,7 +53,7 @@ module Admin
     end
 
     def organization_params
-      params.require(:organization).permit(:title, :country, :city, :site)
+      params.require(:organization).permit(:title, :country, :city, :site, :test)
     end
   end
 end

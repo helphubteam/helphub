@@ -3,7 +3,9 @@ module Admin
     before_action :set_user, only: %i[edit update destroy]
 
     def index
-      @users = policy_scope(UsersSearcher.new(search_params).call)
+      data = UsersSearcher.new(search_params).call
+      @users = policy_scope(data[:paged_scope])
+      @users_count = policy_scope(data[:base_scope]).count
     end
 
     def new
