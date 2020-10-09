@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_213929) do
     t.string "device_token"
     t.string "device_platform"
     t.integer "score", default: 0, null: false
+    t.integer "old_role", default: 0, null: false
     t.hstore "roles"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true

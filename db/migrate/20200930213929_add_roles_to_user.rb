@@ -14,17 +14,11 @@ class AddRolesToUser < ActiveRecord::Migration[6.0]
       user.save
     end
 
-    remove_column :users, :role
+    rename_column :users, :role, :old_role
   end
 
   def down
-    add_column :users, :role, :integer, default: 0, null: false
-
-    TargetModel.all.find_each do |user|
-      user.role = user.roles.find{|k, v| v }[0].to_sym
-      user.save
-    end
-
+    rename_column :users, :old_role, :role
     remove_column :users, :roles
   end
 end
