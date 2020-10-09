@@ -12,15 +12,18 @@ module RolesHelpers
   included do
     ROLES.each do |role|
       define_method("#{role}?") do
-        roles[role].to_s == 'true'
+        self.roles ||= {}
+        self.roles[role].to_s == 'true'
       end
 
       define_method("#{role}=") do |value|
-        roles[role] = value
+        self.roles ||= {}
+        self.roles[role] = value
       end
 
       define_method(role.to_s) do
-        roles[role] == 'true'
+        self.roles ||= {}
+        self.roles[role] == 'true'
       end
 
       scope role.pluralize, -> { by_role(role) }
