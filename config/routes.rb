@@ -23,6 +23,7 @@ Rails.application.routes.draw do
           post :refuse
         end
       end
+      resources :scores, only: :index
     end
   end
 
