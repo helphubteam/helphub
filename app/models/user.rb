@@ -6,16 +6,8 @@ class User < ApplicationRecord
          :invitable # , invite_for: 2.weeks # the period the generated invitation token is valid
   belongs_to :organization, optional: true # TODO: add conditions = true only admin
 
-  enum role: { volunteer: 0, moderator: 1, admin: 2 }
-
-  scope :volunteers, -> { where(role: :volunteer) }
-  scope :moderators, -> { where(role: :moderator) }
-
-  validates :role, presence: true
-
-  DEVICE_PLATFORMS = %w[android ios].freeze
-
-  validates :device_platform, inclusion: { in: DEVICE_PLATFORMS, allow_blank: true }
+  include RolesHelpers
+  include MobileDevices
 
   has_many :activity, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
@@ -32,13 +24,5 @@ class User < ApplicationRecord
   def to_s
     # TODO: add name fields
     [email].join(' ')
-  end
-
-  def android_device?
-    device_platform == 'android'
-  end
-
-  def ios_device?
-    device_platform == 'ios'
   end
 end

@@ -52,7 +52,16 @@ module Admin
 
     def user_params
       defaults = { organization_id: current_organization.id } if current_organization
-      params.require(:user).permit(:name, :surname, :phone, :email, :role, :organization_id, :score)
+      permit_attributes = %i[name surname phone email organization_id score]
+
+      if current_user.moderator? || current_user.admin?
+        permit_attributes << :moderator
+        permit_attributes << :volunteer
+      end
+
+      permit_attributes << :admin if current_user.admin?
+
+      params.require(:user).permit(*permit_attributes)
             .reverse_merge(defaults)
     end
 

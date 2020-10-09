@@ -1,6 +1,6 @@
 unless User.moderators.any?
   User.create!(
-    role: :moderator,
+    roles: { 'moderator' => true },
     name: 'Модератор',
     surname: 'Модераторов',
     phone: '+79999999999',

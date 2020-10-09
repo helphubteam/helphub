@@ -10,13 +10,19 @@
 
   <%= f.input :email, required: true, input_html: { autocomplete: 'email' } %>
 
-  <% 
-    user_roles = User.roles.dup
-    user_roles.delete(:admin) unless current_user.admin?
-    user_roles_list = user_roles.keys.map {|key| [I18n.t(key, scope: [:roles]), key]}
-  %>
+  <% if current_user.admin? %>
+    <%= f.input :admin, as: :boolean do %>
+      <%= f.check_box :admin, {checked: user.admin? }, "true", "false" %>
+    <% end %>
+  <% end %>
 
-  <%= f.input :role, collection: user_roles_list %>
+  <%= f.input :moderator, as: :boolean do %>
+    <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
+  <% end %>
+
+  <%= f.input :volunteer, as: :boolean do %>
+    <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
+  <% end %>
 
   <% if current_user.admin? %>
     <%= f.input :score %>
