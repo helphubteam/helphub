@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class HelpRequestsSearcher < TextSearcher
-  
   DEFAULT_SEARCH_PARAMS = {
     page: 1,
     overdue: false,

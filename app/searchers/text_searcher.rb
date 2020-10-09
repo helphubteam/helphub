@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class TextSearcher
-  
   protected
 
   def search_fields
     raise NotImplementedError
   end
-  
+
   def apply_search(scope)
     str = search_params[:search]
     return scope if str.blank?
