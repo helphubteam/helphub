@@ -54,7 +54,7 @@ module Admin
       defaults = { organization_id: current_organization.id } if current_organization
       permit_attributes = %i[name surname phone email organization_id score]
 
-      if current_user.moderator?
+      if current_user.moderator? || current_user.admin?
         permit_attributes << :moderator
         permit_attributes << :volunteer
       end
