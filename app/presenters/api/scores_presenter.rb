@@ -4,7 +4,7 @@ module Api
   class ScoresPresenter < BasePresenter
     def call
       return [] unless target.organization
-      
+
       users_data.map do |(email, score, name, surname, id)|
         {
           id: id,
