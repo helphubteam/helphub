@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-class HelpRequestsSearcher
-  SEARCH_FIELDS = %i[id comment phone person city street house district apartment score].freeze
-
+class HelpRequestsSearcher < TextSearcher
+  
   DEFAULT_SEARCH_PARAMS = {
     page: 1,
     overdue: false,
@@ -30,6 +29,10 @@ class HelpRequestsSearcher
 
   private
 
+  def search_fields
+    %i[id comment phone person city street house district apartment score]
+  end
+
   def base_scope
     scope = apply_search(HelpRequest)
     scope = apply_states(scope)
@@ -52,22 +55,6 @@ class HelpRequestsSearcher
     scope
       .where(state: %i[active assigned])
       .where('updated_at < ?', overdue_timeout)
-  end
-
-  def apply_search(scope)
-    str = search_params[:search]
-    return scope if str.blank?
-
-    base_scope = scope.dup
-    SEARCH_FIELDS.each_with_index do |field, index|
-      query = "CAST(#{field} AS TEXT) ILIKE concat('%', ?, '%')"
-      scope = if index.zero?
-                scope.where(query, str)
-              else
-                scope.or(base_scope.where(query, str))
-              end
-    end
-    scope
   end
 
   def apply_states(scope)

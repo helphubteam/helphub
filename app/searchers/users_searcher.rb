@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class UsersSearcher
-  SEARCH_FIELDS = %i[surname name phone email].freeze
-
+class UsersSearcher < TextSearcher
   DEFAULT_SEARCH_PARAMS = {
     page: 1,
     overdue: false,
@@ -26,27 +24,15 @@ class UsersSearcher
 
   private
 
+  def search_fields
+    %i[surname name phone email]
+  end
+
   def base_scope
     apply_search(User)
   end
 
   def paged_scope
     base_scope.page(search_params[:page])
-  end
-
-  def apply_search(scope)
-    str = search_params[:search]
-    return scope if str.blank?
-
-    base_scope = scope.dup
-    SEARCH_FIELDS.each_with_index do |field, index|
-      query = "CAST(#{field} AS TEXT) ILIKE concat('%', ?, '%')"
-      scope = if index.zero?
-                scope.where(query, str)
-              else
-                scope.or(base_scope.where(query, str))
-              end
-    end
-    scope
   end
 end
