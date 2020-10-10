@@ -9,9 +9,9 @@ module Api
       TOKEN_LIFETIME = 336.hours.to_i.freeze
 
       def authorize_request
-        @current_api_user = User.find(decoded[:user_id])
+        @current_api_user = User.volunteers.find(decoded[:user_id])
       rescue ActiveRecord::RecordNotFound => e
-        render_error_message(e, :unauthorized)
+        render_error_message(e, :not_found)
       rescue JWT::DecodeError => e
         render_error_message(e, :unauthorized)
       end
@@ -32,10 +32,13 @@ module Api
       end
 
       def render_error_message(error, status)
-        message = if error.message == 'Signature has expired'
+        message = case error.message
+                  when 'Signature has expired'
                     I18n.t('authentication.errors.expired_token')
+                  when 'Nil JSON web token'
+                    I18n.t('authentication.errors.no_jwt_token')
                   else
-                    error.message
+                    I18n.t('authentication.errors.user_not_found')
                   end
         render json: {
           errors: [
