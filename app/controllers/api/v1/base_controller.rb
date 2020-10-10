@@ -32,8 +32,11 @@ module Api
       end
 
       def render_error_message(error, status)
-        message = if error.message == 'Signature has expired'
+        message = case error.message
+                  when 'Signature has expired'
                     I18n.t('authentication.errors.expired_token')
+                  when 'Nil JSON web token'
+                    I18n.t('authentication.errors.no_jwt_token')
                   else
                     I18n.t('authentication.errors.user_not_found')
                   end
