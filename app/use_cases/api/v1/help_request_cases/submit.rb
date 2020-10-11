@@ -7,8 +7,8 @@ module Api
           submitted_already_error
           unassigned_error
           not_own_error
-          increment_volunteer_score
           help_request.submit!
+          increment_volunteer_score
           write_log(:submitted)
         rescue UseCaseError => e
           error_response(e.message)
