@@ -14,10 +14,10 @@ module Admin
       # if @report.save
       #   GenerateReportWorker.perform_async(@report.id)
       #   redirect_to action: :index
-      #   flash[:notice] = 'Генерация отчета началась!'
+      #   flash[:notice] = 'Report generation has begun!'
       # else
       #   render :idnex
-      #   flash[:error] = 'Ошибки при создании отчета'
+      #   flash[:error] = 'Errors!'
       # end
 
       data = ComposeReportData.call(current_organization)
