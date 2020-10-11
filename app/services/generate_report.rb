@@ -2,7 +2,7 @@ class GenerateReport
   def self.call(report)
     report.process!
     begin
-      document = ComposeReportDocument.call(report)
+      document = ComposeReportDocument.call(report.organization)
       report.document = document
       report.save!
     rescue StandardError => e
