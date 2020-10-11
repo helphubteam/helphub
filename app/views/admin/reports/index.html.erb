@@ -1,5 +1,5 @@
 <%= render 'form', report: @report %>
-<table class="table table-bordered table-hover mt-5">
+<table class="table table-bordered table-hover mt-5 d-none">
   <thead class="thead-light">
   <tr>
     <th>Время создания</th>
@@ -8,7 +8,7 @@
     <th>Файл</th>
   </tr>
   </thead>
-  <% @reports.each do |report| %>
+  <% [].each do |report| %>
     <tr>
       <td><%= print_datetime(report.created_at) %></td>
       <td><%= report.name %></td>
@@ -17,4 +17,4 @@
     </tr>
   <% end %>
 </table>
-<%= paginate @reports, theme: 'twitter-bootstrap-4' %>
+<%#= paginate @reports, theme: 'twitter-bootstrap-4' %>
