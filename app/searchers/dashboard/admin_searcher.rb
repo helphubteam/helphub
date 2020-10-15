@@ -45,7 +45,7 @@ module Dashboard
     def help_requests_submission_scope
       HelpRequestLog
         .includes(help_request: :organization)
-        .where.not(organizations: { test: false, archive: false })
+        .where(organizations: { test: false, archive: false })
         .where(kind: :submitted)
         .where('help_request_logs.created_at > ?', 1.week.ago)
     end
