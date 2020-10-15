@@ -1,7 +1,8 @@
-# This will guess the User class
+require 'faker'
+
 FactoryBot.define do
   factory :organization do
-    title { 'HelpHub Testing' }
+    title { Faker::Name.name }
     country { 'Russia' }
   end
 end
