@@ -13,6 +13,31 @@ RSpec.describe 'Api::V1::Login', type: :request do
       end
     end
 
+    context 'when user is not volunteer' do
+      let(:email) { 'email@email.email' }
+      let(:password) { 'testpassword!' }
+      let!(:user) { create :user, :admin, email: email, password: password }
+
+      it 'responds unathorized error' do
+        post api_v1_login_path, params: { email: email, password: password }
+        expect(response).to have_http_status(403)
+        expect(JSON.parse(response.body)).to eq({ 'errors' => [{ 'message' => 'Неверные логин или пароль' }] })
+      end
+    end
+
+    context 'when user from archived organization' do
+      let(:email) { 'email@email.email' }
+      let(:password) { 'testpassword!' }
+      let(:organization) { create :organization, archive: true }
+      let!(:user) { create :user, :volunteer, organization: organization, email: email, password: password }
+
+      it 'responds unathorized error' do
+        post api_v1_login_path, params: { email: email, password: password }
+        expect(response).to have_http_status(403)
+        expect(JSON.parse(response.body)).to eq({ 'errors' => [{ 'message' => 'Неверные логин или пароль' }] })
+      end
+    end
+
     context 'when password is wrong' do
       let(:email) { 'email@email.email' }
       let(:password) { 'testpassword!' }
@@ -32,7 +57,7 @@ RSpec.describe 'Api::V1::Login', type: :request do
       it 'responds unathorized error' do
         post api_v1_refresh_token_path
         expect(response).to have_http_status(401)
-        expect(JSON.parse(response.body)).to eq({ 'errors' => [{ 'message' => 'Nil JSON web token' }] })
+        expect(JSON.parse(response.body)).to eq({ 'errors' => [{ 'message' => 'Ключ не найден, необходима авторизация' }] })
       end
     end
 

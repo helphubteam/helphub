@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_for :users, controllers: { sessions: 'sessions', passwords: 'passwords' }
 
   namespace :api do
     namespace :v1 do
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
           post :refuse
         end
       end
+      resources :scores, only: :index
     end
   end
 

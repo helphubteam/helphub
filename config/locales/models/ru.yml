@@ -11,6 +11,9 @@ ru:
         password: Пароль
         password_confirmation: Пароль
         role: Роль
+        admin: Администратор
+        moderator: Модератор
+        volunteer: Волонтер
         organization_id: Организация
         organization: Организация
       custom_field:
