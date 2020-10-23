@@ -55,7 +55,7 @@ RSpec.describe RecurringHelpRequestsWorker do
         end
 
         it 'updates schedule_set_at' do
-          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(local_date))
+          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(nil))
         end
       end
 
@@ -87,7 +87,7 @@ RSpec.describe RecurringHelpRequestsWorker do
         end
 
         it 'updates schedule_set_at' do
-          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(local_date))
+          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(nil))
         end
       end
 
@@ -103,7 +103,7 @@ RSpec.describe RecurringHelpRequestsWorker do
         end
 
         it 'updates schedule_set_at' do
-          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(local_date))
+          expect { perform }.to(change { repeatable_help_request.reload.schedule_set_at }.from(local_date - 8.days).to(nil))
         end
       end
     end

@@ -7,6 +7,7 @@ module Api
           submitted_already_error
           unassigned_error
           not_own_error
+          setup_recurring
           help_request.submit!
           increment_volunteer_score
           write_log(:submitted)
@@ -14,6 +15,10 @@ module Api
           error_response(e.message)
         else
           success_response
+        end
+
+        def setup_recurring
+          help_request.update(schedule_set_at: Time.zone.now.to_date)
         end
 
         def only_user_organization_error

@@ -27,7 +27,10 @@ class Recurring < ApplicationService
   end
 
   def update_help_request(help_request)
-    help_request.update(params_to_update)
+    help_request.update(
+      state: :active,
+      schedule_set_at: nil # next schedule will happen after submission only
+    )
     help_request.volunteer = nil unless help_request.active?
   end
 
@@ -36,12 +39,5 @@ class Recurring < ApplicationService
       user: help_request.author,
       kind: 'refreshed'
     )
-  end
-
-  def params_to_update
-    {
-      state: :active,
-      schedule_set_at: date_now
-    }
   end
 end

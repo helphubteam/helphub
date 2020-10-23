@@ -62,5 +62,26 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
       expect(help_request.state).to eq('submitted')
       expect(help_request.reload.volunteer.score).to eq(score_result_after_submit)
     end
+
+    context 'when periodic HelpRequest' do
+      let!(:help_request) do 
+        create :help_request,
+          :assigned,
+          period: 1,
+          volunteer: user,
+          organization: organization,
+          schedule_set_at: nil,
+          score: 4
+      end
+
+      let(:current_date) { Time.zone.now.to_date }
+
+      it 'sets recurring date for the record on submission' do
+        post(submit_api_v1_help_request_path(help_request))
+        help_request.reload
+        expect(help_request.state).to eq('submitted')
+        expect(help_request.schedule_set_at).to eq(current_date)
+      end
+    end
   end
 end
