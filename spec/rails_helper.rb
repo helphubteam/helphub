@@ -11,6 +11,9 @@ require 'database_cleaner/active_record'
 Dir[Rails.root.join('spec', 'factories', '**', '*.rb')].sort.each { |f| require f }
 Dir[Rails.root.join('spec', 'helpers', '**', '*.rb')].sort.each { |f| require f }
 
+require 'simplecov'
+SimpleCov.start
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
