@@ -12,9 +12,18 @@ module ApplicationHelper
           when 'submitted'
             'badge-success'
       end
-    content_tag :span, class: "badge #{css}" do
-      I18n.t("help_request.states.#{record.state}")
-    end
+    [
+      (
+        content_tag(:span, class: "badge #{css}") do
+          I18n.t("help_request.states.#{record.state}")
+        end
+      ),
+      (
+        content_tag(:span, class: "badge #{css}") do
+          I18n.t("help_request.recurring_in", count: record.recurring_in)
+        end if record.recurring_in
+      )
+    ].compact.join('&nbsp')
   end
 
   def site_name

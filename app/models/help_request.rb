@@ -63,6 +63,12 @@ class HelpRequest < ApplicationRecord
     logs.where(kind: :created).first.try(:user)
   end
 
+  def recurring_in
+    return nil if blocked? || schedule_set_at.nil? || period.nil?
+
+    period - (Time.zone.now.to_date - schedule_set_at).to_i
+  end
+
   private
 
   def fill_default_number
