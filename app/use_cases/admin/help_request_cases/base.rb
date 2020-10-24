@@ -40,7 +40,7 @@ module Admin
 
       def apply_recurring(result)
         if result[:recurring] != 'true'
-          result[:recurring]  = false
+          result[:recurring] = false
           result[:period] = nil
           result[:schedule_set_at] = nil
         else
