@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 until psql -h postgres -U postgres -c '\l'; do
@@ -7,4 +8,4 @@ done
 echo "Postgres is up - executing command"
 
 bundle install
-bundle exec sidekiq -C config/sidekiq.yml
+bundle exec sidekiq
