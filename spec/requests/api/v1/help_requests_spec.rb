@@ -64,14 +64,14 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
     end
 
     context 'when periodic HelpRequest' do
-      let!(:help_request) do 
+      let!(:help_request) do
         create :help_request,
-          :assigned,
-          period: 1,
-          volunteer: user,
-          organization: organization,
-          schedule_set_at: nil,
-          score: 4
+               :assigned,
+               period: 1,
+               volunteer: user,
+               organization: organization,
+               schedule_set_at: nil,
+               score: 4
       end
 
       let(:current_date) { Time.zone.now.to_date }
