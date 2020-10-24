@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "old_role", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -138,10 +137,12 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
     t.string "name"
     t.string "surname"
     t.string "phone"
-    t.integer "score", default: 0, null: false
     t.string "device_token"
     t.string "device_platform"
+    t.integer "score", default: 0, null: false
+    t.integer "old_role", default: 0, null: false
     t.hstore "roles"
+    t.integer "sex"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
