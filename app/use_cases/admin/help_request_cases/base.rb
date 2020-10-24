@@ -39,10 +39,12 @@ module Admin
       end
 
       def apply_recurring(result)
-        if result[:recurring] == 'true'
-          result[:schedule_set_at] = Time.zone.now.to_date
-        else
+        if result[:recurring] != 'true'
+          result[:recurring] = false
           result[:period] = nil
+          result[:schedule_set_at] = nil
+        else
+          result[:recurring] = true
         end
         result
       end

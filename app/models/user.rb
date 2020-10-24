@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   paginates_per 20
 
+  validates :organization_id, presence: true, if: -> { moderator? || volunteer? }
+
   def active_for_authentication?
     super && account_active?
   end
