@@ -8,7 +8,8 @@ class Recurring < ApplicationService
   end
 
   def call
-    update_recurring_help_requests
+    # We skip recurring until we rework it
+    # update_recurring_help_requests
   end
 
   private
