@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
+    config.hosts << "staging.helphub.ru"
+
     # Initialize configuration defaults for originally generated Rails version.
     config.active_job.queue_adapter = :sidekiq
     config.load_defaults 6.0
