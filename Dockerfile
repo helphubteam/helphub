@@ -8,6 +8,8 @@ COPY ./Gemfile ./Gemfile
 COPY ./Gemfile.lock ./Gemfile.lock
 RUN bundle install
 
+EXPOSE 5000
+
 COPY . .
 
 RUN rm -rf /app/public/reports
