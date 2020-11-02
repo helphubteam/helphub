@@ -22,32 +22,22 @@ module Api
     def non_personal_data
       target.attributes.slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
             .merge(
-              address: non_personal_address,
-              detailed_address: detailed_non_personal_address,
-              lonlat: render_lonlat(target.lonlat_with_salt_geojson),
-              distance: distance_label(target),
-              geo_salt: true,
-              custom_fields: custom_fields,
-              date_begin: timestamp(target.date_begin),
-              date_end: timestamp(target.date_end),
-              created_at: timestamp(target.created_at),
-              updated_at: timestamp(target.updated_at)
+              address: non_personal_address, detailed_address: detailed_non_personal_address,
+              lonlat: render_lonlat(target.lonlat_with_salt_geojson), distance: distance_label(target),
+              geo_salt: true, custom_fields: custom_fields,
+              date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
+              created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at)
             )
     end
 
     def full_data
       target.attributes.slice(*FULL_ATTRIBUTES.map(&:to_s))
             .merge(
-              address: full_address,
-              detailed_address: detailed_full_address,
-              lonlat: render_lonlat(target.lonlat_geojson),
-              distance: distance_label(target),
-              geo_salt: false,
-              custom_fields: custom_fields,
-              date_begin: timestamp(target.date_begin),
-              date_end: timestamp(target.date_end),
-              created_at: target.created_at.to_i,
-              updated_at: target.updated_at.try(:to_i)
+              address: full_address, detailed_address: detailed_full_address,
+              lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label(target),
+              geo_salt: false, custom_fields: custom_fields,
+              date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
+              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
             )
     end
 
@@ -112,10 +102,24 @@ module Api
       custom_fields.map do |custom_field|
         {
           name: custom_field.name,
-          value: custom_values.find { |cv| cv.custom_field == custom_field }.try(:value),
+          value: build_custom_value(custom_field, custom_values),
           type: custom_field.data_type
         }
       end
+    end
+
+    def build_custom_value(custom_field, custom_values)
+      value = custom_values.find { |cv| cv.custom_field == custom_field }.try(:value)
+      case custom_field.data_type
+      when 'checkbox'
+        build_checkbox_value(value)
+      else
+        value
+      end
+    end
+
+    def build_checkbox_value(value)
+      value == '1'
     end
   end
 end
