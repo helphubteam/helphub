@@ -112,10 +112,24 @@ module Api
       custom_fields.map do |custom_field|
         {
           name: custom_field.name,
-          value: custom_values.find { |cv| cv.custom_field == custom_field }.try(:value),
+          value: build_custom_value(custom_field, custom_values),
           type: custom_field.data_type
         }
       end
+    end
+
+    def build_custom_value(custom_field, custom_values)
+      value = custom_values.find { |cv| cv.custom_field == custom_field }.try(:value)
+      case custom_field.data_type
+      when 'checkbox'
+        build_checkbox_value(value)
+      else
+        value
+      end
+    end
+
+    def build_checkbox_value(value)
+      value == '1'
     end
   end
 end
