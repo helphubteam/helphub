@@ -1,7 +1,9 @@
 version: '3.4'
 x-backend:
   &backend
-  build: .
+  build: 
+    dockerfile: _Dockerfile
+    context: .
   env_file: .env
   volumes:
     - ~/.ssh:/root/.ssh
