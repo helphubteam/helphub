@@ -13,8 +13,11 @@ development:
 
 test:
   <<: *default
-  url: <%= ENV.fetch('TEST_DATABASE_URL') %>
+  url: <%= ENV.fetch('TEST_DATABASE_URL', 'app_test') %>
 
 production:
-  <<: *default
+  adapter: postgis
+  encoding: unicode
+  pool: <%= ENV.fetch("DB_POOL") { 5 } %>
+  timeout: 5000
   url: <%= ENV.fetch('DATABASE_URL', 'app_production').sub(/^postgres/, "postgis") %>

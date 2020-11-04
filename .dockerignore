@@ -1,0 +1,15 @@
+.DS_Store
+.bin
+.git
+.gitignore
+.bundleignore
+.bundle
+.byebug_history
+.rspec
+tmp
+log
+test
+config/deploy
+node_modules
+yarn-error.log
+coverage/
