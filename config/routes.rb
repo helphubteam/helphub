@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
 
+    post 'recurring', to: 'manual_pushes#recurring'
+
     resources :help_requests, only: %i[
       index new
       update edit

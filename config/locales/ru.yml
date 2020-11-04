@@ -287,6 +287,11 @@ ru:
       submitted_already: Просьба уже выполнена
       only_user_organization: Нет доступа к просьбам других организаций
   help_request:
+    recurring_in:
+      one: 'Просьба перезапустится через %{count} день'
+      few: 'Просьба перезапустится через %{count} дня'
+      many: 'Просьба перезапустится через %{count} дней'
+      other: 'Просьба перезапустится через %{count} дней'
     states:
       active: Новая
       assigned: В работе

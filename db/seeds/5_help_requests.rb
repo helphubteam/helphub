@@ -6,7 +6,7 @@ unless HelpRequest.any?
   ]
 
   points.each_with_index do |coordinates, index|
-    HelpRequest.create!(
+    help_request = HelpRequest.create!(
       lonlat_geojson: { type: 'Point', coordinates: coordinates }.to_json,
       city: 'Moscow',
       district: 'Center',
@@ -18,6 +18,12 @@ unless HelpRequest.any?
       phone: '+79221111111',
       organization: Organization.first,
       comment: 'comment comment comment'
+    )
+
+    HelpRequestLog.create!(
+      help_request: help_request,
+      kind: 'created',
+      user: Organization.first.users.first
     )
   end
 end

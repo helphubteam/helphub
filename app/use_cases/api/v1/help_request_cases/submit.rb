@@ -7,13 +7,19 @@ module Api
           submitted_already_error
           unassigned_error
           not_own_error
+          setup_recurring
           help_request.submit!
           increment_volunteer_score
           write_log(:submitted)
+          nulify_volunteer
         rescue UseCaseError => e
           error_response(e.message)
         else
           success_response
+        end
+
+        def setup_recurring
+          help_request.update(schedule_set_at: Time.zone.now.to_date)
         end
 
         def only_user_organization_error
@@ -35,6 +41,10 @@ module Api
         def increment_volunteer_score
           volunteer.score += help_request.score
           volunteer.save
+        end
+
+        def nulify_volunteer
+          help_request.update(volunteer_id: nil)
         end
       end
     end

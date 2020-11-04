@@ -16,6 +16,7 @@ ru:
         volunteer: Волонтер
         organization_id: Организация
         organization: Организация
+        score: Баллы за выполненные просьбы
       custom_field:
         name: Название
       help_request:

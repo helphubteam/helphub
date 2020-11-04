@@ -34,15 +34,18 @@ module Admin
           write_moderator_log(:activated)
         elsif params[:block] && !help_request.blocked?
           help_request.block!
+          nulify_volunteer!
           write_moderator_log(:blocked)
         end
       end
 
       def apply_recurring(result)
-        if result[:recurring] == 'true'
-          result[:schedule_set_at] = Time.zone.now.to_date
-        else
+        if result[:recurring] != 'true'
+          result[:recurring] = false
           result[:period] = nil
+          result[:schedule_set_at] = nil
+        else
+          result[:recurring] = true
         end
         result
       end
@@ -56,6 +59,10 @@ module Admin
           custom_values_attributes: %i[value custom_field_id id]
         )
         apply_recurring(result)
+      end
+
+      def nulify_volunteer!
+        @help_request.update(volunteer_id: nil)
       end
 
       def write_moderator_log(kind, comment = nil)

@@ -2,18 +2,35 @@
 
 module ApplicationHelper
   def help_request_state_label(record)
-    css = case record.state
-          when 'active'
-            'badge-primary'
-          when 'blocked'
-            'badge-danger'
-          when 'assigned'
-            'badge-warning'
-          when 'submitted'
-            'badge-success'
-      end
-    content_tag :span, class: "badge #{css}" do
+    [
+      state_badge(record), recurring_bage(record)
+    ].compact.join('&nbsp')
+  end
+
+  def state_badge(record)
+    content_tag(:span, class: "badge #{state_css(record.state)}") do
       I18n.t("help_request.states.#{record.state}")
+    end
+  end
+
+  def state_css(state)
+    case state
+    when 'active'
+      'badge-primary'
+    when 'blocked'
+      'badge-danger'
+    when 'assigned'
+      'badge-warning'
+    when 'submitted'
+      'badge-success'
+    end
+  end
+
+  def recurring_bage(record)
+    return unless record.recurring_in
+
+    content_tag(:span, class: "badge #{state_css(record.state)}") do
+      I18n.t('help_request.recurring_in', count: record.recurring_in)
     end
   end
 

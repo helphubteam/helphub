@@ -1,5 +1,6 @@
 <% if current_user.admin? %>
   <%= render 'admin', data: @data %>
-<% else %>
-  <%= render 'moderator', data: @data %>
+  <%= form_tag 'recurring' do %>
+    <%= button_tag 'Запуск периодических задач', class: 'btn btn-success'%>
+  <% end %>
 <% end %>
