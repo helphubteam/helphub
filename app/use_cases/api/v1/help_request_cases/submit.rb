@@ -11,6 +11,7 @@ module Api
           help_request.submit!
           increment_volunteer_score
           write_log(:submitted)
+          nulify_volunteer
         rescue UseCaseError => e
           error_response(e.message)
         else
@@ -40,6 +41,10 @@ module Api
         def increment_volunteer_score
           volunteer.score += help_request.score
           volunteer.save
+        end
+
+        def nulify_volunteer
+          help_request.update(volunteer_id: nil)
         end
       end
     end

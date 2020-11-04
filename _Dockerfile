@@ -16,5 +16,3 @@ COPY . .
 
 RUN rm -rf /app/public/reports
 RUN ln -s /reports /app/public/reports
-
-ENTRYPOINT ["./start.sh"]

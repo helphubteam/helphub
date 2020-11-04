@@ -55,12 +55,14 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
     let(:score_result_after_submit) { user.score + help_request.score }
 
     it 'submits HelpRequest record' do
+      volunteer = help_request.volunteer
+      expecting_score = score_result_after_submit
       expect(help_request.volunteer).to eq(user)
       expect(help_request.state).to eq('assigned')
       post(submit_api_v1_help_request_path(help_request))
-      expect(help_request.reload.volunteer).to eq(user)
+      expect(help_request.reload.volunteer).to be_nil
       expect(help_request.state).to eq('submitted')
-      expect(help_request.reload.volunteer.score).to eq(score_result_after_submit)
+      expect(volunteer.reload.score).to eq(expecting_score)
     end
 
     context 'when periodic HelpRequest' do
