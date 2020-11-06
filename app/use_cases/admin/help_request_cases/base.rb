@@ -23,7 +23,7 @@ module Admin
         notify_on_unassign!(help_request, old_volunteer) if old_volunteer
 
         if help_request.volunteer
-          assign_help_request(help_request)
+          assign_help_request!(help_request)
         else
           refuse_help_request!(help_request, old_volunteer)
         end
