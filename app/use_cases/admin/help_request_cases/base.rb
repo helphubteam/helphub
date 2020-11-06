@@ -49,7 +49,7 @@ module Admin
           nulify_volunteer!
           write_moderator_log(:blocked)
         end
-        nulify_volunteer! if help_request.blocked? || help_request.submitted? 
+        nulify_volunteer! if help_request.blocked? || help_request.submitted?
       end
 
       def apply_recurring(result)
