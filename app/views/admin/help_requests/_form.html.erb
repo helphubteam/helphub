@@ -42,7 +42,10 @@
   <%= render 'repeat_menu', f: f %>
   <p>
     <h4>Назначить волонтера</h4>
-    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]} %>
+    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>
+    <% unless help_request.active?%>
+      <p class='text-warning'>На этом этапе волонтера у просьбы нельзя сменить</p>
+    <% end %>
   </p>
 
   <p>
