@@ -34,7 +34,7 @@ module Admin
       end
 
       def notification_title_on_unassign(help_request)
-        message = "Координатор снял Вас с просьбы №#{help_request.number}"
+        message = "Координатор снял вас с просьбы №#{help_request.number}"
         message += " (#{help_request.title})" if help_request.title.present?
         message
       end
