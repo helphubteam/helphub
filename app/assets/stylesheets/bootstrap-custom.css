@@ -1,0 +1,8 @@
+.form-control.is-valid, .was-validated .form-control:valid {
+  background-image: none;
+}
+
+
+abbr[data-original-title], abbr[title] {
+  text-decoration: none;
+}
