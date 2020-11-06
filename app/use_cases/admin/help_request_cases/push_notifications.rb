@@ -22,13 +22,13 @@ module Admin
       end
 
       def notification_title_on_update(help_request)
-        title = "№#{help_request.number}"
+        title = "Координатор внес изменения в просьбу №#{help_request.number}"
         title += " (#{help_request.title})" if help_request.title.present?
-        "Просьба #{title} обновлена модератором"
+        title
       end
 
       def notification_title_on_assign(help_request)
-        message = "Координатор закрепил за Вами просьбу №#{help_request.number}"
+        message = "Координатор закрепил за вами просьбу №#{help_request.number}"
         message += " (#{help_request.title})" if help_request.title.present?
         message
       end
