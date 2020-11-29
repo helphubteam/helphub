@@ -20,7 +20,7 @@ module Admin
       def handle_volunteer_assignments!(old_volunteer)
         return if help_request.volunteer == old_volunteer
 
-        notify_on_unassign!(help_request, old_volunteer) if old_volunteer
+        notify_on_unassign!(help_request, old_volunteer, current_user) if old_volunteer
 
         if help_request.volunteer
           assign_help_request!(help_request)
@@ -32,7 +32,7 @@ module Admin
       def assign_help_request!(help_request)
         help_request.assign! if help_request.active?
         write_moderator_log(:manual_assign, 'Волонтер ' + help_request.volunteer.to_s)
-        notify_on_assign!(help_request, help_request.volunteer)
+        notify_on_assign!(help_request, help_request.volunteer, current_user)
       end
 
       def refuse_help_request!(help_request, old_volunteer)
