@@ -85,6 +85,6 @@ class HelpRequest < ApplicationRecord
   end
 
   def fill_activated_at
-    self.activated_at = Date.today if state == 'active'
+    self.activated_at = Date.today if active?
   end
 end
