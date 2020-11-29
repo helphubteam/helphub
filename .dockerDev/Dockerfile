@@ -6,10 +6,6 @@ ARG PG_MAJOR
 ARG NODE_MAJOR
 ARG BUNDLER_VERSION
 ARG YARN_VERSION
-ARG NODE_ENV
-ENV NODE_ENV="$NODE_ENV"
-ARG RAILS_ENV
-ENV RAILS_ENV="$RAILS_ENV"
 
 RUN apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
@@ -47,22 +43,13 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrad
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Configure bundler and PATH
 ENV LANG=C.UTF-8 \
     BUNDLE_JOBS=4 \
     BUNDLE_RETRY=3
 
-# Upgrade RubyGems and install required Bundler version
 RUN gem update --system && \
     gem install bundler:$BUNDLER_VERSION
 
+RUN mkdir -p /app
+
 WORKDIR /app
-
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle config set without 'development test' && bundle install
-COPY . .
-
-RUN yarn --check-files
-RUN bundle exec rails assets:precompile
-RUN bundle exec rails webpacker:compile

@@ -2,7 +2,7 @@ version: '3.4'
 x-backend:
   &backend
   build:
-    dockerfile: ./.docker/Dockerfile
+    dockerfile: ./.dockerDev/Dockerfile
     context: .
     args:
       RUBY_VERSION: '2.7.0'
@@ -10,13 +10,12 @@ x-backend:
       BUNDLER_VERSION: '2.1.4'
       NODE_MAJOR: '14'
       YARN_VERSION: '1.22.5'
-      NODE_ENV: production
-      RAILS_ENV: production
   env_file: .env
   volumes:
-    - ~/.ssh:/root/.ssh
-    - .:/app
-    - "${REPORTS_PATH}:/reports"
+    # - ~/.ssh:/root/.ssh
+    - .:/app:cached
+    - helphub-cache:/app/tmp/cache
+    - helphub-bundle:/usr/local/bundle
 services:
   app:
     <<: *backend
@@ -52,13 +51,8 @@ services:
       timeout: 3s
       retries: 30
 
-networks:
-  default:
-    ipam:
-      driver: default
-      config:
-      - subnet: 10.10.0.0/16
-
 volumes:
   postgres:
   redis:
+  helphub-cache:
+  helphub-bundle:

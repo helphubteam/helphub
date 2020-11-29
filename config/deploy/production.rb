@@ -1,8 +1,8 @@
-server '188.120.228.227', roles: %i[web app db], primary: true
+server '18.198.123.166', roles: %i[web app db], primary: true
 set :user, 'helphub'
 set :deploy_to, "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
-set :repo_url, 'git@github.com-memumen:helphubteam/helphub.git'
-set :rails_env, 'production'
+set :repo_url, 'git@github.com:helphubteam/helphub.git'
+set :rails_env, 'docker-for-production'
 set :branch, 'master'
 
 set :ssh_options, forward_agent: true, user: fetch(:user)
@@ -35,20 +35,20 @@ namespace :deploy do
     end
   end
 
-  after :started, :docker_down do
-    on roles(:app) do
-      within current_path do
-        execute :sudo, 'docker-compose', 'down'
-        execute :sudo, 'docker', 'network', 'prune', '-f'
-      end
-    end
-  end
+  # after :started, :docker_down do
+  #   on roles(:app) do
+  #     within current_path do
+  #       execute :sudo, 'docker-compose', 'down'
+  #       execute :sudo, 'docker', 'network', 'prune', '-f'
+  #     end
+  #   end
+  # end
 
   after :finished, :docker_up do
     on roles(:app) do
       within current_path do
-        execute :sudo, 'rm', '-f', 'node_modules'
-        execute :sudo, 'rm', '-f', 'yarn.lock'
+        # execute :sudo, 'rm', '-f', 'node_modules'
+        # execute :sudo, 'rm', '-f', 'yarn.lock'
         execute :sudo, 'docker-compose', 'up', '-d', '--force-recreate', '--build'
       end
     end
