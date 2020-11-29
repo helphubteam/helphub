@@ -17,11 +17,9 @@ class SettingPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope
-      else
-        []
-      end
+      return [] unless user.admin?
+
+      scope
     end
   end
 end
