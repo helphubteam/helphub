@@ -1,7 +1,7 @@
 server '188.120.228.227', roles: %i[web app db], primary: true
 set :user, 'helphub'
 set :deploy_to, "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
-
+set :repo_url, 'git@github.com-memumen:helphubteam/helphub.git'
 set :rails_env, 'production'
 set :branch, 'master'
 

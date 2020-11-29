@@ -1,22 +1,29 @@
 version: '3.4'
 x-backend:
   &backend
-  build: 
-    dockerfile: _Dockerfile
+  build:
+    dockerfile: ./.docker/Dockerfile
     context: .
+    args:
+      RUBY_VERSION: '2.7.0'
+      PG_MAJOR: '10'
+      BUNDLER_VERSION: '2.1.4'
+      NODE_MAJOR: '14'
+      YARN_VERSION: '1.22.5'
+      NODE_ENV: production
+      RAILS_ENV: production
   env_file: .env
   volumes:
     - ~/.ssh:/root/.ssh
     - .:/app
     - "${REPORTS_PATH}:/reports"
-    - bundle_path:/bundle
 services:
   app:
     <<: *backend
     container_name: app_helphub
     ports:
       - "${DOCKER_PORT}:3000"
-    command: ./start.sh 
+    command: ./start.sh
     depends_on:
       - postgres
       - redis
@@ -55,4 +62,3 @@ networks:
 volumes:
   postgres:
   redis:
-  bundle_path:
