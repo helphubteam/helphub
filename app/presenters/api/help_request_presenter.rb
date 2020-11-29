@@ -18,6 +18,7 @@ module Api
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     def non_personal_data
       target.attributes.slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
             .merge(
@@ -35,12 +36,12 @@ module Api
             .merge(
               address: full_address, detailed_address: detailed_full_address,
               lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label,
-              geo_salt: false, custom_fields: custom_fields,
+              geo_salt: false, custom_fields: custom_fields, activated_days_ago: activated_days_ago(target.activated_at),
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i),
-              activated_days_ago: activated_days_ago(target.activated_at)
+              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
             )
     end
+    # rubocop:enable Metrics/AbcSize
 
     attr_reader :target, :current_user
 
@@ -58,8 +59,7 @@ module Api
 
     def detailed_full_address
       {
-        city: target.city, district: target.district,
-        street: target.street, house: target.house, apartment: target.apartment
+        city: target.city, district: target.district, street: target.street, house: target.house, apartment: target.apartment
       }
     end
 
@@ -74,12 +74,7 @@ module Api
       masked_phone = phone.gsub(/\d/, '*')
       return masked_phone if phone.size < 5
 
-      left, right = if phone.size > 7
-                      [2, 2]
-                    else
-                      [1, 1]
-                    end
-
+      left, right = phone.size > 7 ? [2, 2] : [1, 1]
       "#{phone[0..left]}#{masked_phone[(left + 1)..(-right - 1)]}#{phone[-right..-1]}"
     end
 
@@ -125,9 +120,7 @@ module Api
     end
 
     def activated_days_ago(value)
-      return 0 if value.nil?
-
-      (Date.today - value).try(:to_i)
+      value.nil? ? 0 : (Date.today - value).try(:to_i)
     end
   end
 end
