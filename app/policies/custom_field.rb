@@ -1,6 +1,6 @@
 class CustomFieldPolicy < ApplicationPolicy
   def index?
-    false if user.admin?
+    user.moderator?
   end
 
   def create?
@@ -17,11 +17,9 @@ class CustomFieldPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin?
-        []
-      else
-        scope.includes(:help_request_kind).where(help_request_kinds: { organization: current_organization })
-      end
+      return [] unless user.moderator?
+
+      return scope.includes(:help_request_kind).where(help_request_kinds: { organization: current_organization })
     end
   end
 
