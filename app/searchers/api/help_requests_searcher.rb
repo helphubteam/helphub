@@ -55,9 +55,10 @@ module Api
     end
 
     def submitted_scope(scope)
+      submitted_help_request_ids = current_api_user.activity.where(kind: :submitted).pluck(:help_request_id)
       scope
         .submitted
-        .where(volunteer: current_api_user)
+        .where(id: submitted_help_request_ids)
         .yield_self(&method(:apply_sort))
         .yield_self(&method(:apply_limit))
         .yield_self(&method(:apply_offset))
