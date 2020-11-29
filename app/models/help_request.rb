@@ -79,7 +79,8 @@ class HelpRequest < ApplicationRecord
   end
 
   def update_activated_at
-    return self.activated_at = nil if !state_changed? || state_change[1] != 'active'
+    return unless state_changed?
+    return self.activated_at = nil if state_change[1] != 'active'
 
     self.activated_at = Date.today
   end
