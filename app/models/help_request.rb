@@ -24,6 +24,9 @@ class HelpRequest < ApplicationRecord
 
   before_validation :fill_default_number
 
+  before_create :fill_activated_at
+  before_update :update_activated_at
+
   enum state: { active: 0, assigned: 1, submitted: 2, blocked: 3 } do
     event :assign do
       transition active: :assigned
@@ -73,5 +76,15 @@ class HelpRequest < ApplicationRecord
 
   def fill_default_number
     self.number ||= (organization.help_requests.count + 1).to_s if organization
+  end
+
+  def update_activated_at
+    return self.activated_at = nil if !state_changed? || state_change[1] != 'active'
+
+    self.activated_at = Date.today
+  end
+
+  def fill_activated_at
+    self.activated_at = Date.today if state == 'active'
   end
 end

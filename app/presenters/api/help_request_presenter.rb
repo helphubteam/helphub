@@ -25,7 +25,8 @@ module Api
               lonlat: render_lonlat(target.lonlat_with_salt_geojson), distance: distance_label,
               geo_salt: true, custom_fields: custom_fields, phone: non_personal_phone,
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at)
+              created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at),
+              activated_days_ago: activated_days_ago(target.activated_at)
             )
     end
 
@@ -36,7 +37,8 @@ module Api
               lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label,
               geo_salt: false, custom_fields: custom_fields,
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
+              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i),
+              activated_days_ago: activated_days_ago(target.activated_at)
             )
     end
 
@@ -120,6 +122,12 @@ module Api
 
     def build_checkbox_value(value)
       value == '1'
+    end
+
+    def activated_days_ago(value)
+      return 0 if value.nil?
+
+      (Date.today - value).try(:to_i)
     end
   end
 end
