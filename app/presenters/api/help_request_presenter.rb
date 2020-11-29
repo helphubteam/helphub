@@ -2,9 +2,8 @@
 
 module Api
   class HelpRequestPresenter
-    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id].freeze
-
-    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id].freeze
+    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id period recurring].freeze
+    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id period recurring].freeze
 
     def initialize(target, current_user)
       @target = target
@@ -19,14 +18,16 @@ module Api
 
     private
 
+    # rubocop:disable Metrics/AbcSize
     def non_personal_data
       target.attributes.slice(*NON_PERSONAL_ATTRIBUTES.map(&:to_s))
             .merge(
               address: non_personal_address, detailed_address: detailed_non_personal_address,
-              lonlat: render_lonlat(target.lonlat_with_salt_geojson), distance: distance_label(target),
-              geo_salt: true, custom_fields: custom_fields,
+              lonlat: render_lonlat(target.lonlat_with_salt_geojson), distance: distance_label,
+              geo_salt: true, custom_fields: custom_fields, phone: non_personal_phone,
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at)
+              created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at),
+              activated_days_ago: activated_days_ago(target.activated_at)
             )
     end
 
@@ -34,12 +35,13 @@ module Api
       target.attributes.slice(*FULL_ATTRIBUTES.map(&:to_s))
             .merge(
               address: full_address, detailed_address: detailed_full_address,
-              lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label(target),
-              geo_salt: false, custom_fields: custom_fields,
+              lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label,
+              geo_salt: false, custom_fields: custom_fields, activated_days_ago: activated_days_ago(target.activated_at),
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
               created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
             )
     end
+    # rubocop:enable Metrics/AbcSize
 
     attr_reader :target, :current_user
 
@@ -57,11 +59,7 @@ module Api
 
     def detailed_full_address
       {
-        city: target.city,
-        district: target.district,
-        street: target.street,
-        house: target.house,
-        apartment: target.apartment
+        city: target.city, district: target.district, street: target.street, house: target.house, apartment: target.apartment
       }
     end
 
@@ -71,17 +69,20 @@ module Api
       non_personal_address.compact.join(' ')
     end
 
-    def detailed_non_personal_address
-      {
-        city: target.city,
-        district: target.district,
-        street: target.street,
-        house: target.apartment.blank? && target.house || nil,
-        apartment: nil
-      }
+    def non_personal_phone
+      phone = target.phone
+      masked_phone = phone.gsub(/\d/, '*')
+      return masked_phone if phone.size < 5
+
+      left, right = phone.size > 7 ? [2, 2] : [1, 1]
+      "#{phone[0..left]}#{masked_phone[(left + 1)..(-right - 1)]}#{phone[-right..-1]}"
     end
 
-    def distance_label(target)
+    def detailed_non_personal_address
+      { city: target.city, district: target.district, street: target.street, house: target.apartment.blank? && target.house || nil, apartment: nil }
+    end
+
+    def distance_label
       distance = target.try(:distance)
       return '' unless distance
 
@@ -100,11 +101,7 @@ module Api
       custom_values = target.custom_values
       custom_fields = target.custom_fields
       custom_fields.map do |custom_field|
-        {
-          name: custom_field.name,
-          value: build_custom_value(custom_field, custom_values),
-          type: custom_field.data_type
-        }
+        { name: custom_field.name, value: build_custom_value(custom_field, custom_values), type: custom_field.data_type }
       end
     end
 
@@ -120,6 +117,10 @@ module Api
 
     def build_checkbox_value(value)
       value == '1'
+    end
+
+    def activated_days_ago(value)
+      value.nil? ? 0 : (Date.today - value).try(:to_i)
     end
   end
 end

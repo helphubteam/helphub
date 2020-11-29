@@ -4,8 +4,8 @@ module Admin
       def call
         if help_request.update(permitted_params)
           write_moderator_log(:created)
-          handle_volunteer_manual_assign!(nil)
           handle_blocking!
+          handle_volunteer_assignments!(nil)
           return true
         end
 

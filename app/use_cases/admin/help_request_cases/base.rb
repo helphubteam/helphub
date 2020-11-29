@@ -1,6 +1,8 @@
 module Admin
   module HelpRequestCases
     class Base
+      include PushNotifications
+
       def initialize(help_request, params, current_user)
         @help_request = help_request
         @params = params
@@ -15,28 +17,39 @@ module Admin
 
       attr_reader :help_request, :params, :current_user
 
-      def handle_volunteer_manual_assign!(old_volunteer)
+      def handle_volunteer_assignments!(old_volunteer)
         return if help_request.volunteer == old_volunteer
 
+        notify_on_unassign!(help_request, old_volunteer, current_user) if old_volunteer
+
         if help_request.volunteer
-          help_request.assign! if help_request.active?
-          write_moderator_log(:manual_assign, 'Волонтер ' + help_request.volunteer.to_s)
+          assign_help_request!(help_request)
         else
-          help_request.refuse! if help_request.assigned?
-          write_moderator_log(:manual_unassign, 'Волонтер ' + old_volunteer.to_s)
+          refuse_help_request!(help_request, old_volunteer)
         end
+      end
+
+      def assign_help_request!(help_request)
+        help_request.assign! if help_request.active?
+        write_moderator_log(:manual_assign, 'Волонтер ' + help_request.volunteer.to_s)
+        notify_on_assign!(help_request, help_request.volunteer, current_user)
+      end
+
+      def refuse_help_request!(help_request, old_volunteer)
+        help_request.refuse! if help_request.assigned?
+        write_moderator_log(:manual_unassign, 'Волонтер ' + old_volunteer.to_s)
       end
 
       def handle_blocking!
         if params[:activate] && help_request.blocked?
           help_request.activate!
-          help_request.assign! if help_request.volunteer
           write_moderator_log(:activated)
         elsif params[:block] && !help_request.blocked?
           help_request.block!
           nulify_volunteer!
           write_moderator_log(:blocked)
         end
+        nulify_volunteer! if help_request.blocked? || help_request.submitted?
       end
 
       def apply_recurring(result)

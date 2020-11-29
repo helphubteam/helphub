@@ -1,6 +1,6 @@
 class ReportPolicy < ApplicationPolicy
   def index?
-    !user.admin?
+    user.moderator?
   end
 
   def create?
@@ -18,11 +18,9 @@ class ReportPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.admin?
-        []
-      else
-        scope.where(organization: current_organization)
-      end
+      return [] unless user.moderator?
+
+      scope.where(organization: current_organization)
     end
   end
 

@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'map' %>
 <%= javascript_pack_tag 'custom_fields' %>
-<% title = help_request.new_record? ? "Новая просьба" : "Просьба № #{help_request.id}" %>
+<% title = help_request.new_record? ? "Новая просьба" : "Просьба № #{help_request.number}" %>
 <h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
@@ -42,7 +42,10 @@
   <%= render 'repeat_menu', f: f %>
   <p>
     <h4>Назначить волонтера</h4>
-    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]} %>
+    <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>
+    <% unless help_request.active?%>
+      <p class='text-warning'>На этом этапе волонтера у просьбы нельзя сменить</p>
+    <% end %>
   </p>
 
   <p>

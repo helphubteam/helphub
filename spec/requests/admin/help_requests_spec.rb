@@ -33,6 +33,20 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
       expect { post(admin_help_requests_path, params: valid_create_params) }.to change { HelpRequest.count }.by(1)
       expect(response).to redirect_to(admin_help_requests_path)
     end
+
+    let!(:help_request) { HelpRequest.new(FactoryBot.attributes_for(:help_request)) }
+
+    it 'added activated_at field' do
+      help_request.run_callbacks(:create)
+      expect(help_request.state).to eq('active')
+      expect(help_request.activated_at).to_not eq(nil)
+      help_request.state = :blocked
+      help_request.run_callbacks(:update)
+      expect(help_request.activated_at).to eq(nil)
+      help_request.state = :active
+      help_request.run_callbacks(:create)
+      expect(help_request.activated_at).to_not eq(nil)
+    end
   end
 
   describe 'PUT /admin/help_requests/:id' do

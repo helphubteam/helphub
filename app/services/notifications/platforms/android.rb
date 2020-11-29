@@ -9,7 +9,8 @@ module Notifications
         options = {
           notification: {
             title: title,
-            body: body
+            body: body,
+            sound: 'default'
           }
         }
         fcm.send(registration_ids, options)
