@@ -2,8 +2,8 @@
 
 module Api
   class HelpRequestPresenter
-    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id].freeze
-    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id].freeze
+    FULL_ATTRIBUTES = %i[id title phone state comment number person mediated meds_preciption_required volunteer_id period recurring].freeze
+    NON_PERSONAL_ATTRIBUTES = %i[id title state comment number mediated meds_preciption_required volunteer_id period recurring].freeze
 
     def initialize(target, current_user)
       @target = target
