@@ -69,7 +69,7 @@ module Api
 
     def non_personal_phone
       phone = target.phone
-      masked_phone = phone.gsub(/\d/, '-')
+      masked_phone = phone.gsub(/\d/, '*')
       return masked_phone if phone.size < 5
 
       left, right = if phone.size > 7
