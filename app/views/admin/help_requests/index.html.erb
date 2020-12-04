@@ -3,7 +3,7 @@
   class: 'btn btn-sm btn-success float-right mt-4')
 %>
 <%= render 'filters' %>
-<table class="table table-bordered table-hover table">
+<table class="table table-bordered table-hover">
   <thead class="thead-light">
     <tr>
     <th scope="col" style="width: 15%"><%= sort_link 'state', 'Статус' %></th>
@@ -22,9 +22,9 @@
   <% @help_requests.each do |record| %>
     <% help_request = HelpRequestPresenter.new(record) %>
     <tr>
-      <td style="width: 23%">
+      <td style="width: 15%">
         <%= help_request_state_label(help_request).html_safe %>
-        <div >Просьба №<%= help_request.number %></div>
+        <div>Просьба №<%= help_request.number %></div>
       </td>
       <td><%= print_datetime(help_request.created_at) %></td>
       <td><%= help_request.address %></td>
