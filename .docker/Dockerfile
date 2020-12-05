@@ -10,6 +10,8 @@ ARG NODE_ENV
 ENV NODE_ENV="$NODE_ENV"
 ARG RAILS_ENV
 ENV RAILS_ENV="$RAILS_ENV"
+ARG SECRET_KEY_BASE
+ENV SECRET_KEY_BASE="$SECRET_KEY_BASE"
 
 RUN apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \

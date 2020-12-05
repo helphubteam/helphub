@@ -17,7 +17,7 @@ x-backend:
     - postgres
     - redis
   volumes:
-    # - ~/.ssh:/root/.ssh
+    - ~/.ssh:/root/.ssh
     - .:/app:cached
     - helphub-packs:/app/public/packs
     - helphub-cache:/app/tmp/cache
