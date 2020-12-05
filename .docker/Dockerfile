@@ -66,4 +66,4 @@ RUN bundle config set without 'development test' && bundle install
 COPY . .
 
 RUN yarn --check-files
-RUN bundle exec rails assets:precompile
+# RUN bundle exec rails assets:precompile
