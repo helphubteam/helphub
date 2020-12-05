@@ -49,7 +49,7 @@ namespace :deploy do
       within current_path do
         # execute :sudo, 'rm', '-f', 'node_modules'
         # execute :sudo, 'rm', '-f', 'yarn.lock'
-        execute 'docker-compose', '-f', 'docker-compose.prod.yml', 'up', '-d', '--force-recreate', '--build'
+        execute 'docker-compose', '-f', 'docker-compose.prod.yml', '--env-file', './.env', 'up', '-d', '--force-recreate', '--build'
       end
     end
   end
