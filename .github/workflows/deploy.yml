@@ -1,0 +1,34 @@
+name: Deploy Stage
+
+on:
+  push:
+    branches:
+      - docker-for-production
+
+jobs:
+  push:
+    if: github.event_name == 'push'
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start deploying to the staging server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 18.198.123.166
+          username: helphub
+          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            if [ ! -d staging ]; then
+              mkdir staging
+            fi
+            cd staging
+            ls -la
+            if [ ! -d helphub ]; then
+              git clone git@github.com:helphubteam/helphub.git
+            fi
+            cd helphub
+            git checkout docker-for-production && git pull
+            cp ~/.env ~/staging/helphub/.env
+            docker-compose up -d --build
