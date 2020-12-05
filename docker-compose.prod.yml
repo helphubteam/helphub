@@ -16,10 +16,14 @@ x-backend:
 services:
   app:
     <<: *backend
+    stdin_open: true
+    tty: true
     container_name: app_helphub
     ports:
       - "${DOCKER_PORT}:3000"
     command: ./start.sh
+    volumes:
+      - ./public:/app/public
     depends_on:
       - postgres
       - redis
