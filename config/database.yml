@@ -20,4 +20,4 @@ production:
   encoding: unicode
   pool: <%= ENV.fetch("DB_POOL") { 5 } %>
   timeout: 5000
-  url: app_production
+  url: <%= ENV.fetch('DATABASE_URL', 'app_production').sub(/^postgres/, "postgis") %>
