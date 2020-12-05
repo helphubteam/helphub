@@ -13,7 +13,8 @@ rm -f tmp/pids/server.pid
 
 if [ "$RAILS_ENV" = 'production' ]
 then
-  bundle exec rails db:create db:migrate assets:precompile
+  bundle exec rails db:create db:migrate
+  # assets:precompile
 else
   # bundle exec rails db:create db:migrate db:seed
 fi
