@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 x-backend:
   &backend
   build:
@@ -13,8 +13,6 @@ x-backend:
       NODE_ENV: production
       RAILS_ENV: production
   env_file: .env
-  volumes:
-    - .:/app
 services:
   app:
     <<: *backend
