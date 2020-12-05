@@ -65,4 +65,3 @@ COPY . .
 
 RUN yarn --check-files
 RUN bundle exec rails assets:precompile
-RUN bundle exec rails webpacker:compile

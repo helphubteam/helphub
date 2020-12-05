@@ -1,5 +1,4 @@
 ARG RUBY_VERSION
-# See explanation below
 FROM ruby:$RUBY_VERSION-slim-buster
 
 ARG PG_MAJOR
