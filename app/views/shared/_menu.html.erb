@@ -16,7 +16,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-    <ul class="navbar-nav ">
+    <ul class="navbar-nav">
       <%
         is_admin = current_user.admin? || nil
         is_moderator = current_user.moderator? || nil
@@ -46,5 +46,5 @@
           method: :delete,
           class: 'btn btn-sm btn-outline-danger align-self-end'
         %>
-      </div>
+  </div>
 </nav>
