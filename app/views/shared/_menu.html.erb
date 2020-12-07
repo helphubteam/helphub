@@ -5,26 +5,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <% title = is_admin ?  'HelpHub' : "HelpHub: #{current_user.organization.title}" %>
   <%= link_to (is_admin ? admin_dashboard_path : admin_help_requests_path),  class:"navbar-brand" do %>
-    <%= render partial:'svg/logo' %>
+   <div class="card bg-light">
+      <div class="card-body">
+        <%= render partial:'svg/logo' %>
+        <h5 class="card-title">Название фонда "Мария тест"</h5>
+      </div>
+    </div>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <%
-        is_admin = current_user.admin? || nil
-        is_moderator = current_user.moderator? || nil
-        menu = [
-          is_admin && ["Организации", admin_organizations_path],
-          ["Пользователи", admin_users_path],
-          is_moderator && ["Просьбы", admin_help_requests_path],
-          is_moderator && ["Виды просьб", admin_help_request_kinds_path],
-          is_moderator && ["Отчеты", admin_reports_path],
-          is_admin && ["Настройки", admin_settings_path],
-        ].compact
-      %>
-      
+      <div class = "center-menu">  
+        <%
+          is_admin = current_user.admin? || nil
+          is_moderator = current_user.moderator? || nil
+          menu = [
+            is_admin && ["Организации", admin_organizations_path],
+            ["Пользователи", admin_users_path],
+            is_moderator && ["Просьбы", admin_help_requests_path],
+            is_moderator && ["Виды просьб", admin_help_request_kinds_path],
+            is_moderator && ["Отчеты", admin_reports_path],
+            is_admin && ["Настройки", admin_settings_path],
+          ].compact
+        %>
+      </div>
       <% menu.each do |(name, url)| %>
         <li class="nav-item <%= request.path.include?(url) ? 'active' : ''%>">
           <%= link_to name, url, class: 'nav-link' %>

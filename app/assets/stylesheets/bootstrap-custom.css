@@ -6,3 +6,15 @@
 abbr[data-original-title], abbr[title] {
   text-decoration: none;
 }
+.center-menu {
+  padding-left: 100px;
+}
+.card-title{
+  font-size: 0.75em;
+  margin-bottom: 0;
+}
+.card {
+  border: none;
+  width: 15rem; 
+  height: 6rem
+}
