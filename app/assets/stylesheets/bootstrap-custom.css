@@ -2,19 +2,21 @@
   background-image: none;
 }
 
-
 abbr[data-original-title], abbr[title] {
   text-decoration: none;
 }
-.center-menu {
-  padding-left: 100px;
+
+.card-body {
+  min-height: 1px;
+  padding: 0;
+  margin: -7px 0 0 0;
 }
+
 .card-title{
-  font-size: 0.75em;
+  font-size: 12px;
   margin-bottom: 0;
 }
 .card {
   border: none;
-  width: 15rem; 
-  height: 6rem
+  height: 42px;
 }
