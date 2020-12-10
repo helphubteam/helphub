@@ -31,4 +31,4 @@ jobs:
             cd helphub
             git checkout docker-for-production && git pull
             cp ~/.env ~/staging/helphub/.env
-            docker-compose up -d --build
+            docker-compose -f ./docker-compose.prod.yml up -d --build
