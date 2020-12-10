@@ -52,7 +52,7 @@ module Admin
 
     def user_params
       defaults = { organization_id: current_organization.id } if current_organization
-      permit_attributes = %i[name surname phone email organization_id score]
+      permit_attributes = %i[name surname phone email sex organization_id score]
 
       if current_user.moderator? || current_user.admin?
         permit_attributes << :moderator

@@ -3,6 +3,7 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { '123qwe123qwe!' }
+    sex { 0 }
 
     trait :admin do
       role { 'admin' }
