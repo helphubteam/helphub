@@ -24,6 +24,8 @@
     <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
   <% end %>
 
+  <%= f.input :sex, as: :radio_buttons, collection: [[0, 'женский'], [1, 'мужской']], label_method: :second, value_method: :first %>
+
   <% if current_user.admin? %>
     <%= f.input :score %>
   <% else %>

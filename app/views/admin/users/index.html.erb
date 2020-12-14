@@ -11,6 +11,7 @@
     <th scope="col">Телефон</th>
     <th scope="col">Email</th>
     <th scope="col">Организация</th>
+    <th scope="col">Пол</th>
     <th scope="col">Роль</th>
     <th scope="col">Баллы</th>
     <th scope="col" style="width: 10%"></th>
@@ -27,6 +28,11 @@
           <div><%= record.organization.title %></div>
         <% else %>
           <div class="font-italic">Организация не назначена</div>
+        <% end %>
+      </td>
+      <td>
+        <% if record.sex %>
+          <%= sex_field(record) %>
         <% end %>
       </td>
       <td><%= I18n.t(record.role, scope: [:roles]) %></td>
