@@ -1,11 +1,11 @@
 <%= link_to('Новая просьба',
-  new_admin_help_request_path,
-  class: 'btn btn-sm btn-success float-right mt-4')
+            new_admin_help_request_path,
+            class: 'btn btn-sm btn-success float-right mt-4')
 %>
 <%= render 'filters' %>
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
-    <tr>
+  <tr>
     <th scope="col" style="width: 15%"><%= sort_link 'state', 'Статус' %></th>
     <th scope="col"><%= sort_link 'created_at', 'Создана' %></th>
     <th scope="col">Адрес</th>
@@ -14,17 +14,15 @@
     <th scope="col">Волонтер</th>
     <th scope="col"><%= sort_link 'period', 'Повтор, дн' %></th>
     <th scope="col"><%= sort_link 'updated_at', 'Последнее изменение' %></th>
-    <th scope="col"><%= sort_link 'date_begin', 'Дата начала' %></th>
-    <th scope="col"><%= sort_link 'date_end', 'Дата окончания' %></th>
-      <th scope="col" style="width: 10%"></th>
-    </tr>
+  </tr>
   </thead>
   <% @help_requests.each do |record| %>
     <% help_request = HelpRequestPresenter.new(record) %>
     <tr>
       <td style="width: 15%">
         <%= help_request_state_label(help_request).html_safe %>
-        <div>Просьба №<%= help_request.number %></div>
+        <div><%= link_to "Просьба №#{help_request.number}" << " (#{help_request.title})", edit_admin_help_request_path(help_request.id) %>
+        </div>
       </td>
       <td><%= print_datetime(help_request.created_at) %></td>
       <td><%= help_request.address %></td>
@@ -34,9 +32,6 @@
       <td><%= link_to user_label(volunteer), edit_admin_user_path(volunteer) if volunteer %></td>
       <td><%= help_request.period %></td>
       <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
-      <td><%= help_request.date_begin %></td>
-      <td><%= help_request.date_end %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_help_request_path(help_request.id), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
