@@ -3,7 +3,7 @@ name: Deploy Stage
 on:
   push:
     branches:
-      - docker-for-production
+      - master
 
 jobs:
   push:
