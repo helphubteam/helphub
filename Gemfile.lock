@@ -408,6 +408,7 @@ DEPENDENCIES
   pundit
   rails (~> 6.0.2, >= 6.0.2.1)
   rails-settings-cached (~> 2.2)
+  rake
   redis (~> 4.0)
   rgeo
   rgeo-activerecord

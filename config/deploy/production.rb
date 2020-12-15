@@ -1,9 +1,9 @@
-server '188.120.228.227', roles: %i[web app db], primary: true
+server '18.198.123.166', roles: %i[web app db], primary: true
 set :user, 'helphub'
 set :deploy_to, "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
-
+set :repo_url, 'git@github.com:helphubteam/helphub.git'
 set :rails_env, 'production'
-set :branch, 'master'
+set :branch, 'docker-for-production'
 
 set :ssh_options, forward_agent: true, user: fetch(:user)
 
@@ -25,7 +25,7 @@ namespace :deploy do
         if directories.any?
           directories.each do |release|
             within releases_path.join(release) do
-              execute :sudo, :chown, '-R', 'helphub:helphub', '.'
+              # execute :sudo, :chown, '-R', 'helphub:helphub', '.'
             end
           end
         else
@@ -35,21 +35,21 @@ namespace :deploy do
     end
   end
 
-  after :started, :docker_down do
-    on roles(:app) do
-      within current_path do
-        execute :sudo, 'docker-compose', 'down'
-        execute :sudo, 'docker', 'network', 'prune', '-f'
-      end
-    end
-  end
+  # after :started, :docker_down do
+  #   on roles(:app) do
+  #     within current_path do
+  #       execute :sudo, 'docker-compose', 'down'
+  #       execute :sudo, 'docker', 'network', 'prune', '-f'
+  #     end
+  #   end
+  # end
 
   after :finished, :docker_up do
     on roles(:app) do
       within current_path do
-        execute :sudo, 'rm', '-f', 'node_modules'
-        execute :sudo, 'rm', '-f', 'yarn.lock'
-        execute :sudo, 'docker-compose', 'up', '-d', '--force-recreate', '--build'
+        # execute :sudo, 'rm', '-f', 'node_modules'
+        # execute :sudo, 'rm', '-f', 'yarn.lock'
+        execute 'docker-compose', '-f', 'docker-compose.prod.yml', '--env-file', './.env', 'up', '-d', '--force-recreate', '--build'
       end
     end
   end

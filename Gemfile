@@ -44,7 +44,7 @@ gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
-
+gem 'rake'
 gem 'fcm'
 
 # Use Active Storage variant
