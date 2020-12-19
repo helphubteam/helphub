@@ -2,7 +2,7 @@ version: '3.8'
 x-backend:
   &backend
   build:
-    dockerfile: ./.dockerDev/Dockerfile
+    dockerfile: ./.docker/Dockerfile
     context: .
     args:
       RUBY_VERSION: '2.7.0'
@@ -10,54 +10,47 @@ x-backend:
       BUNDLER_VERSION: '2.1.4'
       NODE_MAJOR: '14'
       YARN_VERSION: '1.22.5'
+      NODE_ENV: production
+      RAILS_ENV: production
   env_file: .env
-  stdin_open: true
-  tty: true
-  depends_on:
-    - postgres
-    - redis
-  volumes:
-    - ~/.ssh:/root/.ssh
-    - .:/app:cached
-    - helphub-packs:/app/public/packs
-    - helphub-cache:/app/tmp/cache
-    - helphub-bundle:/usr/local/bundle
-    - helphub-node_modules:/app/node_modules
 services:
   app:
     <<: *backend
+    stdin_open: true
+    tty: true
     container_name: app_helphub
     ports:
       - "${DOCKER_PORT}:3000"
     command: ./start.sh
-
-  # runner:
-  #   <<: *backend
-  #   command: /bin/bash
-  #   ports:
-  #     - '3000:3000'
-  #     - '3002:3002'
-
+    volumes:
+      - ./public:/app/public
+    depends_on:
+      - postgres
+      - redis
   sidekiq:
     <<: *backend
     container_name: sidekiq_helphub
     command: ./start_sidekiq.sh
+    depends_on:
+      - app
+      - postgres
+      - redis
 
   postgres:
     container_name: db_helphub
     image: skywidesoft/postgres-hstore-postgis
     volumes:
       - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
-
   redis:
     image: redis:6.0.9-alpine
     volumes:
       - redis:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
 
 volumes:
   postgres:
   redis:
-  helphub-cache:
-  helphub-bundle:
-  helphub-node_modules:
-  helphub-packs:
