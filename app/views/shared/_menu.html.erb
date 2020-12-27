@@ -1,4 +1,4 @@
-<%        
+<%
   is_admin = current_user.admin? || nil
   is_moderator = current_user.moderator? || nil
 %>
@@ -32,19 +32,31 @@
       <% menu.each do |(name, url)| %>
         <li class="nav-item <%= request.path.include?(url) ? 'active' : ''%>">
           <%= link_to name, url, class: 'nav-link' %>
-        </li>
+          </li>
       <% end %>
+
     </ul>
+    <div  class="d-block d-md-none">
+      <%= link_to "Выйти", destroy_user_session_path,
+        method: :delete,
+        class: 'btn btn-sm btn-outline-danger mr-2'
+      %>
+      <%= link_to edit_admin_user_path(current_user) do %>
+        <b style='font-size: 12px; color: black;'>
+          <%= current_user.email %>
+        </b>
+      <% end %>
+    </div>
   </div>
-  <div style='right: 20px'>
-        <%= link_to edit_admin_user_path(current_user) do %>
-          <b class='mr-1' style='font-size: 12px; color: black;'> 
-            <%= current_user.email %>
-          </b>
-        <% end %>
-        <%= link_to "Выйти", destroy_user_session_path,
-          method: :delete,
-          class: 'btn btn-sm btn-outline-danger align-self-end'
-        %>
+  <div style='right: 20px' class="d-none d-md-block">
+    <%= link_to edit_admin_user_path(current_user) do %>
+      <b class='mr-1' style='font-size: 12px; color: black;'>
+        <%= current_user.email %>
+      </b>
+    <% end %>
+    <%= link_to "Выйти", destroy_user_session_path,
+      method: :delete,
+      class: 'btn btn-sm btn-outline-danger align-self-end'
+    %>
   </div>
 </nav>
