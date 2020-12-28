@@ -40,7 +40,7 @@ module ApplicationHelper
 
   def print_datetime(datetime)
     content_tag :span, class: 'js-print-datetime hidden' do
-      datetime.to_s
+      datetime.try(:iso8601)
     end
   end
 
