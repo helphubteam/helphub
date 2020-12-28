@@ -27,14 +27,14 @@
                   <div><%= link_to "Просьба №#{help_request.number}" << " #{title}", edit_admin_help_request_path(help_request.id) %>
                   </div>
                 </td>
-                <td><%= print_datetime(help_request.created_at.iso8601) %></td>
+                <td><%= print_datetime(help_request.created_at) %></td>
                 <td><%= help_request.address %></td>
                 <td><%= help_request.person %></td>
                 <td><%= truncate(help_request.comment, length: 50) %></td>
                 <% volunteer = help_request.volunteer %>
                 <td><%= link_to user_label(volunteer), edit_admin_user_path(volunteer) if volunteer %></td>
                 <td><%= help_request.period %></td>
-                <td><%= print_datetime(help_request.updated_at.iso8601 || help_request.created_at.iso8601) %></td>
+                <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
               </tr>
             <% end %>
           </tbody>
