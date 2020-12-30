@@ -1,31 +1,18 @@
 namespace :happy_new_year do
   desc 'Send send congratulations to all Helphub volunteers'
   task start: :environment do
-    user_ids = User.where.not(device_token: nil).pluck(:id)
     message_data = {
       body: 'Спасибо за ваши добрые сердца, будьте счастливы и здоровы! Мы рады быть с вами, команда HelpHub.',
       title: 'Поздравляем вас с Новым годом!'
     }
-    user_ids.each do |user_id|
-      notify_user(user_id, message_data)
+    User.where.not(device_token: nil).find_each do |user|
+      notify_user(user, message_data)
     end
   end
 
   private
 
-  def notify_user(id, message_data)
-    user = User.find_by_id(id)
-
-    unless user
-      puts "#{id}: user not found"
-      return
-    end
-
-    unless user.device_token
-      puts "#{user.email}: user has no mobile app"
-      return
-    end
-
+  def notify_user(user, message_data)
     Notifications::PushNotification.new(
       user: user,
       title: message_data[:title],
