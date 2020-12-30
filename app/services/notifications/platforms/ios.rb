@@ -10,7 +10,7 @@ module Notifications
       private
 
       def curl_line
-        "curl -v -d '#{request_body.to_json}' -H 'apns-topic:#{APP_ID}' " \
+        "curl -v -k -d '#{request_body.to_json}' -H 'apns-topic:#{APP_ID}' " \
         "--http2 --cert #{sert_path}:#{sert_password} " \
         "https://api.push.apple.com/3/device/#{user.device_token}"
       end
