@@ -29,6 +29,6 @@ jobs:
               git clone git@github.com:helphubteam/helphub.git
             fi
             cd helphub
-            git checkout docker-for-production && git pull
+            git checkout master && git pull
             cp ~/.env ~/staging/helphub/.env
             docker-compose -f ./docker-compose.prod.yml up -d --build
