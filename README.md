@@ -64,5 +64,3 @@ docker-compose run app bash
 export RAILS_ENV=test
 bundle exec rspec spec
 ```
-
-[![Build Status](https://drone.pixelpoint.io/api/badges/helphubteam/helphub/status.svg?ref=/refs/heads/dev)](https://drone.pixelpoint.io/helphubteam/helphub)
