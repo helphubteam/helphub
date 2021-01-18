@@ -52,5 +52,4 @@ services:
       retries: 30
 
 volumes:
-  postgres:
   redis:
