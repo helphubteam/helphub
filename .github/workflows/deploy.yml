@@ -1,4 +1,4 @@
-name: Deploy Stage
+name: Deploy Production
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Start deploying to the staging server
+      - name: Start deploying to the production server
         uses: appleboy/ssh-action@master
         with:
           host: 18.198.123.166
@@ -20,15 +20,15 @@ jobs:
           key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            if [ ! -d staging ]; then
-              mkdir staging
+            if [ ! -d production ]; then
+              mkdir production
             fi
-            cd staging
+            cd production
             ls -la
             if [ ! -d helphub ]; then
               git clone git@github.com:helphubteam/helphub.git
             fi
             cd helphub
             git checkout master && git pull
-            cp ~/.env ~/staging/helphub/.env
+            cp ~/.production.env ~/production/helphub/.env
             docker-compose -f ./docker-compose.prod.yml up -d --build
