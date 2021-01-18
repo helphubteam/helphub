@@ -25,10 +25,10 @@ jobs:
             fi
             cd staging
             ls -la
-            if [ ! -d helphub ]; then
-              git clone git@github.com:helphubteam/helphub.git
+            if [ ! -d helphub_staging ]; then
+              git clone git@github.com:helphubteam/helphub.git helphub_staging
             fi
-            cd helphub
+            cd helphub_staging
             git checkout dev && git pull
-            cp ~/.staging.env ~/staging/helphub/.env
+            cp ~/.staging.env ~/staging/helphub_staging/.env
             docker-compose -f ./docker-compose.stg.yml up -d --build
