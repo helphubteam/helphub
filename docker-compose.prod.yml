@@ -45,11 +45,6 @@ services:
     image: redis:6.0.9-alpine
     volumes:
       - redis:/data
-    healthcheck:
-      test: redis-cli ping
-      interval: 1s
-      timeout: 3s
-      retries: 30
 
 volumes:
   redis:
