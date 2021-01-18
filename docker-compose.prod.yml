@@ -42,6 +42,7 @@ services:
     volumes:
       - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
   redis:
+    container_name: redis_helphub
     image: redis:6.0.9-alpine
     volumes:
       - redis:/data
