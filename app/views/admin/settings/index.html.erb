@@ -3,8 +3,8 @@
   <table class="table table-bordered table-hover mt-5">
     <thead class="thead-light">
     <tr>
-      <th scope="col">Название</th>
-      <th>Значение</th>
+      <th scope="col"><%= t(".title") %></th>
+      <th><%= t(".value") %></th>
     </tr>
     </thead>
     <% Setting.keys.each do |key| %>
@@ -16,8 +16,8 @@
       </tr>
     <% end %>
   </table>
-  <%= submit_tag 'Сохранить изменения', 
+  <%= submit_tag t(".save"), 
       class: 'btn btn-success float-right my-3',
-      data: { confirm: 'ВНИМАНИЕ: Мы меняем настройки всего сайта. Продолжить?' }
+      data: { confirm: t(".confirm") }
   %>
 <% end %>

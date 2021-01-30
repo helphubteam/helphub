@@ -2,10 +2,10 @@
 <table class="table table-bordered table-hover mt-5 d-none">
   <thead class="thead-light">
   <tr>
-    <th>Время создания</th>
-    <th scope="col">Название</th>
-    <th>Статус</th>
-    <th>Файл</th>
+    <th><%= t(".created") %></th>
+    <th scope="col"><%= t(".title") %></th>
+    <th><%= t(".status") %></th>
+    <th><%= t(".file") %></th>
   </tr>
   </thead>
   <% [].each do |report| %>
@@ -13,7 +13,7 @@
       <td><%= print_datetime(report.created_at) %></td>
       <td><%= report.name %></td>
       <td><%= report_state_label(report) %></td>
-      <td><%= link_to('Скачать файл', report_document_path(report), class: 'btn btn-sm btn-success') if report.finished? %></td>
+      <td><%= link_to(t(".download"), report_document_path(report), class: 'btn btn-sm btn-success') if report.finished? %></td>
     </tr>
   <% end %>
 </table>

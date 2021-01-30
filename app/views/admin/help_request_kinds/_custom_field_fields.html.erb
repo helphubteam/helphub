@@ -1,5 +1,5 @@
 <div class="nested-fields">
   <%= f.input :name %>
   <%= f.input :data_type, collection: options_for_datatype, include_blank: false %>
-  <%= link_to_remove_association "Удалить поле", f, {class: 'btn btn-sm btn-danger'} %>
+  <%= link_to_remove_association t(".remove_link"), f, {class: 'btn btn-sm btn-danger'} %>
 </div>

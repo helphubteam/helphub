@@ -1,11 +1,11 @@
-<h4>Дополнительные поля</h4>
+<h4><%= t(".header")%></h4>
 <p>
   <%= f.simple_fields_for :custom_fields do |custom_field| %>
     <%= custom_field.input :name %>
     <%= custom_field.input :data_type, collection: options_for_datatype, include_blank: false %>
-    <%= custom_field.input '_destroy', as: :boolean, label: 'Удалить поле' %>
+    <%= custom_field.input '_destroy', as: :boolean, label: t(".delete") %>
   <% end %>
   <div class="mt-1 links">
-    <%= link_to_add_association 'Добавить поле', f, :custom_fields, { class: 'btn btn-sm btn-primary' } %>
+    <%= link_to_add_association t(".add_field"), f, :custom_fields, { class: 'btn btn-sm btn-primary' } %>
   </div>
 </p>

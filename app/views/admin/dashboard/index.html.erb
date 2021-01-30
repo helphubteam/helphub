@@ -1,6 +1,6 @@
 <% if current_user.admin? %>
   <%= render 'admin', data: @data %>
   <%= form_tag 'recurring' do %>
-    <%= button_tag 'Запуск периодических задач', class: 'btn btn-success'%>
+    <%= button_tag t(".task_button"), class: 'btn btn-success'%>
   <% end %>
 <% end %>

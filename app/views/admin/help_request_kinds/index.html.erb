@@ -1,12 +1,12 @@
-<%= link_to('Новый вид просьбы',
+<%= link_to(t(".new_kind_link"),
             new_admin_help_request_kind_path,
             class: 'btn btn-sm btn-success float-right my-3')
 %>
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
   <tr>
-    <th scope="col">Название</th>
-    <th>Выбирается по умолчанию</th>
+    <th scope="col"><%= t(".name_column") %></th>
+    <th><%= t(".default_column") %></th>
     <th></th>
   </tr>
   </thead>
@@ -19,7 +19,7 @@
         <% end %>
       </td>
       <td style="width: 10%">
-        <%= link_to('Редактировать', edit_admin_help_request_kind_path(record), class: 'btn btn-sm btn-outline-primary') %>
+        <%= link_to(t(".edit"), edit_admin_help_request_kind_path(record), class: 'btn btn-sm btn-outline-primary') %>
       </td>
     </tr>
   <% end %>
