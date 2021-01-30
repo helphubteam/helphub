@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_075155) do
+ActiveRecord::Schema.define(version: 2020_12_20_185345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
     t.string "device_token"
     t.string "device_platform"
     t.hstore "roles"
+    t.integer "sex"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"

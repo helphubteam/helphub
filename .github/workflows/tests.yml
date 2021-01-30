@@ -1,0 +1,56 @@
+name: Run test suite
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: skywidesoft/postgres-hstore-postgis
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:6.0.9-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --entrypoint redis-server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.0
+          bundler-cache: true
+
+      - name: Install required Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Run install dependencies
+        run: |
+          sudo apt update
+          sudo apt-get -yqq install libpq-dev
+          yarn --check-files
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          SECRET_KEY_BASE: odejeiyduiyiodeui87wyuhgwjgdhegk
+          DATABASE_URL: postgis://postgres:postgres@127.0.0.1:5432/app_test
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+          bundle exec rspec

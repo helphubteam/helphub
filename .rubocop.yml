@@ -55,6 +55,7 @@ Layout/MultilineOperationIndentation:
 Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
     - 'config/environments/production.rb'
+    - 'config/environments/staging.rb'
 
 # Offense count: 1
 Metrics/AbcSize:
@@ -141,6 +142,7 @@ Style/StringLiterals:
     - 'bin/webpack-dev-server'
     - 'bin/yarn'
     - 'config/environments/production.rb'
+    - 'config/environments/staging.rb'
     - 'config/puma.rb'
     - 'config/spring.rb'
     - 'db/schema.rb'

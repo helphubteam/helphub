@@ -316,6 +316,8 @@ ru:
     labels:
       custom_fields:
         data_type: Формат
+      user:
+        sex: 'Пол'
   settings:
     analytics: Код аналитики
   admin:
@@ -330,3 +332,5 @@ ru:
           help_requests_count: Создано заявок
           volunteers_count: Зарегистрировано волонтеров
           help_requests_submissions: Выполнено заявок
+  female: Женский
+  male: Мужской

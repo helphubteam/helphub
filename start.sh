@@ -11,7 +11,7 @@ rm -f tmp/pids/server.pid
 # bundle install
 # yarn --check-files
 
-if [ "$RAILS_ENV" = 'production' ]
+if [ "$RAILS_ENV" = 'production' ] || [ "$RAILS_ENV" = 'staging' ]
 then
   bundle exec rails db:create db:migrate assets:precompile
 else
