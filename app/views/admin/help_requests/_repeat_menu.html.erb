@@ -1,7 +1,7 @@
 <div>
   <%= f.check_box :recurring, { 'data-toggle':'collapse',
 'data-target':'#collapsePeriod'}, true, false %>
-  <%= label_tag :help_request_recurring, 'Оказывать помощь регулярно' %>
+  <%= label_tag :help_request_recurring, t(".regular_help") %>
 </div>
 
 <div class="collapse <%= 'show' unless (@help_request.recurring).blank? %>" id="collapsePeriod">
@@ -12,6 +12,6 @@
                   label: false,
                   input_html: { min: "1", class: "w-50" }%>
     </div>
-    <%= label_tag :help_request_period, 'дней', class: "col-1" %>
+    <%= label_tag :help_request_period, t(".period"), class: "col-1" %>
   </div>
 </div>

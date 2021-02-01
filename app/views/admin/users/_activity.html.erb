@@ -1,18 +1,18 @@
 <div class='mt-5 mb-5'>
-  <h3>Активность</h3>
+  <h3><%= t(".activity") %></h3>
   <table class='table table-bordered table-hover'>
     <thead>
       <tr>
-        <td>Просьба</td>
-        <td>Действие</td>
-        <td>Комментарий</td>
-        <td>Время</td>
+        <td><%= t(".help_request") %></td>
+        <td><%= t(".action") %></td>
+        <td><%= t(".comment") %></td>
+        <td><%= t(".time") %></td>
       </tr>
     </thead>
     <tbody>
       <% activity.each do |log| %>
         <tr>
-          <td><%= link_to("Просьба №#{log.help_request.number}", edit_admin_help_request_path(log.help_request)) %></td>
+          <td><%= link_to("#{t(".help_request_num")}#{log.help_request.number}", edit_admin_help_request_path(log.help_request)) %></td>
           <td><%= I18n.t("help_request_log.kind.#{log.kind}") %></td>
           <td><%= log.comment %></td>
           <td><%= print_datetime(log.created_at) %></td>

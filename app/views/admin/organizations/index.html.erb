@@ -1,16 +1,16 @@
-<%= link_to('Новая организация',
+<%= link_to(t(".new_organization"),
             new_admin_organization_path,
             class: 'btn btn-sm btn-success float-right my-3')
 %>
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
   <tr>
-    <th scope="col">Наименование</th>
-    <th scope="col">Страна</th>
-    <th scope="col">Город</th>
-    <th scope="col">Сайт</th>
-    <th scope="col">Участники</th>
-    <th scope="col">Просьбы</th>
+    <th scope="col"><%= t(".title") %></th>
+    <th scope="col"><%= t(".country") %></th>
+    <th scope="col"><%= t(".city") %></th>
+    <th scope="col"><%= t(".site") %></th>
+    <th scope="col"><%= t(".members") %></th>
+    <th scope="col"><%= t(".help_requests") %></th>
     <th scope="col" style="width: 10%"></th>
   </tr>
   </thead>
@@ -22,7 +22,7 @@
       <td><%= record.site %></td>
       <td style="width: 10%"><%= record.users.count %></td>
       <td style="width: 10%"><%= record.help_requests.count %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_organization_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
+      <td style="width: 10%"><%= link_to(t(".edit"), edit_admin_organization_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>
