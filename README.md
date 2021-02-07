@@ -3,9 +3,9 @@
 ### How To Setup Locally
 
 ```bash
-cp ./env.example ./.env
+cp .env.example .env
 docker-compose build
-docker-compose run --rm app bundle install && bundle exec rails db:create db:migrate db:seed
+docker-compose run --rm app bash -c "bundle install && bundle exec rails db:create db:migrate db:seed && yarn --check-files"
 docker-compose up -d
 ```
 
