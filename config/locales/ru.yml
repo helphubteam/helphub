@@ -321,6 +321,9 @@ ru:
   settings:
     analytics: Код аналитики
   admin:
+    organization_configs:
+      show:
+        title: Настройки Организации
     dashboard:
       admin:
         header: Панель администратора

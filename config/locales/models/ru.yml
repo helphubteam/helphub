@@ -47,6 +47,8 @@ ru:
         city: Город 
         site: Сайт
         test: Тестовый фонд
+        configs:
+          notify_if_new: Отправлять PUSH-нотификации волонтерам при создании новой просьбы
       help_request_kind:
         name: Название
         default: Применять по умолчанию

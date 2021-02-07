@@ -1,0 +1,10 @@
+<p><h3><%= t(".title") %></h3></p>
+<%= simple_form_for [:config, :admin, @organization], wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :notify_if_new, as: @organization.notify_if_new_input.to_sym, label: @organization.notify_if_new_label %>
+  <div class="form-group row mb-0">
+    <div class="col-sm-9">
+      <%= f.submit('Сохранить', class: 'btn btn-primary') %>
+    </div>
+  </div>
+<% end %>
