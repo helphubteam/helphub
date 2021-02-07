@@ -51,7 +51,7 @@ export default class YandexGeocoder extends BaseGeocoder {
     return Object.values(geoObjects).
       map(value => {
         const geoObject = value.GeoObject;
-        const [lat, lon] = geoObject.Point.pos.split(' ');
+        const [lon, lat] = geoObject.Point.pos.split(' ');
 
         return new Point(lat, lon, `${geoObject.name}, ${geoObject.description}`)
       });
