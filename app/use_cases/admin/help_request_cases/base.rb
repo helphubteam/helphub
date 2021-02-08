@@ -87,12 +87,8 @@ module Admin
       end
 
       def notify_volunteers(message)
-        Notifications::BroadcastPushNotification.call(
-          current_user.organization,
-          {
-            title: message,
-            body: ''
-          }
+        BroadcastPushNotificationWorker.perform_later(
+          current_user.organization_id, message, ''
         )
       end
     end
