@@ -16,9 +16,7 @@ module Admin
       private
 
       def notify_volunteers_on_creation
-        if current_user.organization.notify_if_new?
-          notify_volunteers(I18n.t('notifications.help_request.create'))
-        end
+        notify_volunteers(I18n.t('notifications.help_request.create')) if current_user.organization.notify_if_new
       end
     end
   end

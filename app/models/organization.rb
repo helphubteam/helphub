@@ -14,7 +14,7 @@ class Organization < ApplicationRecord
     }
   ].freeze
 
-  has_config *CONFIG_FIELDS
+  setup_config(*CONFIG_FIELDS)
 
   validates :title, uniqueness: true, presence: true
   validates :country, presence: true
