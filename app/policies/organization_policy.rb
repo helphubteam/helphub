@@ -8,7 +8,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def update?
-    current_admin?
+    current_admin? || ( current_moderator? && organization.changes.keys == ['config'] )
   end
 
   def destroy?
@@ -19,10 +19,18 @@ class OrganizationPolicy < ApplicationPolicy
     current_admin?
   end
 
+  def show?
+    current_admin? || current_moderator?
+  end
+
   private
 
   def current_admin?
     user.present? && user.admin?
+  end
+
+  def current_moderator?
+    user.present? && user.moderator? && user.organization == organization
   end
 
   def organization
