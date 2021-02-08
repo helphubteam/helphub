@@ -470,3 +470,6 @@ ru:
         edit: Редактировать
   female: Женский
   male: Мужской
+  notifications:
+      help_request:
+        create: Появились новые просьбы. Возможно, вы сможете помочь

@@ -17,6 +17,7 @@ class Recurring < ApplicationService
     recurring_help_requests.each do |help_request|
       if check_need_start?(help_request)
         update_help_request(help_request)
+        notify_volunteers_on_creation(help_request)
         write_recurring_log(help_request)
       end
     end
@@ -39,5 +40,11 @@ class Recurring < ApplicationService
       user: help_request.author,
       kind: 'refreshed'
     )
+  end
+
+  def notify_volunteers_on_creation(help_request)
+    if help_request.organization.notify_if_new?
+      notify_volunteers(I18n.t('notifications.help_request.create'))
+    end
   end
 end

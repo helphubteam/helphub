@@ -85,6 +85,16 @@ module Admin
           comment: comment
         )
       end
+
+      def notify_volunteers(message)
+        Notifications::BroadcastPushNotification.call(
+          current_user.organization,
+          {
+            title: message,
+            body: ''
+          }
+        )
+      end
     end
   end
 end
