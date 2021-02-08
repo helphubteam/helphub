@@ -43,12 +43,12 @@ class Recurring < ApplicationService
   end
 
   def notify_volunteers_on_creation(help_request)
-    if help_request.organization.notify_if_new?
-      BroadcastPushNotificationWorker.perform_later(
-        help_request.organization_id,
-        I18n.t('notifications.help_request.create'),
-        ''
-      )
-    end
+    return unless help_request.organization.notify_if_new
+
+    BroadcastPushNotificationWorker.perform_async(
+      help_request.organization_id,
+      I18n.t('notifications.help_request.create'),
+      ''
+    )
   end
 end

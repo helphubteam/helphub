@@ -87,7 +87,7 @@ module Admin
       end
 
       def notify_volunteers(message)
-        BroadcastPushNotificationWorker.perform_later(
+        BroadcastPushNotificationWorker.perform_async(
           current_user.organization_id, message, ''
         )
       end
