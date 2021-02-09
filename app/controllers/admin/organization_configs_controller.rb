@@ -7,7 +7,7 @@ module Admin
 
     def update
       @organization = current_user.organization
-      
+
       @organization.assign_attributes(permitted_params)
       authorize @organization
 
