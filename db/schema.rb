@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2021_02_07_203244) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "archive", default: false
     t.boolean "test", default: false
-    t.json "config", default: {}
+    t.jsonb "config", default: {}
   end
 
   create_table "reports", force: :cascade do |t|
