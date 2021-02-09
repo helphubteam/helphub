@@ -20,23 +20,19 @@ module HasConfig
       end
     end
 
-    def config_field_input(name)
-      base_config_field(name)[:input]
-    end
-
     def config_field(name)
       self.config ||= {}
-      field = self.config[name.to_s] || {}
-      field['value'] ||= base_config_field(name)[:value]
+      field = self.config[name.to_s] ||= {}
+      field['value'] ||= self.class.config_field(name)[:value]
       field
+    end
+
+    def self.config_field(name)
+      self.config_fields.find { |cf| cf[:name].to_s == name.to_s }
     end
 
     private
 
     cattr_accessor :config_fields
-
-    def base_config_field(name)
-      self.class.config_fields.find { |cf| cf[:name].to_s == name.to_s }
-    end
   end
 end

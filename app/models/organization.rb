@@ -10,7 +10,7 @@ class Organization < ApplicationRecord
     {
       name: :notify_if_new,
       value: false,
-      input: 'boolean'
+      type: :boolean
     }
   ].freeze
 
