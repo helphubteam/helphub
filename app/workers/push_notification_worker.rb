@@ -6,7 +6,7 @@ class PushNotificationWorker
   def perform(*args)
     user_id, title, body = args
     user = User.find(user_id)
-    PushNotification.new(
+    Notifications::PushNotification.new(
       user: user,
       body: body,
       title: title

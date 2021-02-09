@@ -15,10 +15,11 @@ class Recurring < ApplicationService
 
   def update_recurring_help_requests
     recurring_help_requests.each do |help_request|
-      if check_need_start?(help_request)
-        update_help_request(help_request)
-        write_recurring_log(help_request)
-      end
+      next unless check_need_start?(help_request)
+
+      update_help_request(help_request)
+      notify_volunteers_on_creation(help_request)
+      write_recurring_log(help_request)
     end
   end
 
@@ -38,6 +39,16 @@ class Recurring < ApplicationService
     help_request.logs.create!(
       user: help_request.author,
       kind: 'refreshed'
+    )
+  end
+
+  def notify_volunteers_on_creation(help_request)
+    return unless help_request.organization.notify_if_new
+
+    BroadcastPushNotificationWorker.perform_async(
+      help_request.organization_id,
+      I18n.t('notifications.help_request.create'),
+      ''
     )
   end
 end

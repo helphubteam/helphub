@@ -4,6 +4,18 @@ class Organization < ApplicationRecord
   has_many :help_request_kinds, dependent: :destroy
   has_many :reports, dependent: :destroy
 
+  include HasConfig
+
+  CONFIG_FIELDS = [
+    {
+      name: :notify_if_new,
+      value: false,
+      input: 'boolean'
+    }
+  ].freeze
+
+  setup_config(*CONFIG_FIELDS)
+
   validates :title, uniqueness: true, presence: true
   validates :country, presence: true
 

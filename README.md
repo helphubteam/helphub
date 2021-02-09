@@ -19,5 +19,11 @@ CI will start automatically on every code update. See github actions.
 
 For local testing:
 ```bash
-docker-compose run --rm app bundle exec rspec spec
+docker-compose run app bash -c 'RAILS_ENV=test rspec spec'
+```
+
+### Run Linter
+
+```bash
+docker-compose run app bash -c 'rubocop'
 ```

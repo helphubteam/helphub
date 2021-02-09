@@ -61,6 +61,8 @@ Rails.application.routes.draw do
     ] do
       member do
         post 'archive'
+        get 'config', to: 'organization_configs#show'
+        patch 'config', to: 'organization_configs#update'
       end
     end
 

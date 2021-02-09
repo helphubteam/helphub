@@ -321,6 +321,9 @@ ru:
   settings:
     analytics: Код аналитики
   admin:
+    organization_configs:
+      show:
+        title: Настройки Организации
     dashboard:
       admin:
         header: Панель администратора
@@ -467,3 +470,6 @@ ru:
         edit: Редактировать
   female: Женский
   male: Мужской
+  notifications:
+      help_request:
+        create: Появились новые просьбы. Возможно, вы сможете помочь
