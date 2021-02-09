@@ -26,10 +26,10 @@ module Admin
     def handle_fields(params)
       params.permit!.to_h.each_with_object(ActionController::Parameters.new) do |(key, value), result|
         result[key] = if Organization.config_field(key)[:type] == :boolean
-          value == '1'
-        else
-          value
-        end
+                        value == '1'
+                      else
+                        value
+                      end
       end
     end
   end

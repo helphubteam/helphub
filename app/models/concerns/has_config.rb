@@ -28,10 +28,8 @@ module HasConfig
     end
 
     def self.config_field(name)
-      self.config_fields.find { |cf| cf[:name].to_s == name.to_s }
+      config_fields.find { |cf| cf[:name].to_s == name.to_s }
     end
-
-    private
 
     cattr_accessor :config_fields
   end
