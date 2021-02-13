@@ -79,7 +79,10 @@ module Api
     def apply_lonlat(scope)
       return scope unless search_params[:lonlat]
 
-      long, lat = search_params[:lonlat].split('_').map(&:to_f)
+      # temporary solution, was necessarry to swap coordinates because of mistake with its order. Client need to receive
+      # data with previous wrong order.
+      # long, lat = search_params[:lonlat].split('_').map(&:to_f)
+      lat, long = search_params[:lonlat].split('_').map(&:to_f)
       distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
       distance_order_query = "#{distance_query} ASC"
       distance_limit_query = "#{distance_query} < #{(search_params[:distance].to_i * 1000)}"
@@ -91,7 +94,10 @@ module Api
     def apply_distance(scope)
       return scope unless search_params[:lonlat]
 
-      long, lat = search_params[:lonlat].split('_').map(&:to_f)
+      # temporary solution, was necessarry to swap coordinates because of mistake with its order. Client need to receive
+      # data with previous wrong order.
+      # long, lat = search_params[:lonlat].split('_').map(&:to_f)
+      lat, long = search_params[:lonlat].split('_').map(&:to_f)
       distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
 
       scope.select("help_requests.*, #{distance_query} as distance").group('help_requests.id').all

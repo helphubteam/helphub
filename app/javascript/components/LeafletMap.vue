@@ -88,10 +88,10 @@ export default {
   methods: {
     /**
      * Updates current marker with new coorinates.
-     * @param {[lon: number, lat: number]} coordinates Coordinates.
+     * @param {[lat: number, lon: number]} coordinates Coordinates.
      */
     updateCurrentMarker([lat, lon]) {
-      if (lon && lat) {
+      if (lat && lon) {
         // To store point correctly, we need to pass coordinates in [lng, lat] order.
         this.currentMarker = {
           type: 'Point',
@@ -125,8 +125,8 @@ export default {
      */
     onChangeCurrentPoint(event) {
       const pointData = JSON.parse(event.target.value);
-      this.updateCurrentMarker([ pointData.lon, pointData.lat ]);
-      this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+      this.updateCurrentMarker([ pointData.lat, pointData.lon ]);
+      this.$refs.map.mapObject.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
     },
 
     getCurrentMarkerLatLonOrderCoords() {
