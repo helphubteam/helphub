@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.1'
+gem 'rails', '~> 6.1.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -27,7 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'activerecord-postgis-adapter'
 gem 'rgeo'
-gem 'rgeo-activerecord', git: 'https://github.com/rgeo/rgeo-activerecord'
+gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
 
 gem 'devise'
