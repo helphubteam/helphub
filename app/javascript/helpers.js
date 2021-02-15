@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", ()=> {
-  handlePrintDatetime();
-})
+document.addEventListener("DOMContentLoaded", () =>  handlePrintDatetime())
 
 const handlePrintDatetime = () => {
   const items = Array.from(document.getElementsByClassName('js-print-datetime'))

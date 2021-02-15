@@ -1,11 +1,11 @@
-<p><h3>Создать новый отчет</h3></p>
+<p><h3><%= t(".create_new_report") %></h3></p>
 <%= simple_form_for [:admin, report], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
   <%= f.input :name %>
   <%= f.input :organization_id, as: :hidden %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
-      <%= f.submit('Создать', class: 'btn btn-primary', data: { disable_with: false }) %>
+      <%= f.submit(t(".create"), class: 'btn btn-primary', data: { disable_with: false }) %>
     </div>
   </div>
 <% end %>

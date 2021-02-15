@@ -1,47 +1,63 @@
-<%        
+<%
   is_admin = current_user.admin? || nil
   is_moderator = current_user.moderator? || nil
 %>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
   <% title = is_admin ?  'HelpHub' : "HelpHub: #{current_user.organization.title}" %>
   <%= link_to (is_admin ? admin_dashboard_path : admin_help_requests_path),  class:"navbar-brand" do %>
-    <%= render partial:'svg/logo' %>
+   <div class="card bg-light">
+      <div class="card-body">
+        <%= render partial:'svg/logo' %>
+      </div>
+    </div>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <%
         is_admin = current_user.admin? || nil
         is_moderator = current_user.moderator? || nil
+        organization = current_user.try(:organization)
         menu = [
           is_admin && ["Организации", admin_organizations_path],
           ["Пользователи", admin_users_path],
           is_moderator && ["Просьбы", admin_help_requests_path],
           is_moderator && ["Виды просьб", admin_help_request_kinds_path],
           is_moderator && ["Отчеты", admin_reports_path],
+          is_moderator && organization && ["Настройки Организации", config_admin_organization_path(organization)],
           is_admin && ["Настройки", admin_settings_path],
         ].compact
       %>
-      
       <% menu.each do |(name, url)| %>
         <li class="nav-item <%= request.path.include?(url) ? 'active' : ''%>">
           <%= link_to name, url, class: 'nav-link' %>
-        </li>
+          </li>
       <% end %>
 
-      <div style='position: absolute; right: 20px'>
-        <%= link_to edit_admin_user_path(current_user) do %>
-          <b class='mr-1' style='color: black;'> 
-            <%= current_user.email %>
-          </b>
-        <% end %>
-        <%= link_to "Выйти", destroy_user_session_path,
-          method: :delete,
-          class: 'btn btn-sm btn-outline-danger align-self-end'
-        %>
-      </div>
     </ul>
+    <div  class="d-block d-md-none">
+      <%= link_to "Выйти", destroy_user_session_path,
+        method: :delete,
+        class: 'btn btn-sm btn-outline-danger mr-2'
+      %>
+      <%= link_to edit_admin_user_path(current_user) do %>
+        <b style='font-size: 12px; color: black;'>
+          <%= current_user.email %>
+        </b>
+      <% end %>
+    </div>
+  </div>
+  <div style='right: 20px' class="d-none d-md-block">
+    <%= link_to edit_admin_user_path(current_user) do %>
+      <b class='mr-1' style='font-size: 12px; color: black;'>
+        <%= current_user.email %>
+      </b>
+    <% end %>
+    <%= link_to "Выйти", destroy_user_session_path,
+      method: :delete,
+      class: 'btn btn-sm btn-outline-danger align-self-end'
+    %>
   </div>
 </nav>

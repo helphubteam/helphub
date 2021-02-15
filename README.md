@@ -1,68 +1,29 @@
 # README
 
-## What is done
+### How To Setup Locally
 
-### Backend
-
-- Rails 6 + PostgreSQL + Redis project
-- Action Cable
-- Rubocop code checker
-To start it locally run:
 ```bash
-docker-compose exec app rubocop .
-```
-
-### Frontend
-
-- Webpack assets compiler 
-- ESLint
-To start it locally run:
-```bash
-docker-compose exec app node-modules/.bin/eslint ./**/*.js
-docker-compose exec app node-modules/.bin/eslint ./**/*.jsx
-```
-
-### Deployment
-
-- prepare file `.env` with environment variables. for example see `.evn.example` 
-
-- Docker for development mode
-To start just run:
-```bash
+cp .env.example .env
 docker-compose build
+docker-compose run --rm app bash -c "bundle install && bundle exec rails db:create db:migrate db:seed && yarn --check-files"
 docker-compose up -d
 ```
-and open `http://localhost:3000` in browser
 
 ### Deploy 
 
-after first deploy need create database 
-
-```
- docker-compose run rake db:create
-```
-
-- Docker for development mode
-To start just run:
-```bash
-docker-compose run app bundle exec cap production deploy
-```
-
-and open `production url` in browser:
-https://app.helphub.ru
-
-NOTE: deploy DOES TAKE TIME (~15 mins) so be patient
-
-
-- Heroku for production mode
-https://helphubstaging.herokuapp.com/
+Code will lbe deployed autmatically after push into `master` branch. See github actions.
 
 ### Run Tests
 
+CI will start automatically on every code update. See github actions.
+
+For local testing:
 ```bash
-docker-compose run app bash
-export RAILS_ENV=test
-bundle exec rspec spec
+docker-compose run app bash -c 'RAILS_ENV=test rspec spec'
 ```
 
-[![Build Status](https://drone.pixelpoint.io/api/badges/helphubteam/helphub/status.svg?ref=/refs/heads/dev)](https://drone.pixelpoint.io/helphubteam/helphub)
+### Run Linter
+
+```bash
+docker-compose run app bash -c 'rubocop'
+```

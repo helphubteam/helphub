@@ -46,7 +46,9 @@ module Api
     attr_reader :target, :current_user
 
     def render_lonlat(lonlat)
-      JSON.parse(lonlat)
+      result = JSON.parse(lonlat)
+      result['coordinates'][0], result['coordinates'][1] = result['coordinates'][1], result['coordinates'][0]
+      result
     end
 
     def timestamp(value)

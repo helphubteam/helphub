@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_075155) do
+ActiveRecord::Schema.define(version: 2021_02_07_203244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "archive", default: false
     t.boolean "test", default: false
+    t.jsonb "config", default: {}
   end
 
   create_table "reports", force: :cascade do |t|
@@ -119,6 +120,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer "old_role", default: 0, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -137,10 +139,9 @@ ActiveRecord::Schema.define(version: 2020_11_29_075155) do
     t.string "name"
     t.string "surname"
     t.string "phone"
+    t.integer "score", default: 0, null: false
     t.string "device_token"
     t.string "device_platform"
-    t.integer "score", default: 0, null: false
-    t.integer "old_role", default: 0, null: false
     t.hstore "roles"
     t.integer "sex"
     t.index ["email"], name: "index_users_on_email", unique: true

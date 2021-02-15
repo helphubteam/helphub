@@ -1,4 +1,4 @@
-<%= link_to('Новый пользователь',
+<%= link_to(t(".new_user"),
             new_admin_user_path,
             class: 'btn btn-sm btn-success float-right my-3')
 %>
@@ -6,14 +6,14 @@
 <table class="table table-bordered table-hover">
   <thead class="thead-light">
   <tr>
-    <th scope="col">Фамилия</th>
-    <th scope="col">Имя</th>
-    <th scope="col">Телефон</th>
-    <th scope="col">Email</th>
-    <th scope="col">Организация</th>
-    <th scope="col">Пол</th>
-    <th scope="col">Роль</th>
-    <th scope="col">Баллы</th>
+    <th scope="col"><%= t(".lastname") %></th>
+    <th scope="col"><%= t(".firstname") %></th>
+    <th scope="col"><%= t(".phone") %></th>
+    <th scope="col"><%= t(".email") %></th>
+    <th scope="col"><%= t(".organization") %></th>
+    <th scope="col"><%= t(".sex") %></th>
+    <th scope="col"><%= t(".role") %></th>
+    <th scope="col"><%= t(".points") %></th>
     <th scope="col" style="width: 10%"></th>
   </tr>
   </thead>
@@ -27,7 +27,7 @@
         <% if record.organization %>
           <div><%= record.organization.title %></div>
         <% else %>
-          <div class="font-italic">Организация не назначена</div>
+          <div class="font-italic"><%= t(".not_assigned") %></div>
         <% end %>
       </td>
       <td>
@@ -37,7 +37,7 @@
       </td>
       <td><%= I18n.t(record.role, scope: [:roles]) %></td>
       <td><%= record.score %></td>
-      <td style="width: 10%"><%= link_to('Редактировать', edit_admin_user_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
+      <td style="width: 10%"><%= link_to(t(".edit"), edit_admin_user_path(record), class: 'btn btn-sm btn-outline-primary') %></td>
     </tr>
   <% end %>
 </table>

@@ -1,39 +1,38 @@
 <%= form_tag admin_help_requests_path, method: 'GET', class: 'mb-4' do %>
-  <div class='row'>
-    <div class='col-4'>
-      <div class="input-group ml-0">
-        <%= text_field_tag :search, params[:search], placeholder: 'Поиск...', class: 'form-control' %>
+  <div class='d-flex justify-content-between align-items-center flex-column flex-md-row'>
+    <div class='col-12 col-md-4 py-2 py-md-0'>
+      <div class="input-group m-0">
+        <%= text_field_tag :search, params[:search], placeholder: t(".search_placeholder"), class: 'form-control form-control-sm' %>
         <div class="input-group-append">
-          <%= submit_tag 'Искать', class: 'btn btn-outline-success' %>
+          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success' %>
         </div>
       </div>
     </div>
-    <div class='col-4'>
-      <div class="field form-check ml-4 mt-4 float-left">
-        <%= check_box_tag :overdue, true, params[:overdue], class: 'form-check-input' %>
-        <%= label_tag :overdue, 'Показать просроченные просьбы' %>
+    <!-- <div class='col-12 col-md-4 d-flex justify-content-center py-2 py-md-0'>
+      <div class="field form-check">
+        <%#= check_box_tag :overdue, true, params[:overdue], class: 'form-check-input' %>
+        <%#= label_tag :overdue, 'Показать просроченные просьбы', class: 'mb-0' %>
       </div>
-    </div>
-    <div class='col-4'>
-      <%= link_to 'Сбросить фильтры', admin_help_requests_path, class: 'btn btn-sm float-right btn-outline-secondary mt-4' %>
+    </div> -->
+    <div class='col-12 col-md-4 d-flex justify-content-center justify-content-md-end py-2 py-md-0'>
+      <%= link_to t(".cancel_filters"), admin_help_requests_path, class: 'btn btn-sm btn-outline-secondary mr-2' %>
+      <%= link_to(t(".new_helprequest"), new_admin_help_request_path, class: 'btn btn-sm btn-success') %>
     </div>
   </div>
 
-  <div class='form-inline mt-2'>
+  <div class='form-inline mt-3'>
     <div class="form-group mx-sm-3 mb-2">
       <%= select_tag :states,
                      options_for_select(HelpRequest.states.map { |state| [I18n.t("help_request.states.#{state[0]}"),
                                                                           state[0],
                                                                           {class: ''}] },
                                         params[:states]),
-                     title: 'Фильтр по статусу...',
+                     title: t(".by_status"),
                      multiple: true,
                      class: 'selectpicker' %>
     </div>
     <div class='col-4'>
-      Найдено записей: <b><%= @help_requests_count %></b>
+      <%= t(".find")%> <b><%= @help_requests_count %></b>
     </div>
   </div>
 <% end %>
-
-

@@ -1,13 +1,13 @@
 <%= javascript_pack_tag 'map' %>
 <%= javascript_pack_tag 'custom_fields' %>
-<% title = help_request.new_record? ? "Новая просьба" : "Просьба № #{help_request.number}" %>
+<% title = help_request.new_record? ? t(".new_helprequest") : "#{t(".help_request")} #{help_request.number}" %>
 <h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
   <% volunteer = help_request.volunteer %>
   <% if volunteer %>
     <div class="alert alert-info mr-5" role="alert">
-      <strong>Волонтер:</strong>
+      <strong><%= t(".volunteer") %></strong>
       <%= link_to user_label(volunteer), edit_admin_user_path(volunteer) %>
     </div>
     <% end %>
@@ -16,7 +16,7 @@
   <%= f.error_notification %>
   <div class="row">
     <div class="col-6">
-      <%= f.input :title, hint: 'Не более 140 символов' %>
+      <%= f.input :title, hint: t(".char_limit") %>
       <%= f.input :person %>
       <%= f.input :city %>
       <%= f.input :district %>
@@ -41,24 +41,24 @@
   <%#= f.input :mediated %>
   <%= render 'repeat_menu', f: f %>
   <p>
-    <h4>Назначить волонтера</h4>
+    <h4><%= t(".set_volunteer")%></h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>
     <% unless help_request.active?%>
-      <p class='text-warning'>На этом этапе волонтера у просьбы нельзя сменить</p>
+      <p class='text-warning'><%= t(".warning") %></p>
     <% end %>
   </p>
 
   <p>
-    <h4>Установить баллы</h4>
+    <h4><%= t(".set_balls") %></h4>
     <%= f.input :score, collection: 1..5, include_blank: false %>
   </p>
   <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
-      <%= f.submit('Сохранить', class: 'btn btn-primary') %>
-      <%= f.submit('Архивировать просьбу', name: :block, class: 'btn btn-outline-danger') if !help_request.new_record? && !help_request.blocked? %>
-      <%= f.submit('Активировать', name: :activate, class: 'btn btn-success') if help_request.blocked? %>
-      <%= link_to('Отмена', admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
+      <%= f.submit(t(".save"), class: 'btn btn-primary') %>
+      <%= f.submit(t(".archive_helprequest"), name: :block, class: 'btn btn-outline-danger') if !help_request.new_record? && !help_request.blocked? %>
+      <%= f.submit(t(".archive"), name: :activate, class: 'btn btn-success') if help_request.blocked? %>
+      <%= link_to(t(".cancel"), admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
       <%# unless help_request.new_record? %>
         <%#= link_to('Удалить', admin_help_request_path(@help_request),
           method: :delete,
