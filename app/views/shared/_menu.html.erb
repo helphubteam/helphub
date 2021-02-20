@@ -19,12 +19,14 @@
       <%
         is_admin = current_user.admin? || nil
         is_moderator = current_user.moderator? || nil
+        organization = current_user.try(:organization)
         menu = [
           is_admin && ["Организации", admin_organizations_path],
           ["Пользователи", admin_users_path],
           is_moderator && ["Просьбы", admin_help_requests_path],
           is_moderator && ["Виды просьб", admin_help_request_kinds_path],
           is_moderator && ["Отчеты", admin_reports_path],
+          is_moderator && organization && ["Настройки Организации", config_admin_organization_path(organization)],
           is_admin && ["Настройки", admin_settings_path],
         ].compact
       %>

@@ -1,7 +1,7 @@
 <div class="container">
-  <h2>Панель Администратора</h2>
+  <h2><%= t(".header") %></h2>
   <p>
-    <b>Статистика за все время</b>
+    <b><%= t(".full.header") %></b>
     <div class="row">
       <% data[:full].each do |key, value| %>
         <% title = t(".full.#{key}")%>
@@ -10,7 +10,7 @@
     </div>
   </p>
   <p>
-    <b>Статистика за последнюю неделю</b>
+    <b><%= t(".week.header") %></b>
     <div class="row">
       <% data[:week].each do |key, value| %>
         <% title = t(".week.#{key}")%>

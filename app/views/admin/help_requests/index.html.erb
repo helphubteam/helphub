@@ -6,14 +6,14 @@
       <table class="table table-bordered table-hover">
         <thead class="thead-light">
           <tr>
-            <th scope="col" class="position-sticky" style="width: 15%; left: 0;"><%= sort_link 'state', 'Статус' %></th>
-            <th scope="col"><%= sort_link 'created_at', 'Создана' %></th>
-            <th scope="col">Адрес</th>
-            <th scope="col">ФИО</th>
-            <th scope="col">Комментарий</th>
-            <th scope="col">Волонтер</th>
-            <th scope="col"><%= sort_link 'period', 'Повтор, дн' %></th>
-            <th scope="col"><%= sort_link 'updated_at', 'Последнее изменение' %></th>
+            <th scope="col" class="position-sticky" style="width: 15%; left: 0;"><%= sort_link 'state', t(".status") %></th>
+            <th scope="col"><%= sort_link 'created_at', t(".created") %></th>
+            <th scope="col"><%= t(".address") %></th>
+            <th scope="col"><%= t(".name") %></th>
+            <th scope="col"><%= t(".comment") %></th>
+            <th scope="col"><%= t(".volunteer") %></th>
+            <th scope="col"><%= sort_link 'period', t(".period") %></th>
+            <th scope="col"><%= sort_link 'updated_at', t(".last_update") %></th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
               <td class="position-sticky" style="width: 15%; left: 0; background-color: #fff;">
                 <%= help_request_state_label(help_request).html_safe %>
                 <% title = help_request.title.present? ? "(#{help_request.title})" : '' %>
-                <div><%= link_to "Просьба №#{help_request.number}" << " #{title}", edit_admin_help_request_path(help_request.id) %>
+                <div><%= link_to "#{t(".help_request_num")}#{help_request.number}" << " #{title}", edit_admin_help_request_path(help_request.id) %>
                 </div>
               </td>
               <td><%= print_datetime(help_request.created_at) %></td>

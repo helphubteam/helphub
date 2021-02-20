@@ -1,4 +1,4 @@
-<% title = user.new_record? ? "Новый пользователь" : "Пользователь #{user.email}" %>
+<% title = user.new_record? ? t(".new_user") : "#{t(".user")} #{user.email}" %>
 <p><h3><%= title %></h3></p>
 <%= simple_form_for [:admin, user], wrapper: :horizontal_form do |f| %>
 
@@ -24,7 +24,7 @@
     <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
   <% end %>
 
-  <%= f.input :sex, as: :radio_buttons, collection: [[0, 'женский'], [1, 'мужской']], label_method: :second, value_method: :first %>
+  <%= f.input :sex, as: :radio_buttons, collection: [[0, t("female")], [1, t("male")]], label_method: :second, value_method: :first %>
 
   <% if current_user.admin? %>
     <%= f.input :score %>
@@ -39,12 +39,12 @@
   <% end %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
-      <%= f.submit(user.new_record? ? 'Создать' : 'Сохранить', class: 'btn btn-primary') %>
-      <%= link_to('Отмена', admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
+      <%= f.submit(user.new_record? ? t(".create") : t(".save"), class: 'btn btn-primary') %>
+      <%= link_to(t(".cancel"), admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
       <% unless user.new_record? %>
-        <%= link_to('Удалить', admin_user_path(@user),
+        <%= link_to(t(".delete"), admin_user_path(@user),
                     method: :delete,
-                    data: { confirm: 'Вы уверены что хотите удалить пользователя?' },
+                    data: { confirm: t(".confirm") },
                     class: 'btn btn-outline-danger align-self-start')
         %>
       <% end %>

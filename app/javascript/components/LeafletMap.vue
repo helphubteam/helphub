@@ -61,8 +61,8 @@ export default {
     map.addLayer(this.editableLayers);
 
     if (this.currentMarker) {
-      this.updateCurrentMarker(this.currentMarker.coordinates); 
-      map.setView(this.currentMarker.coordinates, this.zoom);
+      this.updateCurrentMarker(this.getCurrentMarkerLatLonOrderCoords()); 
+      map.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
     }
 
     map.addControl(this.getDrawControl());
@@ -76,8 +76,8 @@ export default {
         const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.yandex);
         geocoder.findByAddress(searchString).then(result => {
           if (result.length) {
-            this.updateCurrentMarker([ result[0].lon, result[0].lat ]);
-            this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+            this.updateCurrentMarker([ result[0].lat, result[0].lon ]);
+            this.$refs.map.mapObject.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
             this.foundPoints = result;
           }
         });
@@ -88,17 +88,19 @@ export default {
   methods: {
     /**
      * Updates current marker with new coorinates.
-     * @param {Array} coordinates Coordinates.
+     * @param {[lat: number, lon: number]} coordinates Coordinates.
      */
-    updateCurrentMarker(coordinates) {
-      if (coordinates) {
+    updateCurrentMarker([lat, lon]) {
+      if (lat && lon) {
+        // To store point correctly, we need to pass coordinates in [lng, lat] order.
         this.currentMarker = {
           type: 'Point',
-          coordinates
+          coordinates: [lon, lat]
         };
 
+        // To show point correctly in the map, we need to pass coordinates in [lat, lng] order.
         this.editableLayers.clearLayers();
-        this.editableLayers.addLayer(L.marker(coordinates));
+        this.editableLayers.addLayer(L.marker([lat, lon]));
       }
     },
 
@@ -123,8 +125,12 @@ export default {
      */
     onChangeCurrentPoint(event) {
       const pointData = JSON.parse(event.target.value);
-      this.updateCurrentMarker([ pointData.lon, pointData.lat ]);
-      this.$refs.map.mapObject.setView(this.currentMarker.coordinates, this.zoom);
+      this.updateCurrentMarker([ pointData.lat, pointData.lon ]);
+      this.$refs.map.mapObject.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
+    },
+
+    getCurrentMarkerLatLonOrderCoords() {
+      return [this.currentMarker.coordinates[1], this.currentMarker.coordinates[0]];
     }
   }
 }

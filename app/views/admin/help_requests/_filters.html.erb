@@ -2,9 +2,9 @@
   <div class='d-flex justify-content-between align-items-center flex-column flex-md-row'>
     <div class='col-12 col-md-4 py-2 py-md-0'>
       <div class="input-group m-0">
-        <%= text_field_tag :search, params[:search], placeholder: 'Поиск...', class: 'form-control form-control-sm' %>
+        <%= text_field_tag :search, params[:search], placeholder: t(".search_placeholder"), class: 'form-control form-control-sm' %>
         <div class="input-group-append">
-          <%= submit_tag 'Искать', class: 'btn btn-sm btn-outline-success' %>
+          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success' %>
         </div>
       </div>
     </div>
@@ -15,8 +15,8 @@
       </div>
     </div> -->
     <div class='col-12 col-md-4 d-flex justify-content-center justify-content-md-end py-2 py-md-0'>
-      <%= link_to 'Сбросить фильтры', admin_help_requests_path, class: 'btn btn-sm btn-outline-secondary mr-2' %>
-      <%= link_to('Новая просьба', new_admin_help_request_path, class: 'btn btn-sm btn-success') %>
+      <%= link_to t(".cancel_filters"), admin_help_requests_path, class: 'btn btn-sm btn-outline-secondary mr-2' %>
+      <%= link_to(t(".new_helprequest"), new_admin_help_request_path, class: 'btn btn-sm btn-success') %>
     </div>
   </div>
 
@@ -27,12 +27,12 @@
                                                                           state[0],
                                                                           {class: ''}] },
                                         params[:states]),
-                     title: 'Фильтр по статусу...',
+                     title: t(".by_status"),
                      multiple: true,
                      class: 'selectpicker' %>
     </div>
     <div class='col-4'>
-      Найдено записей: <b><%= @help_requests_count %></b>
+      <%= t(".find")%> <b><%= @help_requests_count %></b>
     </div>
   </div>
 <% end %>
