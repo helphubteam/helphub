@@ -13,6 +13,10 @@ module ApplicationHelper
     end
   end
 
+  def yandex_map_apikey
+    tag :meta, name: "yandex_map_apikey", content: ENV["YANDEX_MAP_APIKEY"]
+  end
+
   def state_css(state)
     case state
     when 'active'

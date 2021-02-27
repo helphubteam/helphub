@@ -14,11 +14,14 @@ export default class YandexGeocoder extends BaseGeocoder {
   // eslint-disable-next-line max-statements
   async findByAddress(address) {
     let requestString = 'https://geocode-maps.yandex.ru/1.x?';
+    const apikey = Array.from(document.getElementsByTagName('meta'))
+      .filter(x => x.getAttribute('name') === 'yandex_map_apikey')[0]
+      .getAttribute('content');
     const options = {
-      apikey: '479be894-c949-490f-9cb1-aa6528b652f2',
-      format: 'json'
+      apikey: apikey,
+      format: 'json',
+      geocode: address
     };
-    options.geocode = address;
 
     requestString += Object.entries(options).
       map(([key, value]) => `${key}=${Array.isArray(value) ? value.join(',') : value}`).
