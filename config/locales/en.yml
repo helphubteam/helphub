@@ -293,11 +293,11 @@ en:
       other: "The request will restart %{count} in days"
     states:
       active: New
-      assigned: In work
-      submitted: Выполнена
-      blocked: In the archive
+      assigned: In progress
+      submitted: Done
+      blocked: Archived
     errors:
-      empty_point: The point on the map must be indicated
+      empty_point: A point on the map must be indicated
   reports:
     state:
       enqueued: Waiting in line
@@ -314,7 +314,7 @@ en:
   simple_form:
     labels:
       custom_fields:
-        data_type: Формат
+        data_type: Format
       user:
         sex: "Пол"
   settings:
@@ -329,8 +329,8 @@ en:
         full:
           header: All time statistics
           organizations_count: Registered funds
-          help_requests_count: Orders created
-          moderators_count: Registered fund administrators
+          help_requests_count: Requests created
+          moderators_count: Registered fund coordinators
           volunteers_count: Registered volunteers
         week:
           header: Statistics for the last week
@@ -343,17 +343,17 @@ en:
       custom_field_fields:
         remove_link: Delete field
       custom_fields:
-        header: Additional fields
+        header: Custom fields
         delete: Delete field
         add_field: Add field
       form:
         new_kind: A new kind of request
         help_request_kinds: Type of request
-        create: Create a
+        create: Create
         save: Save
-        cancel: Cancellation
+        cancel: Cancel
         delete: Delete
-        confirm: "ATTENTION: Deleting will entail deleting additional fields from all requests of this type. Are you sure about deleting?"
+        confirm: "ATTENTION: Deleting will cause deleting custom fields from all requests of this type. Are you sure you want to proceed?"
       index:
         new_kind_link: A new kind of request
         name_column: Name
@@ -364,7 +364,7 @@ en:
         header: Additional fields
       filters:
         search_placeholder: Search...
-        submit_search: Искать
+        submit_search: Search
         cancel_filters: Reset filters
         new_helprequest: New request
         by_status: Filter by status ...
@@ -373,13 +373,13 @@ en:
         new_helprequest: New request
         help_request: Request no.
         volunteer: "Volunteer:"
-        char_limit: No more than 140 simbols
+        char_limit: 140 symbols max
         set_volunteer: Appoint a volunteer
         set_balls: Set points
         save: Save
         archive_helprequest: Archive request
         archive: Activate
-        cancel: Cancellation
+        cancel: Cancel
         warning: At this stage, the request cannot be changed from the volunteer
       logs:
         active: Activity
@@ -388,12 +388,12 @@ en:
         comment: Comment
         time: Time
       repeat_menu:
-        regular_help: Provide assistance regularly
+        regular_help: Provide help regularly
         period: days
       index:
         status: Status
         created: Created by
-        address: The address
+        address: Address
         name: Full name
         comment: Comment
         volunteer: Volunteer
@@ -403,12 +403,12 @@ en:
     organizations:
       form:
         new_organization: New organization
-        organization: name organization
+        organization: Organization name
         create: Create
         save: Save
-        cancel: Cancellation
+        cancel: Cancel
         archive: Archive
-        confirm: Are you sure you want to archive the organization? Users of this organization will no longer be able to login to HelpHub. To restore the organization after archiving, write to the developers.
+        confirm: Are you sure you want to archive the organization? Users of this organization will no longer be able to login to HelpHub. To restore the organization after archiving, contact the developers.
       index:
         new_organization: New organization
         title: Name
@@ -452,7 +452,7 @@ en:
         user: User
         create: Create
         save: Save
-        cancel: Cancellation
+        cancel: Cancel
         delete: Delete
         confirm: Are you sure you want to delete the user?
       index:
