@@ -1,12 +1,13 @@
 module Api
   module V2
-    class AuthenticationController < Api::V1::AuthenticationController
+    class AuthenticationController < Api::V2::BaseController
       before_action :set_user, only: :login
       skip_before_action :authorize_request, only: :login
 
       # POST /login
       def login
         if @user&.valid_password?(params[:password]) && @user&.account_active? && @user&.volunteer?
+          register_app_version!(@user, params[:app_version])
           render json: generate_token_data(@user), status: :ok
         else
           render json: error_response(I18n.t('authentication.errors.unauthorized')),
@@ -16,6 +17,7 @@ module Api
 
       # POST /refresh_token
       def refresh_token
+        register_app_version!(current_api_user, params[:app_version])
         render json: generate_token_data(current_api_user), status: :ok
       end
 
@@ -34,6 +36,10 @@ module Api
 
       def set_user
         @user = User.find_by_email(params[:email])
+      end
+
+      def register_app_version!(user, app_version)
+        user.update(app_version: app_version)
       end
 
       def login_params
