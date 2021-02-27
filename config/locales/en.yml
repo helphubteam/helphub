@@ -1,33 +1,474 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "There were errors: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Unable to delete entry because a dependency exists: %{record}"
+          has_many: "Unable to delete entry because dependencies exist: %{record}"
+  date:
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+    abbr_month_names:
+      -
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    formats:
+      default: "%d.%m.%Y"
+      long: "%-d %B %Y"
+      short: "%-d %b"
+    month_names:
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    order:
+      - :day
+      - :month
+      - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about %{count} an hour
+        few: about %{count} hours
+        many: about %{count} hours
+        other: about %{count} an hour
+      about_x_months:
+        one: about %{count} a month
+        few: about %{count} months
+        many: about %{count} months
+        other: about %{count} a month
+      about_x_years:
+        one: about %{count} a year
+        few: about %{count} a year
+        many: about %{count} years
+        other:  about %{count} year
+      almost_x_years:
+        one: Almost 1 year
+        few: almost %{count} a year
+        many: almost %{count} years
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_seconds:
+        one: less %{count} than a second
+        few: less %{count} seconds
+        many: less %{count} seconds
+        other: lass %{count} second
+      less_than_x_minutes:
+        one: less %{count} minute
+        few: less %{count} minutes
+        many: less %{count} minutes
+        other: less %{count} minute
+      over_x_years:
+        one: more %{count} a year
+        few: more %{count} years 
+        many:  more %{count} year
+        other: more %{count} a year
+      x_seconds:
+        one: "%{count} per second"
+        few: "%{count} second"
+        many: "%{count} seconds"
+        other: "%{count} second"
+      x_minutes:
+        one: "%{count} per minute"
+        few: "%{count} minutes"
+        many: "%{count} minutes"
+        other: "%{count} minute"
+      x_days:
+        one: "%{count} per day"
+        few: "%{count} days"
+        many: "%{count} days"
+        other: "%{count} days"
+      x_months:
+        one: "%{count} per month"
+        few: "%{count} month"
+        many: "%{count} months"
+        other: "%{count} month"
+      x_years:
+        one: "%{count} per year"
+        few: "%{count} year"
+        many: "%{count} years"
+        other: "%{count} year"
+    prompts:
+      second: Seconds
+      minute: Minutes
+      hour: Hours
+      day: Days
+      month: Month
+      year: Year
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: need to confirm
+      blank: cannot be empty
+      confirmation: does not match the field value%{attribute}
+      empty: cannot be empty
+      equal_to: can only matter, equal %{count}
+      even: can only have an even value
+      exclusion: has a reserved meaning
+      greater_than: may matter more %{count}
+      greater_than_or_equal_to: may have a value greater than or equal to %{count}
+      inclusion: has an unintended meaning
+      invalid: has the wrong meaning
+      less_than: may matter less than %{count}
+      less_than_or_equal_to: may have a value less than or equal to %{count}
+      model_invalid: "There were errors: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: is not an integer
+      odd: can only have an odd value
+      other_than: should be different from %{count}
+      present: must be left blank
+      required: cannot be absent
+      taken: already exists
+      too_long:
+        one: too long (cannot be more than %{count} symbol)
+        few: too long (cannot be more than %{count} symbol)
+        many: too long (cannot be more than %{count} symbol)
+        other: too long (cannot be more than %{count} symbol)
+      too_short:
+        one: insufficient length (cannot be less %{count} symbol)
+        few: insufficient length (cannot be less %{count} symbol)
+        many: insufficient length (cannot be less %{count} symbol)
+        other: insufficient length (cannot be less %{count} symbol)
+      wrong_length:
+        one: wrong length (may be exactly %{count} symbol)
+        few: wrong length (may be exactly %{count} symbol)
+        many: wrong length (may be exactly %{count} symbol)
+        other: wrong length (may be exactly %{count} symbol)
+    template:
+      body: "There were problems with the following fields:"
+      header:
+        one: "%{model}: savе failed due to %{count} error"
+        few: "%{model}: save failed due to %{count} errors"
+        many: "%{model}: save failed due to %{count} errors"
+        other: "%{model}: save failed due to %{count} errors"
+  helpers:
+    select:
+      prompt: "Select:"
+    submit:
+      create: Create a % {model}
+      submit: Save % {model}
+      update: Save % {model}
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: руб.
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: billion
+            few: billion
+            many: billion
+            other: billion
+          million:
+            one: million
+            few: million
+            many: million
+            other: million
+          quadrillion:
+            one: quadrillion
+            few: quadrillion
+            many: quadrillion
+            other: quadrillion
+          thousand:
+            one: one thousand
+            few: thousand
+            many: thousand
+            other: thousand
+          trillion:
+            one: trillion
+            few: trillion
+            many: trillion
+            other: trillion
+          unit: ""
+      format:
+        delimiter: ""
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: byte
+            few: byte
+            many: byte
+            other: byte
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ""
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ""
+  support:
+    array:
+      last_word_connector: " and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: in the morning
+    formats:
+      default: "%a, %d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+    pm: evenings
+  roles:
+    volunteer: "Volunteer"
+    moderator: "Moderator"
+    admin: "Administrator"
+  authentication:
+    errors:
+      unauthorized: Incorrect login or password
+      expired_token: Key is outdated, authorization required
+      user_not_found: User is not found
+      no_jwt_token: Key not found, authorization required
+  help_request_cases:
+    errors:
+      unactive: Request is inactive
+      assigned_already: The request has already been taken into account by you
+      volunteer_role_only: The user must be a volunteer
+      unassigned: Request not accepted
+      not_own: It is impossible to fulfill someone else's request
+      submitted_already: Request already fulfilled
+      only_user_organization: No access to requests from other organizations
+  help_request:
+    recurring_in:
+      one: "The request will restart in %{count} a day"
+      few: "The request will restart %{count} in days"
+      many: "The request will restart %{count} in days"
+      other: "The request will restart %{count} in days"
+    states:
+      active: New
+      assigned: In work
+      submitted: Выполнена
+      blocked: In the archive
+    errors:
+      empty_point: The point on the map must be indicated
+  reports:
+    state:
+      enqueued: Waiting in line
+      processing: Processing in progress
+      finished: Report ready
+      errored: Errors occured
+  views:
+    pagination:
+      first: First page
+      last: Last page
+      next: Forward
+      previous: Back to
+      truncate: ...
+  simple_form:
+    labels:
+      custom_fields:
+        data_type: Формат
+      user:
+        sex: "Пол"
+  settings:
+    analytics: Analytics code
+  admin:
+    organization_configs:
+      show:
+        title: Organization settings
+    dashboard:
+      admin:
+        header: Admin panel
+        full:
+          header: All time statistics
+          organizations_count: Registered funds
+          help_requests_count: Orders created
+          moderators_count: Registered fund administrators
+          volunteers_count: Registered volunteers
+        week:
+          header: Statistics for the last week
+          help_requests_count: Orders created
+          volunteers_count: Registered volunteers
+          help_requests_submissions: Applications completed
+      index:
+        task_button: Running periodic tasks
+    help_request_kinds:
+      custom_field_fields:
+        remove_link: Delete field
+      custom_fields:
+        header: Additional fields
+        delete: Delete field
+        add_field: Add field
+      form:
+        new_kind: A new kind of request
+        help_request_kinds: Type of request
+        create: Create a
+        save: Save
+        cancel: Cancellation
+        delete: Delete
+        confirm: "ATTENTION: Deleting will entail deleting additional fields from all requests of this type. Are you sure about deleting?"
+      index:
+        new_kind_link: A new kind of request
+        name_column: Name
+        default_column: Selected by default
+        edit: Edit
+    help_requests:
+      custom_values:
+        header: Additional fields
+      filters:
+        search_placeholder: Search...
+        submit_search: Искать
+        cancel_filters: Reset filters
+        new_helprequest: New request
+        by_status: Filter by status ...
+        find: "Records found:"
+      form:
+        new_helprequest: New request
+        help_request: Request no.
+        volunteer: "Volunteer:"
+        char_limit: No more than 140 simbols
+        set_volunteer: Appoint a volunteer
+        set_balls: Set points
+        save: Save
+        archive_helprequest: Archive request
+        archive: Activate
+        cancel: Cancellation
+        warning: At this stage, the request cannot be changed from the volunteer
+      logs:
+        active: Activity
+        author: Author
+        action: Action
+        comment: Comment
+        time: Time
+      repeat_menu:
+        regular_help: Provide assistance regularly
+        period: days
+      index:
+        status: Status
+        created: Created by
+        address: The address
+        name: Full name
+        comment: Comment
+        volunteer: Volunteer
+        period: Repeat, days
+        last_update: Last modified
+        help_request_num: Request no.
+    organizations:
+      form:
+        new_organization: New organization
+        organization: name organization
+        create: Create
+        save: Save
+        cancel: Cancellation
+        archive: Archive
+        confirm: Are you sure you want to archive the organization? Users of this organization will no longer be able to login to HelpHub. To restore the organization after archiving, write to the developers.
+      index:
+        new_organization: New organization
+        title: Name
+        country: Country name
+        city: City name
+        site: Website
+        members: Members
+        help_requests: Requests
+        edit: Edit
+    reports:
+      form:
+        create_new_report: Create new report
+        create: Create
+      index:
+        created: Time of creation
+        title: Name
+        status: Status
+        file: File
+        download: Download file
+    settings:
+      index:
+        title: Name
+        value: Value
+        save: Save changes
+        confirm: "ATTENTION: We are changing the settings of the entire site. Continue?"
+    users:
+      activity:
+        activity: Action
+        help_request: Request
+        action: Acrion
+        comment: Comment
+        time: Time
+        help_request_num: Request no.
+      filters:
+        searching: Search...
+        search: Search
+        find: Records found
+        reset: Reset filters
+      form:
+        new_user: New user
+        user: User
+        create: Create
+        save: Save
+        cancel: Cancellation
+        delete: Delete
+        confirm: Are you sure you want to delete the user?
+      index:
+        new_user: New user
+        lastname: Last Name
+        firstname: First Name
+        phone: Telephone number
+        email: Email
+        organization: Name of the organization
+        sex: Sex
+        role: Role
+        points: Points
+        not_assigned: Organization not assigned
+        edit: Edit
+  female: Female
+  male: Male
+  notifications:
+      help_request:
+        create: New requests have appeared. You may be able to help

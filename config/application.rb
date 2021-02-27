@@ -12,7 +12,7 @@ module App
     config.active_job.queue_adapter = :sidekiq
     config.load_defaults 6.0
     config.autoload_paths << "#{Rails.root}/lib"
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = ENV['LOCALE']
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     # Settings in config/environments/* take precedence over those specified here.
