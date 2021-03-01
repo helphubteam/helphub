@@ -24,7 +24,9 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+      authorize @help_request_kind
+    end
 
     def update
       authorize @help_request_kind
