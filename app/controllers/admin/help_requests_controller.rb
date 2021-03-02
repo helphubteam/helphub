@@ -12,6 +12,7 @@ module Admin
     end
 
     def edit
+      authorize @help_request
       flash.now[:danger] = 'Просьба находится в архиве' if @help_request.blocked?
     end
 
