@@ -11,6 +11,14 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user.moderator?
   end
 
+  class Scope < Scope
+    def resolve
+      return scope if user.admin?
+
+      scope.where(organization: current_organization)
+    end
+  end
+
   private
 
   def set_user
