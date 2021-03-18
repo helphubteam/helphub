@@ -8,7 +8,8 @@ class HelpRequestLog < ApplicationRecord
     blocked: 4, activated: 5,
     refreshed: 6, created: 7,
     manual_unassign: 8,
-    manual_assign: 9
+    manual_assign: 9,
+    updated: 10
   }
 
   validates :kind, presence: true
