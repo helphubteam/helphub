@@ -86,9 +86,9 @@ module Api
       distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
       distance_order_query = "#{distance_query} ASC"
       distance_limit_query = "#{distance_query} < #{(search_params[:distance].to_i * 1000)}"
-
-      scope.where(distance_limit_query)
-           .reorder(distance_order_query)
+      distance_limit_sql = Arel.sql(distance_limit_query)
+      distance_order_sql = Arel.sql(distance_order_query)
+      scope.where(distance_limit_sql).reorder(distance_order_sql)
     end
 
     def apply_distance(scope)
@@ -99,8 +99,9 @@ module Api
       # long, lat = search_params[:lonlat].split('_').map(&:to_f)
       lat, long = search_params[:lonlat].split('_').map(&:to_f)
       distance_query = "ST_Distance(help_requests.lonlat, ST_GeogFromText('SRID=4326;POINT(#{long} #{lat})'))"
-
-      scope.select("help_requests.*, #{distance_query} as distance").group('help_requests.id').all
+      select_distance_sql = Arel.sql("help_requests.*, #{distance_query} as distance")
+      group_sql = Arel.sql('help_requests.id')
+      scope.select(select_distance_sql).group(group_sql).all
     end
 
     def current_organization
