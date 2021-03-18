@@ -364,6 +364,7 @@ en:
         header: Additional fields
       filters:
         search_placeholder: Search...
+        number: Request number
         submit_search: Search
         cancel_filters: Reset filters
         new_helprequest: New request
