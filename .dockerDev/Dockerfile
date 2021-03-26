@@ -14,6 +14,7 @@ RUN apt-get update -qq \
     less \
     git \
     pkg-config \
+    shared-mime-info \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \

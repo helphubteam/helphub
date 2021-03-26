@@ -47,7 +47,6 @@ gem 'sidekiq-scheduler'
 gem 'rake'
 gem 'fcm'
 
-gem 'mimemagic', '0.3.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
