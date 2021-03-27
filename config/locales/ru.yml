@@ -280,7 +280,7 @@ ru:
   help_request_cases:
     errors:
       unactive: Просьба неактивна
-      assigned_already: Просьба уже взята Вами в работу
+      assigned_already: Просьба уже у вас в работе
       volunteer_role_only: Пользователь должен быть волонтером
       unassigned: Просьба не взята в работу
       not_own: Невозможно выполнить чужую просьбу
@@ -288,10 +288,10 @@ ru:
       only_user_organization: Нет доступа к просьбам других организаций
   help_request:
     recurring_in:
-      one: "Просьба перезапустится через %{count} день"
-      few: "Просьба перезапустится через %{count} дня"
-      many: "Просьба перезапустится через %{count} дней"
-      other: "Просьба перезапустится через %{count} дней"
+      one: "Перезапустится через %{count} день"
+      few: "Перезапустится через %{count} дня"
+      many: "Перезапустится через %{count} дней"
+      other: "Перезапустится через %{count} дней"
     states:
       active: Новая
       assigned: В работе
@@ -323,7 +323,7 @@ ru:
   admin:
     organization_configs:
       show:
-        title: Настройки Организации
+        title: Настройки организации
     dashboard:
       admin:
         header: Панель администратора
@@ -331,7 +331,7 @@ ru:
           header: Статистика за все время
           organizations_count: Зарегистрировано фондов
           help_requests_count: Создано заявок
-          moderators_count: Зарегистрировано администраторов фондов
+          moderators_count: Зарегистрировано координаторов фондов
           volunteers_count: Зарегистрировано волонтеров
         week:
           header: Статистика за последнюю неделю
@@ -365,6 +365,7 @@ ru:
         header: Дополнительные поля
       filters:
         search_placeholder: Поиск...
+        number: Номер просьбы
         submit_search: Искать
         cancel_filters: Сбросить фильтры
         new_helprequest: Новая просьба
@@ -396,7 +397,7 @@ ru:
         created: Создана
         address: Адрес
         name: ФИО
-        comment: Комментарий
+        comment: Описание просьбы
         volunteer: Волонтер
         period: Повтор, дн
         last_update: Последнее изменение
@@ -472,4 +473,4 @@ ru:
   male: Мужской
   notifications:
       help_request:
-        create: Появились новые просьбы. Возможно, вы сможете помочь
+        create: Появились новые просьбы

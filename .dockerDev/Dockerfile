@@ -14,6 +14,7 @@ RUN apt-get update -qq \
     less \
     git \
     pkg-config \
+    shared-mime-info \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
@@ -47,7 +48,9 @@ ENV LANG=C.UTF-8 \
     BUNDLE_RETRY=3
 
 RUN gem update --system && \
-    gem install bundler:$BUNDLER_VERSION
+    rm /usr/local/lib/ruby/gems/*/specifications/default/bundler-*.gemspec && \
+    gem uninstall bundler && \
+    gem install bundler -v $BUNDLER_VERSION
 
 RUN mkdir -p /app
 

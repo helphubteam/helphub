@@ -5,9 +5,9 @@ x-backend:
     dockerfile: ./.docker/Dockerfile
     context: .
     args:
-      RUBY_VERSION: '2.7.0'
+      RUBY_VERSION: '2.7.2'
       PG_MAJOR: '10'
-      BUNDLER_VERSION: '2.1.4'
+      BUNDLER_VERSION: '2.2.15'
       NODE_MAJOR: '14'
       YARN_VERSION: '1.22.5'
       NODE_ENV: staging

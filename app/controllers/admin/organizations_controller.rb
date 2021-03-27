@@ -25,7 +25,9 @@ module Admin
       end
     end
 
-    def edit; end
+    def edit
+      authorize @organization
+    end
 
     def update
       authorize @organization

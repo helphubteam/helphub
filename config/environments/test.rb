@@ -23,7 +23,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
-
+  
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
@@ -46,4 +46,7 @@ Rails.application.configure do
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
   config.hosts << 'www.example.com'
+
+  # TODO: rework tests to use i18n instead of doing this
+  config.i18n.default_locale = :ru
 end
