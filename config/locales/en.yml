@@ -273,6 +273,7 @@ en:
   authentication:
     errors:
       unauthorized: Incorrect login or password
+      unconfirmed: Confirm your email first
       expired_token: Key is outdated, authorization required
       user_not_found: User is not found
       no_jwt_token: Key not found, authorization required
