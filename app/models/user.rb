@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  #  :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :recoverable,
          :rememberable, :validatable,
-         :invitable # , invite_for: 2.weeks # the period the generated invitation token is valid
+         :invitable, # , invite_for: 2.weeks # the period the generated invitation token is valid
+         :registerable, :confirmable
   belongs_to :organization, optional: true # TODO: add conditions = true only admin
 
   include RolesHelpers
