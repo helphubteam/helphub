@@ -1,4 +1,4 @@
-<h2>Редактировать <%= resource_name.to_s.humanize %></h2>
+<h2><%= t('devise.registrationd.edit.header'), resource_name.to_s.humanize %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -11,14 +11,14 @@
     <% end %>
 
     <%= f.input :password,
-                hint: "оставьте пустым если не хотите менять пароль",
+                hint: t('devise.registrationd.edit.password_hint'),
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :current_password,
-                hint: "необходим Ваш текущий пароль чтобы подтвердить изменения",
+                hint: t('devise.registrationd.edit.current_password_hint'),
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
   </div>

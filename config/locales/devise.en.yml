@@ -1,0 +1,74 @@
+en:
+  errors:
+    messages:
+      expired: "outdated. Please request a new"
+      not_found: "not found"
+      already_confirmed: "already confirmed. Please try to login"
+      not_locked: "not blocked"
+      not_saved:
+        one: "%{resource}: save failed due to %{count} error"
+        few: "%{resource}: save failed due to %{count} error"
+        many: "%{resource}: save failed due to %{count} error"
+        other: "%{resource}: save failed due to %{count} error"
+devise:
+    invitations:
+      send_instructions: "Invitation sent by email: %{email}."
+      invitation_token_invalid: "Wrong invitation key!"
+      updated: "Your password has been successfully set. You are now logged into the site."
+      updated_not_active: "Your password has been successfully set."
+      no_invitations_remaining: "No more invitations left"
+      invitation_removed: "No more invitations left."
+      new:
+        header: "Sending invitations"
+        submit_button: "Send an invitation"
+      edit:
+        header: "Set a password"
+        new_password: "New password"
+        password_confirmation: "Password Confirmation"
+    failure:
+      user:
+        not_found_in_database: "User is not found."
+      already_authenticated: "You are already signed in."
+      unauthenticated: "You need to login or register."
+      unconfirmed: "You must verify your account."
+      locked: "Your account has been blocked."
+      invalid: "Invalid email or password."
+      invalid_token: "Invalid Authentication Key."
+      timeout: "Your session has ended. Please login again."
+      inactive: "Your account has been archived."
+    sessions:
+      signed_in: "You are logged in to the system."
+      signed_out: "The system is logged out."
+    passwords:
+      send_instructions: "Within a few minutes you will receive an email with instructions on how to reset your password."
+      updated: "Your password has been changed. You are now logged in."
+      updated_not_active: 'Your password has been changed.'
+      send_paranoid_instructions: "If your e-mail address is in our database, then within a few minutes you will receive an email with instructions on how to reset your password."
+    confirmations:
+      submit: "Submit instructions"
+      send_instructions: "Within a few minutes you will receive an email with instructions on how to verify your account."
+      send_paranoid_instructions: "If your e-mail address is in our database, then within a few minutes you will receive an email with instructions for confirming your account."
+      confirmed: "Your account has been verified. You are now logged in."
+    registrations:
+      signed_up: "Welcome! You have successfully registered."
+      inactive_signed_up: "Welcome! You have successfully registered. But for now, you cannot log in. your account %{reason}."
+      updated: "Your account has been changed."
+      destroyed: "Goodbye! Your account has been deleted. Hope to see you again."
+      reasons:
+        inactive: 'not active'
+        unconfirmed: 'not confirmed'
+        locked: 'locked'
+    unlocks:
+      send_instructions: "Within a few minutes you will receive an email with instructions on how to unblock your account.."
+      unlocked: "Your account is unlocked. You are now logged in."
+      send_paranoid_instructions: "If your account exists, then within a few minutes you will receive an email with instructions on how to unblock it."
+    omniauth_callbacks:
+      success: "The system is logged in with an account from %{kind}."
+      failure: "You cannot log in with an account of  %{kind}, because \"%{reason}\"."
+    mailer:
+      confirmation_instructions:
+        subject: "Account verification instructions"
+      reset_password_instructions:
+        subject: "Password recovery instructions"
+      unlock_instructions:
+        subject: "Account unlocking instructions"

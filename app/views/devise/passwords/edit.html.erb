@@ -1,5 +1,5 @@
 <div class="container d-flex flex-column align-items-center">
-  <h2>Смена пароля</h2>
+  <h2><%= t "devise.invitations.edit.header"%></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
@@ -9,19 +9,19 @@
 
     <div class="form-inputs">
       <%= f.input :password,
-                  label: "Новый пароль",
+                  label: t('devise.invitations.edit.new_password'),
                   required: true,
                   autofocus: true,
                   hint: ("минимальная длина пароля #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :password_confirmation,
-                  label: "Подтверждение пароля",
+                  label: t('devise.invitations.edit.password_confirmation'),
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Сменить пароль", class: "btn btn-primary" %>
+      <%= f.button :submit, t('devise.passwords.change.submit_button'), class: "btn btn-primary" %>
     </div>
   <% end %>
 

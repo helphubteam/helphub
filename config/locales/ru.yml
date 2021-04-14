@@ -482,3 +482,21 @@ ru:
   notifications:
       help_request:
         create: Появились новые просьбы
+  devise:
+    passwords:
+      new:
+        send_instructions_button: "Отправить инструкции"
+        forgot_your_password_header: "Забыли пароль?"
+      change:
+        submit_button: "Установить пароль"
+    registrations:
+      edit:
+        header: "Регистрация"
+        password_hint: "оставьте пустым если не хотите менять пароль"
+        current_password_hint: "необходим Ваш текущий пароль чтобы подтвердить изменения"
+    shared:
+      links:
+        enter: "Войти"
+        new_registration: "Зарегистрироваться"
+        receive_confirmation: "Не пришло подтверждение?"
+        receive_unlock_instructions: "Не пришли инструкции по разблокировке?"

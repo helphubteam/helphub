@@ -481,3 +481,21 @@ en:
   notifications:
       help_request:
         create: New requests have appeared. You may be able to help
+  devise:
+    passwords:
+      new:
+        send_instructions_button: "Send instructions"
+        forgot_your_password_header: "Forgot your password?"
+      change:
+        submit_button: "Set password"
+    registrations:
+      edit:
+        header: "Registration"
+        password_hint: "leave blank if you don't want to change your password"
+        current_password_hint: "your current password is required to confirm changes"
+    shared:
+      links:
+        enter: "Войти"
+        new_registration: "Register"
+        receive_confirmation: "Didn't receive confirmation?"
+        receive_unlock_instructions: "Didn't receive unlock instructions?"
