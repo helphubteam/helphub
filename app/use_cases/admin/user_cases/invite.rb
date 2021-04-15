@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module Admin
   module UserCases
     class Invite
@@ -9,7 +11,6 @@ module Admin
       def call
         user = User.new(normalized_params)
         user.valid?
-        user.errors.messages.except!(:password)
         return error_response(user) if user.errors.any?
 
         user.invite!
@@ -24,6 +25,7 @@ module Admin
         @normalized_params ||= begin
           res = @user_params.dup
           res[:role] = 'moderator' if res[:role] == 'admin' && !current_user.admin?
+          res[:password] = SecureRandom.uuid
           res
         end
       end
