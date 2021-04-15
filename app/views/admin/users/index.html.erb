@@ -19,7 +19,7 @@
   </thead>
   <% @users.each do |record| %>
     <tr>
-      <td><%= record.surname %></td>
+      <td><%= "!!!CHECK NEEDED!!! " if record.on_check? %><%= record.surname %></td>
       <td><%= record.name %></td>
       <td><%= record.phone %></td>
       <td><%= record.email %></td>
