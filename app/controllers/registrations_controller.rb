@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def sign_up_params
-    super.merge(volunteer: true)
+    super.merge(volunteer: true, status: :on_check)
   end
 
   def configure_sign_up_params

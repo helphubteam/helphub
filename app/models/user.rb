@@ -16,12 +16,22 @@ class User < ApplicationRecord
 
   validates :organization_id, presence: true, if: -> { moderator? || volunteer? }
 
+  enum status: { active: 0, on_check: 1, blocked: 2 } do
+    event :block do
+      transition all => :blocked
+    end
+
+    event :confirm do
+      transition on_check: :active
+    end
+  end
+
   def active_for_authentication?
     super && account_active?
   end
 
   def account_active?
-    organization ? !organization.archive? : true
+    active? && (organization ? !organization.archive? : true)
   end
 
   def to_s
