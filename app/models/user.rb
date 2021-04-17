@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def account_active?
-    active? && (organization ? !organization.archive? : true)
+    organization ? !organization.archive? : true
   end
 
   def to_s

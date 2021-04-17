@@ -274,6 +274,7 @@ en:
     errors:
       unauthorized: Incorrect login or password
       unconfirmed: Confirm your email first
+      pending: Need to be approved by moderator
       expired_token: Key is outdated, authorization required
       user_not_found: User is not found
       no_jwt_token: Key not found, authorization required
@@ -403,6 +404,9 @@ en:
         last_update: Last modified
         help_request_num: Request no.
     organizations:
+      invite_link:
+        invite: Volunteers registration link
+        copy: Copy
       form:
         new_organization: New organization
         organization: Organization name

@@ -275,6 +275,7 @@ ru:
     errors:
       unauthorized: Неверные логин или пароль
       unconfirmed: Пользователь не подтвердил свой email
+      pending: Пользователь не активирован модератором
       expired_token: Ключ устарел, необходима авторизация
       user_not_found: Пользователь не найден
       no_jwt_token: Ключ не найден, необходима авторизация
@@ -404,6 +405,9 @@ ru:
         last_update: Последнее изменение
         help_request_num: Просьба №
     organizations:
+      invite_link:
+        invite: Ссылка на регистрацию
+        copy: Скопировать
       form:
         new_organization: Новая организация
         organization: Организация

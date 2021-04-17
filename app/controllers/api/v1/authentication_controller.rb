@@ -8,7 +8,11 @@ module Api
       def login
         if @user&.valid_password?(params[:password]) && @user&.account_active? && @user&.volunteer?
           unless @user.confirmed?
-            return render json: error_response(I18n.t('authentication.errors.unconfirmed'))
+            return render json: error_response(I18n.t('authentication.errors.unconfirmed')), status: :forbidden
+          end
+
+          unless @user.active?
+            return render json: error_response(I18n.t('authentication.errors.pending')), status: :forbidden
           end
           render json: generate_token_data(@user), status: :ok
         else
