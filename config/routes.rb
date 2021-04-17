@@ -68,7 +68,11 @@ Rails.application.routes.draw do
       index new
       update edit
       destroy create
-    ]
+    ] do
+      member do
+        post :approve
+      end
+    end
 
     resources :organizations, only: %i[
       index new

@@ -16,13 +16,13 @@ class User < ApplicationRecord
 
   validates :organization_id, presence: true, if: -> { moderator? || volunteer? }
 
-  enum status: { active: 0, on_check: 1, blocked: 2 } do
+  enum status: { active: 0, pending: 1, blocked: 2 } do
     event :block do
       transition all => :blocked
     end
 
-    event :confirm do
-      transition on_check: :active
+    event :approve do
+      transition pending: :active
     end
   end
 

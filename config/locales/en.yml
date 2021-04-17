@@ -437,6 +437,9 @@ en:
         save: Save changes
         confirm: "ATTENTION: We are changing the settings of the entire site. Continue?"
     users:
+      approval_form:
+        approve: Approve
+        info: Volunteer can't use the system until gets moderator's approval.
       activity:
         activity: Action
         help_request: Request
