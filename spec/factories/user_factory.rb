@@ -4,6 +4,8 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { '123qwe123qwe!' }
     sex { 0 }
+    confirmed_at { Time.zone.now }
+    status { :active }
 
     trait :admin do
       role { 'admin' }

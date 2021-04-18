@@ -47,6 +47,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.hosts << 'www.example.com'
 
+  Rails.application.routes.default_url_options[:host]= 'localhost:3000'
+
   # TODO: rework tests to use i18n instead of doing this
   config.i18n.default_locale = :ru
 end

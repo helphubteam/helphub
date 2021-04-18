@@ -11,6 +11,10 @@ class UserPolicy < ApplicationPolicy
     user.admin? || user.moderator?
   end
 
+  def approve?
+    user.admin? || (user.moderator? && !set_user.admin?)
+  end
+
   class Scope < Scope
     def resolve
       return scope if user.admin?

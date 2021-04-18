@@ -1,0 +1,8 @@
+<% return "" unless user.pending? %>
+
+<div class="alert alert-warning overflow-hidden" role="alert">
+  <%= form_for [:approve, :admin, user], method: :post do |f| %>
+    <%= t('.info') %>
+    <%= f.submit t(".approve"), class: 'btn btn-success float-right' %>
+  <% end %>
+</div>

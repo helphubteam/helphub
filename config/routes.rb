@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users, controllers: { sessions: 'sessions', passwords: 'passwords' }
+  devise_for :users, controllers: { sessions: 'sessions', passwords: 'passwords', registrations: 'registrations' }
 
   namespace :api do
     namespace :v1 do
@@ -68,7 +68,11 @@ Rails.application.routes.draw do
       index new
       update edit
       destroy create
-    ]
+    ] do
+      member do
+        post :approve
+      end
+    end
 
     resources :organizations, only: %i[
       index new
