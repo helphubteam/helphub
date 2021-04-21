@@ -3,9 +3,6 @@
     <div class='col-12 col-md-4 py-2 py-md-0'>
       <div class="input-group m-0">
         <%= text_field_tag :search, params[:search], placeholder: t(".search_placeholder"), class: 'form-control form-control-sm' %>
-        <div class="input-group-append">
-          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success' %>
-        </div>
       </div>
     </div>
     <!-- <div class='col-12 col-md-4 d-flex justify-content-center py-2 py-md-0'>
@@ -38,6 +35,11 @@
     </div>
     <div class='col-4'>
       <%= t(".find")%> <b><%= @help_requests_count %></b>
+    </div>
+  </div>
+  <div class= "container">
+    <div class="input-group-append">
+          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success' %>
     </div>
   </div>
 <% end %>
