@@ -1,0 +1,54 @@
+wb = xlsx_package.workbook
+
+header_options = {
+  sz: 14,
+  height: 30,
+  style: wb.styles.add_style(
+    b: true,
+    alignment: { horizontal: :center, vertical: :center },
+    border: {
+      style: :thin, color: "000000",
+      edges: %i[bottom]
+    }
+  )
+}
+
+cell_options = {
+  sz: 12,
+  height: 28,
+  style: wb.styles.add_style(
+    alignment: { horizontal: :center, vertical: :center },
+  )
+}
+
+title_options = {
+  height: 40,
+  sz: 22,
+  style: wb.styles.add_style(
+    b: true,
+    alignment: { vertical: :center },
+  )
+}
+
+title = "Отчет по заявкам #{current_organization.title}"
+
+wb.styles do |s|
+  wb.add_worksheet(name: title) do |sheet|
+    sheet.add_row [title], **title_options
+    sheet.merge_cells('A1:F1')
+    sheet.column_widths 20, 20, 15, 15, 15, 15
+    sheet.add_row [], height: 30
+    sheet.add_row ['Номер заявки', 'Пользователь', 'Email', 'Действие', 'Комментарий', 'Время изменений'], **header_options
+    sheet.add_row [], height: 30
+    logs.each do |log|
+      sheet.add_row [
+        log.help_request.number,
+        [log.user.name, log.user.surname].join(' '),
+        log.user.email,
+        I18n.t("help_request_log.kind.#{log.kind}"),
+        log.comment,
+        "#{I18n.l(log.created_at, format: :short)} #{Time.zone}"
+      ], **cell_options
+    end
+  end
+end

@@ -8,25 +8,17 @@ module Admin
     end
 
     def create
-      # @report = Report.new(report_params)
-      # authorize @report
-
-      # if @report.save
-      #   GenerateReportWorker.perform_async(@report.id)
-      #   redirect_to action: :index
-      #   flash[:notice] = 'Report generation has begun!'
-      # else
-      #   render :idnex
-      #   flash[:error] = 'Errors!'
-      # end
-
-      data = ComposeReportData.call(current_organization)
-      filename = "#{report_params[:name]}.csv"
-      options = {
-        type: 'text/csv; charset=utf-8; header=present',
-        filename: filename,
-        disposition: "attachment; filename=#{filename}"
-      }
+      logs = HelpRequestLog.includes(:help_request, :user)
+                           .where(users: { organization: current_organization })
+      data = ActionController::Base.new.render_to_string(
+        layout: false,
+        template: 'admin/reports/template.xlsx.axlsx',
+        handlers: [:axlsx],
+        formats: [:xlsx],
+        locals: { logs: logs, current_organization: current_organization }
+      )
+      filename = "Отчет по заявкам #{current_organization.title}.xlsx"
+      options = { filename: filename, type: Mime[:xlsx], disposition: 'inline' }
       send_data data, options
     end
 

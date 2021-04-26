@@ -1,6 +1,5 @@
 version: '3.8'
-x-backend:
-  &backend
+x-backend: &backend
   build:
     dockerfile: ./.dockerDev/Dockerfile
     context: .

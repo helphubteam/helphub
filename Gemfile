@@ -47,6 +47,9 @@ gem 'sidekiq-scheduler'
 gem 'rake'
 gem 'fcm'
 
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -79,6 +82,10 @@ group :development do
   gem 'capistrano', '~> 3.11'
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+
+  gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
