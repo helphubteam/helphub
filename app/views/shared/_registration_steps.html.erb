@@ -1,0 +1,11 @@
+<% steps = { form: 1, confirm_email: 2, waiting_for_moderator: 3, good_to_go: 4 } %>
+<% step ||= :form %>
+<% step_number = steps[step] %>
+<div class="registration-steps mb-1" style="font-size: 9px">
+  <% steps.each do |step, number| %>
+    <% css = "" %>
+    <% css += "color: grey;" if number <  step_number  %>
+    <% css += "font-weight: bold;" if number == step_number  %>
+    <span style="<%= css %>"><%= t("registration_steps.#{step}") %> -> </span>
+  <% end %>
+</div>

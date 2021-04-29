@@ -9,6 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
+    handle_personal_data_confirmation!
     @organizations = available_organizations
     @organization = resource.organization
     super
@@ -26,6 +27,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def handle_personal_data_confirmation!
+    if params[:personal_data_confirmation] != 'true'
+      resource.errors.add(:personal_data_confirmation, I18n.t('registration.personal_data_confirmation_error'))
+    end
+  end
 
   def available_organizations
     Organization.active.where(test: false)

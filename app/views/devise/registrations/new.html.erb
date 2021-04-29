@@ -7,7 +7,8 @@
   <% if @organization.present? %>
     <%= @organization.title %>
   <% end %>
-  <div class="mb-2"><b>Регистрация волонтера</b></div>
+  <div class="mb-1"><b>Регистрация волонтера</b></div>
+  <%= render "shared/registration_steps", step: :form %>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :vertical_form) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
@@ -30,7 +31,6 @@
             include_blank: false
         %>
       <% end %>
-
       <%= f.input :name, 
         required: true,
         placeholder: t('activerecord.attributes.user.name'),
@@ -46,22 +46,29 @@
         placeholder: t('activerecord.attributes.user.phone'),
         label: false
       %>
-
       <%= f.input :password,
                   placeholder: t('activerecord.attributes.user.password'),
                   required: true,
                   label: false,
                   hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
+      <% personal_data_confirmation_errored = resource.errors.messages[:personal_data_confirmation] %>
+      <div class="form-group form-check mb-1 <%= "form-group-invalid" if personal_data_confirmation_errored %>">
+        <input required type="hidden" value="false" name="personal_data_confirmation">
+        <input class="form-check-input boolean <%= 'is-invalid' if personal_data_confirmation_errored %>" required type="checkbox" value="true" name="personal_data_confirmation" id="personal_data_confirmation">
+        <label style="font-size: 10px" class="form-check-label boolean" for="personal_data_confirmation">
+          <%= t("registration.personal_data_confirmation") %>
+        </label>
+      </div>
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success' %>
+      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success', id: :registration_submit_btn %>
     </div>
 
     <%= recaptcha_execute('register') %>
   <% end %>
-  <div class="mt-3">
+  <div class="mt-1">
     <%= render "devise/shared/registration_links" %>
   </div>
 </div>
