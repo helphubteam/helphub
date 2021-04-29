@@ -3,6 +3,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @organizations = available_organizations
+    @organization = Organization.find(params[:organization_id]) if params[:organization_id]
+    super
+  end
+
+  def create
+    build_resource(sign_up_params)
+    @organizations = available_organizations
+    @organization = resource.organization
     super
   end
 

@@ -50,9 +50,11 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { '123qwe123qwe!' }
     sex { 0 }
+    phone { Faker::PhoneNumber.phone_number }
+    name { Faker::Name.name.split(' ').first }
+    surname { Faker::Name.name.split(' ').last }
     confirmed_at { Time.zone.now }
     status { :active }
-
     trait :admin do
       role { 'admin' }
     end
