@@ -82,9 +82,5 @@ module Admin
     def search_params
       params.permit(*UsersSearcher::DEFAULT_SEARCH_PARAMS.keys)
     end
-
-    def moderator_confirmation
-      UserMailer.moderator_confirmation(@user).deliver_now
-    end
   end
 end
