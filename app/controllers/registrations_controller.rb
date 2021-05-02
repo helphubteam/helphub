@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     @organizations = available_organizations
     print params[:recaptcha_token]
     unless verify_recaptcha?(params[:recaptcha_token], 'register')
-      flash[:error] = "reCAPTCHA: ошибка авторизации. Повторите попытку позже."
+      flash[:error] = I18n.t('registration.errors.recaptcha')
       redirect_to action: :new
       return
     end
@@ -36,7 +36,6 @@ class RegistrationsController < Devise::RegistrationsController
     uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?secret=#{secret_key}&response=#{token}")
     response = Net::HTTP.get_response(uri)
     json = JSON.parse(response.body)
-    print json
     json['success'] && json['score'] > RECAPTCHA_MINIMUM_SCORE && json['action'] == recaptcha_action
   end
 end
