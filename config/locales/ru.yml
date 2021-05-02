@@ -279,6 +279,9 @@ ru:
       expired_token: Ключ устарел, необходима авторизация
       user_not_found: Пользователь не найден
       no_jwt_token: Ключ не найден, необходима авторизация
+  registration:
+    errors:
+      recaptcha: Ошибка регистрации. Повторите попытку позже.
   help_request_cases:
     errors:
       unactive: Просьба неактивна

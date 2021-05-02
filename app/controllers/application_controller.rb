@@ -2,7 +2,8 @@
 
 class ApplicationController < ActionController::Base
   PROMOTE_HELPHUB_APP_PAGE = 'http://helphub.ru/download'
-
+  RECAPTCHA_MINIMUM_SCORE = 0.5
+  
   include Pundit
 
   protected

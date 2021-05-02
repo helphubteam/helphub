@@ -6,6 +6,17 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def create
+    @organizations = available_organizations
+    print params[:recaptcha_token]
+    unless verify_recaptcha?(params[:recaptcha_token], 'register')
+      flash[:error] = I18n.t('registration.errors.recaptcha')
+      redirect_to action: :new
+      return
+    end
+    super
+  end
+
   protected
 
   def available_organizations
@@ -18,5 +29,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:organization_id, :name, :surname, :phone])
+  end
+
+  def verify_recaptcha?(token, recaptcha_action)
+    secret_key = ENV["RECAPTCHA_SECRET_KEY"]
+    uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?secret=#{secret_key}&response=#{token}")
+    response = Net::HTTP.get_response(uri)
+    json = JSON.parse(response.body)
+    json['success'] && json['score'] > RECAPTCHA_MINIMUM_SCORE && json['action'] == recaptcha_action
   end
 end
