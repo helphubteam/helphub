@@ -50,6 +50,9 @@ gem 'fcm'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
+gem 'sentry-ruby'
+gem 'sentry-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
