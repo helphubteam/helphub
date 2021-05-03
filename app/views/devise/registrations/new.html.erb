@@ -9,7 +9,7 @@
   <% end %>
   <div class="mb-1"><b>Регистрация волонтера</b></div>
   <%= render "shared/registration_steps", step: :form %>
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :vertical_form) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :vertical_form, html: {class: 'mt-1'}) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
                   required: true,
@@ -52,14 +52,8 @@
                   label: false,
                   hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
-      <% personal_data_confirmation_errored = resource.errors.messages[:personal_data_confirmation] %>
-      <div class="form-group form-check mb-1 <%= "form-group-invalid" if personal_data_confirmation_errored %>">
-        <input required type="hidden" value="false" name="personal_data_confirmation">
-        <input class="form-check-input boolean <%= 'is-invalid' if personal_data_confirmation_errored %>" required type="checkbox" value="true" name="personal_data_confirmation" id="personal_data_confirmation">
-        <label style="font-size: 10px" class="form-check-label boolean" for="personal_data_confirmation">
-          <%= t("registration.personal_data_confirmation") %>
-        </label>
-      </div>
+
+      <%= f.input :policy_confirmed, required: true, error: false %>
     </div>
 
     <div class="form-actions">

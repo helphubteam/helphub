@@ -20,6 +20,7 @@
 #  name                   :string
 #  old_role               :integer          default(0), not null
 #  phone                  :string
+#  policy_confirmed       :boolean
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -55,6 +56,7 @@ FactoryBot.define do
     surname { Faker::Name.name.split(' ').last }
     confirmed_at { Time.zone.now }
     status { :active }
+    policy_confirmed true
     trait :admin do
       role { 'admin' }
     end

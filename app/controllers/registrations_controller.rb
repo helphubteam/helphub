@@ -43,7 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:organization_id, :name, :surname, :phone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:organization_id, :name, :surname, :phone, :policy_confirmed])
   end
 
   def verify_recaptcha?(token, recaptcha_action)
