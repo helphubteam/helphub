@@ -12,12 +12,6 @@ class RegistrationsController < Devise::RegistrationsController
     handle_personal_data_confirmation!
     @organizations = available_organizations
     @organization = resource.organization
-    super
-  end
-
-  def create
-    @organizations = available_organizations
-    print params[:recaptcha_token]
     unless verify_recaptcha?(params[:recaptcha_token], 'register')
       flash[:error] = I18n.t('registration.errors.recaptcha')
       redirect_to action: :new
