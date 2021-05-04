@@ -53,10 +53,10 @@
                   hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
 
-      <%= f.input :policy_confirmed, required: true, error: false %>
+      <%= f.input :policy_confirmed, required: true, error: false, label_html: { style: 'font-size: 10px' } %>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions d-flex justify-content-center">
       <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success', id: :registration_submit_btn %>
     </div>
 
