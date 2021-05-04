@@ -1,45 +1,68 @@
+<%= content_for :recaptcha_js do %>
+  <%= include_recaptcha_js %>
+<% end %>
+
 <div class="container d-flex flex-column align-items-center">
-  <h2 class='mt-5'><%= render partial: 'svg/logo' %></h2>
-  <h3>Регистрация волонтера</h3>
-
-  <%= content_for :recaptcha_js do %>
-    <%= include_recaptcha_js %>
+  <%= render partial: 'svg/logo' %>
+  <% if @organization.present? %>
+    <%= @organization.title %>
   <% end %>
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :horizontal_form) do |f| %>
-    <%= f.error_notification %>
-
+  <div class="mb-1"><b>Регистрация волонтера</b></div>
+  <%= render "shared/registration_steps", step: :form %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :vertical_form, html: {class: 'mt-1'}) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "email" }
+                  label: false,
+                  placeholder: t('activerecord.attributes.user.email')
       %>
+      <% if @organization.present? %>
       <%= f.input :organization_id,
-          selected: params[:organization_id],
-          as: :select,
-          collection: @organizations.pluck(:title, :id),
-          include_blank: false
-      %>    
-
-      <%= f.input :name, required: true %>
-      <%= f.input :surname, required: true %>
-      <%= f.input :phone, required: true %>
-
+            input_html: { value: @organization.id },
+            as: :hidden
+        %>
+      <% else %>
+        <%= f.input :organization_id,
+            as: :select,
+            collection: @organizations.pluck(:title, :id),
+            label: false,
+            placeholder: t('activerecord.attributes.user.organization_id'),
+            include_blank: false
+        %>
+      <% end %>
+      <%= f.input :name, 
+        required: true,
+        placeholder: t('activerecord.attributes.user.name'),
+        label: false
+      %>
+      <%= f.input :surname, 
+        required: true,
+        placeholder: t('activerecord.attributes.user.surname'),
+        label: false
+      %>
+      <%= f.input :phone, 
+        required: true,
+        placeholder: t('activerecord.attributes.user.phone'),
+        label: false
+      %>
       <%= f.input :password,
+                  placeholder: t('activerecord.attributes.user.password'),
                   required: true,
+                  label: false,
                   hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
+
+      <%= f.input :policy_confirmed, required: true, error: false, label_html: { style: 'font-size: 10px' } %>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success' %>
+    <div class="form-actions d-flex justify-content-center">
+      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success', id: :registration_submit_btn %>
     </div>
 
     <%= recaptcha_execute('register') %>
   <% end %>
-
-  <%= render "devise/shared/links" %>
+  <div class="mt-1">
+    <%= render "devise/shared/registration_links" %>
+  </div>
 </div>

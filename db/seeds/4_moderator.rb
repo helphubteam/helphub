@@ -8,6 +8,7 @@ unless User.moderators.any?
     password: 'covihelp19',
     password_confirmation: 'covihelp19',
     organization: Organization.first,
-    confirmed_at: '2021-01-01 00:00:00'
+    confirmed_at: '2021-01-01 00:00:00',
+    policy_confirmed: true
   )
 end

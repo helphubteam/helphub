@@ -26,6 +26,7 @@ module Admin
           res = @user_params.dup
           res[:role] = 'moderator' if res[:role] == 'admin' && !current_user.admin?
           res[:password] = SecureRandom.uuid
+          res[:policy_confirmed] = true
           res
         end
       end

@@ -3,12 +3,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @organizations = available_organizations
+    @organization = Organization.find(params[:organization_id]) if params[:organization_id]
     super
   end
 
   def create
+    build_resource(sign_up_params)
+    handle_personal_data_confirmation!
     @organizations = available_organizations
-    print params[:recaptcha_token]
+    @organization = resource.organization
     unless verify_recaptcha?(params[:recaptcha_token], 'register')
       flash[:error] = I18n.t('registration.errors.recaptcha')
       redirect_to action: :new
@@ -19,6 +22,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def handle_personal_data_confirmation!
+    if params[:personal_data_confirmation] != 'true'
+      resource.errors.add(:personal_data_confirmation, I18n.t('registration.personal_data_confirmation_error'))
+    end
+  end
+
   def available_organizations
     Organization.active.where(test: false)
   end
@@ -28,7 +37,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:organization_id, :name, :surname, :phone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:organization_id, :name, :surname, :phone, :policy_confirmed])
   end
 
   def verify_recaptcha?(token, recaptcha_action)

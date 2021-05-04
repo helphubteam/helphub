@@ -20,6 +20,7 @@
 #  name                   :string
 #  old_role               :integer          default(0), not null
 #  phone                  :string
+#  policy_confirmed       :boolean
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -50,9 +51,12 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { '123qwe123qwe!' }
     sex { 0 }
+    phone { Faker::PhoneNumber.phone_number }
+    name { Faker::Name.name.split(' ').first }
+    surname { Faker::Name.name.split(' ').last }
     confirmed_at { Time.zone.now }
     status { :active }
-
+    policy_confirmed { true }
     trait :admin do
       role { 'admin' }
     end

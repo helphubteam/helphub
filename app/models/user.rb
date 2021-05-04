@@ -20,6 +20,7 @@
 #  name                   :string
 #  old_role               :integer          default(0), not null
 #  phone                  :string
+#  policy_confirmed       :boolean
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -62,6 +63,9 @@ class User < ApplicationRecord
   paginates_per 20
 
   validates :organization_id, presence: true, if: -> { moderator? || volunteer? }
+
+  validates :phone, :name, :surname, presence: true, if: :volunteer?
+  validates :policy_confirmed, presence: true, if: :volunteer?
 
   enum status: { active: 0, pending: 1, blocked: 2 } do
     event :block do
