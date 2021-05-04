@@ -56,7 +56,7 @@ FactoryBot.define do
     surname { Faker::Name.name.split(' ').last }
     confirmed_at { Time.zone.now }
     status { :active }
-    policy_confirmed true
+    policy_confirmed { true }
     trait :admin do
       role { 'admin' }
     end
