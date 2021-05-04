@@ -2,10 +2,11 @@
 <% step ||= :form %>
 <% step_number = steps[step] %>
 <div class="registration-steps mb-1" style="font-size: 9px">
-  <% steps.each do |step, number| %>
-    <% css = "" %>
-    <% css += "color: grey;" if number <  step_number  %>
-    <% css += "font-weight: bold;" if number == step_number  %>
-    <span style="<%= css %>"><%= t("registration_steps.#{step}") %> -> </span>
-  <% end %>
+  <%= steps.map do |step, number|
+    css = ""
+    css += "color: grey;" if number <  step_number
+    css += "font-weight: bold;" if number == step_number
+    label = t("registration_steps.#{step}")
+    "<span style='#{css}'>#{label}</span>"
+  end.join(" -> ").html_safe %>
 </div>
