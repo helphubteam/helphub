@@ -33,7 +33,7 @@ title_options = {
 title = "Отчет по заявкам #{current_organization.title}"
 
 wb.styles do |s|
-  wb.add_worksheet(name: title) do |sheet|
+  wb.add_worksheet(name: "Отчет") do |sheet|
     sheet.add_row [title], **title_options
     sheet.merge_cells('A1:F1')
     sheet.column_widths 20, 20, 15, 15, 15, 15
