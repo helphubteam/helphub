@@ -47,4 +47,8 @@ class RegistrationsController < Devise::RegistrationsController
     json = JSON.parse(response.body)
     json['success'] && json['score'] > RECAPTCHA_MINIMUM_SCORE && json['action'] == recaptcha_action
   end
+  
+  def after_inactive_sign_up_path_for(resource)
+    pages_confirm_email_path(email: resource.email)
+  end
 end

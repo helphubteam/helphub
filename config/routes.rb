@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users, controllers: { sessions: 'sessions', passwords: 'passwords', registrations: 'registrations' }
+  devise_for :users, controllers: { 
+    sessions: 'sessions', 
+    passwords: 'passwords', 
+    registrations: 'registrations',
+    confirmations: 'confirmations'
+  }
 
   namespace :api do
     namespace :v1 do
@@ -95,5 +100,8 @@ Rails.application.routes.draw do
     resources :reports, only: %i[index create]
   end
 
+  get "pages/confirm_email", to: "pages#confirm_email"
+  get "pages/waiting_for_moderator", to: "pages#waiting_for_moderator"
+  
   root to: redirect('/users/sign_in')
 end
