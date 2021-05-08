@@ -44,7 +44,11 @@ module Admin
       if @user.approve
         redirect_to action: :edit
         flash[:notice] = 'Пользователь активирован!'
-        UserMailer.moderator_confirmation(@user).deliver_now
+        UserMailer.moderator_confirmation(
+          user_id: @user.id,
+          moderator_id: current_user.id,
+          organization_id: @user.organization_id
+        ).deliver_now
       else
         render :edit
         flash[:error] = 'Не удалось активировать пользователя!'
