@@ -486,7 +486,8 @@ ru:
       help_request:
         create: Появились новые просьбы
   registration_steps:
-    form: Отправка формы регистрации
-    confirm_email: Подтверждение почты
-    waiting_for_moderator: Проверка модератором фонда
-    good_to_go: Работа в приложении Helphub
+    form: Заполнить форму
+    confirm_email: Подтвердить почту
+    waiting_for_moderator: Ждать ответа модератора
+    talk_to_moderator: Поговорить с модератором
+    good_to_go: Успех - начать помогать!

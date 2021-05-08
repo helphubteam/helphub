@@ -53,7 +53,12 @@
                   hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
 
-      <%= f.input :policy_confirmed, required: true, error: false, label_html: { style: 'font-size: 10px' } %>
+      <% 
+        policy_confirmed_url = "https://helphub.ru/privacy" 
+        policy_confirmed_label = "Cогласен на обработку " + 
+        "<a target='__blank__' href='#{policy_confirmed_url}'>персональных данных</a>"
+      %>
+      <%= f.input :policy_confirmed, required: true, label: policy_confirmed_label.html_safe,error: false, label_html: { style: 'font-size: 10px' } %>
     </div>
 
     <div class="form-actions d-flex justify-content-center">
