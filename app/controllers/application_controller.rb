@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_up_path_for(resource)
+    pages_waiting_for_moderator_path(organization: resource.organization.title)
+  end
+
   def after_sign_in_path_for(resource)
     if resource.admin?
       admin_dashboard_path
