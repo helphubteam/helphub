@@ -1,25 +1,25 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Войти", new_session_path(resource_name), class: "align-self-center mt-3" %><br />
+  <%= link_to t(".link_sign_in"), new_session_path(resource_name), class: "align-self-center mt-3" %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Зарегистрироваться", new_registration_path(resource_name) %><br />
+  <%= link_to t(".link_registration"), new_registration_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && !%w(passwords registrations invitations).include?(controller_name) %>
-  <%= link_to "Забыли пароль?", new_password_path(resource_name) %><br />
+  <%= link_to t(".link_forgot_password"), new_password_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Не пришло подтверждение?", new_confirmation_path(resource_name) %><br />
+  <%= link_to t(".link_confirmable"), new_confirmation_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Не пришли инструкции по разблокировке?", new_unlock_path(resource_name) %><br />
+  <%= link_to t(".link_lockable"), new_unlock_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Войти через #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+    <%= link_to "#{t(".link_omniauthable")} #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end %>
 <% end %>

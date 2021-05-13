@@ -1,5 +1,5 @@
 <div class="container d-flex flex-column align-items-center">
-  <h2>Забыли пароль?</h2>
+  <h2><%= t(".title")%></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= f.error_notification %>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Отправить инструкции", class: "btn btn-primary"  %>
+      <%= f.button :submit, t(".submit_button"), class: "btn btn-primary"  %>
     </div>
   <% end %>
 

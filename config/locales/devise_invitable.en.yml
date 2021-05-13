@@ -15,6 +15,11 @@ en:
       edit:
         header: "Set your password"
         submit_button: "Set my password"
+        enter_password_new: New password
+        hind1: minimum password length
+        hind2: characters
+        label_confirmation: Password confirmation
+        submit_button: Set password
     mailer:
       invitation_instructions:
         subject: "Invitation instructions"

@@ -10,7 +10,7 @@ module Admin
       settings_params.each do |key, value|
         Setting.public_send("#{key}=", value)
       end
-      flash[:notice] = 'Настройки сохранены'
+      flash[:notice] = t(".controller.notice.update")
       redirect_to action: :index
     end
 

@@ -191,7 +191,7 @@ en:
         separator: ","
         significant: false
         strip_insignificant_zeros: false
-        unit: руб.
+        unit: rub.
     format:
       delimiter: " "
       precision: 3
@@ -328,6 +328,7 @@ en:
     organization_configs:
       show:
         title: Organization settings
+        submit: Save
     dashboard:
       admin:
         header: Admin panel
@@ -347,6 +348,10 @@ en:
     help_request_kinds:
       custom_field_fields:
         remove_link: Delete field
+        enter_text_field: Text field
+        enter_checkbox: Checkbox (Yes / No)
+        enter_textarea: Text box with line breaks and formatting options
+        enter_data_time: Date and time
       custom_fields:
         header: Custom fields
         delete: Delete field
@@ -364,6 +369,14 @@ en:
         name_column: Name
         default_column: Selected by default
         edit: Edit
+      controller:
+        notice:
+          create: A new kind of request has been created
+          edit: Request type changed
+          destroy: Request type deleted
+        error:
+          create: Request type not created
+          edit: Failed to change the type of request
     help_requests:
       custom_values:
         header: Additional fields
@@ -396,6 +409,7 @@ en:
       repeat_menu:
         regular_help: Provide help regularly
         period: days
+        every_period: every
       index:
         status: Status
         created: Created by
@@ -406,6 +420,16 @@ en:
         period: Repeat, days
         last_update: Last modified
         help_request_num: Request no.
+      controller:
+        danger:
+          danger_archiv: 'The request is in the archive'
+        notice:
+          update: Request changed
+          create: A new request has been created
+          destroy: Request deleted 
+        error:
+          update: Failed to change request
+          create: Request not created
     organizations:
       invite_link:
         invite: Volunteers registration link
@@ -427,6 +451,14 @@ en:
         members: Members
         help_requests: Requests
         edit: Edit
+      controller:
+        notice:
+          create: A new organization has been created!
+          update: Organization changed!
+          arhived: The organization is archived!
+        error:
+          create: The organization has not been created!
+          update: Failed to change organization!
     reports:
       form:
         create_new_report: Create new report
@@ -437,12 +469,23 @@ en:
         status: Status
         file: File
         download: Download file
+      create:
+        report_kinds: Application report
     settings:
       index:
         title: Name
         value: Value
         save: Save changes
         confirm: "ATTENTION: We are changing the settings of the entire site. Continue?"
+      controller:
+        notice:
+          update: Settings have been saved
+    manual_pushes:
+      controller:
+        success:
+          create: Periodic requests created
+        error:
+          create: There were errors while creating requests
     users:
       approval_form:
         approve: Approve
@@ -479,8 +522,45 @@ en:
         points: Points
         not_assigned: Organization not assigned
         edit: Edit
+      controller:
+        notice:
+          update: User changed!
+          approve: User activated!
+          destroy: User deleted!
+        error:
+          update: Failed to change user!
+          approve: Failed to activate user!
   female: Female
   male: Male
   notifications:
       help_request:
         create: New requests have appeared. You may be able to help
+  registration_steps:
+    form: Fill in the form
+    confirm_email: Confirm mail
+    waiting_for_moderator: Wait for a response from the moderator
+    talk_to_moderator: Talk to the moderator
+    good_to_go: Success - start helping!
+  shared:
+    menu:
+      organizations: Organizations
+      users: Users
+      help_requests: Requests
+      help_request_kinds: Request kinds
+      reports: Reports
+      settings: Settings
+      exit: "Exit"
+    registration_steps:
+      step: Step
+      of: of
+  pages:
+    confirm_email:
+      title: Thank you for filling out the registration form!
+      content_start: Please, check the mail
+      content_middle: and follow the link from the letter.
+      content_end: This is to make sure there are no typos in the email.
+    waiting_for_moderator:
+      title: You have confirmed your registration!
+      content_start: Now your data has been sent to the foundation
+      content_end: The coordinator will contact you by phone or email within the next few days.
+      footer: For any questions write

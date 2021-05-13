@@ -21,13 +21,13 @@
         is_moderator = current_user.moderator? || nil
         organization = current_user.try(:organization)
         menu = [
-          is_admin && ["Организации", admin_organizations_path],
-          ["Пользователи", admin_users_path],
-          is_moderator && ["Просьбы", admin_help_requests_path],
-          is_moderator && ["Виды просьб", admin_help_request_kinds_path],
-          is_moderator && ["Отчеты", admin_reports_path],
-          is_moderator && organization && ["Настройки Организации", config_admin_organization_path(organization)],
-          is_admin && ["Настройки", admin_settings_path],
+          is_admin && [t(".organizations"), admin_organizations_path],
+          [t(".users"), admin_users_path],
+          is_moderator && [t(".help_requests"), admin_help_requests_path],
+          is_moderator && [t(".help_request_kinds"), admin_help_request_kinds_path],
+          is_moderator && [t(".reports"), admin_reports_path],
+          is_moderator && organization && [t("admin.organization_configs.show.title"), config_admin_organization_path(organization)],
+          is_admin && [t(".settings"), admin_settings_path],
         ].compact
       %>
       <% menu.each do |(name, url)| %>
@@ -38,7 +38,7 @@
 
     </ul>
     <div  class="d-block d-md-none">
-      <%= link_to "Выйти", destroy_user_session_path,
+      <%= link_to t(".exit"), destroy_user_session_path,
         method: :delete,
         class: 'btn btn-sm btn-outline-danger mr-2'
       %>
@@ -55,7 +55,7 @@
         <%= current_user.email %>
       </b>
     <% end %>
-    <%= link_to "Выйти", destroy_user_session_path,
+    <%= link_to t(".exit"), destroy_user_session_path,
       method: :delete,
       class: 'btn btn-sm btn-outline-danger align-self-end'
     %>

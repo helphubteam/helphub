@@ -32,10 +32,10 @@ module Admin
       authorize @user
       if @user.update(user_params)
         redirect_to action: :index
-        flash[:notice] = 'Пользователь изменен!'
+        flash[:notice] = t(".controller.notice.update")
       else
         render :edit
-        flash[:error] = 'Не удалось изменить пользователя!'
+        flash[:error] = t(".controller.error.update")
       end
     end
 
@@ -43,7 +43,7 @@ module Admin
       authorize @user
       if @user.approve
         redirect_to action: :edit
-        flash[:notice] = 'Пользователь активирован!'
+        flash[:notice] = t(".controller.notice.approve")
         UserMailer.moderator_confirmation(
           user_id: @user.id,
           moderator_id: current_user.id,
@@ -51,7 +51,7 @@ module Admin
         ).deliver_now
       else
         render :edit
-        flash[:error] = 'Не удалось активировать пользователя!'
+        flash[:error] = t(".controller.error.approve")
       end
     end
 
@@ -59,7 +59,7 @@ module Admin
       authorize @user
       @user.destroy
       redirect_to action: :index
-      flash[:notice] = 'Пользователь удален!'
+      flash[:notice] = t(".controller.notice.destroy")
     end
 
     private

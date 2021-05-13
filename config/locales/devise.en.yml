@@ -1,0 +1,125 @@
+en:
+  errors:
+    messages:
+      expired: "outdated. Please request a new"
+      not_found: "not found"
+      already_confirmed: "already confirmed. Please try to login"
+      not_locked: "not blocked"
+      not_saved:
+        one: "%{resource}: save failed due to %{count} error"
+        few: "%{resource}: save failed due to %{count} errors"
+        many: "%{resource}: save failed due to %{count} errors"
+        other: "%{resource}: save failed due to %{count} errors"
+
+  devise:
+    invitations:
+      send_instructions: "Invitation sent by email: %{email}."
+      invitation_token_invalid: "Wrong invitation key!"
+      updated: "Your password has been successfully set. You are now logged into the site."
+      updated_not_active: "Your password has been successfully set."
+      no_invitations_remaining: "No more invitations left"
+      invitation_removed: "Your invitation has been deleted."
+      new:
+        header: "Sending invitations"
+        submit_button: "Send invitation"
+      edit:
+        header: "Set a password"
+        submit_button: "Set password"
+    failure:
+      user:
+        not_found_in_database: "User is not found."
+      already_authenticated: "You are already signed in."
+      unauthenticated: "You need to login or register."
+      unconfirmed: "You must verify your account."
+      locked: "Your account has been blocked."
+      invalid: "Invalid email address or password."
+      invalid_token: "Invalid authentication key."
+      timeout: "Your session has ended. Please login again."
+      inactive: "Your account is inactive."
+    sessions:
+      signed_in: "You are logged in to the system."
+      signed_out: "The system is logged out."
+      user:
+        already_signed_out: "The system is logged out."
+      new:
+        sign_in_bottom: Enter
+    passwords:
+      send_instructions: "Within a few minutes you will receive an email with instructions on how to reset your password."
+      updated: "Your password has been changed. You are now logged in."
+      updated_not_active: 'Your password has been changed.'
+      send_paranoid_instructions: "If your e-mail address is in our database, then within a few minutes you will receive an email with instructions on how to reset your password."
+      edit:
+        title: Password change
+        enter_label_password: New password
+        hind1: minimum password length
+        hind2: characters
+        label_confirmation: Password confirmation
+        submit_button: Change password
+      new:
+        title: Forgot your password?
+        submit_button: Send instructions
+    confirmations:
+      send_instructions: "Within a few minutes you will receive an email with instructions to verify your account."
+      send_paranoid_instructions: "If your e-mail address is in our database, then within a few minutes you will receive an email with instructions to verify your account."
+      confirmed: "Your account has been verified. You are now logged in."
+      new:
+        title: Send instructions
+        submit: Send instructions
+    registrations:
+      user:
+        signed_up_but_unconfirmed: "You need to confirm your account by email"
+        pending: "The volunteer is registered and is waiting for confirmation from the fund moderator"
+      signed_up: "Welcome! You have successfully registered."
+      inactive_signed_up: "Welcome! You have successfully registered. But for now, you cannot log in. your account %{reason}."
+      updated: "Your account has been changed."
+      destroyed: "Bye! Your account has been deleted. Hope to see you again."
+      reasons:
+        inactive: 'not active'
+        unconfirmed: 'not confirmed'
+        locked: 'locked'
+      new:
+        title: Registration volunteer
+        hind1: minimum password length
+        hind2: characters
+        policy_confirmed_label: "I agree to processing"
+        submit_registration: Registration
+        personal_data: of personal data
+      edit:
+        title: Edit
+        confirmation_email: Awaiting confirmation by email
+        password_hind: leave blank if you do not want to change your password
+        current_password_hind: your current password is required to confirm the changes
+        submit: Update
+        del_title: Account deleting
+        question_del: Delete?
+        del_account: Delete my account
+        back_buttom: Back
+    unlocks:
+      send_instructions: "Within a few minutes you will receive an email with instructions on how to unblock your account."
+      unlocked: "Your account is unlocked. You are now logged in."
+      send_paranoid_instructions: "If your account exists, then within a few minutes you will receive an email with instructions on how to unblock it."
+    omniauth_callbacks:
+      success: "The system is logged in with an account from %{kind}."
+      failure: "You cannot log in with an account from %{kind}, as \"%{reason}\"."
+    mailer:
+      confirmation_instructions:
+        subject: "Account verification instructions"
+      reset_password_instructions:
+        subject: "Password recovery instructions"
+      unlock_instructions:
+        subject: "Account unlocking instructions"
+    shared:
+      links:
+        link_sign_in: Enter
+        link_registration: Register now
+        link_forgot_password: Forgot your password?
+        link_confirmable: Didn't receive confirmation?
+        link_lockable: Didn't receive unlock instructions?
+        link_omniauthable: Login with
+      registration_links:
+        link_confirmable: Didn't receive confirmation?
+        link_lockable: Didn't receive unlock instructions?
+      unlocks:
+        new:
+          title: Send unlock instructions
+          submit_buttom: Send unlock instructions
