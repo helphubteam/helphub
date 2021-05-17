@@ -14,6 +14,11 @@ ru:
       edit:
         header: "Создание пароля"
         submit_button: "Сохранить"
+        enter_password_new: Новый пароль
+        hind1: минимальная длина пароля
+        hind2: символов
+        label_confirmation: Подтверждение пароля
+        submit_button: Установить пароль
     mailer:
       invitation_instructions:
         subject: 'Ваша учетная запись на платформе HelpHub'

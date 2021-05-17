@@ -6,7 +6,7 @@
 
 <div class="collapse <%= 'show' unless (@help_request.recurring).blank? %>" id="collapsePeriod">
   <div class='form-inline'>
-    <%= label_tag :help_request_period, 'каждые' %>
+    <%= label_tag :help_request_period, t(".every_period") %>
     <div class="form-group col-md-1">
       <%= f.input :period,
                   label: false,

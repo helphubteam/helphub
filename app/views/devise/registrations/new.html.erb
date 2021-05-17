@@ -7,7 +7,7 @@
   <% if @organization.present? %>
     <%= @organization.title %>
   <% end %>
-  <div class="mb-1"><b>Регистрация волонтера</b></div>
+  <div class="mb-1"><b><%= t(".title")%></b></div>
   <%= render "shared/registration_steps", step: :form %>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), wrapper: :vertical_form, html: {class: 'mt-1'}) do |f| %>
     <div class="form-inputs">
@@ -50,19 +50,19 @@
                   placeholder: t('activerecord.attributes.user.password'),
                   required: true,
                   label: false,
-                  hint: ("минимальная длина #{@minimum_password_length} символов" if @minimum_password_length),
+                  hint: ("#{t(".hind1")} #{@minimum_password_length} #{t(".hind2")}" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
 
       <% 
         policy_confirmed_url = "https://helphub.ru/privacy" 
-        policy_confirmed_label = "Cогласен на обработку " + 
-        "<a target='__blank__' href='#{policy_confirmed_url}'>персональных данных</a>"
+        policy_confirmed_label = t(".policy_confirmed_label") + 
+        "<a target='__blank__' href='#{policy_confirmed_url}'> #{t(".personal_data")}</a>"
       %>
       <%= f.input :policy_confirmed, required: true, label: policy_confirmed_label.html_safe,error: false, label_html: { style: 'font-size: 10px' } %>
     </div>
 
     <div class="form-actions d-flex justify-content-center">
-      <%= f.button :submit, "Зарегистрироваться", class: 'btn btn-success', id: :registration_submit_btn %>
+      <%= f.button :submit, t(".submit_registration"), class: 'btn btn-success', id: :registration_submit_btn %>
     </div>
 
     <%= recaptcha_execute('register') %>

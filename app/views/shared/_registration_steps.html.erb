@@ -2,6 +2,6 @@
 <% step ||= :form %>
 <% step_number = steps[step] %>
 <div class="registration-steps mb-1" style="font-size: 11px; text-align: center;">
-  <span><%= "Шаг #{step_number} из #{steps.keys.count}" %></span><br/>
+  <span><%= "#{t('.step')} #{step_number} #{t(".of")} #{steps.keys.count}"%></span><br/>
   <span><%= t("registration_steps.#{step}") %></span>
 </div>

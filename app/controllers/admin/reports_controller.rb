@@ -17,7 +17,7 @@ module Admin
         formats: [:xlsx],
         locals: { logs: logs, current_organization: current_organization }
       )
-      filename = "Отчет по заявкам #{current_organization.title}.xlsx"
+      filename = "#{t(".report_kinds")} #{current_organization.title}.xlsx"
       options = { filename: filename, type: Mime[:xlsx], disposition: 'inline' }
       send_data data, options
     end

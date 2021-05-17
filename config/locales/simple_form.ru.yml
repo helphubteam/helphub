@@ -64,7 +64,7 @@ ru:
         rotator_mode: 'Режим ротатора'
         ground_rotator_config:
           categories: 'Категории'
-          block_adult: 'Блокировать объявления "для взослых"'
+          block_adult: 'Блокировать объявления "для взрослых"'
           block_doubtful: 'Блокировать сомнительные объявления'
       offer:
         category_id: 'Категория'

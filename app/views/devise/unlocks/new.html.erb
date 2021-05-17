@@ -1,4 +1,4 @@
-<h2>Отправить инструкции по разблокировке</h2>
+<h2><%=t(".title")%></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Отправить инструкции по разблокировке" %>
+    <%= f.button :submit, t(".submit_buttom") %>
   </div>
 <% end %>
 

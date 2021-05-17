@@ -21,7 +21,7 @@ ru:
       updated: "Ваш пароль был успешно установлен. Теперь вы вошли на сайт."
       updated_not_active: "Ваш пароль был успешно установлен."
       no_invitations_remaining: "Больше не осталось пришлашений"
-      invitation_removed: Ваше приглашение было удалено."
+      invitation_removed: "Ваше приглашение было удалено."
       new:
         header: "Отправка приглашений"
         submit_button: "Отправить приглашение"
@@ -42,15 +42,32 @@ ru:
     sessions:
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."
+      user:
+        already_signed_out: "Выход из системы выполнен."
+      new:
+        sign_in_bottom: Войти
     passwords:
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
       updated: "Ваш пароль изменён. Теперь вы вошли в систему."
       updated_not_active: 'Ваш пароль изменен.'
       send_paranoid_instructions: "Если ваш адрес e-mail есть в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по восстановлению вашего пароля."
+      edit:
+        title: Смена пароля
+        enter_label_password: Новый пароль
+        hind1: минимальная длина пароля
+        hind2: символов
+        label_confirmation: Подтверждение пароля
+        submit_button: Сменить пароль
+      new:
+        title: Забыли пароль?
+        submit_button: Отправить инструкции
     confirmations:
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по подтверждению вашей учётной записи."
       send_paranoid_instructions: "Если ваш адрес e-mail есть в нашей базе данных, то в течение нескольких минут вы получите письмо с инструкциями по подтверждению вашей учётной записи."
       confirmed: "Ваша учётная запись подтверждена. Теперь вы вошли в систему."
+      new:
+        title: Выслать инструкции
+        submit: Выслать инструкции
     registrations:
       user:
         signed_up_but_unconfirmed: "Необходимо подтвердить Вашу учетную запись по email"
@@ -63,6 +80,23 @@ ru:
         inactive: 'неактивна'
         unconfirmed: 'не подтверждена'
         locked: 'заблокирована'
+      new:
+        title: Регистрация волонтера
+        hind1: минимальная длина пароля
+        hind2: символов
+        policy_confirmed_label: "Cогласен на обработку "
+        submit_registration: Зарегестрироваться
+        personal_data: персональных данных
+      edit:
+        title: Редактировать
+        confirmation_email: Ожидает подтверждения по email
+        password_hind: оставьте пустым если не хотите менять пароль
+        current_password_hind: необходим Ваш текущий пароль чтобы подтвердить изменения
+        submit: Обновить
+        del_title: Удаление аккаунта
+        question_del: Удалить?
+        del_account: Удалить мой аккаунт
+        back_buttom: Назад
     unlocks:
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по разблокировке вашей учётной записи."
       unlocked: "Ваша учётная запись разблокирована. Теперь вы вошли в систему."
@@ -77,9 +111,18 @@ ru:
         subject: "Инструкции по восстановлению пароля"
       unlock_instructions:
         subject: "Инструкции по разблокировке учётной записи"
-
-
-
-
-
-
+    shared:
+      links:
+        link_sign_in: Войти
+        link_registration: Зарегистрироваться
+        link_forgot_password: Забыли пароль?
+        link_confirmable: Не пришло подтверждение?
+        link_lockable: Не пришли инструкции по разблокировке?
+        link_omniauthable: Войти через
+      registration_links:
+        link_confirmable: Не пришло подтверждение?
+        link_lockable: Не пришли инструкции по разблокировке?
+      unlocks:
+        new:
+          title: Отправить инструкции по разблокировке
+          submit_buttom: Отправить инструкции по разблокировке

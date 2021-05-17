@@ -17,10 +17,10 @@ module Admin
 
       if @help_request_kind.save
         redirect_to action: :index
-        flash[:notice] = 'Создан новый вид просьбы'
+        flash[:notice] = t(".controller.notice.create")
       else
         render :new
-        flash[:error] = 'Вид просьбы не создан'
+        flash[:error] = t(".controller.error.create")
       end
     end
 
@@ -32,10 +32,10 @@ module Admin
       authorize @help_request_kind
       if @help_request_kind.update(help_request_kind_params)
         redirect_to action: :index
-        flash[:notice] = 'Вид просьбы изменен'
+        flash[:notice] = t(".controller.notice.edit")
       else
         render :edit
-        flash[:error] = 'Не удалось изменить вид просьбы'
+        flash[:error] = t(".controller.error.edit")
       end
     end
 
@@ -43,7 +43,7 @@ module Admin
       authorize @help_request_kind
       @help_request_kind.destroy
       redirect_to action: :index
-      flash[:notice] = 'Вид просьбы удален'
+      flash[:notice] = t(".controller.notice.destroy")
     end
 
     private

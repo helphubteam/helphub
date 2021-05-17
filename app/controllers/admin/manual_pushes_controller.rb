@@ -5,9 +5,9 @@ module Admin
     def recurring
       begin
         Recurring.call
-        flash[:success] = 'Периодические просьбы созданы'
+        flash[:success] = t(".controller.success.create")
       rescue Error => e
-        flash[:error] = "Возникли ошибки при создании просьб: \n#{e.message}"
+        flash[:error] = "#{t(".controller.error.create")} #{\n} #{e.message}"
       end
       redirect_to :admin_dashboard
     end

@@ -1,4 +1,4 @@
-<h2>Выслать инструкции</h2>
+<h2><%=t(".title")%></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= f.error_notification %>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Выслать инструкции" %>
+    <%= f.button :submit, t(".title") %>
   </div>
 <% end %>
 

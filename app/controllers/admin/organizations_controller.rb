@@ -18,10 +18,10 @@ module Admin
 
       if @organization.save
         redirect_to action: :index
-        flash[:notice] = 'Создана новая организация!'
+        flash[:notice] = t(".controller.notice.create")
       else
         render :new
-        flash[:error] = 'Организация не создана!'
+        flash[:error] = t(".controller.error.create")
       end
     end
 
@@ -33,10 +33,10 @@ module Admin
       authorize @organization
       if @organization.update(organization_params)
         redirect_to action: :index
-        flash[:notice] = 'Организация изменена!'
+        flash[:notice] = t(".controller.notice.update")
       else
         render :edit
-        flash[:error] = 'Не удалось изменить организацию!'
+        flash[:error] = t(".controller.error.update")
       end
     end
 
@@ -45,7 +45,7 @@ module Admin
       @organization.archive = true
       @organization.save
       redirect_to action: :index
-      flash[:notice] = 'Организация заархивирована!'
+      flash[:notice] = t(".controller.notice.arhived")
     end
 
     private

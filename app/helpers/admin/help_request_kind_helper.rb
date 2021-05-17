@@ -2,10 +2,10 @@ module Admin
   module HelpRequestKindHelper
     def options_for_datatype
       [
-        ['Текстовое поле', :string],
-        ['Галочка (Да/Нет)', :checkbox],
-        ['Текстовое поле с переносами строки и возможностью форматирования', :textarea],
-        ['Дата и время', :date]
+        ["#{t(".enter_text_field")}", :string],
+        ["#{t(".enter_checkbox")}", :checkbox],
+        ["#{t(".enter_textarea")}", :textarea],
+        ["#{t(".enter_data_time")}", :date]
       ]
     end
   end

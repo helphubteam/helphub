@@ -328,7 +328,8 @@ ru:
   admin:
     organization_configs:
       show:
-        title: Настройки организации
+        title: Настройки Организации
+        submit: Сохранить
     dashboard:
       admin:
         header: Панель администратора
@@ -348,6 +349,10 @@ ru:
     help_request_kinds:
       custom_field_fields:
         remove_link: Удалить поле
+        enter_text_field: Текстовое поле
+        enter_checkbox: Галочка (Да/Нет)
+        enter_textarea: Текстовое поле с переносами строки и возможностью форматирования
+        enter_data_time: Дата и время
       custom_fields:
         header: Дополнительные поля
         delete: Удалить поле
@@ -365,6 +370,14 @@ ru:
         name_column: Название
         default_column: Выбирается по умолчанию
         edit: Редактировать
+      controller:
+        notice:
+          create: Создан новый вид просьбы
+          edit: Вид просьбы изменен
+          destroy: Вид просьбы удален
+        error:
+          create: Вид просьбы не создан
+          edit: Не удалось изменить вид просьбы
     help_requests:
       custom_values:
         header: Дополнительные поля
@@ -397,6 +410,7 @@ ru:
       repeat_menu:
         regular_help: Оказывать помощь регулярно
         period: дней
+        every_period: каждые
       index:
         status: Статус
         created: Создана
@@ -407,6 +421,16 @@ ru:
         period: Повтор, дн
         last_update: Последнее изменение
         help_request_num: Просьба №
+      controller:
+        danger:
+          danger_archiv: 'Просьба находится в архиве'
+        notice:
+          update: Просьба изменена
+          create: Создана новая просьба
+          destroy: Просьба удалена 
+        error:
+          update: Не удалось изменить просьбу
+          create: Просьба не создана
     organizations:
       invite_link:
         invite: Ссылка на регистрацию
@@ -428,6 +452,14 @@ ru:
         members: Участники
         help_requests: Просьбы
         edit: Редактировать
+      controller:
+        notice:
+          create: Создана новая организация!
+          update: Организация изменена!
+          arhived: Организация заархивирована!
+        error:
+          create: Организация не создана!
+          update: Не удалось изменить организацию!
     reports:
       form:
         create_new_report: Создать новый отчет
@@ -438,12 +470,23 @@ ru:
         status: Статус
         file: Файл
         download: Скачать файл
+      create:
+        report_kinds: Отчет по заявкам
     settings:
       index:
         title: Название
         value: Значение
         save: Сохранить изменения
         confirm: "ВНИМАНИЕ: Мы меняем настройки всего сайта. Продолжить?"
+      controller:
+        notice:
+          update: Настройки сохранены
+    manual_pushes:
+      controller:
+        success:
+          create: Периодические просьбы созданы
+        error:
+          create: Возникли ошибки при создании просьб
     users:
       approval_form:
         approve: Одобрить волонтера
@@ -480,6 +523,14 @@ ru:
         points: Баллы
         not_assigned: Организация не назначена
         edit: Редактировать
+      controller:
+        notice:
+          update: Пользователь изменен!
+          approve: Пользователь активирован!
+          destroy: Пользователь удален!
+        error:
+          update: Не удалось изменить пользователя!
+          approve: Не удалось активировать пользователя!
   female: Женский
   male: Мужской
   notifications:
@@ -491,3 +542,26 @@ ru:
     waiting_for_moderator: Ждать ответа модератора
     talk_to_moderator: Поговорить с модератором
     good_to_go: Успех - начать помогать!
+  shared:
+    menu:
+      organizations: Организации
+      users: Пользователи
+      help_requests: Просьбы
+      help_request_kinds: Виды просьб
+      reports: Отчеты
+      settings: Настройки
+      exit: "Выйти"
+    registration_steps:
+      step: Шаг
+      of: из
+  pages:
+    confirm_email:
+      title: Спасибо, что заполнили форму регистрации!
+      content_start: Пожалуйста, проверьте почту
+      content_middle: и перейдите по ссылке из письма.
+      content_end: Это нужно, чтобы удостовериться, что в имейле нет опечаток.
+    waiting_for_moderator:
+      title: Вы подтвердили вашу регистрацию!
+      content_start: Теперь ваши данные отправлены в фонд
+      content_end: Координатор свяжется с вами по телефону или имейлу в течение следующих нескольких дней.
+      footer: По любым вопросам пишите
