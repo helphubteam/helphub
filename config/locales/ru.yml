@@ -280,6 +280,7 @@ ru:
       user_not_found: Пользователь не найден
       no_jwt_token: Ключ не найден, необходима авторизация
   registration:
+    enter_new_password: Придумайте пароль
     errors:
       recaptcha: Ошибка регистрации. Повторите попытку позже.
   help_request_cases:

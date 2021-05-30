@@ -65,6 +65,7 @@ class User < ApplicationRecord
   validates :organization_id, presence: true, if: -> { moderator? || volunteer? }
 
   validates :phone, :name, :surname, presence: true, if: :volunteer?
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :policy_confirmed, presence: true, if: :volunteer?
 
   enum status: { active: 0, pending: 1, blocked: 2 } do
