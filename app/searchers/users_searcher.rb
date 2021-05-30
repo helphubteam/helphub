@@ -29,7 +29,7 @@ class UsersSearcher < TextSearcher
   end
 
   def base_scope
-    apply_search(User)
+    apply_search(User).reorder('status DESC, updated_at DESC')
   end
 
   def paged_scope
