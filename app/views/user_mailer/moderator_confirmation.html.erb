@@ -1,8 +1,8 @@
 <p><b><%= @user.name %></b>, здравствуйте!</p>
 
-<p> Координатор фонда <b> <%= @organization.title %> <%= @moderator.name%> </b> добавила вас в аккаунт фонда. Теперь вы можете просматривать и выполнять просьбы этого фонда в мобильном приложении Helphub.</p>
+<p> Координатор <b><%= @moderator.name %></b> из фонда <b><%= @organization.title %></b> добавила вас в аккаунт фонда. Теперь вы можете просматривать и выполнять просьбы этого фонда в мобильном приложении Helphub.</p>
 
-<p>Скачайте приложение <%= link_to 'helphub.ru для iOSs', 'https://apps.apple.com/us/app/id1525392141'%> </p>
+<p>Скачайте приложение <%= link_to 'helphub.ru для iOS', 'https://apps.apple.com/us/app/id1525392141'%> </p>
 <p>Скачайте приложение <%= link_to 'helphub.ru для Android', 'https://play.google.com/store/apps/details?id=com.helphub'%></p>
 
 <p>В качестве логина используйте этот имейл <b><%= @user.email %> </b>. Используйте пароль, заданный Вами при регистрации.</p>
