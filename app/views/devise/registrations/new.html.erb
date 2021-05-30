@@ -23,9 +23,22 @@
             as: :hidden
         %>
       <% else %>
+       <% 
+        organization_titles = @organizations.map do |organization|
+          label = if organization.city.present?
+            "#{organization.title} - #{organization.city}"
+          else
+            organization.title
+          end
+          [
+            label,
+            organization.id
+          ]
+        end
+       %>
         <%= f.input :organization_id,
             as: :select,
-            collection: @organizations.pluck(:title, :id),
+            collection: organization_titles,
             label: false,
             placeholder: t('activerecord.attributes.user.organization_id'),
             include_blank: false
