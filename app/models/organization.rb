@@ -26,6 +26,11 @@ class Organization < ApplicationRecord
       name: :notify_if_new,
       value: false,
       type: :boolean
+    },
+    {
+      name: :volunteers_can_join,
+      value: true,
+      type: :boolean
     }
   ].freeze
 
