@@ -1,0 +1,16 @@
+<div style="position: absolute; top: 0; left: 0; width: 100%;height: 100%;overflow: hidden;">
+  <div class="container">
+    <p>
+      <h1 style="text-align:center">Спасибо, что заполнили форму регистрации!</h1>
+      <!-- <%#= render "shared/registration_steps", step: :confirm_email %> -->
+    </p>
+    
+    <div>
+      <p>
+        Пожалуйста, проверьте почту <b><%= params[:email] %></b> и перейдите по ссылке из письма.<br/>
+        Это нужно, чтобы удостовериться, что в имейле нет опечаток.
+      </p>
+      <%= render partial: 'svg/logo' %>
+    </div>
+  <div>
+<div>

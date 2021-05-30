@@ -18,7 +18,7 @@
   </tr>
   </thead>
   <% @users.each do |record| %>
-    <tr>
+    <tr class="<%= "alert alert-warning" if record.pending? %>">
       <td><%= record.surname %></td>
       <td><%= record.name %></td>
       <td><%= record.phone %></td>

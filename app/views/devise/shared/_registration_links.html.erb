@@ -1,0 +1,7 @@
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "Не пришло подтверждение?", new_confirmation_path(resource_name), style: 'font-size: 10px' %><br />
+<% end %>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to "Не пришли инструкции по разблокировке?", new_unlock_path(resource_name), style: 'font-size: 10px'  %><br />
+<% end %>

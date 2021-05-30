@@ -1,0 +1,7 @@
+<% steps = { form: 1, confirm_email: 2, waiting_for_moderator: 3, talk_to_moderator: 4, good_to_go: 5 } %>
+<% step ||= :form %>
+<% step_number = steps[step] %>
+<div class="registration-steps mb-1" style="font-size: 11px; text-align: center;">
+  <span><%= "Шаг #{step_number} из #{steps.keys.count}" %></span><br/>
+  <span><%= t("registration_steps.#{step}") %></span>
+</div>

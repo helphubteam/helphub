@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.2.1'
+gem 'rails', '~> 6.1.3'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -47,6 +47,12 @@ gem 'sidekiq-scheduler'
 gem 'rake'
 gem 'fcm'
 
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
+gem 'sentry-ruby'
+gem 'sentry-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -79,6 +85,10 @@ group :development do
   gem 'capistrano', '~> 3.11'
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+
+  gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do

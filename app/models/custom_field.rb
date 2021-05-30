@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: custom_fields
+#
+#  id                   :bigint           not null, primary key
+#  data_type            :string           default("string"), not null
+#  info                 :hstore
+#  name                 :string           not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  help_request_kind_id :bigint           not null
+#
+# Indexes
+#
+#  index_custom_fields_on_help_request_kind_id  (help_request_kind_id)
+#
 class CustomField < ApplicationRecord
   DATA_TYPES = %w[string textarea date checkbox].freeze
 

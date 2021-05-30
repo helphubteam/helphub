@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[edit update destroy]
+    before_action :set_user, only: %i[edit update destroy approve]
 
     def index
       data = UsersSearcher.new(search_params).call
@@ -36,6 +36,22 @@ module Admin
       else
         render :edit
         flash[:error] = 'Не удалось изменить пользователя!'
+      end
+    end
+
+    def approve
+      authorize @user
+      if @user.approve
+        redirect_to action: :edit
+        flash[:notice] = 'Пользователь активирован!'
+        UserMailer.moderator_confirmation(
+          user_id: @user.id,
+          moderator_id: current_user.id,
+          organization_id: @user.organization_id
+        ).deliver_now
+      else
+        render :edit
+        flash[:error] = 'Не удалось активировать пользователя!'
       end
     end
 

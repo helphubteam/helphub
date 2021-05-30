@@ -2,10 +2,15 @@
 
 class ApplicationController < ActionController::Base
   PROMOTE_HELPHUB_APP_PAGE = 'http://helphub.ru/download'
-
+  RECAPTCHA_MINIMUM_SCORE = 0.5
+  
   include Pundit
 
   protected
+
+  def after_sign_up_path_for(resource)
+    pages_waiting_for_moderator_path(organization: resource.organization.title)
+  end
 
   def after_sign_in_path_for(resource)
     if resource.admin?

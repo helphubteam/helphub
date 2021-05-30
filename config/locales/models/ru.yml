@@ -1,4 +1,10 @@
 ru:
+  errors:
+    models:
+      user:
+        attributes:
+          policy_confirmed:
+            blank: "Необходимо Ваше согласие на обработку персональных данных"
   activerecord:
     models:
       user: Пользователи
@@ -17,6 +23,7 @@ ru:
         organization_id: Организация
         organization: Организация
         score: Баллы за выполненные просьбы
+        policy_confirmed: Cогласен на обработку персональных данных
       custom_field:
         name: Название
       help_request:

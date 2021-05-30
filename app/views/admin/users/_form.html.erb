@@ -1,5 +1,8 @@
 <% title = user.new_record? ? t(".new_user") : "#{t(".user")} #{user.email}" %>
 <p><h3><%= title %></h3></p>
+
+<%= render "approval_form", user: user %>
+
 <%= simple_form_for [:admin, user], wrapper: :horizontal_form do |f| %>
 
   <%= f.error_notification %>
