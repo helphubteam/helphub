@@ -1,11 +1,10 @@
 <p>Здравствуйте, <%= @user.name %></p>
 
 <p>
-  Вы заполнили форму регистрации на Helphub, чтобы помогать людям<br/>
-  Вместе с благотворительным фондом <%= @organization.title %>
+  Вы заполнили форму регистрации на <%= link_to "helphub.ru", "https://helphub.ru" %>, чтобы помогать людям вместе с благотворительным фондом <%= @organization.title %>
 </p>
 <p>
-  Чтобы продолжить, подтвердите вашу почту по этой <%= link_to 'ссылке', confirmation_url(@resource, confirmation_token: @token) %>
+  Чтобы продолжить, подтвердите вашу почту по этой <%= link_to 'ссылке', confirmation_url(@resource, confirmation_token: @token) %>.
 </p>
 <p>Если вы не регистрировались на <%= link_to "helphub.ru", "https://helphub.ru" %>, проигнорируйте это письмо.<p>
 <p>
