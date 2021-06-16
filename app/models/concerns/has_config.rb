@@ -23,7 +23,7 @@ module HasConfig
     def config_field(name)
       self.config ||= {}
       field = self.config[name.to_s] ||= {}
-      field['value'] ||= self.class.config_field(name)[:value]
+      field['value'] = field['value'].nil? ? self.class.config_field(name)[:value] : field['value']
       field
     end
 
