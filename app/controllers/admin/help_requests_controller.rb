@@ -30,7 +30,7 @@ module Admin
         @help_request = Admin::HelpRequestCases::Clone.new(
           @help_request, current_user
         ).call
-        flash[:notice] = 'Просьба склонирована'
+        flash.now[:notice] = 'Просьба склонирована'
         render :new
         return
       end
