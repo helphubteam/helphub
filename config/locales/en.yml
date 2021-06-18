@@ -384,6 +384,7 @@ en:
         set_balls: Set points
         save: Save
         archive_helprequest: Archive request
+        clone: Clone request
         archive: Activate
         cancel: Cancel
         warning: At this stage, the request cannot be changed from the volunteer

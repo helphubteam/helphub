@@ -2,7 +2,7 @@ module Admin
   # rubocop:disable Metrics/ClassLength
   class HelpRequestsController < Admin::BaseController
     before_action :fill_help_request, only: %i[edit update destroy custom_fields]
-    before_action :fill_volunteers, only: %i[new edit]
+    before_action :fill_volunteers, only: %i[new edit update]
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
@@ -25,6 +25,15 @@ module Admin
 
     def update
       authorize @help_request
+
+      if params[:clone]
+        @help_request = Admin::HelpRequestCases::Clone.new(
+          @help_request, current_user
+        ).call
+        flash[:notice] = 'Просьба склонирована'
+        render :new
+        return
+      end
 
       if Admin::HelpRequestCases::Update.new(
         @help_request, params, current_user
