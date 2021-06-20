@@ -27,11 +27,11 @@ module Admin
       authorize @help_request
 
       if params[:clone]
-        @help_request = Admin::HelpRequestCases::Clone.new(
+        clone_help_request = Admin::HelpRequestCases::Clone.new(
           @help_request, current_user
         ).call
-        flash.now[:notice] = 'Просьба склонирована'
-        render :new
+        flash[:notice] = 'Просьба склонирована'
+        redirect_to edit_admin_help_request_path(clone_help_request)
         return
       end
 
