@@ -10,26 +10,38 @@ module Admin
 
       attr_reader :help_request, :current_user
 
+      BLANK_ATTRIBUTES = %w(id created_at updated_at volunteer number)
+
       def call
-        help_request_clone = help_request.dup
-        help_request_clone.id = nil
-        help_request_clone.created_at = nil
-        help_request_clone.updated_at = nil
-        help_request_clone.volunteer = nil
-        help_request_clone.state = :active
-        help_request_clone.number = nil
-        help_request_clone.custom_values_attributes = help_request.custom_values.map do |cv|
-          {
-            value: cv.value,
-            custom_field_id: cv.custom_field_id
-          }
-        end
+        help_request_clone = build_help_request_clone
         help_request_clone.save!
         build_log(help_request_clone)
         help_request_clone
       end
 
       private
+
+      def build_help_request_clone
+        record = HelpRequest.new(
+          help_request.
+            attributes.
+            except(*BLANK_ATTRIBUTES).
+            merge(
+              "state" => "active"
+            )
+        )
+        record.custom_values_attributes = custom_values_attributes
+        record
+      end
+
+      def custom_values_attributes
+        help_request.custom_values.map do |cv|
+          {
+            value: cv.value,
+            custom_field_id: cv.custom_field_id
+          }
+        end
+      end
 
       def build_log(help_request_clone)
         help_request_clone.logs.create!(
