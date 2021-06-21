@@ -387,6 +387,8 @@ en:
         archive: Activate
         cancel: Cancel
         warning: At this stage, the request cannot be changed from the volunteer
+      clone_button:
+        clone: Clone request
       logs:
         active: Activity
         author: Author

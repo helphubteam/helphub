@@ -389,6 +389,8 @@ ru:
         archive: Активировать
         cancel: Отмена
         warning: На этом этапе волонтера у просьбы нельзя сменить
+      clone_button:
+        clone: Склонировать просьбу
       logs:
         active: Активность
         author: Автор
