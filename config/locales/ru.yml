@@ -387,9 +387,10 @@ ru:
         save: Сохранить
         archive_helprequest: Архивировать просьбу
         archive: Активировать
-        clone: Склонировать
         cancel: Отмена
         warning: На этом этапе волонтера у просьбы нельзя сменить
+      clone_button:
+        clone: Склонировать просьбу
       logs:
         active: Активность
         author: Автор

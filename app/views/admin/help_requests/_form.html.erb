@@ -1,6 +1,7 @@
 <%= javascript_pack_tag 'map' %>
 <%= javascript_pack_tag 'custom_fields' %>
 <% title = help_request.new_record? ? t(".new_helprequest") : "#{t(".help_request")} #{help_request.number}" %>
+<%= render 'clone_button', help_request: help_request %>
 <h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
 <p><span><%= help_request_state_label(help_request).html_safe %></span></p>
 <% if (help_request.assigned? || help_request.submitted?) %>
@@ -56,7 +57,6 @@
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit(t(".save"), class: 'btn btn-primary') %>
-      <%= f.submit(t(".clone"), name: :clone, class: 'btn btn-secondary') unless help_request.new_record? %>
       <%= f.submit(t(".archive_helprequest"), name: :block, class: 'btn btn-outline-danger') if !help_request.new_record? && !help_request.blocked? %>
       <%= f.submit(t(".archive"), name: :activate, class: 'btn btn-success') if help_request.blocked? %>
       <%= link_to(t(".cancel"), admin_help_requests_path, class: 'btn btn-outline-secondary align-self-start') %>
