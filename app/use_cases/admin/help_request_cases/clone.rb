@@ -10,7 +10,7 @@ module Admin
 
       attr_reader :help_request, :current_user
 
-      BLANK_ATTRIBUTES = %w(id created_at updated_at volunteer number)
+      BLANK_ATTRIBUTES = %w[id created_at updated_at volunteer number]
 
       def call
         help_request_clone = build_help_request_clone
@@ -23,11 +23,11 @@ module Admin
 
       def build_help_request_clone
         record = HelpRequest.new(
-          help_request.
-            attributes.
-            except(*BLANK_ATTRIBUTES).
-            merge(
-              "state" => "active"
+          help_request
+            .attributes
+            .except(*BLANK_ATTRIBUTES)
+            .merge(
+              'state' => 'active'
             )
         )
         record.custom_values_attributes = custom_values_attributes
