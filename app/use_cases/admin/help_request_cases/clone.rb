@@ -10,7 +10,7 @@ module Admin
 
       attr_reader :help_request, :current_user
 
-      BLANK_ATTRIBUTES = %w[id created_at updated_at volunteer number]
+      BLANK_ATTRIBUTES = %w[id created_at updated_at volunteer number].freeze
 
       def call
         help_request_clone = build_help_request_clone
@@ -35,12 +35,7 @@ module Admin
       end
 
       def custom_values_attributes
-        help_request.custom_values.map do |cv|
-          {
-            value: cv.value,
-            custom_field_id: cv.custom_field_id
-          }
-        end
+        help_request.custom_values.map { |cv| cv.attributes.slice('value', 'custom_field_id') }
       end
 
       def build_log(help_request_clone)
