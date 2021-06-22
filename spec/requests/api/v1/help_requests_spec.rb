@@ -28,6 +28,19 @@ RSpec.describe 'Api::V1::HelpRequests', type: :request do
     end
   end
 
+  describe 'GET /api/v1/help_requests with not empty content' do
+    let!(:help_request) { create :help_request, organization: organization, creator: moderator }
+
+    it 'returns help request JSON' do
+      get api_v1_help_requests_path
+      expect(response).to have_http_status(200)
+      data = JSON.parse(response.body)
+      expect(data.size).to eq(1)
+      help_request = data[0]
+      expect(help_request['creator_phone']).to_not be_blank
+    end
+  end
+
   describe 'POST /api/v1/help_requests/:id/assign' do
     let!(:help_request) { create :help_request, organization: organization, creator: moderator }
 
