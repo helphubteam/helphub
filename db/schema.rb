@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_03_204811) do
+ActiveRecord::Schema.define(version: 2021_06_22_071908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2021_05_03_204811) do
     t.datetime "date_end"
     t.string "title", limit: 140
     t.date "activated_at"
+    t.integer "creator_id"
     t.index ["organization_id"], name: "index_help_requests_on_organization_id"
   end
 
