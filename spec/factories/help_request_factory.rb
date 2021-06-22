@@ -27,6 +27,7 @@
 #  title                    :string(140)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  creator_id               :integer
 #  help_request_kind_id     :integer
 #  organization_id          :bigint
 #  volunteer_id             :integer
@@ -52,6 +53,7 @@ FactoryBot.define do
     person { 'test person' }
     state { 'active' }
     organization
+    creator { create :user, :moderator }
 
     trait :assigned do
       state { 'assigned' }
