@@ -27,7 +27,8 @@ module Api
               geo_salt: true, custom_fields: custom_fields, phone: non_personal_phone,
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
               created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at),
-              activated_days_ago: activated_days_ago(target.activated_at)
+              activated_days_ago: activated_days_ago(target.activated_at),
+              creator_phone: target.creator.try(:phone)
             )
     end
 
@@ -38,7 +39,8 @@ module Api
               lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label,
               geo_salt: false, custom_fields: custom_fields, activated_days_ago: activated_days_ago(target.activated_at),
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
+              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i),
+              creator_phone: target.creator.try(:phone)
             )
     end
     # rubocop:enable Metrics/AbcSize

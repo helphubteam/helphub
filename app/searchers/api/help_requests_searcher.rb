@@ -22,7 +22,7 @@ module Api
     end
 
     def call
-      scope = HelpRequest.preload(:custom_values, :custom_fields)
+      scope = HelpRequest.preload(:custom_values, :custom_fields, :creator)
       return submitted_scope(scope) if search_params[:submitted] == 'true'
       return taken_scope(scope) if search_params[:taken] == 'true'
 
