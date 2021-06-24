@@ -50,6 +50,7 @@ module Admin
         redirect_to action: :index
       else
         fill_volunteers
+        fill_custom_values
         flash.now[:error] = "Просьба не создана #{@help_request.errors.messages.inspect}"
         render :edit
       end
@@ -95,6 +96,22 @@ module Admin
       render json: custom_fields_data
     end
     # rubocop:enable Metrics/MethodLength
+
+    def fill_custom_values
+      data = params[:help_request][:custom_values_attributes].permit!.to_h
+      @custom_values = data.map do |id, custom_value|
+        custom_field_id = custom_value[:custom_field_id]
+        custom_field = CustomField.find_by_id custom_field_id
+        next unless custom_field
+        {
+          id: nil,
+          value: custom_value[:value],
+          custom_field_id: custom_value[:custom_field_id],
+          name: custom_field.name,
+          data_type: custom_field.data_type
+        }
+      end.compact
+    end
 
     def clone
       authorize @help_request
