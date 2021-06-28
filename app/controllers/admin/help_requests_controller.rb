@@ -89,7 +89,7 @@ module Admin
           id: existing_custom_value.try(:[], :id),
           value: existing_custom_value.try(:[], :value),
           custom_field_id: custom_field.id,
-          name: custom_field.name,
+          name: custom_field.label,
           data_type: custom_field.data_type
         }
       end
@@ -107,7 +107,7 @@ module Admin
           id: nil,
           value: custom_value[:value],
           custom_field_id: custom_value[:custom_field_id],
-          name: custom_field.name,
+          name: custom_field.label,
           data_type: custom_field.data_type
         }
       end.compact
