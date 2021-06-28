@@ -12,12 +12,23 @@ class RegistrationsController < Devise::RegistrationsController
     handle_personal_data_confirmation!
     @organizations = available_organizations
     @organization = resource.organization
+    moderator_notified
     unless verify_recaptcha?(params[:recaptcha_token], 'register')
       flash[:error] = I18n.t('registration.errors.recaptcha')
       redirect_to action: :new
       return
     end
     super
+  end
+
+  def moderator_notified
+     unless @user.approve
+      UserMailer.new_volunteer_confirmation(
+        moderator_id: @moderator.id,
+        user_id: current_user.id,
+        organization_id: @user.organization_id
+      ).deliver_now
+      end
   end
 
   protected

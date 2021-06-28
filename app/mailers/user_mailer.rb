@@ -12,6 +12,6 @@ class UserMailer < ApplicationMailer
     @user = User.find(user_id)
     @moderator = User.find(moderator_id)
     @organization = Organization.find(organization_id)
-    mail(to: @moderator.email, subject: "Новый волонтер в #{@organization.title}")
+    mail(to: @moderator.email, subject: "Новый волонтер")
   end
 end

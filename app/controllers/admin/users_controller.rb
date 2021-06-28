@@ -55,17 +55,6 @@ module Admin
       end
     end
 
-    def moderator_notified
-      authorize @user
-     unless @user.approve
-      UserMailer.new_volunteer_confirmation(
-        moderator_id: @moderator.id,
-        user_id: current_user.id,
-        organization_id: @user.organization_id
-      ).deliver_now
-      end
-    end
-
     def destroy
       authorize @user
       @user.destroy
