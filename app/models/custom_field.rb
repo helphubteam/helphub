@@ -6,6 +6,7 @@
 #  data_type            :string           default("string"), not null
 #  info                 :hstore
 #  name                 :string           not null
+#  public_field         :boolean          default(FALSE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  help_request_kind_id :bigint           not null
@@ -23,4 +24,8 @@ class CustomField < ApplicationRecord
   validates :data_type, presence: true, inclusion: { in: DATA_TYPES }
 
   has_many :custom_values, dependent: :destroy
+
+  def label
+    public_field ? "#{name}<br/>(публичное поле)" : name
+  end
 end

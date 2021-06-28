@@ -320,6 +320,7 @@ en:
     labels:
       custom_fields:
         data_type: Format
+        public_field: Field is public
       user:
         sex: "Пол"
   settings:

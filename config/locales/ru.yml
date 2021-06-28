@@ -322,6 +322,7 @@ ru:
     labels:
       custom_fields:
         data_type: Формат
+        public_field: Публичное поле
       user:
         sex: "Пол"
   settings:
