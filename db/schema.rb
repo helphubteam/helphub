@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_071908) do
+ActiveRecord::Schema.define(version: 2021_06_24_203554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_06_22_071908) do
     t.hstore "info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "public_field", default: false
     t.index ["help_request_kind_id"], name: "index_custom_fields_on_help_request_kind_id"
   end
 
