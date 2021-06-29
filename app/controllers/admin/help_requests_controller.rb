@@ -98,6 +98,8 @@ module Admin
     # rubocop:enable Metrics/MethodLength
 
     def fill_custom_values
+      return if params[:help_request].try(:[], :custom_values_attributes).nil?
+
       data = params[:help_request][:custom_values_attributes].permit!.to_h
       @custom_values = data.map do |id, custom_value|
         custom_field_id = custom_value[:custom_field_id]
