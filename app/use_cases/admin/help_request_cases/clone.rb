@@ -10,7 +10,7 @@ module Admin
 
       attr_reader :help_request, :current_user
 
-      BLANK_ATTRIBUTES = %w[id created_at updated_at volunteer number].freeze
+      BLANK_ATTRIBUTES = %w[id created_at updated_at volunteer_id number].freeze
 
       def call
         help_request_clone = build_help_request_clone
