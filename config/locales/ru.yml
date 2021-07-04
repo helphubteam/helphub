@@ -322,6 +322,7 @@ ru:
     labels:
       custom_fields:
         data_type: Формат
+        public_field: Публичное поле
       user:
         sex: "Пол"
   settings:
@@ -389,6 +390,8 @@ ru:
         archive: Активировать
         cancel: Отмена
         warning: На этом этапе волонтера у просьбы нельзя сменить
+      clone_button:
+        clone: Клонировать просьбу
       logs:
         active: Активность
         author: Автор

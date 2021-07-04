@@ -1,8 +1,8 @@
 module Admin
   # rubocop:disable Metrics/ClassLength
   class HelpRequestsController < Admin::BaseController
-    before_action :fill_help_request, only: %i[edit update destroy custom_fields]
-    before_action :fill_volunteers, only: %i[new edit]
+    before_action :fill_help_request, only: %i[edit update destroy custom_fields clone]
+    before_action :fill_volunteers, only: %i[new edit update]
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
@@ -50,6 +50,7 @@ module Admin
         redirect_to action: :index
       else
         fill_volunteers
+        fill_custom_values
         flash.now[:error] = "Просьба не создана #{@help_request.errors.messages.inspect}"
         render :edit
       end
@@ -88,13 +89,41 @@ module Admin
           id: existing_custom_value.try(:[], :id),
           value: existing_custom_value.try(:[], :value),
           custom_field_id: custom_field.id,
-          name: custom_field.name,
+          name: custom_field.label,
           data_type: custom_field.data_type
         }
       end
       render json: custom_fields_data
     end
     # rubocop:enable Metrics/MethodLength
+
+    def fill_custom_values
+      return if params[:help_request].try(:[], :custom_values_attributes).nil?
+
+      data = params[:help_request][:custom_values_attributes].permit!.to_h
+      @custom_values = data.map do |id, custom_value|
+        custom_field_id = custom_value[:custom_field_id]
+        custom_field = CustomField.find_by_id custom_field_id
+        next unless custom_field
+        {
+          id: nil,
+          value: custom_value[:value],
+          custom_field_id: custom_value[:custom_field_id],
+          name: custom_field.label,
+          data_type: custom_field.data_type
+        }
+      end.compact
+    end
+
+    def clone
+      authorize @help_request
+
+      result = Admin::HelpRequestCases::Clone.new(
+        @help_request, current_user
+      ).call
+      flash[:notice] = 'Просьба склонирована'
+      redirect_to edit_admin_help_request_path(result)
+    end
 
     private
 

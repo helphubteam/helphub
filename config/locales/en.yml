@@ -320,6 +320,7 @@ en:
     labels:
       custom_fields:
         data_type: Format
+        public_field: Field is public
       user:
         sex: "Пол"
   settings:
@@ -387,6 +388,8 @@ en:
         archive: Activate
         cancel: Cancel
         warning: At this stage, the request cannot be changed from the volunteer
+      clone_button:
+        clone: Clone request
       logs:
         active: Activity
         author: Author

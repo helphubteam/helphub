@@ -3,6 +3,7 @@
   <%= f.simple_fields_for :custom_fields do |custom_field| %>
     <%= custom_field.input :name %>
     <%= custom_field.input :data_type, collection: options_for_datatype, include_blank: false %>
+    <%= custom_field.input :public_field %>
     <%= custom_field.input '_destroy', as: :boolean, label: t(".delete") %>
   <% end %>
   <div class="mt-1 links">

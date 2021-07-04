@@ -5,6 +5,15 @@ export default class CustomFieldsPanel {
     this.url = el.dataset.url
     
     this.selectEl.addEventListener('change', this.updateCustomValues.bind(this));
+    const currentData = el.dataset.values
+    
+    if (currentData) {
+      const parsedCurrentData = JSON.parse(currentData)
+      if (parsedCurrentData) {
+        this.renderData(parsedCurrentData);
+        return
+      }
+    }
     this.updateCustomValues();
   }
 

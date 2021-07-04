@@ -2,7 +2,11 @@ module Admin
   module HelpRequestCases
     class Create < Base
       def call
-        if help_request.update(permitted_params)
+        if help_request.update(
+          permitted_params.merge(
+            creator_id: current_user.id
+          )
+        )
           write_moderator_log(:created)
           handle_blocking!
           handle_volunteer_assignments!(nil)
