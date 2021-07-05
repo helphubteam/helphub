@@ -15,9 +15,6 @@ class UserPolicy < ApplicationPolicy
     user.admin? || (user.moderator? && !set_user.admin?)
   end
 
-  def moderator_notified?
-    user.current_user?
-  end
   class Scope < Scope
     def resolve
       return scope if user.admin?
