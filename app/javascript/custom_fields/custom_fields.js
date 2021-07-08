@@ -128,6 +128,47 @@ export default class CustomFieldsPanel {
       `
     }
 
+    function renderAddress(obj, index) {
+      if (!obj.value) {
+        obj.value = {
+          city: '',
+          apartment: '',
+          district: '',
+          house: '',
+          street: ''
+        }
+      }
+      const { city, apartment, district, house, street } = obj.value
+      return `<div class="form-group row help_request_custom_values_value">
+                <label
+                  class="col-sm-3 col-form-label string optional"
+                  for="${fieldId(index)}" 
+                >
+                  ${obj.name}
+                </label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <input placeholder="Город" value="${escapeHtml(city)}" class="form-control string required" type="text" name="${fieldName(index, 'value')}[city]">
+                  </div>
+                  <div class="col-sm-9">
+                    <input placeholder="Район" value="${escapeHtml(district)}" class="form-control string optional" type="text" name="${fieldName(index, 'value')}[district]" id="help_request_district">
+                  </div>
+                  <div class="col-sm-9">
+                    <input placeholder="Улица" value="${escapeHtml(street)}" class="form-control string required" type="text" name="${fieldName(index, 'value')}[street]" id="help_request_street">
+                  </div>
+                  <div class="col-sm-9">
+                    <input placeholder="Дом" value="${escapeHtml(house)}" class="form-control string required" type="text" name="${fieldName(index, 'value')}[house]" id="help_request_house">
+                  </div>
+                  <div class="col-sm-9">
+                    <input placeholder="Квартира" value="${escapeHtml(apartment)}" class="form-control string optional" type="text" name="${fieldName(index, 'value')}[apartment]" id="help_request_apartment">
+                  </div>
+                </div>
+              </div>
+              ${renderHiddenFields(obj, index)}
+            </div>`
+    }
+
     this.container.innerHTML = data.map((obj, index) => {
       let dtype = obj.data_type;
       switch (dtype) {
@@ -139,6 +180,8 @@ export default class CustomFieldsPanel {
           return  renderDate(obj, index);
         case 'checkbox':
           return renderCheckbox(obj, index);
+        case 'address':
+          return renderAddress(obj, index);
       }
     }).join('')
   }
