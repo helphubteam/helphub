@@ -29,7 +29,7 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <%= bootstrap_flash unless action_name.to_sym.in?([:create, :update]) %>
+          <%= bootstrap_flash if force_show_flash_notice? || !action_name.to_sym.in?([:create, :update]) %>
         </div>
       </div>
     </div>
