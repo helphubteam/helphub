@@ -31,4 +31,5 @@ jobs:
             cd helphub_staging
             git checkout dev && git pull
             cp ~/.staging.env ~/staging/helphub_staging/.env
+            cp ~/Certificates.pem ~/staging/helphub_staging/config/Certificates.pem
             docker-compose -f ./docker-compose.stg.yml up -d --build
