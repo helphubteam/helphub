@@ -16,10 +16,15 @@ module Admin
         help_request_clone = build_help_request_clone
         help_request_clone.save!
         build_log(help_request_clone)
+        notify_volunteers_on_creation
         help_request_clone
       end
 
       private
+
+      def notify_volunteers_on_creation
+        notify_volunteers(I18n.t('notifications.help_request.create')) if current_user.organization.notify_if_new
+      end
 
       def build_help_request_clone
         record = HelpRequest.new(
