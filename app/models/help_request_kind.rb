@@ -15,7 +15,7 @@
 #
 class HelpRequestKind < ApplicationRecord
   belongs_to :organization
-  has_many :help_requests
+  has_many :help_requests, dependent: :restrict_with_exception
   has_many :custom_fields, dependent: :destroy
   accepts_nested_attributes_for :custom_fields, reject_if: :all_blank, allow_destroy: true
 

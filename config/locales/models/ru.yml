@@ -26,6 +26,7 @@ ru:
         policy_confirmed: Cогласен на обработку персональных данных
       custom_field:
         name: Название
+        custom_values: Значения в просьбах
       help_request:
         title: Заголовок
         number: Номер просьбы
@@ -62,6 +63,7 @@ ru:
         default: Применять по умолчанию
         organization: Организация
         organization_id: Организация
+        help_requests: Просьбы
       report:
         name: Название
         document: Файл отчета

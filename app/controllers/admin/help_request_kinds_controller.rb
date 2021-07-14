@@ -30,20 +30,35 @@ module Admin
 
     def update
       authorize @help_request_kind
-      if @help_request_kind.update(help_request_kind_params)
-        redirect_to action: :index
-        flash[:notice] = 'Вид просьбы изменен'
-      else
+      begin
+        if @help_request_kind.update(help_request_kind_params)
+          redirect_to action: :index
+          flash[:notice] = 'Вид просьбы изменен'
+          return
+        else
+          render :edit
+          return
+        end
+      rescue ActiveRecord::DeleteRestrictionError
+        flash[:error] = 'Не удалось удалить поле так как оно уже заполнено в просьбах'
         render :edit
-        flash[:error] = 'Не удалось изменить вид просьбы'
       end
     end
 
     def destroy
       authorize @help_request_kind
-      @help_request_kind.destroy
-      redirect_to action: :index
-      flash[:notice] = 'Вид просьбы удален'
+      begin
+        @help_request_kind.destroy
+        flash[:notice] = 'Вид просьбы удален'
+      rescue ActiveRecord::DeleteRestrictionError
+        flash[:error] = 'Невозможно удалить вид просьбы когда существуют просьбы этого вида'
+      ensure
+        redirect_to action: :index
+      end
+    end
+
+    def force_show_flash_notice?
+      true
     end
 
     private
