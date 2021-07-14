@@ -26,6 +26,12 @@ module Admin
         notify_volunteers(I18n.t('notifications.help_request.create')) if current_user.organization.notify_if_new
       end
 
+      def notify_volunteers(message)
+        BroadcastPushNotificationWorker.perform_async(
+          current_user.organization_id, message, ''
+        )
+      end
+
       def build_help_request_clone
         record = HelpRequest.new(
           help_request
