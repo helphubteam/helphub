@@ -31,4 +31,5 @@ jobs:
             cd helphub
             git checkout master && git pull
             cp ~/.production.env ~/production/helphub/.env
+            cp ~/Certificates.pem ~/production/helphub/config/Certificates.pem
             docker-compose -f ./docker-compose.prod.yml up -d --build
