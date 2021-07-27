@@ -1,6 +1,8 @@
 class NewVolunteerNotificationWorker
   include Sidekiq::Worker
 
+  sidekiq_options lock: :until_expired, lock_ttl: 1.week
+
   def perform(volunteer_id)
     volunteer = User.volunteers.find(volunteer_id)
     organization_id = volunteer.organization_id

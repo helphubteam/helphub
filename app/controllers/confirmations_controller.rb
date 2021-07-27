@@ -13,7 +13,6 @@ class ConfirmationsController < Devise::ConfirmationsController
   private
 
   def notify_moderators!
-    # TODO: make it happen only once
-    # ::NewVolunteerNotificationWorker.perform_async(resource.id)
+    ::NewVolunteerNotificationWorker.perform_async(resource.id)
   end
 end
