@@ -19,6 +19,7 @@ en:
         score: Points for fulfilled requests
       custom_field:
         name: Name
+        custom_values: Values in help requests
       help_request:
         title: Title
         number: Request number
@@ -49,11 +50,13 @@ en:
         test: Test fund
         configs:
           notify_if_new: Send notifications of new requests to volunteers
+          volunteers_can_join: Volunteers can join to the organization during registration
       help_request_kind:
         name: Name of the request
         default: Apply by default
         organization: Name of the organization
         organization_id: Organization ID
+        help_requests: Help Requests
       report:
         name: Name
         document: Report file
@@ -70,3 +73,4 @@ en:
       manual_unassign: The moderator removed the volunteer from the request
       refreshed: Duplicate request updated
       updated: The moderator updated the request
+      cloned: The moderator cloned the request

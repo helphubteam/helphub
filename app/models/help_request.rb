@@ -27,6 +27,7 @@
 #  title                    :string(140)
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  creator_id               :integer
 #  help_request_kind_id     :integer
 #  organization_id          :bigint
 #  volunteer_id             :integer
@@ -48,6 +49,7 @@ class HelpRequest < ApplicationRecord
   belongs_to :volunteer, class_name: 'User', optional: true
   belongs_to :organization
   belongs_to :help_request_kind, optional: true
+  belongs_to :creator, class_name: 'User'
 
   has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
   has_many :custom_fields, through: :help_request_kind
@@ -58,7 +60,7 @@ class HelpRequest < ApplicationRecord
   paginates_per 20
 
   validates :number, presence: true, uniqueness: { scope: :organization_id }
-  validates :lonlat, :comment, :phone, :person, :city, :street, :house, presence: true
+  validates :lonlat, :comment, :city, :street, :house, presence: true
   validates :period, numericality: { allow_blank: true, greater_than: 0 }
   validates :score, inclusion: 1..5
   validates :title, length: { maximum: 140 }

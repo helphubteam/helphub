@@ -1,0 +1,13 @@
+<% if @moderator.name.present? %>
+  <p><b><%= @moderator.name %></b>, здравствуйте!</p>
+<% else %>
+  <p>Здравствуйте!</p>
+<% end %>
+<p> В фонд <b><%= @organization.title %></b> поступила регистрация нового волонтера:</p>
+<p><b><%= @user.name %></b> / <b><%= @user.email %></b> / <b><%= @user.phone %></b><p>
+<p>Свяжитесь c волонтером, а потом одобрите его доступ к просьбам фонда в  <%= link_to("интерфейсе администратора", edit_admin_user_url(@user)) %>.</p>
+  С уважением,<br/>
+  Команда HelpHub<br/>
+</p>
+
+<p>Вопросы? Напишите нам на <a href="mailto:hello@helphub.ru">hello@helphub.ru</a></p>

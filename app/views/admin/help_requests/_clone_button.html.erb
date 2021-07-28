@@ -1,0 +1,5 @@
+<% unless help_request.new_record? %>
+  <%= form_for [:clone, :admin, help_request], method: :post, html: { style: 'float: right' } do |f| %>
+    <%= f.submit(t(".clone"), name: :clone, class: 'btn btn-sm btn-outline-success')  %>
+  <% end %>
+<% end %>

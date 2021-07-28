@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     ] do
       member do
         get :custom_fields
+        post :clone
       end
     end
 

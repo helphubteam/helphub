@@ -6,7 +6,13 @@ class ApplicationController < ActionController::Base
   
   include Pundit
 
+  helper_method :force_show_flash_notice?
+
   protected
+
+  def force_show_flash_notice?
+    false
+  end
 
   def after_sign_up_path_for(resource)
     pages_waiting_for_moderator_path(organization: resource.organization.title)

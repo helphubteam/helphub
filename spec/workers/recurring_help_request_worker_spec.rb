@@ -25,6 +25,7 @@ RSpec.describe RecurringHelpRequestsWorker do
     let(:repeatable_help_request) do
       create :help_request,
              state: state,
+             creator: moderator,
              volunteer: volunteer,
              organization: organization,
              schedule_set_at: schedule_set_at,
@@ -187,6 +188,7 @@ RSpec.describe RecurringHelpRequestsWorker do
     let(:repeatable_help_request) do
       create :help_request,
              state: :submitted,
+             creator: moderator,
              volunteer: volunteer,
              organization: organization,
              schedule_set_at: nil,

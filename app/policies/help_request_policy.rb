@@ -7,6 +7,10 @@ class HelpRequestPolicy < ApplicationPolicy
     help_request.organization == user.organization
   end
 
+  def clone?
+    help_request.organization == user.organization
+  end
+
   def update?
     help_request.organization == user.organization || user.admin?
   end

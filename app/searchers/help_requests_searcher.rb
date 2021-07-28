@@ -30,7 +30,7 @@ class HelpRequestsSearcher < TextSearcher
   private
 
   def search_fields
-    %i[id comment phone person city street house district apartment score]
+    %i[id title comment phone person city street house district apartment score]
   end
 
   def base_scope

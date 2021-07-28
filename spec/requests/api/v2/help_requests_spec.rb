@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V2::HelpRequests', type: :request do
   include_context 'jwt authenticated'
+  let(:moderator) { create :user, :moderator, organization: organization }
 
   describe 'when old token from wrong user role' do
     let(:user) { create :user, :admin, organization: organization, score: 3 }
@@ -26,8 +27,21 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
     end
   end
 
+  describe 'GET /api/v1/help_requests with not empty content' do
+    let!(:help_request) { create :help_request, organization: organization, creator: moderator }
+
+    it 'returns help request JSON' do
+      get api_v1_help_requests_path
+      expect(response).to have_http_status(200)
+      data = JSON.parse(response.body)
+      expect(data.size).to eq(1)
+      help_request = data[0]
+      expect(help_request['creator_phone']).to_not be_blank
+    end
+  end
+
   describe 'POST /api/v2/help_requests/:id/assign' do
-    let!(:help_request) { create :help_request, organization: organization }
+    let!(:help_request) { create :help_request, organization: organization, creator: moderator }
 
     it 'assigns HelpRequest record' do
       expect(help_request.volunteer).to be_nil
@@ -39,7 +53,7 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
   end
 
   describe 'POST /api/v2/help_requests/:id/refuse' do
-    let!(:help_request) { create :help_request, :assigned, volunteer: user, organization: organization }
+    let!(:help_request) { create :help_request, :assigned, volunteer: user, creator: moderator, organization: organization }
 
     it 'refuses HelpRequest record' do
       expect(help_request.volunteer).to eq(user)
@@ -51,7 +65,7 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
   end
 
   describe 'POST /api/v2/help_requests/:id/submit' do
-    let!(:help_request) { create :help_request, :assigned, volunteer: user, organization: organization, score: 4 }
+    let!(:help_request) { create :help_request, :assigned, volunteer: user, creator: moderator, organization: organization, score: 4 }
     let(:score_result_after_submit) { user.score + help_request.score }
 
     it 'submits HelpRequest record' do
@@ -70,6 +84,7 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
         create :help_request,
                :assigned,
                period: 1,
+               creator: moderator,
                volunteer: user,
                organization: organization,
                schedule_set_at: nil,

@@ -29,7 +29,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def available_organizations
-    Organization.active.where(test: false)
+    Organization.active.where("test = false and (config ='{}' or config->'volunteers_can_join'->>'value' != 'false')")
   end
 
   def sign_up_params

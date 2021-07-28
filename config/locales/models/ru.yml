@@ -26,6 +26,7 @@ ru:
         policy_confirmed: Cогласен на обработку персональных данных
       custom_field:
         name: Название
+        custom_values: Значения в просьбах
       help_request:
         title: Заголовок
         number: Номер просьбы
@@ -56,11 +57,13 @@ ru:
         test: Тестовый фонд
         configs:
           notify_if_new: Отправлять волонтерам уведомления о новых просьбах
+          volunteers_can_join: Волонтёры при регистрации могут присоединиться к организации
       help_request_kind:
         name: Название
         default: Применять по умолчанию
         organization: Организация
         organization_id: Организация
+        help_requests: Просьбы
       report:
         name: Название
         document: Файл отчета
@@ -77,3 +80,4 @@ ru:
       manual_unassign: Модератор снял волонтера с просьбы
       refreshed: Повторяющаяся просьба обновлена
       updated: Заявка обновлена модератором
+      cloned: Модератор склонировал просьбу

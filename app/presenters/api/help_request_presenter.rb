@@ -24,10 +24,11 @@ module Api
             .merge(
               address: non_personal_address, detailed_address: detailed_non_personal_address,
               lonlat: render_lonlat(target.lonlat_with_salt_geojson), distance: distance_label,
-              geo_salt: true, custom_fields: custom_fields, phone: non_personal_phone,
+              geo_salt: true, custom_fields: custom_fields(public_only: true), phone: non_personal_phone,
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
               created_at: timestamp(target.created_at), updated_at: timestamp(target.updated_at),
-              activated_days_ago: activated_days_ago(target.activated_at)
+              activated_days_ago: activated_days_ago(target.activated_at),
+              creator_phone: target.creator.try(:phone)
             )
     end
 
@@ -38,7 +39,8 @@ module Api
               lonlat: render_lonlat(target.lonlat_geojson), distance: distance_label,
               geo_salt: false, custom_fields: custom_fields, activated_days_ago: activated_days_ago(target.activated_at),
               date_begin: timestamp(target.date_begin), date_end: timestamp(target.date_end),
-              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i)
+              created_at: target.created_at.to_i, updated_at: target.updated_at.try(:to_i),
+              creator_phone: target.creator.try(:phone)
             )
     end
     # rubocop:enable Metrics/AbcSize
@@ -99,12 +101,16 @@ module Api
       end
     end
 
-    def custom_fields
+    def custom_fields(public_only: false)
       custom_values = target.custom_values
       custom_fields = target.custom_fields
       custom_fields.map do |custom_field|
-        { name: custom_field.name, value: build_custom_value(custom_field, custom_values), type: custom_field.data_type }
-      end
+        if public_only && !custom_field.public_field
+          nil
+        else
+          { name: custom_field.name, value: build_custom_value(custom_field, custom_values), type: custom_field.data_type }
+        end
+      end.compact
     end
 
     def build_custom_value(custom_field, custom_values)

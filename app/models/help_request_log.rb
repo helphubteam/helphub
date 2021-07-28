@@ -26,7 +26,8 @@ class HelpRequestLog < ApplicationRecord
     refreshed: 6, created: 7,
     manual_unassign: 8,
     manual_assign: 9,
-    updated: 10
+    updated: 10,
+    cloned: 11
   }
 
   validates :kind, presence: true
