@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.3'
+gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -18,7 +18,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.4'
 gem 'activerecord-import'
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
