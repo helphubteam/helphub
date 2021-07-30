@@ -1,5 +1,8 @@
 name: Deploy Production
 
+concurrency:
+  group: deploy
+
 on:
   push:
     branches:
