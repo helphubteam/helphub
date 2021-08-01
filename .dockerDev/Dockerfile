@@ -55,3 +55,8 @@ RUN gem update --system && \
 RUN mkdir -p /app
 
 WORKDIR /app
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]

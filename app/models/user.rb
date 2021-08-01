@@ -55,6 +55,8 @@ class User < ApplicationRecord
          :registerable, :confirmable
   belongs_to :organization, optional: true # TODO: add conditions = true only admin
 
+  after_invitation_accepted :notify_moderators
+
   include RolesHelpers
   include MobileDevices
 
@@ -91,5 +93,9 @@ class User < ApplicationRecord
   def to_s
     # TODO: add name fields
     [email].join(' ')
+  end
+
+  def notify_moderators
+    ::NewVolunteerNotificationWorker.perform_async(id)
   end
 end
