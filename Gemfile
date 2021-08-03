@@ -79,8 +79,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'rubocop'
-  gem 'letter_opener'
-  gem 'letter_opener_web'
 
   gem 'capistrano', '~> 3.11'
   gem 'ed25519', '>= 1.2', '< 2.0'
