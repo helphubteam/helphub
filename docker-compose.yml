@@ -28,19 +28,12 @@ services:
     container_name: app_helphub
     ports:
       - "${DOCKER_PORT}:3000"
-    command: ./start.sh
-
-  # runner:
-  #   <<: *backend
-  #   command: /bin/bash
-  #   ports:
-  #     - '3000:3000'
-  #     - '3002:3002'
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
 
   sidekiq:
     <<: *backend
     container_name: sidekiq_helphub
-    command: ./start_sidekiq.sh
+    command: bundle exec sidekiq -C config/sidekiq.yml
 
   postgres:
     container_name: db_helphub
@@ -49,9 +42,14 @@ services:
       - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
 
   redis:
-    image: redis:6.0.9-alpine
+    image: redis:6.2.5-alpine
     volumes:
       - redis:/data
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
 
 volumes:
   postgres:
