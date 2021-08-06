@@ -6,7 +6,7 @@ module Api
       before_action :setup_headers, :authorize_request
       protect_from_forgery with: :null_session
 
-      TOKEN_LIFETIME = 336.hours.to_i.freeze
+      TOKEN_LIFETIME = 35.days.to_i.freeze
 
       def authorize_request
         @current_api_user = User.volunteers.find(decoded[:user_id])
