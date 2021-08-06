@@ -12,6 +12,7 @@ unless HelpRequest.any?
       district: 'Center',
       street: 'Lenina',
       house: (index + 1).to_s,
+      creator: User.moderators.first,
       apartment: '1',
       number: (index + 1).to_s,
       person: 'Some Test Person',
