@@ -33,6 +33,7 @@ module Admin
         redirect_to action: :index
       else
         fill_volunteers
+        fill_custom_values
         flash.now[:error] = 'Не удалось изменить просьбу'
         render :edit
       end
