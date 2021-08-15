@@ -1,7 +1,11 @@
 <p>
   <h4><%= t(".header") %></h4>
-  <div id='js-custom-fields' data-values='<%= @custom_values.to_json %>' data-url='<%= custom_fields_admin_help_request_path(f.object.try(:id) || 0) %>'>
-    <%= f.input :help_request_kind_id, collection: help_request_kinds, include_blank: false, input_html: { class: 'js-help-request-kind-selector' } %>
-    <div class='js-custom-fields-container'></div>
+  <%= f.input :help_request_kind_id, collection: help_request_kinds, include_blank: false, input_html: { class: 'js-help-request-kind-selector' } %>
+  <div id='js-custom-fields'>
+    <div id="js-custom-fields-container">
+      <custom-fields-panel 
+        :request-path="'<%= custom_fields_admin_help_request_path(f.object.try(:id) || 0) %>'"
+      />
+    </div>
   </div>
 </p>
