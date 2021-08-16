@@ -29,11 +29,16 @@ export default {
 
   data() {
     return {
-      customFields: []
+      customFields: JSON.parse(this.$parent.$el.dataset.values) || []
     }
   },
 
   async mounted() {
+    if (this.customFields.length == 0) {
+      const helpRequestKindIdElem = document.getElementById('help_request_help_request_kind_id');
+      this.getCustomFields(helpRequestKindIdElem.value);
+    }
+
     window.vueEventBus.$on('helpRequestKindIdChanged', helpRequestKindId => {
       this.getCustomFields(helpRequestKindId);
     });

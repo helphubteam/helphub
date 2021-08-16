@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const helpRequestKindIdElem = document.getElementById('help_request_help_request_kind_id');
-  window.vueEventBus.$emit('helpRequestKindIdChanged', helpRequestKindIdElem.value);
   helpRequestKindIdElem.onchange = () => {
       window.vueEventBus.$emit('helpRequestKindIdChanged', helpRequestKindIdElem.value);
   }
