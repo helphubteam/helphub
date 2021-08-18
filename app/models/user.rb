@@ -95,6 +95,10 @@ class User < ApplicationRecord
     [email].join(' ')
   end
 
+  def after_confirmation
+    notify_moderators
+  end
+
   def notify_moderators
     ::NewVolunteerNotificationWorker.perform_async(id)
   end
