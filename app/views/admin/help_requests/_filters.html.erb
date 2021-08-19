@@ -1,10 +1,11 @@
 <%= form_tag admin_help_requests_path, method: 'GET', class: 'mb-4' do %>
   <div class='d-flex justify-content-between align-items-center flex-column flex-md-row'>
-    <div class='col-12 col-md-4 py-2 py-md-0'>
+    <div class='col-12 col-md-6 py-2 py-md-0 pl-0'>
       <div class="input-group m-0">
         <%= text_field_tag :search, params[:search], placeholder: t(".search_placeholder"), class: 'form-control form-control-sm' %>
         <div class="input-group-append">
-          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success' %>
+          <%= submit_tag t(".submit_search"), class: 'btn btn-sm btn-outline-success mr-2' %>
+          <%= link_to t(".cancel_filters"), admin_help_requests_path, class: 'btn btn-sm btn-outline-secondary' %>
         </div>
       </div>
     </div>
@@ -14,14 +15,13 @@
         <%#= label_tag :overdue, 'Показать просроченные просьбы', class: 'mb-0' %>
       </div>
     </div> -->
-    <div class='col-12 col-md-4 d-flex justify-content-center justify-content-md-end py-2 py-md-0'>
-      <%= link_to t(".cancel_filters"), admin_help_requests_path, class: 'btn btn-sm btn-outline-secondary mr-2' %>
+    <div class='col-12 col-md-4 d-flex justify-content-center justify-content-md-end py-2 py-md-0 pr-0'>
       <%= link_to(t(".new_helprequest"), new_admin_help_request_path, class: 'btn btn-sm btn-success') %>
     </div>
   </div>
 
   <div class='form-inline mt-3'>
-    <div class='col-12 col-md-2 py-2 py-md-0'>
+    <div class='col-12 col-md-2 py-2 py-md-0 pl-0'>
       <div class="input-group m-0">
         <%= text_field_tag :number, params[:number], placeholder: t(".number"), class: 'form-control form-control-sm' %>
       </div>
