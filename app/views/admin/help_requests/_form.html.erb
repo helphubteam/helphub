@@ -36,12 +36,12 @@
       </div>      
     </div>
   </div>
-  <%= f.input :meds_preciption_required %>
+  <%#= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%#= f.input :date_begin, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :date_end, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :mediated %>
-  <%= render 'repeat_menu', f: f %>
+  <%= render 'custom_values', f: f %>
   <p>
     <h4><%= t(".set_volunteer")%></h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>
@@ -49,12 +49,11 @@
       <p class='text-warning'><%= t(".warning") %></p>
     <% end %>
   </p>
-
+  <%= render 'repeat_menu', f: f %>
   <p>
     <h4><%= t(".set_balls") %></h4>
     <%= f.input :score, collection: 1..5, include_blank: false %>
   </p>
-  <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit(t(".save"), class: 'btn btn-primary') %>
