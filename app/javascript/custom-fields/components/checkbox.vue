@@ -11,7 +11,7 @@
       :id="getFieldId(index)" 
     />
     <label class="form-check-label boolean required" :for="getFieldId(index)">
-      {{obj.name}}
+      <span v-html="obj.name"> </span>
     </label>
   </div>
   <hidden-field :obj="obj" :index="index" />

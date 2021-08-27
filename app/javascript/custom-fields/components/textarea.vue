@@ -4,7 +4,7 @@
     class="col-sm-3 col-form-label string optional"
     :for="getFieldId(index)" 
   >
-    {{obj.name}}
+    <span v-html="obj.name"> </span>
   </label>
   <div class="col-sm-9">
     <textarea id="x" style="display:none" v-html="this.escapeHtml(this.obj.value) || ''" :name="getFieldName(index, 'value')"></textarea>

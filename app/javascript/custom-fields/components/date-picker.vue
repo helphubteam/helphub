@@ -4,7 +4,7 @@
     class="col-sm-3 col-form-label string optional"
     :for="getFieldId(index)" 
   >
-    {{obj.name}}
+    <span v-html="obj.name"> </span>
   </label>
   <div class="col-sm-3">
     <input
