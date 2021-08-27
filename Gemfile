@@ -68,6 +68,15 @@ group :development, :test do
   gem 'faker'
   gem 'timecop'
   gem 'database_cleaner-active_record'
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'webdrivers'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  gem 'cucumber-rails', require: false
+  gem 'capybara-screenshot'
+  gem 'show_me_the_cookies'
+  # Easy installation and use of web drivers to run system tests with browsers
 end
 
 group :development do
@@ -90,12 +99,6 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'cucumber-rails', require: false
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'fuubar'
   gem 'simplecov', '~> 0.19.0', require: false
 end

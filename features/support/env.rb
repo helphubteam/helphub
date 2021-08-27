@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara-screenshot'
+require 'capybara-screenshot/cucumber'
 
 # frozen_string_literal: true
 
@@ -58,3 +60,37 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+############################ Chrome driver config  ############################################
+Webdrivers::Chromedriver.required_version = ENV['CHROME_VERSION'] if ENV['CHROME_VERSION']
+
+Webdrivers.cache_time = 1.month.to_i
+
+Capybara.register_driver :headless_chrome do |app|
+  caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {
+    w3c: false
+  }, 'goog:loggingPrefs'=>{browser: 'ALL'})
+  opts = Selenium::WebDriver::Chrome::Options.new
+  opts.add_argument('--headless')
+  opts.add_argument('--no-sandbox')
+  opts.add_argument("--window-size=1920,1080")
+  # opts.add_argument("--disable-dev-shm-usage")
+  # opts.add_preference(:download, prompt_for_download: false,
+  #                        default_directory: DownloadHelpers::PATH.to_s)
+  opts.add_preference(:browser, set_download_behavior: { behavior: 'allow' })
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts,  desired_capabilities: caps)
+end
+
+Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
+ShowMeTheCookies.register_adapter(:headless_chrome, ShowMeTheCookies::SeleniumChrome)
+
+
+Capybara.default_driver = :headless_chrome
+Capybara.javascript_driver = :headless_chrome
+
+############################
+
+# We will test staging with russion locale bu default
+I18n.locale = :ru
