@@ -3,6 +3,7 @@
   <div v-for="(field, index) in customFields" :key="field.custom_field_id">
     <text-field v-if="field.data_type === 'string'" :obj="field" :index="index" />
     <text-area v-else-if="field.data_type === 'textarea'" :obj="field" :index="index" />
+    <phone v-else-if="field.data_type === 'phone'" :obj="field" :index="index" />
     <date-picker v-else-if="field.data_type === 'date'" :obj="field" :index="index" />
     <checkbox v-else-if="field.data_type === 'checkbox'" :obj="field" :index="index" />
   </div>
@@ -14,13 +15,15 @@ import Checkbox from "./components/checkbox"
 import DatePicker from "./components/date-picker"
 import TextArea from "./components/textarea"
 import TextField from "./components/text-field"
+import Phone from "./components/phone"
 
 export default {
   components: {
     Checkbox,
     DatePicker,
     TextArea,
-    TextField
+    TextField,
+    Phone
   },
 
   props: {
