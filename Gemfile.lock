@@ -72,6 +72,8 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    archive-zip (0.12.0)
+      io-like (~> 0.3.0)
     ast (2.4.2)
     bcrypt (3.1.16)
     bcrypt_pbkdf (1.1.0)
@@ -105,6 +107,9 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    capybara-screenshot (1.0.25)
+      capybara (>= 1.0, < 4)
+      launchy
     caxlsx (3.1.0)
       htmlentities (~> 4.3, >= 4.3.4)
       marcel (~> 1.0)
@@ -114,11 +119,53 @@ GEM
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
     childprocess (3.0.0)
+    chromedriver-helper (2.1.1)
+      archive-zip (~> 0.10)
+      nokogiri (~> 1.8)
     cocoon (1.2.15)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    cucumber (7.0.0)
+      builder (~> 3.2, >= 3.2.4)
+      cucumber-core (~> 10.0, >= 10.0.1)
+      cucumber-create-meta (~> 6.0, >= 6.0.1)
+      cucumber-cucumber-expressions (~> 12.1, >= 12.1.1)
+      cucumber-gherkin (~> 20.0, >= 20.0.1)
+      cucumber-html-formatter (~> 16.0, >= 16.0.1)
+      cucumber-messages (~> 17.0, >= 17.0.1)
+      cucumber-wire (~> 6.0, >= 6.0.1)
+      diff-lcs (~> 1.4, >= 1.4.4)
+      mime-types (~> 3.3, >= 3.3.1)
+      multi_test (~> 0.1, >= 0.1.2)
+      sys-uname (~> 1.2, >= 1.2.2)
+    cucumber-core (10.0.1)
+      cucumber-gherkin (~> 20.0, >= 20.0.1)
+      cucumber-messages (~> 17.0, >= 17.0.1)
+      cucumber-tag-expressions (~> 3.0, >= 3.0.1)
+    cucumber-create-meta (6.0.1)
+      cucumber-messages (~> 17.0, >= 17.0.1)
+      sys-uname (~> 1.2, >= 1.2.2)
+    cucumber-cucumber-expressions (12.1.2)
+    cucumber-gherkin (20.0.1)
+      cucumber-messages (~> 17.0, >= 17.0.1)
+    cucumber-html-formatter (16.0.1)
+      cucumber-messages (~> 17.0, >= 17.0.1)
+    cucumber-messages (17.0.1)
+    cucumber-rails (2.4.0)
+      capybara (>= 2.18, < 4)
+      cucumber (>= 3.2, < 8)
+      mime-types (~> 3.3)
+      nokogiri (~> 1.10)
+      railties (>= 5.0, < 7)
+      rexml (~> 3.0)
+      webrick (~> 1.7)
+    cucumber-tag-expressions (3.0.1)
+    cucumber-wire (6.1.1)
+      cucumber-core (~> 10.0, >= 10.0.1)
+      cucumber-cucumber-expressions (~> 12.1, >= 12.1.2)
+      cucumber-messages (~> 17.0, >= 17.0.1)
     database_cleaner-active_record (2.0.1)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -177,6 +224,7 @@ GEM
     htmlentities (4.3.4)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    io-like (0.3.1)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jwt (2.2.3)
@@ -192,6 +240,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -203,10 +253,14 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
     method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2021.0704)
     mini_mime (1.1.0)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_test (0.1.2)
     multipart-post (2.1.1)
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
@@ -349,6 +403,8 @@ GEM
     sentry-ruby-core (4.6.4)
       concurrent-ruby
       faraday
+    show_me_the_cookies (5.0.1)
+      capybara (>= 2, < 4)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -382,6 +438,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stateful_enum (0.6.0)
+    sys-uname (1.2.2)
+      ffi (~> 1.1)
     thor (1.1.0)
     thwait (0.2.0)
       e2mmap
@@ -408,6 +466,7 @@ GEM
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
+    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -433,9 +492,12 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.11)
   capybara (>= 2.15)
+  capybara-screenshot
   caxlsx
   caxlsx_rails
+  chromedriver-helper
   cocoon
+  cucumber-rails
   database_cleaner-active_record
   devise
   devise_invitable (~> 2.0.0)
@@ -467,6 +529,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  show_me_the_cookies
   sidekiq
   sidekiq-scheduler
   simple_form
