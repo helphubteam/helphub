@@ -118,6 +118,8 @@ module Api
       case custom_field.data_type
       when 'checkbox'
         build_checkbox_value(value)
+      when 'phone'
+        build_phone_value(value)
       else
         value
       end
@@ -125,6 +127,10 @@ module Api
 
     def build_checkbox_value(value)
       value == '1'
+    end
+
+    def build_phone_value(value)
+      JSON.parse(value)
     end
 
     def activated_days_ago(value)

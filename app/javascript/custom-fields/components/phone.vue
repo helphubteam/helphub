@@ -4,15 +4,20 @@
     class="col-sm-3 col-form-label string optional"
     :for="getFieldId(index)" 
   >
-    <span v-html="obj.name"> </span>
+  <span v-html="obj.name"> </span>
   </label>
-  <div class="col-sm-3">
+  <div class="col-sm-9">
     <input
       class="form-control string optional"
-      type="date"
+      type="text"
+      :value="obj.value && JSON.parse(obj.value).phone || ''"
+      @input="setPhone($event)"
+    />
+    <input
+      type="hidden"
       :name="getFieldName(index, 'value')" 
       :id="getFieldId(index)"
-      :value="obj.value"
+      :value="getPhone"
     />
   </div>
   <hidden-field :obj="obj" :index="index" />
@@ -33,6 +38,20 @@ export default {
   props: {
     obj: Object,
     index: Number
+  },
+
+  computed: {
+    getPhone () {
+      return this.obj.value
+    }
+  },
+
+  methods: {
+    setPhone(event) {
+      if (!event || !event.target) return
+      this.obj.value = JSON.stringify({ phone: event.target.value })
+      this.$forceUpdate()
+    }
   }
 }
 </script>
