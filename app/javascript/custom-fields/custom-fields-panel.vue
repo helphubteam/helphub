@@ -6,7 +6,7 @@
     <phone v-else-if="field.data_type === 'phone'" :obj="field" :index="index" />
     <date-picker v-else-if="field.data_type === 'date'" :obj="field" :index="index" />
     <checkbox v-else-if="field.data_type === 'checkbox'" :obj="field" :index="index" />
-    <address v-else-if="field.data_type === 'address'" :obj="field" :index="index" />
+    <AddressField v-else-if="field.data_type === 'address'" :obj="field" :index="index" />
   </div>
 </div>
 </template>
@@ -17,7 +17,7 @@ import DatePicker from "./components/date-picker"
 import TextArea from "./components/textarea"
 import TextField from "./components/text-field"
 import Phone from "./components/phone"
-import Address from "./components/address"
+import AddressField from "./components/address-field"
 
 export default {
   components: {
@@ -26,7 +26,7 @@ export default {
     TextArea,
     TextField,
     Phone,
-    Address
+    AddressField
   },
 
   props: {
