@@ -130,7 +130,7 @@ module Api
     end
 
     def build_phone_value(value)
-      JSON.parse(value)
+      JSON.parse(value)["phone"] || ''
     end
 
     def activated_days_ago(value)
