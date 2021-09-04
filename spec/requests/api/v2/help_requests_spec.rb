@@ -59,6 +59,7 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
         help_request_response = JSON.parse(response.body)[0]
         help_request_response.delete('created_at')
         help_request_response.delete('updated_at')
+        help_request_response.delete('id')
         help_request_response.delete('creator_phone')
         lonlat = help_request_response.delete('lonlat')
         expect(lonlat['type']).to eq("Point")
@@ -88,7 +89,6 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
               "street"=>"Test Street"},
             "distance"=>"",
             "geo_salt"=>true,
-            "id"=>1,
             "mediated"=>false,
             "meds_preciption_required"=>nil,
             "number"=>"1",
