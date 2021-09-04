@@ -44,6 +44,16 @@ Rails.application.routes.draw do
       end
       resources :scores, only: :index
     end
+
+    namespace :v3 do
+      resources :help_requests, only: :index do
+        member do
+          post :assign
+          post :submit
+          post :refuse
+        end
+      end
+    end
   end
 
   namespace :admin do

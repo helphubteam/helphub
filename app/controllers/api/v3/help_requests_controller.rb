@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  module V1
+  module V3
     class HelpRequestsController < Api::V1::BaseController
       before_action :fill_help_request, only: %i[assign submit refuse]
 
@@ -11,13 +11,13 @@ module Api
         ).call
 
         response = records.map do |record|
-          Api::HelpRequestPresenter.new(record, current_api_user).call
+          Api::V3::HelpRequestPresenter.new(record, current_api_user).call
         end
         render json: response
       end
 
       def assign
-        data = Api::V1::HelpRequestCases::Assign.new({
+        data = Api::V3::HelpRequestCases::Assign.new({
                                                        help_request: @help_request,
                                                        volunteer: current_api_user,
                                                        params: update_params
@@ -26,7 +26,7 @@ module Api
       end
 
       def submit
-        data = Api::V1::HelpRequestCases::Submit.new({
+        data = Api::V3::HelpRequestCases::Submit.new({
                                                        help_request: @help_request,
                                                        volunteer: current_api_user,
                                                        params: update_params
@@ -35,7 +35,7 @@ module Api
       end
 
       def refuse
-        data = Api::V1::HelpRequestCases::Refuse.new({
+        data = Api::V3::HelpRequestCases::Refuse.new({
                                                        help_request: @help_request,
                                                        volunteer: current_api_user,
                                                        params: update_params
