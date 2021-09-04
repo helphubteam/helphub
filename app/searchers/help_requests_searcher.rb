@@ -7,7 +7,8 @@ class HelpRequestsSearcher < TextSearcher
     search: '',
     column: 'updated_at',
     direction: 'desc',
-    number: nil
+    number: nil,
+    creator_id: nil
   }.freeze
 
   SORT_COLUMN = %w[state created_at updated_at period].freeze
@@ -35,6 +36,7 @@ class HelpRequestsSearcher < TextSearcher
 
   def base_scope
     scope = apply_search(HelpRequest)
+    scope = apply_creator(scope)
     scope = apply_states(scope)
     scope = apply_number(scope)
     if search_params[:overdue]
@@ -61,6 +63,11 @@ class HelpRequestsSearcher < TextSearcher
   def apply_states(scope)
     states = search_params[:states]
     states.blank? ? scope : scope.where(state: states)
+  end
+
+  def apply_creator(scope)
+    creator_id = search_params[:creator_id]
+    creator_id.blank? ? scope : scope.where(creator_id: creator_id)
   end
 
   def apply_number(scope)

@@ -374,7 +374,8 @@ en:
         submit_search: Search
         cancel_filters: Reset filters
         new_helprequest: New request
-        by_status: Filter by status ...
+        by_status: Filter by status...
+        by_creator: Filter by creator...
         find: "Records found:"
       form:
         new_helprequest: New request
