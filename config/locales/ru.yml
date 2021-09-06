@@ -377,6 +377,7 @@ ru:
         cancel_filters: Сбросить фильтры
         new_helprequest: Новая просьба
         by_status: Фильтр по статусу...
+        by_creator: Фильтр по создателю просьбы...
         find: "Найдено записей:"
       form:
         new_helprequest: Новая просьба

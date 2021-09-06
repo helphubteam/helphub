@@ -8,6 +8,7 @@ module Admin
     def index
       data = HelpRequestsSearcher.new(search_params).call
       @help_requests = policy_scope(data[:paged_scope])
+      @users = current_organization.users.moderators
       @help_requests_count = policy_scope(data[:base_scope]).count
     end
 
@@ -160,7 +161,7 @@ module Admin
     end
 
     def search_params
-      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []))
+      params.permit(*HelpRequestsSearcher::DEFAULT_SEARCH_PARAMS.keys.push(states: []).push(creator_id: []))
     end
   end
   # rubocop:enable Metrics/ClassLength
