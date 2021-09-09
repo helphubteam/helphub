@@ -52,9 +52,9 @@ class HelpRequest < ApplicationRecord
   belongs_to :creator, class_name: 'User'
 
   has_many :logs, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
-  has_many :custom_fields, through: :help_request_kind
+  has_many :custom_fields, -> { reorder('custom_fields.id') }, through: :help_request_kind
 
-  has_many :custom_values, -> { preload(:custom_field) }
+  has_many :custom_values, -> { reorder('custom_values.custom_field_id').preload(:custom_field) }
   accepts_nested_attributes_for :custom_values, reject_if: :all_blank, allow_destroy: false
 
   paginates_per 20
