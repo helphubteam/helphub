@@ -22,6 +22,7 @@ class CustomValue < ApplicationRecord
   belongs_to :custom_field
 
   validates :help_request, presence: true, unless: :new_record?
+  validates :custom_field_id, uniqueness: { scope: :help_request_id }
 
   has_rich_text :content
 end
