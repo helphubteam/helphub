@@ -108,7 +108,11 @@ module Api
         if public_only && !custom_field.public_field
           nil
         else
-          { name: custom_field.name, value: build_custom_value(custom_field, custom_values), type: custom_field.data_type }
+          { 
+            name: custom_field.name,
+            value: build_custom_value(custom_field, custom_values),
+            type: build_custom_type(custom_field.data_type)
+          }
         end
       end.compact
     end
@@ -123,6 +127,12 @@ module Api
       else
         value
       end
+    end
+
+    def build_custom_type(type)
+      return 'string' if type == 'phone'
+      
+      type
     end
 
     def build_checkbox_value(value)
