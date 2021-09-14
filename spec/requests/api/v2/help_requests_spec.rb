@@ -77,7 +77,7 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
               {"name"=>"checkbox_field", "type"=>"checkbox", "value"=>false},
               {"name"=>"date_field", "type"=>"date", "value"=>"22-09-1989"},
               {"name"=>"phone_field",
-               "type"=>"phone",
+               "type"=>"string",
                "value"=>"89293811231"}],
             "date_begin"=>nil,
             "date_end"=>nil,
