@@ -140,7 +140,7 @@ module Api
     end
 
     def build_phone_value(value)
-      return '' if value.blank?
+      return '' if value.blank? || JSON.parse(value).blank?
       JSON.parse(value)["phone"] || ''
     end
 
