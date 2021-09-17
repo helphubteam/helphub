@@ -16,7 +16,7 @@ module Admin
       authorize @help_request_kind
 
       if @help_request_kind.save
-        redirect_to action: :index
+        redirect_to edit_admin_help_request_kind_path(@help_request_kind)
         flash[:notice] = 'Создан новый вид просьбы'
       else
         render :new

@@ -4,7 +4,7 @@
   <%= f.error_notification %>
   <%= f.input :name %>
   <%= f.input :default %>
-  <%= render 'custom_fields', f: f %>
+  <%= render 'custom_fields', f: f unless help_request_kind.new_record? %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit(help_request_kind.new_record? ? t(".create") : t(".save"), class: 'btn btn-primary') %>
