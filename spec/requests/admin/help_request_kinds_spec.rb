@@ -29,7 +29,7 @@ RSpec.describe 'Admin::HelpRequestKinds', type: :request do
 
     it 'creates HelpRequest record' do
       expect { post(admin_help_request_kinds_path, params: valid_create_params) }.to change { HelpRequestKind.count }.by(1)
-      expect(response).to redirect_to(admin_help_request_kinds_path)
+      expect(response).to redirect_to(edit_admin_help_request_kind_path(HelpRequestKind.last))
     end
   end
 
