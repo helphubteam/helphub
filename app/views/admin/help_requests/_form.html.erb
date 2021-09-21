@@ -1,5 +1,6 @@
+<%= javascript_pack_tag 'vue-event-bus' %>
 <%= javascript_pack_tag 'map' %>
-<%= javascript_pack_tag 'custom_fields' %>
+<%= javascript_pack_tag 'custom-fields' %>
 <% title = help_request.new_record? ? t(".new_helprequest") : "#{t(".help_request")} #{help_request.number}" %>
 <%= render 'clone_button', help_request: help_request %>
 <h3 data-errors='<%= help_request.errors.messages.inspect %>' ><%= title %></h3>
@@ -27,7 +28,7 @@
       <%= f.input :phone %>
     </div>
     <div class="col-6">
-      <div id="vue-app">
+      <div id="map">
         <leaflet-map 
           :marker="<%= help_request.lonlat_geojson || 'null' %>"
           :is-valid="<%= !help_request.errors[:lonlat].any? %>"
@@ -35,12 +36,12 @@
       </div>      
     </div>
   </div>
-  <%= f.input :meds_preciption_required %>
+  <%#= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%#= f.input :date_begin, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :date_end, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :mediated %>
-  <%= render 'repeat_menu', f: f %>
+  <%= render 'custom_values', f: f %>
   <p>
     <h4><%= t(".set_volunteer")%></h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>
@@ -48,12 +49,11 @@
       <p class='text-warning'><%= t(".warning") %></p>
     <% end %>
   </p>
-
+  <%= render 'repeat_menu', f: f %>
   <p>
     <h4><%= t(".set_balls") %></h4>
     <%= f.input :score, collection: 1..5, include_blank: false %>
   </p>
-  <%= render 'custom_values', f: f %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit(t(".save"), class: 'btn btn-primary') %>

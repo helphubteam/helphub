@@ -32,6 +32,7 @@ jobs:
               git clone git@github.com:helphubteam/helphub.git helphub_staging
             fi
             cd helphub_staging
+            docker system prune -a -f
             git checkout dev && git pull
             cp ~/.staging.env ~/staging/helphub_staging/.env
             cp ~/Certificates.pem ~/staging/helphub_staging/config/Certificates.pem

@@ -25,6 +25,83 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
       expect(response).to have_http_status(200)
       expect(JSON.parse(response.body)).to eq([])
     end
+
+    context 'when help_requests exist' do
+      before(:each) do
+        kind = create :help_request_kind, name: 'test', organization: organization
+        string_field = create :custom_field, name: "string_field", help_request_kind: kind, data_type: :string
+        textarea_field = create :custom_field, name: "textarea_field", help_request_kind: kind, data_type: :textarea
+        checkbox_field = create :custom_field, name: "checkbox_field", help_request_kind: kind, data_type: :checkbox
+        date_field = create :custom_field, name: "date_field", help_request_kind: kind, data_type: :date
+        phone_field = create :custom_field, name: "phone_field", help_request_kind: kind, data_type: :phone
+        help_request = create :help_request, organization: organization, creator: moderator, help_request_kind: kind
+        custom_values = {
+          string_field.id => "string",
+          textarea_field.id => "<p><b>textarea</b></p>",
+          checkbox_field.id => "true",
+          date_field.id => "22-09-1989",
+          phone_field.id => "{\"phone\": \"89293811231\"}"
+        }
+
+        custom_values.each do |custom_field_id, value|
+          help_request.custom_values.build(
+            custom_field_id: custom_field_id,
+            value: value
+          )
+        end
+
+        help_request.save!
+      end
+
+      it 'returns the list' do
+        get api_v2_help_requests_path
+        expect(response).to have_http_status(200)
+        help_request_response = JSON.parse(response.body)[0]
+        help_request_response.delete('created_at')
+        help_request_response.delete('updated_at')
+        help_request_response.delete('id')
+        help_request_response.delete('creator_phone')
+        lonlat = help_request_response.delete('lonlat')
+        expect(lonlat['type']).to eq("Point")
+        expect(lonlat['coordinates']).not_to be_empty
+        expect(help_request_response).to eq(
+          {
+            "activated_days_ago"=>0,
+            "address"=>"Moscow Center Test Street 12",
+            "comment"=>"test comment",
+            "custom_fields"=>
+             [{"name"=>"string_field", "type"=>"string", "value"=>"string"},
+              {"name"=>"textarea_field",
+               "type"=>"textarea",
+               "value"=>"<p><b>textarea</b></p>"},
+              {"name"=>"checkbox_field", "type"=>"checkbox", "value"=>false},
+              {"name"=>"date_field", "type"=>"date", "value"=>"22-09-1989"},
+              {"name"=>"phone_field",
+               "type"=>"string",
+               "value"=>"89293811231"}],
+            "date_begin"=>nil,
+            "date_end"=>nil,
+            "detailed_address"=>
+             {"apartment"=>nil,
+              "city"=>"Moscow",
+              "district"=>"Center",
+              "house"=>nil,
+              "street"=>"Test Street"},
+            "distance"=>"",
+            "geo_salt"=>true,
+            "mediated"=>false,
+            "meds_preciption_required"=>nil,
+            "number"=>"1",
+            "period"=>nil,
+            "phone"=>"123****23",
+            "recurring"=>nil,
+            "state"=>"active",
+            "title"=>nil,
+            "volunteer_id"=>nil
+          }
+        )
+      end
+    end
   end
 
   describe 'GET /api/v1/help_requests with not empty content' do

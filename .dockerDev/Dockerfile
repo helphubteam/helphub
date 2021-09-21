@@ -52,6 +52,17 @@ RUN gem update --system && \
     gem uninstall bundler && \
     gem install bundler -v $BUNDLER_VERSION
 
+#### Chromedriver dependencies & Chrome
+ENV PATH="/root/.webdrivers:${PATH}"
+ENV CHROME_VERSION="92.0.4515.107"
+RUN apt-get update && apt-get install -y wget curl unzip xvfb libxi6 libgconf-2-4 libnss3 wget \
+    && TEMP_DEB="$(mktemp)" \
+    && wget -O "$TEMP_DEB" 'http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_92.0.4515.107-1_amd64.deb' \
+    && dpkg -i "$TEMP_DEB" \
+    ; apt-get -f -y install \
+    && rm -f "$TEMP_DEB";
+#####
+
 RUN mkdir -p /app
 
 WORKDIR /app

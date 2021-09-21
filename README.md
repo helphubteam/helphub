@@ -29,3 +29,18 @@ docker-compose run app bash -c 'RAILS_ENV=test rspec spec'
 ```bash
 docker-compose run app bash -c 'rubocop'
 ```
+
+### Run Automation Tests
+
+```bash
+docker-compose exec app xvfb-run -a bundle exec cucumber
+```
+To debug this you can try
+1) Set breakpoints in the steps code:
+```ruby
+  binding.pry
+```
+2) Or take a screenshot:
+```ruby  
+  page.save_screenshot('/app/test.png')
+```

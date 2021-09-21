@@ -13,6 +13,9 @@ x-backend:
       NODE_ENV: staging
       RAILS_ENV: staging
   env_file: .env
+  logging:
+    options:
+      max-size: "200m"
 services:
   app:
     <<: *backend

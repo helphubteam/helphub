@@ -43,7 +43,7 @@ module Api
         render_data(data)
       end
 
-      private
+      protected
 
       def render_data(data)
         code = data[:errors] ? :not_acceptable : :ok
