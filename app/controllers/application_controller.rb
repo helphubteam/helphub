@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
       admin_dashboard_path
     elsif resource.moderator?
       admin_help_requests_path
+    elsif resource.content_manager?
+      admin_help_requests_path
     else
       sign_out(resource)
       PROMOTE_HELPHUB_APP_PAGE
@@ -30,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def can_use_application?(resource)
-    resource.admin? || resource.moderator?
+    resource.admin? || resource.moderator? || resource.content_manager?
   end
 
   rescue_from Pundit::NotAuthorizedError do

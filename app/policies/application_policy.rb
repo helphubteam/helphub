@@ -43,9 +43,10 @@ class ApplicationPolicy
     end
 
     def resolve
-      return scope.all unless user.moderator?
-
-      scope.where(organization: current_organization)
+      if user.moderator? || user.content_manager?
+        return scope.where(organization: current_organization) 
+      end
+      scope.all
     end
 
     private

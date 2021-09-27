@@ -4,7 +4,6 @@ class ReportPolicy < ApplicationPolicy
   end
 
   def create?
-    puts report.attributes.inspect
     report.organization == user.organization
   end
 

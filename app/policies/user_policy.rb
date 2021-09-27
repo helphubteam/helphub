@@ -4,7 +4,12 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || (user.moderator? && !set_user.admin?)
+    return true if user.admin? || (
+      user.moderator? && !set_user.admin? 
+    ) || (
+      user.content_manager? && set_user == user
+    )
+    false
   end
 
   def destroy?
@@ -18,6 +23,7 @@ class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       return scope if user.admin?
+      return scope.where(id: user.id) if user.content_manager?
 
       scope.where(organization: current_organization)
     end
