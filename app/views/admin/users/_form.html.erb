@@ -23,6 +23,10 @@
     <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
   <% end %>
 
+  <%= f.input :content_manager, as: :boolean do %>
+    <%= f.check_box :content_manager, { checked: user.content_manager? }, "true", "false" %>
+  <% end %>
+
   <%= f.input :volunteer, as: :boolean do %>
     <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
   <% end %>

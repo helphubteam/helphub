@@ -75,6 +75,7 @@ module Admin
       if current_user.moderator? || current_user.admin?
         permit_attributes << :moderator
         permit_attributes << :volunteer
+        permit_attributes << :content_manager
       end
 
       permit_attributes << :admin if current_user.admin?

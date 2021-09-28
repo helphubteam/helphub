@@ -70,5 +70,10 @@ FactoryBot.define do
       role { 'moderator' }
       organization
     end
+
+    trait :content_manager do
+      role { 'content_manager' }
+      organization
+    end
   end
 end

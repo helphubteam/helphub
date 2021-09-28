@@ -6,8 +6,9 @@ module RolesHelpers
   MODERATOR = 'moderator'.freeze
   ADMIN = 'admin'.freeze
   VOLUNTEER = 'volunteer'.freeze
+  CONTENT_MANAGER = 'content_manager'.freeze
 
-  ROLES = [ADMIN, MODERATOR, VOLUNTEER].freeze
+  ROLES = [ADMIN, MODERATOR, VOLUNTEER, CONTENT_MANAGER].freeze
 
   included do
     ROLES.each do |role|
@@ -44,6 +45,7 @@ module RolesHelpers
       self.admin = true if role.to_s == ADMIN
       self.moderator = true if role.to_s == MODERATOR
       self.volunteer = true if role.to_s == VOLUNTEER
+      self.volunteer = true if role.to_s == CONTENT_MANAGER
     end
 
     scope :by_role, ->(role) { where("roles -> ? = 'true'", role) }
