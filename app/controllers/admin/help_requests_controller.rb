@@ -8,7 +8,7 @@ module Admin
     def index
       data = HelpRequestsSearcher.new(search_params).call
       @help_requests = policy_scope(data[:paged_scope])
-      @users = current_organization.users.moderators
+      @users = policy_scope(current_organization.users.moderators.or(current_organization.users.content_managers))
       @help_requests_count = policy_scope(data[:base_scope]).count
     end
 

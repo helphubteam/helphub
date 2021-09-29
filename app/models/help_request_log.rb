@@ -31,4 +31,9 @@ class HelpRequestLog < ApplicationRecord
   }
 
   validates :kind, presence: true
+
+  def label
+    user_role = I18n.t("activerecord.attributes.user.#{self.user.role}")
+    I18n.t("help_request_log.kind.#{self.kind}", user: user_role)
+  end
 end
