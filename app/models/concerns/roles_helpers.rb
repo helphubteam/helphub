@@ -33,6 +33,7 @@ module RolesHelpers
     def role
       return ADMIN if admin?
       return MODERATOR if moderator?
+      return CONTENT_MANAGER if content_manager?
 
       VOLUNTEER
     end
