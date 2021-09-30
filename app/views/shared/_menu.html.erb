@@ -1,7 +1,6 @@
 <%
   is_admin = current_user.admin? || nil
   is_moderator = current_user.moderator? || nil
-  is_content_manager = current_user.content_manager? || nil
 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
   <% title = is_admin ?  'HelpHub' : "HelpHub: #{current_user.organization.title}" %>
@@ -24,7 +23,7 @@
         menu = [
           is_admin && ["Организации", admin_organizations_path],
           (is_moderator || is_admin) && ["Пользователи", admin_users_path],
-          (is_moderator || is_content_manager) && ["Просьбы", admin_help_requests_path],
+          is_moderator && ["Просьбы", admin_help_requests_path],
           is_moderator && ["Виды просьб", admin_help_request_kinds_path],
           is_moderator && ["Отчеты", admin_reports_path],
           is_moderator && organization && ["Настройки Организации", config_admin_organization_path(organization)],

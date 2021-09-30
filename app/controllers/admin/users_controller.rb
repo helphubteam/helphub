@@ -31,7 +31,11 @@ module Admin
     def update
       authorize @user
       if @user.update(user_params)
-        redirect_to action: :index
+        if current_user.admin? || current_user.moderator?
+          redirect_to action: :index
+        else
+          redirect_to admin_help_requests_path
+        end
         flash[:notice] = 'Пользователь изменен!'
       else
         render :edit
