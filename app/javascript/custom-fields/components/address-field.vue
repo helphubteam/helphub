@@ -91,7 +91,6 @@ export default {
 
   data() {
     return {
-      apartment: '',
       addressValue: '',
       addressChangedEventName: this.getRandomString(),
     }
