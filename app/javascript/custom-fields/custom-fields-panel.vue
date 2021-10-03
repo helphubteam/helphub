@@ -6,7 +6,11 @@
     <phone v-else-if="field.data_type === 'phone'" :obj="field" :index="index" />
     <date-picker v-else-if="field.data_type === 'date'" :obj="field" :index="index" />
     <checkbox v-else-if="field.data_type === 'checkbox'" :obj="field" :index="index" />
-    <AddressField v-else-if="field.data_type === 'address'" :obj="field" :index="index" />
+    <address-field v-else-if="field.data_type === 'address'" 
+      :obj="field" 
+      :index="index" 
+      :empty-point-error-message="emptyPointErrorMessage" 
+    />
   </div>
 </div>
 </template>
@@ -31,6 +35,7 @@ export default {
 
   props: {
     requestPath: String,
+    emptyPointErrorMessage: String
   },
 
   data() {

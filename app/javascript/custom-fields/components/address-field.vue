@@ -56,7 +56,12 @@
         </div>
       </div>
       <div class="col-6">
-        <leaflet-map :marker='null' :is-valid='true' error-message="" />
+        <leaflet-map 
+          :marker="obj.value.coordinates" 
+          :is-valid="!!obj.value.coordinates" 
+          :address-changed-event-name="addressChangedEventName"
+          :error-message="emptyPointErrorMessage" 
+        s/>
       </div>
     </div>
   </div>
@@ -87,45 +92,55 @@ export default {
   data() {
     return {
       apartment: '',
-      addressValue: ''
+      addressValue: '',
+      addressChangedEventName: this.getRandomString(),
     }
   },
 
   props: {
     obj: Object,
-    index: Number
+    index: Number,
+    emptyPointErrorMessage: String
   },
 
   created() {
     this.obj.value = this.obj.value && JSON.parse(this.obj.value) || {};
     this.addressValue = JSON.stringify(this.obj.value);
+
+    this.$watch('obj.value.city', this.updateAddressString);
+    this.$watch('obj.value.district', this.updateAddressString);
+    this.$watch('obj.value.street', this.updateAddressString);
+    this.$watch('obj.value.house', this.updateAddressString);
+    this.$watch('obj.value.apartment', this.updateAddressString);
+  },
+
+  mounted() {
+    window.vueEventBus.$on(`${this.addressChangedEventName}_marker_changed`, coordinates => {
+      this.obj.value.coordinates = coordinates;
+    });
   },
 
   watch: {
-    'obj.value.city': function() {
-      this.updateAddressValue();
-    },
-
-    'obj.value.district': function() {
-      this.updateAddressValue();
-    },
-
-    'obj.value.street': function() {
-      this.updateAddressValue();
-    },
-
-    'obj.value.house': function() {
-      this.updateAddressValue();
-    },
-
-    'obj.value.apartment': function() {
-      this.updateAddressValue();
-    },
+    'obj.value': {
+      handler() {
+        this.addressValue = JSON.stringify(this.obj.value);
+      },
+      deep: true
+    }
   },
 
   methods: {
-    updateAddressValue() {
-      this.addressValue = JSON.stringify(this.obj.value);
+    updateAddressString() {
+      const addressString = [
+        this.obj.value.city,
+        this.obj.value.street,
+        this.obj.value.house
+      ].join(' ');
+      window.vueEventBus.$emit(this.addressChangedEventName, addressString);
+    },
+
+    getRandomString() {
+      return Math.random().toString(36).substr(2,10);
     }
   }
 }

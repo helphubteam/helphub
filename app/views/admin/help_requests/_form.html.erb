@@ -32,6 +32,8 @@
         <leaflet-map 
           :marker="<%= help_request.lonlat_geojson || 'null' %>"
           :is-valid="<%= !help_request.errors[:lonlat].any? %>"
+          marker-field-name="help_request[lonlat_geojson]"
+          address-changed-event-name="searchStringChanged"
           error-message="<%= I18n.t("help_request.errors.empty_point") %>" />
       </div>      
     </div>
