@@ -10,8 +10,7 @@
               class="form-control string optional"
               placeholder="Город"
               type="text"
-              :value="obj.value && JSON.parse(obj.value).city || ''"
-              @input="setAddress('city', $event)"
+              v-model="obj.value.city"
             />
           </div>
         </div>
@@ -21,8 +20,7 @@
               class="form-control string optional"
               placeholder="Район"
               type="text"
-              :value="obj.value && JSON.parse(obj.value).district || ''"
-              @input="setAddress('district', $event)"
+              v-model="obj.value.district"
             />
           </div>
         </div>
@@ -32,8 +30,7 @@
               class="form-control string optional"
               placeholder="Улица"
               type="text"
-              :value="obj.value && JSON.parse(obj.value).street || ''"
-              @input="setAddress('street', $event)"
+              v-model="obj.value.street"
             />
           </div>
         </div>
@@ -43,8 +40,7 @@
               class="form-control string optional"
               placeholder="Дом"
               type="text"
-              :value="obj.value && JSON.parse(obj.value).house || ''"
-              @input="setAddress('house', $event)"
+              v-model="obj.value.house"
             />
           </div>
         </div>
@@ -54,8 +50,7 @@
               class="form-control string optional"
               placeholder="Квартира"
               type="text"
-              :value="obj.value && JSON.parse(obj.value).apartment || ''"
-              @input="setAddress('apartment', $event)"
+              v-model="obj.value.apartment"
             />
           </div>
         </div>
@@ -70,7 +65,7 @@
     type="hidden"
     :name="getFieldName(index, 'value')" 
     :id="getFieldId(index)"
-    :value="getAddress"
+    :value="addressValue"
   />
   <hidden-field :obj="obj" :index="index" />
 </div>
@@ -89,25 +84,49 @@ export default {
 
   mixins: [fieldMixin],
 
+  data() {
+    return {
+      apartment: '',
+      addressValue: ''
+    }
+  },
+
   props: {
     obj: Object,
     index: Number
   },
 
-  computed: {
-    getAddress () {
-      return this.obj.value
-    }
+  created() {
+    this.obj.value = this.obj.value && JSON.parse(this.obj.value) || {};
+    this.addressValue = JSON.stringify(this.obj.value);
+  },
+
+  watch: {
+    'obj.value.city': function() {
+      this.updateAddressValue();
+    },
+
+    'obj.value.district': function() {
+      this.updateAddressValue();
+    },
+
+    'obj.value.street': function() {
+      this.updateAddressValue();
+    },
+
+    'obj.value.house': function() {
+      this.updateAddressValue();
+    },
+
+    'obj.value.apartment': function() {
+      this.updateAddressValue();
+    },
   },
 
   methods: {
-    setAddress(field, event) {
-      if (!event || !event.target) return
-      let value = this.obj.value ? JSON.parse(this.obj.value) : {}
-      value[field] = event.target.value
-      this.obj.value = JSON.stringify(value)
-      this.$forceUpdate()
-    },
+    updateAddressValue() {
+      this.addressValue = JSON.stringify(this.obj.value);
+    }
   }
 }
 </script>
