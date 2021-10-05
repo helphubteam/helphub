@@ -36,7 +36,7 @@
                      multiple: true,
                      class: 'selectpicker' %>
     </div>
-    <% if @users.any? %>
+    <% if @users.size > 1 %>
       <div class="form-group mb-2">
         <%= select_tag :creator_id,
                       options_for_select(@users.map { |user| ["#{user.name} <#{user.email}>", user.id, {class: ''}] },
