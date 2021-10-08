@@ -1,17 +1,16 @@
 class UserPolicy < ApplicationPolicy
   def create?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
-      user.moderator? && !set_user.admin?
+      own_organization? && user.moderator? && !set_user.admin?
     )
   end
 
   def update?
     return true if user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      own_organization? &&
       (
         (user.moderator? && !set_user.admin?) || 
-        (user.content_manager? && set_user == user)
+        (user.content_manager? && setup_own_user?)
       )
     )
     false
@@ -19,14 +18,14 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      own_organization? &&
       user.moderator? && !set_user.admin?
     )
   end
 
   def approve?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      own_organization? &&
       user.moderator? && !set_user.admin?
     )
   end
@@ -37,17 +36,17 @@ class UserPolicy < ApplicationPolicy
 
   def update_moderator_role?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      own_organization? &&
       user.moderator?
     )
   end
 
   def update_volunteer_role?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      own_organization? &&
       (
         user.moderator? || (
-          set_user == user && user.content_manager?
+          setup_own_user? && user.content_manager?
         )
       )
     )
@@ -55,10 +54,10 @@ class UserPolicy < ApplicationPolicy
 
   def update_content_manager_role?
     user.admin? || (
-      (user.organization_id == set_user.organization_id) &&
+      (own_organization?) &&
       (
         user.moderator? || (
-          set_user == user && user.content_manager?
+          setup_own_user? && user.content_manager?
         )
       )
     )
@@ -77,5 +76,13 @@ class UserPolicy < ApplicationPolicy
 
   def set_user
     record
+  end
+
+  def own_organization?
+    user.organization_id == set_user.organization_id
+  end
+
+  def setup_own_user?
+    set_user == user
   end
 end
