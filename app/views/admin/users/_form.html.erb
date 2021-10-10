@@ -13,24 +13,26 @@
 
   <%= f.input :email, required: true, input_html: { autocomplete: 'email' } %>
 
-  <% if current_user.admin? %>
+  <% if policy(user).update_admin_role? %>
     <%= f.input :admin, as: :boolean do %>
       <%= f.check_box :admin, {checked: user.admin? }, "true", "false" %>
     <% end %>
   <% end %>
-
-  <%= f.input :moderator, as: :boolean do %>
-    <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
+  <% if policy(user).update_moderator_role? %>
+    <%= f.input :moderator, as: :boolean do %>
+      <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
+    <% end %>
   <% end %>
-
-  <%= f.input :content_manager, as: :boolean do %>
-    <%= f.check_box :content_manager, { checked: user.content_manager? }, "true", "false" %>
+  <% if policy(user).update_content_manager_role? %>
+    <%= f.input :content_manager, as: :boolean do %>
+      <%= f.check_box :content_manager, { checked: user.content_manager? }, "true", "false" %>
+    <% end %>
   <% end %>
-
-  <%= f.input :volunteer, as: :boolean do %>
-    <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
+  <% if policy(user).update_volunteer_role? %>
+    <%= f.input :volunteer, as: :boolean do %>
+      <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
+    <% end %>
   <% end %>
-
   <%= f.input :sex, as: :radio_buttons, collection: [[0, t("female")], [1, t("male")]], label_method: :second, value_method: :first %>
 
   <% if current_user.admin? %>
