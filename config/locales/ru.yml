@@ -271,7 +271,7 @@ ru:
     volunteer: "Волонтер"
     moderator: "Модератор"
     admin: "Администратор"
-    content_manager: "Редактор просьб"
+    content_manager: "Координатор"
   authentication:
     errors:
       unauthorized: Неверные логин или пароль
