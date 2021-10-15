@@ -76,19 +76,21 @@ module Admin
       defaults = { organization_id: current_organization.id } if current_organization
       permit_attributes = %i[name surname phone email sex organization_id score]
 
-      if policy(@user).update_content_manager_role?
+      user = @user || User.new(defaults)
+
+      if policy(user).update_content_manager_role?
         permit_attributes << :content_manager
       end
 
-      if policy(@user).update_volunteer_role?
+      if policy(user).update_volunteer_role?
         permit_attributes << :volunteer
       end
       
-      if policy(@user).update_moderator_role?
+      if policy(user).update_moderator_role?
         permit_attributes << :moderator
       end
       
-      if policy(@user).update_admin_role?
+      if policy(user).update_admin_role?
         permit_attributes << :admin
       end
 
