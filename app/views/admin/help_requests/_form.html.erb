@@ -16,34 +16,16 @@
 <% end %>
 <%= simple_form_for [:admin, help_request], wrapper: :horizontal_form do |f| %>
   <%= f.error_notification %>
-  <div class="row">
-    <div class="col-6">
-      <%= f.input :title, hint: t(".char_limit") %>
-      <%= f.input :person %>
-      <%= f.input :city %>
-      <%= f.input :district %>
-      <%= f.input :street %>
-      <%= f.input :house %>
-      <%= f.input :apartment %>
-      <%= f.input :phone %>
-    </div>
-    <div class="col-6">
-      <div id="map">
-        <leaflet-map 
-          :marker="<%= help_request.lonlat_geojson || 'null' %>"
-          :is-valid="<%= !help_request.errors[:lonlat].any? %>"
-          marker-field-name="help_request[lonlat_geojson]"
-          address-changed-event-name="searchStringChanged"
-          error-message="<%= I18n.t("help_request.errors.empty_point") %>" />
-      </div>      
-    </div>
-  </div>
+  <%= f.input :title, hint: t(".char_limit") %>
+  <%= f.input :person %>
+  <%= f.input :phone %>
+  <%= render 'custom_values', f: f %>
   <%#= f.input :meds_preciption_required %>
   <%= f.input :comment, as: :text %>
   <%#= f.input :date_begin, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :date_end, as: :string, input_html: { class: 'datetimepicker' } %>
   <%#= f.input :mediated %>
-  <%= render 'custom_values', f: f %>
+  
   <p>
     <h4><%= t(".set_volunteer")%></h4>
     <%= f.input :volunteer_id, collection: @volunteers.map{|v| [user_label(v), v.id]}, disabled: !help_request.active? %>

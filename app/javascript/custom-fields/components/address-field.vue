@@ -1,6 +1,8 @@
 <template>
 <div class="form-group row help_request_custom_values_value">
-  <h4 v-html="obj.name" />
+  <label class="col-sm-3 col-form-label string optional">
+    <h5 v-html="obj.name"/>
+  </label>
   <div class="col-12">
     <div class="row">
       <div class="col-6">
