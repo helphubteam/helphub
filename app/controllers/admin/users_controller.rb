@@ -9,7 +9,7 @@ module Admin
     end
 
     def new
-      @user = User.new
+      @user = User.new organization: current_organization
     end
 
     def create
