@@ -13,20 +13,26 @@
 
   <%= f.input :email, required: true, input_html: { autocomplete: 'email' } %>
 
-  <% if current_user.admin? %>
+  <% if policy(user).update_admin_role? %>
     <%= f.input :admin, as: :boolean do %>
       <%= f.check_box :admin, {checked: user.admin? }, "true", "false" %>
     <% end %>
   <% end %>
-
-  <%= f.input :moderator, as: :boolean do %>
-    <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
+  <% if policy(user).update_moderator_role? %>
+    <%= f.input :moderator, as: :boolean do %>
+      <%= f.check_box :moderator, {checked: user.moderator? }, "true", "false" %>
+    <% end %>
   <% end %>
-
-  <%= f.input :volunteer, as: :boolean do %>
-    <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
+  <% if policy(user).update_content_manager_role? %>
+    <%= f.input :content_manager, as: :boolean do %>
+      <%= f.check_box :content_manager, { checked: user.content_manager? }, "true", "false" %>
+    <% end %>
   <% end %>
-
+  <% if policy(user).update_volunteer_role? %>
+    <%= f.input :volunteer, as: :boolean do %>
+      <%= f.check_box :volunteer, { checked: user.volunteer? }, "true", "false" %>
+    <% end %>
+  <% end %>
   <%= f.input :sex, as: :radio_buttons, collection: [[0, t("female")], [1, t("male")]], label_method: :second, value_method: :first %>
 
   <% if current_user.admin? %>
@@ -43,8 +49,9 @@
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">
       <%= f.submit(user.new_record? ? t(".create") : t(".save"), class: 'btn btn-primary') %>
-      <%= link_to(t(".cancel"), admin_users_path, class: 'btn btn-outline-secondary align-self-start') %>
-      <% unless user.new_record? %>
+      <% cancel_path = current_user.moderator? || current_user.admin? ? admin_users_path : admin_help_requests_path %>
+      <%= link_to(t(".cancel"), cancel_path, class: 'btn btn-outline-secondary align-self-start') %>
+      <% if !user.new_record? && policy(@user).destroy? %>
         <%= link_to(t(".delete"), admin_user_path(@user),
                     method: :delete,
                     data: { confirm: t(".confirm") },

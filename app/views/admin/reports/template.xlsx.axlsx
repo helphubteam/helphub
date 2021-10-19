@@ -45,7 +45,7 @@ wb.styles do |s|
         log.help_request.number,
         [log.user.name, log.user.surname].join(' '),
         log.user.email,
-        I18n.t("help_request_log.kind.#{log.kind}"),
+        log.label,
         log.comment,
         "#{I18n.l(log.created_at, format: :short)} #{Time.zone}"
       ], **cell_options

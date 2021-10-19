@@ -36,14 +36,16 @@
                      multiple: true,
                      class: 'selectpicker' %>
     </div>
-    <div class="form-group mb-2">
-      <%= select_tag :creator_id,
-                     options_for_select(@users.map { |user| ["#{user.name} <#{user.email}>", user.id, {class: ''}] },
-                                        params[:creator_id]),
-                     title: t(".by_creator"),
-                     multiple: true,
-                     class: 'selectpicker' %>
-    </div>
+    <% if @users.size > 1 %>
+      <div class="form-group mb-2">
+        <%= select_tag :creator_id,
+                      options_for_select(@users.map { |user| ["#{user.name} <#{user.email}>", user.id, {class: ''}] },
+                                          params[:creator_id]),
+                      title: t(".by_creator"),
+                      multiple: true,
+                      class: 'selectpicker' %>
+      </div>
+    <% end %>
     <div class='col-4'>
       <%= t(".find")%> <b><%= @help_requests_count %></b>
     </div>

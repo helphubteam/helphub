@@ -20,6 +20,7 @@ ru:
         admin: Администратор
         moderator: Модератор
         volunteer: Волонтер
+        content_manager: Координатор
         organization_id: Организация
         organization: Организация
         score: Баллы за выполненные просьбы
@@ -69,15 +70,15 @@ ru:
         document: Файл отчета
   help_request_log:
     kind:
-      assigned: Волонтер взял просьбу в работу
-      submitted: Волонтер выполнил просьбу
-      refused: Волонтер отказался от выполнения
-      blocked: Модератор заблокировал просьбу
-      activated: Модератор активировал просьбу
+      assigned: "%{user} взял просьбу в работу"
+      submitted: "%{user} выполнил просьбу"
+      refused: "%{user} отказался от выполнения"
+      blocked: "%{user} заблокировал просьбу"
+      activated: "%{user} активировал просьбу"
       refreshed: Повторяющаяся просьба обновлена
-      created: Модератор создал просьбу
-      manual_assign: Модератор назначил волонтеру просьбу
-      manual_unassign: Модератор снял волонтера с просьбы
+      created: "%{user} создал просьбу"
+      manual_assign: "%{user} назначил волонтеру просьбу"
+      manual_unassign: "%{user} снял волонтера с просьбы"
       refreshed: Повторяющаяся просьба обновлена
-      updated: Заявка обновлена модератором
-      cloned: Модератор склонировал просьбу
+      updated: "%{user} обновил просьбу"
+      cloned: "%{user} склонировал просьбу"

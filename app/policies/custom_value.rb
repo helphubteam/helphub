@@ -1,6 +1,6 @@
 class CustomValuePolicy < ApplicationPolicy
   def index?
-    user.moderator?
+    user.moderator? || user.content_manager?
   end
 
   def create?
@@ -17,7 +17,7 @@ class CustomValuePolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return [] unless user.moderator?
+      return [] if !user.moderator? && !user.content_manager? 
 
       scope.includes(:help_request).where(help_request: { organization: current_organization })
     end
