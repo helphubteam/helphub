@@ -65,6 +65,7 @@ module Admin
 
       def handle_address!
         address_field = @help_request.custom_values.includes(:custom_field).where(custom_fields: {data_type: 'address'}).first
+        return unless address_field
         address_data = JSON.parse(address_field.value)
         @help_request.city = address_data["city"]
         @help_request.street = address_data["street"]
