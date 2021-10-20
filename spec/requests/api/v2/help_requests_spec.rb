@@ -34,13 +34,15 @@ RSpec.describe 'Api::V2::HelpRequests', type: :request do
         checkbox_field = create :custom_field, name: "checkbox_field", help_request_kind: kind, data_type: :checkbox
         date_field = create :custom_field, name: "date_field", help_request_kind: kind, data_type: :date
         phone_field = create :custom_field, name: "phone_field", help_request_kind: kind, data_type: :phone
+        address_field = create :custom_field, name: "address_field", help_request_kind: kind, data_type: :address
         help_request = create :help_request, organization: organization, creator: moderator, help_request_kind: kind
         custom_values = {
           string_field.id => "string",
           textarea_field.id => "<p><b>textarea</b></p>",
           checkbox_field.id => "true",
           date_field.id => "22-09-1989",
-          phone_field.id => "{\"phone\": \"89293811231\"}"
+          phone_field.id => "{\"phone\": \"89293811231\"}",
+          address_field.id => "{\"city\":\"Moscow\",\"street\":\"Льва Толстого\",\"house\":\"1\",\"coordinates\":{\"type\":\"Point\",\"coordinates\":[\"37.589752\",\"55.731886\"]},\"apartment\":\"12\",\"district\":\"Центр\"}"
         }
 
         custom_values.each do |custom_field_id, value|
