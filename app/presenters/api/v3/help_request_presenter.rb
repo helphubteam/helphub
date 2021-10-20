@@ -108,6 +108,9 @@ module Api
         custom_fields.map do |custom_field|
           if public_only && !custom_field.public_field
             nil
+          # We skip address custom field as we use address fields instead
+          elsif custom_field.data_type == 'address'
+            nil 
           else
             { name: custom_field.name, value: build_custom_value(custom_field, custom_values), type: custom_field.data_type }
           end
