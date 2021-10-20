@@ -63,6 +63,18 @@ module Admin
         result
       end
 
+      def handle_address!
+        address_field = @help_request.custom_values.includes(:custom_field).where(custom_fields: {data_type: 'address'}).first
+        address_data = JSON.parse(address_field.value)
+        @help_request.city = address_data["city"]
+        @help_request.street = address_data["street"]
+        @help_request.house = address_data["house"]
+        @help_request.apartment = address_data["apartment"]
+        @help_request.district = address_data["district"]
+        @help_request.lonlat_geojson = address_data["coordinates"]
+        @help_request.save!
+      end
+
       def permitted_params
         result = params.require(:help_request).permit(
           :lonlat_geojson, :phone, :city, :district, :street,
