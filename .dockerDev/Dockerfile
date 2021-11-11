@@ -25,11 +25,12 @@ RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
+RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     libpq-dev \
     libcurl4-openssl-dev \
     postgresql-client-$PG_MAJOR \
