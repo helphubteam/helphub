@@ -7,6 +7,7 @@ module Admin
             creator_id: current_user.id
           )
         )
+          handle_address!
           write_moderator_log(:created)
           handle_blocking!
           handle_volunteer_assignments!(nil)

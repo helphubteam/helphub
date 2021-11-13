@@ -4,7 +4,7 @@
       type="hidden" 
       :value="JSON.stringify(currentMarker)" 
       v-bind:class="[ isValid ? '' : 'is-invalid' ]" 
-      name='help_request[lonlat_geojson]' 
+      :name="markerFieldName"
     />
     <div class="invalid-feedback">{{errorMessage}}</div>
     <l-map
@@ -39,6 +39,8 @@ export default {
   props: {
     marker: Object,
     isValid: Boolean,
+    addressChangedEventName: String,
+    markerFieldName: String,
     errorMessage: String
   },
 
@@ -69,9 +71,10 @@ export default {
     map.on(L.Draw.Event.CREATED, e => {
       this.updateCurrentMarker(Object.values(e.layer.getLatLng()));
       this.isManualMarker = true;
+      window.vueEventBus.$emit(`${this.addressChangedEventName}_marker_changed`, this.currentMarker);
     });
 
-    window.vueEventBus.$on('searchStringChanged', searchString => {
+    window.vueEventBus.$on(this.addressChangedEventName, searchString => {
       if (!this.isManualMarker) {
         const geocoder = GeocoderFactory.createGeocoder(GeocoderFactory.TYPES.yandex);
         geocoder.findByAddress(searchString).then(result => {
@@ -79,6 +82,7 @@ export default {
             this.updateCurrentMarker([ result[0].lat, result[0].lon ]);
             this.$refs.map.mapObject.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
             this.foundPoints = result;
+            window.vueEventBus.$emit(`${this.addressChangedEventName}_marker_changed`, this.currentMarker);
           }
         });
       }
@@ -127,6 +131,7 @@ export default {
       const pointData = JSON.parse(event.target.value);
       this.updateCurrentMarker([ pointData.lat, pointData.lon ]);
       this.$refs.map.mapObject.setView(this.getCurrentMarkerLatLonOrderCoords(), this.zoom);
+      window.vueEventBus.$emit(`${this.addressChangedEventName}_marker_changed`, this.currentMarker);
     },
 
     getCurrentMarkerLatLonOrderCoords() {
