@@ -17,7 +17,8 @@ module Admin
         Notifications::PushNotification.new(
           user: user,
           title: message_data[:title],
-          body: message_data[:body]
+          body: message_data[:body],
+          data: message_data[:data] || {}
         ).call
       end
 
@@ -26,7 +27,11 @@ module Admin
         body += " (#{help_request.title})" if help_request.title.present?
         {
           title: user_full_name(moderator),
-          body: body
+          body: body,
+          data: {
+            type: 'help_request:updated',
+            id: help_request.id_to_s
+          }
         }
       end
 
@@ -35,7 +40,11 @@ module Admin
         body += " (#{help_request.title})" if help_request.title.present?
         {
           title: user_full_name(moderator),
-          body: body
+          body: body,
+          data: {
+            type: 'help_request:assigned',
+            id: help_request.id_to_s
+          }
         }
       end
 
@@ -44,7 +53,11 @@ module Admin
         body += " (#{help_request.title})" if help_request.title.present?
         {
           title: user_full_name(moderator),
-          body: body
+          body: body,
+          data: {
+            type: 'help_request:unassigned',
+            id: help_request.id_to_s
+          }
         }
       end
 
