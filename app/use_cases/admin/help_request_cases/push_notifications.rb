@@ -30,7 +30,7 @@ module Admin
           body: body,
           data: {
             type: 'help_request:updated',
-            id: help_request.id_to_s
+            id: help_request.id.to_s
           }
         }
       end
@@ -43,7 +43,7 @@ module Admin
           body: body,
           data: {
             type: 'help_request:assigned',
-            id: help_request.id_to_s
+            id: help_request.id.to_s
           }
         }
       end
@@ -56,7 +56,7 @@ module Admin
           body: body,
           data: {
             type: 'help_request:unassigned',
-            id: help_request.id_to_s
+            id: help_request.id.to_s
           }
         }
       end
