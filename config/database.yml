@@ -5,11 +5,11 @@ default: &default
   timeout: 5000
   host: postgres
   username: postgres
-  password:
+  password: password
 
 development:
   <<: *default
-  url: app_development
+  url: <%= ENV.fetch('DATABASE_URL', 'app_development') %>
 
 test:
   <<: *default

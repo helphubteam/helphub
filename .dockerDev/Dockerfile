@@ -15,6 +15,7 @@ RUN apt-get update -qq \
     git \
     pkg-config \
     shared-mime-info \
+    python \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
