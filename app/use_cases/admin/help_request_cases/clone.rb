@@ -23,12 +23,15 @@ module Admin
       private
 
       def notify_volunteers_on_creation
-        notify_volunteers(I18n.t('notifications.help_request.create')) if current_user.organization.notify_if_new
+        notify_volunteers(
+          I18n.t('notifications.help_request.create'),
+          { type: 'help_request:created', id: help_request.id.to_s }
+        ) if current_user.organization.notify_if_new
       end
 
-      def notify_volunteers(message)
+      def notify_volunteers(message, data)
         BroadcastPushNotificationWorker.perform_async(
-          current_user.organization_id, message, ''
+          current_user.organization_id, message, '', data
         )
       end
 
