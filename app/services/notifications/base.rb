@@ -1,9 +1,10 @@
 module Notifications
   class Base
-    def initialize(title:, body:, user:)
+    def initialize(title:, body:, data:, user:)
       @title = title
       @body = body
       @user = user
+      @data = data
     end
 
     def call
@@ -12,6 +13,6 @@ module Notifications
 
     protected
 
-    attr_reader :title, :body, :user
+    attr_reader :title, :body, :user, :data
   end
 end

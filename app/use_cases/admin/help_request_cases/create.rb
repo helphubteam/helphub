@@ -21,7 +21,12 @@ module Admin
       private
 
       def notify_volunteers_on_creation
-        notify_volunteers(I18n.t('notifications.help_request.create')) if current_user.organization.notify_if_new
+        if current_user.organization.notify_if_new
+          notify_volunteers(
+            I18n.t('notifications.help_request.create'),
+            { type: 'help_request:created', id: help_request.id.to_s }
+          )
+        end
       end
     end
   end

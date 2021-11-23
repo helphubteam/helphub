@@ -1,9 +1,10 @@
 module Notifications
   class BroadcastPushNotification
-    def initialize(organization:, title:, body:)
+    def initialize(organization:, title:, body:, data:)
       @organization = organization
       @title = title
       @body = body
+      @data = data
     end
 
     def call
@@ -14,11 +15,11 @@ module Notifications
 
     private
 
-    attr_reader :organization, :title, :body
+    attr_reader :organization, :title, :body, :data
 
     def notify_volunteer(user_id)
       PushNotificationWorker.perform_async(
-        user_id, title, body
+        user_id, title, body, data
       )
     end
   end
