@@ -63,17 +63,22 @@ module Admin
         result
       end
 
-      def handle_address!
-        address_field = @help_request.custom_values.includes(:custom_field).where(custom_fields: {data_type: 'address'}).first
-        return unless address_field
-        address_data = JSON.parse(address_field.value)
+      def prelim_handle_address!(permitted_params)
+        help_request_kind = HelpRequestKind.find_by_id(permitted_params[:help_request_kind_id])
+        address_custom_field_id = help_request_kind && help_request_kind.custom_fields.where(data_type: 'address').first.try(:id)
+        return unless address_custom_field_id
+
+        custom_values = permitted_params["custom_values_attributes"]
+        address_field = custom_values && custom_values.to_h.values.find{|a| a['custom_field_id'] == address_custom_field_id.to_s}
+        address_data = address_field && address_field["value"] && JSON.parse(address_field["value"])
+        return unless address_data
+
         @help_request.city = address_data["city"]
         @help_request.street = address_data["street"]
         @help_request.house = address_data["house"]
         @help_request.apartment = address_data["apartment"]
         @help_request.district = address_data["district"]
         @help_request.lonlat_geojson = address_data["coordinates"]
-        @help_request.save!
       end
 
       def permitted_params

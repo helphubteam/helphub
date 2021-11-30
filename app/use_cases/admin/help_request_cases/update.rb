@@ -3,8 +3,8 @@ module Admin
     class Update < Base
       def call
         old_volunteer = help_request.volunteer
+        prelim_handle_address!(permitted_params)
         if help_request.update(permitted_params)
-          handle_address!
           write_update_log(help_request, permitted_params)
           handle_blocking!
           handle_volunteer_assignments!(old_volunteer)
