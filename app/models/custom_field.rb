@@ -16,7 +16,7 @@
 #  index_custom_fields_on_help_request_kind_id  (help_request_kind_id)
 #
 class CustomField < ApplicationRecord
-  DATA_TYPES = %w[string textarea date checkbox phone].freeze
+  DATA_TYPES = %w[string textarea date checkbox phone address].freeze
 
   belongs_to :help_request_kind
 

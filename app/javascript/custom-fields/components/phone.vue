@@ -10,14 +10,13 @@
     <input
       class="form-control string optional"
       type="text"
-      :value="obj.value && JSON.parse(obj.value).phone || ''"
-      @input="setPhone($event)"
+      v-model="obj.value.phone"
     />
     <input
       type="hidden"
       :name="getFieldName(index, 'value')" 
       :id="getFieldId(index)"
-      :value="getPhone"
+      :value="phoneValue"
     />
   </div>
   <hidden-field :obj="obj" :index="index" />
@@ -35,22 +34,28 @@ export default {
 
   mixins: [fieldMixin],
 
+  data() {
+    return {
+      phoneValue: ''
+    }
+  },
+
   props: {
     obj: Object,
     index: Number
   },
 
-  computed: {
-    getPhone () {
-      return this.obj.value
-    }
+  created() {
+    this.obj.value = this.obj.value && JSON.parse(this.obj.value) || {};
+    this.phoneValue = JSON.stringify(this.obj.value);
   },
 
-  methods: {
-    setPhone(event) {
-      if (!event || !event.target) return
-      this.obj.value = JSON.stringify({ phone: event.target.value })
-      this.$forceUpdate()
+  watch: {
+    'obj.value': {
+      handler() {
+        this.phoneValue = JSON.stringify(this.obj.value);
+      },
+      deep: true
     }
   }
 }

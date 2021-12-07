@@ -85,7 +85,9 @@ module Admin
                                end
       custom_fields_data = CustomField.includes(:help_request_kind)
                                       .where(help_request_kinds: { organization: current_organization })
-                                      .where(help_request_kind_id: help_request_kind_id).map do |custom_field|
+                                      .where(help_request_kind_id: help_request_kind_id)
+                                      .reorder('custom_fields.created_at')
+                                      .map do |custom_field|
         existing_custom_value = existing_custom_values[custom_field.id]
         {
           id: existing_custom_value.try(:[], :id),

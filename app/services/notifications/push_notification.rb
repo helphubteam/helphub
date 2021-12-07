@@ -12,7 +12,8 @@ module Notifications
       notification_driver.new(
         user: user,
         title: title,
-        body: body
+        body: body,
+        data: data
       ).call
     end
   end
