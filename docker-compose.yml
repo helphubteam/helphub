@@ -37,7 +37,7 @@ services:
 
   postgres:
     container_name: db_helphub
-    image: postgis/postgis
+    image: skywidesoft/postgres-hstore-postgis
     volumes:
       - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
 
