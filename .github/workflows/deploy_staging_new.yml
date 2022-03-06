@@ -1,0 +1,88 @@
+name: Deploy Stage
+
+concurrency:
+  group: deploy_stage
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy_production:
+    if: github.event_name == 'push'
+    env:
+      WEBAPP_IMAGE: 886471362192.dkr.ecr.eu-central-1.amazonaws.com/dev
+      SHA1: ${{ github.sha }}
+      SECRET_KEY_BASE: value
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PRODUCTION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRODUCTION }}
+          aws-region: eu-central-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build docker image
+        run: |
+          docker build -f .docker/Dockerfile -t $WEBAPP_IMAGE:$SHA1 \
+          --build-arg RUBY_VERSION=${RUBY_VERSION} \
+          --build-arg PG_MAJOR=${PG_MAJOR} \
+          --build-arg BUNDLER_VERSION=${BUNDLER_VERSION} \
+          --build-arg NODE_MAJOR=${NODE_MAJOR} \
+          --build-arg YARN_VERSION=${YARN_VERSION} \
+          --build-arg NODE_ENV=${NODE_ENV} \
+          --build-arg RAILS_ENV=${RAILS_ENV} \
+          --build-arg BUILDKIT_INLINE_CACHE=1 .
+        env:
+          DOCKER_BUILDKIT: 1
+          RUBY_VERSION: '2.7.2'
+          PG_MAJOR: '10'
+          BUNDLER_VERSION: '2.2.15'
+          NODE_MAJOR: '14'
+          YARN_VERSION: '1.22.5'
+          NODE_ENV: staging
+          RAILS_ENV: staging
+
+      - run: docker tag $WEBAPP_IMAGE:$SHA1 $WEBAPP_IMAGE:latest
+      - run: docker push $WEBAPP_IMAGE:$SHA1
+      - run: docker push $WEBAPP_IMAGE:latest
+
+      - run: 'echo "$DEV_ENVS" > .env && echo $DEV_CERTS | base64 -d > Certificates.pem'
+        shell: bash
+        env:
+          PROD_ENVS: ${{secrets.DEV_ENVS}}
+          PROD_CERTS: ${{secrets.DEV_CERTS}}
+          
+      - name: Copy files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.DEV_USER}}
+          key: ${{ secrets.DEV_SSH_KEY}}
+          source: ".env,docker-compose.stag.yml,Certificates.pem"
+          target: "helphub_staging"
+
+      - name: Start deploying to the production server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.DEV_USER}}
+          key: ${{ secrets.DEV_SSH_KEY}}
+          script: |
+
+            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_PRODUCTION }}
+            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_PRODUCTION }}
+            export AWS_DEFAULT_REGION=eu-central-1
+
+            $(aws ecr get-login|sed 's/ -e none//g')
+            mv helphub_staging/docker-compose.stag.yml helphub_staging/docker-compose.yml
+            cd helphub_staging && docker-compose pull app && docker-compose up -d --force-recreate
+            docker system prune -a -f
