@@ -1,6 +1,26 @@
 .form-control.is-valid, .was-validated .form-control:valid {
   background-image: none;
 }
+.container_body {
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 0px 15px;
+}
+@media (max-width: 1200px){
+  container_body{
+    max-width: 970px;
+  }
+}
+@media (max-width: 992px){
+  container_body{
+    max-width: 750px;
+  }
+}
+@media (max-width: 767px){
+  container_body{
+    max-width: none;
+  }
+}
 
 abbr[data-original-title], abbr[title] {
   text-decoration: none;
