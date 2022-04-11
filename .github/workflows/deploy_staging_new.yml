@@ -71,7 +71,7 @@ jobs:
           source: ".env,docker-compose.stag.yml,Certificates.pem"
           target: "helphub_staging"
 
-      - name: Start deploying to the production server
+      - name: Start deploying to the staging server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_HOST }}
