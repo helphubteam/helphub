@@ -20,13 +20,11 @@
     <%= yield :recaptcha_js %>
     <%= Setting.analytics.html_safe if !current_user.try(:admin?) && Setting.analytics.present? %>
   </head>
-
-
   <body>
     <div class="container p-0 px-3">
       <%= render partial: 'shared/menu' if current_user %>
     </div>
-    <div class="container_body ">
+    <div class="container_body ">  
         <div class="row">
           <div class="col">
             <%= bootstrap_flash if force_show_flash_notice? || !action_name.to_sym.in?([:create, :update]) %>
