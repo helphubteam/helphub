@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - dev
-      - deploy_new
 
 jobs:
   deploy_stage:
