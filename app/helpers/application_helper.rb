@@ -19,6 +19,10 @@ module ApplicationHelper
     tag :meta, name: "yandex_map_apikey", content: ENV["YANDEX_MAP_APIKEY"]
   end
 
+  def sentry_keys
+    tag :meta, name: "sentry", content: ENV["SENTRY_DSN"]
+  end
+
   def state_css(state)
     case state
     when 'active'
