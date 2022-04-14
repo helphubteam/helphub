@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  app:
+    image: 886471362192.dkr.ecr.eu-central-1.amazonaws.com/production:dev
+    env_file: .env
+    stdin_open: true
+    tty: true
+    container_name: app_helphub_staging
+    ports:
+      - "${DOCKER_PORT}:3000"
+    command: ./start.sh
+    volumes:
+      - ./public:/app/public
+      - ${HOME}/helphub_staging/Certificates.pem:/app/config/Certificates.pem
+    depends_on:
+      - postgres
+      - redis
+  sidekiq:
+    image: 886471362192.dkr.ecr.eu-central-1.amazonaws.com/production:dev
+    env_file: .env
+    container_name: sidekiq_helphub_staging
+    command: ./start_sidekiq.sh
+    depends_on:
+      - app
+      - postgres
+      - redis
+
+  postgres:
+    container_name: db_helphub_staging
+    image: skywidesoft/postgres-hstore-postgis
+    volumes:
+      - ${DATA_SAVE_PATH}:/var/lib/postgresql/data
+  redis:
+    container_name: redis_helphub_staging
+    image: redis:6.0.9-alpine
+    volumes:
+      - redis_staging:/data
+
+volumes:
+  redis_staging:

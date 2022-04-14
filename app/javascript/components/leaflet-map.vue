@@ -24,10 +24,17 @@
 </template>
 
 <script>
-import { latLng } from "leaflet";
+import { latLng, Icon } from "leaflet";
 import 'leaflet-draw';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import GeocoderFactory from '../map/geocoder-factory';
+
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
 
 export default {
   components: {

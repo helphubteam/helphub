@@ -57,13 +57,13 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-6" style="margin-bottom: 40px;">
         <leaflet-map 
           :marker="obj.value.coordinates" 
           :is-valid="!!obj.value.coordinates" 
           :address-changed-event-name="addressChangedEventName"
           :error-message="emptyPointErrorMessage" 
-        s/>
+        />
       </div>
     </div>
   </div>
