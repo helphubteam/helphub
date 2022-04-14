@@ -1,9 +1,11 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Войти", new_session_path(resource_name), class: "align-self-center mt-3" %><br />
+<div class= "align-self-center mt-3, btn_new_registration">
+  <%= link_to "Войти", new_session_path(resource_name), class: "btn btn-outline-primary" %><br />
 <% end %>
+</div>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Зарегистрироваться", new_registration_path(resource_name) %><br />
+  <%= link_to "Зарегистрироваться", new_registration_path(resource_name), class: "btn btn-outline-primary" %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && !%w(passwords registrations invitations).include?(controller_name) %>
@@ -11,7 +13,7 @@
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Не пришло подтверждение?", new_confirmation_path(resource_name) %><br />
+  <%= link_to "Не пришло подтверждение?", new_confirmation_path(resource_name), class: "btn btn-outline-primary" %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

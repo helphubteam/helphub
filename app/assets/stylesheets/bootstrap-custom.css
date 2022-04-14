@@ -20,3 +20,7 @@ abbr[data-original-title], abbr[title] {
   border: none;
   height: 42px;
 }
+.btn_new_registration{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
