@@ -46,6 +46,12 @@ Rails.application.routes.draw do
     end
 
     namespace :v3 do
+      post '/login', to: 'authentication#login'
+      post '/refresh_token', to: 'authentication#refresh_token'
+      get '/profile', to: 'profiles#show'
+      post '/subscribe', to: 'profiles#subscribe'
+      delete '/unsubscribe', to: 'profiles#unsubscribe'
+      
       resources :help_requests, only: :index do
         member do
           post :assign
@@ -53,6 +59,7 @@ Rails.application.routes.draw do
           post :refuse
         end
       end
+      resources :scores, only: :index
     end
   end
 
