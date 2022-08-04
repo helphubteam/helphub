@@ -33,11 +33,14 @@ module Api
         end
 
         def write_log(kind)
-          @help_request.logs.create!(
+          help_request_log = @help_request.logs.create!(
             user: volunteer,
             kind: kind.to_s,
             comment: params[:comment]
           )
+          if params[:photos].present?
+            help_request_log.photos.attach(params[:photos])
+          end
         end
       end
     end

@@ -15,7 +15,14 @@
         <tr>
           <td><%= link_to user_label(user), edit_admin_user_path(user) if user %></td>
           <td><%= log.label %></td>
-          <td><%= log.comment.try(:html_safe) %></td>
+          <td>
+            <%= log.comment.try(:html_safe) %>
+            <% if log.photos.attached? %>
+              <% log.photos.each do |photo| %>
+                <%= image_tag rails_blob_path(photo, only_path: true) %>
+              <% end %>
+            <% end %>
+          </td>
           <td><%= print_datetime(log.created_at) %></td>
         </tr>
       <% end %>

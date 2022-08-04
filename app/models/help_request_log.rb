@@ -19,6 +19,8 @@ class HelpRequestLog < ApplicationRecord
   belongs_to :user
   belongs_to :help_request
 
+  has_many_attached :photos
+
   enum kind: {
     actived: 0, assigned: 1,
     submitted: 2, refused: 3,
