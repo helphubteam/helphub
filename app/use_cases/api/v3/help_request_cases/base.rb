@@ -36,11 +36,9 @@ module Api
           help_request_log = @help_request.logs.create!(
             user: volunteer,
             kind: kind.to_s,
-            comment: params[:comment]
+            comment: params[:comment],
+            photos: params[:photos]
           )
-          if params[:photos].present?
-            help_request_log.photos.attach(params[:photos])
-          end
         end
       end
     end

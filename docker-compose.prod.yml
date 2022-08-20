@@ -24,6 +24,7 @@ services:
     command: ./start.sh
     volumes:
       - ./public:/app/public
+      - '../storage:/app/storage'
     depends_on:
       - postgres
       - redis

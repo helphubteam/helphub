@@ -53,8 +53,8 @@ gem 'caxlsx_rails'
 gem 'sentry-ruby'
 gem 'sentry-rails'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', ">= 1.2"
+gem 'activestorage-validator'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap',  require: false

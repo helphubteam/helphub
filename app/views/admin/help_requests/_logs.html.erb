@@ -16,10 +16,12 @@
           <td><%= link_to user_label(user), edit_admin_user_path(user) if user %></td>
           <td><%= log.label %></td>
           <td>
-            <%= log.comment.try(:html_safe) %>
+            <div><%= log.comment.try(:html_safe) %></div>
             <% if log.photos.attached? %>
               <% log.photos.each do |photo| %>
-                <%= image_tag rails_blob_path(photo, only_path: true) %>
+                <%= link_to rails_blob_path(photo), { class: 'log-image', target: "_blank" } do %>
+                  <%= image_tag photo.variant(resize_to_fit: [200, 100]) %>
+                <% end %>
               <% end %>
             <% end %>
           </td>
