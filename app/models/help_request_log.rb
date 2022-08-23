@@ -18,6 +18,13 @@
 class HelpRequestLog < ApplicationRecord
   belongs_to :user
   belongs_to :help_request
+  
+  has_many_attached :photos do |attachment|
+    attachable.variant :thumb, resize: "100x100"
+    attachable.variant :medium, resize: "300x300", monochrome: true  
+  end
+
+  validates :photos, presence: false, blob: { content_type: ['image/bmp', 'image/png', 'image/jpg', 'image/jpeg'], size_range: 0..(10.megabytes) }
 
   enum kind: {
     actived: 0, assigned: 1,

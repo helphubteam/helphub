@@ -12,6 +12,7 @@ services:
     volumes:
       - ./public:/app/public
       - ${HOME}/helphub_staging/Certificates.pem:/app/config/Certificates.pem
+      - '../storage:/app/storage'
     depends_on:
       - postgres
       - redis

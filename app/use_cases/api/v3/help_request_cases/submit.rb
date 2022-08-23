@@ -8,11 +8,13 @@ module Api
           unassigned_error
           not_own_error
           setup_recurring
+          write_log(:submitted)
           help_request.submit!
           increment_volunteer_score
-          write_log(:submitted)
           nulify_volunteer
         rescue UseCaseError => e
+          error_response(e.message)
+        rescue Exception => e
           error_response(e.message)
         else
           success_response
