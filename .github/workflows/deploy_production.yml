@@ -1,7 +1,7 @@
 name: Deploy Production
 
 concurrency:
-  group: deploy
+  group: deploy_prod
 
 on:
   push:
@@ -9,30 +9,81 @@ on:
       - master
 
 jobs:
-  push:
+  deploy_production:
     if: github.event_name == 'push'
+    env:
+      RAILS_ENV: production
+      WEBAPP_IMAGE: 886471362192.dkr.ecr.eu-central-1.amazonaws.com/production
+      SHA1: ${{ github.sha }}
+      SECRET_KEY_BASE: value
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PRODUCTION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRODUCTION }}
+          aws-region: eu-central-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build docker image
+        run: |
+          docker build -f .docker/Dockerfile -t $WEBAPP_IMAGE:$SHA1 \
+          --build-arg RUBY_VERSION=${RUBY_VERSION} \
+          --build-arg PG_MAJOR=${PG_MAJOR} \
+          --build-arg BUNDLER_VERSION=${BUNDLER_VERSION} \
+          --build-arg NODE_MAJOR=${NODE_MAJOR} \
+          --build-arg YARN_VERSION=${YARN_VERSION} \
+          --build-arg NODE_ENV=${NODE_ENV} \
+          --build-arg RAILS_ENV=${RAILS_ENV} \
+          --build-arg BUILDKIT_INLINE_CACHE=1 .
+        env:
+          DOCKER_BUILDKIT: 1
+          RUBY_VERSION: '2.7.2'
+          PG_MAJOR: '10'
+          BUNDLER_VERSION: '2.2.15'
+          NODE_MAJOR: '14'
+          YARN_VERSION: '1.22.5'
+          NODE_ENV: production
+          RAILS_ENV: production
+
+      - run: docker tag $WEBAPP_IMAGE:$SHA1 $WEBAPP_IMAGE:latest
+      - run: docker push $WEBAPP_IMAGE:$SHA1
+      - run: docker push $WEBAPP_IMAGE:latest
+
+      - run: 'echo "$PROD_ENVS" > .env && echo $PROD_CERTS | base64 -d > Certificates.pem'
+        shell: bash
+        env:
+          PROD_ENVS: ${{secrets.PROD_ENVS}}
+          PROD_CERTS: ${{secrets.PROD_CERTS}}
+          
+      - name: Copy files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER}}
+          key: ${{ secrets.PROD_SSH_KEY}}
+          source: ".env,docker-compose.prod.yml,Certificates.pem"
+          target: "helphub"
+
       - name: Start deploying to the production server
         uses: appleboy/ssh-action@master
         with:
-          host: 18.198.123.166
-          username: helphub
-          key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-          port: 22
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER}}
+          key: ${{ secrets.PROD_SSH_KEY}}
           script: |
-            if [ ! -d production ]; then
-              mkdir production
-            fi
-            cd production
-            ls -la
-            if [ ! -d helphub ]; then
-              git clone git@github.com:helphubteam/helphub.git
-            fi
-            cd helphub
-            git checkout master && git pull
-            cp ~/.production.env ~/production/helphub/.env
-            cp ~/Certificates.pem ~/production/helphub/config/Certificates.pem
-            docker-compose -f ./docker-compose.prod.yml up -d --build
+
+            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID_PRODUCTION }}
+            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY_PRODUCTION }}
+            export AWS_DEFAULT_REGION=eu-central-1
+
+            $(aws ecr get-login|sed 's/ -e none//g')
+            mv helphub/docker-compose.prod.yml helphub/docker-compose.yml
+            cd helphub && docker-compose pull app && docker-compose up -d --force-recreate
+            docker system prune -a -f
