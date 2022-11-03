@@ -22,6 +22,7 @@ x-backend: &backend
     - helphub-cache:/app/tmp/cache
     - helphub-bundle:/usr/local/bundle
     - helphub-node_modules:/app/node_modules
+    - './storage:/app/storage'
 services:
   app:
     <<: *backend

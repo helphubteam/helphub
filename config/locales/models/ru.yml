@@ -5,7 +5,15 @@ ru:
         attributes:
           policy_confirmed:
             blank: "Необходимо Ваше согласие на обработку персональных данных"
+
   activerecord:
+    errors:
+      models:
+        help_request_log:
+          attributes:
+            photos:
+              content_type: "Неверный формат изображения. Поддерживаемые форматы: JPEG, PNG, BMP"
+              max_size_error: "Слишком большое изображение. Максимальный размер: 10 Mb"
     models:
       user: Пользователи
     attributes:
@@ -65,6 +73,8 @@ ru:
         organization: Организация
         organization_id: Организация
         help_requests: Просьбы
+
+        
       report:
         name: Название
         document: Файл отчета
