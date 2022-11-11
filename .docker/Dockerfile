@@ -20,14 +20,13 @@ RUN apt-get update -qq \
     curl \
     less \
     git \
+    imagemagick \
     pkg-config \
     shared-mime-info \
     && apt-get clean \
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && truncate -s 0 /var/log/*log
-
-RUN apt-get update && apt-get --assume-yes install imagemagick
 
 RUN curl -sSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && echo 'deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
