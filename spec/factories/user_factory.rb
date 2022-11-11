@@ -11,6 +11,7 @@
 #  device_token           :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  hidden                 :boolean          default(FALSE)
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
 #  invitation_limit       :integer

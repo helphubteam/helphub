@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_195819) do
+ActiveRecord::Schema.define(version: 2022_11_11_200006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_195819) do
     t.string "unconfirmed_email"
     t.integer "status", default: 0
     t.boolean "policy_confirmed"
+    t.boolean "hidden", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
