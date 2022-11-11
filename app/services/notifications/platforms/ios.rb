@@ -1,10 +1,23 @@
+class IosNotificationError < StandardError
+  attr_reader :device_token, :user_id
+
+  def initialize(message, device_token, user_id)
+    @device_token = device_token 
+    @user_id = user_id
+    super(message)
+  end
+end
+
 module Notifications
   module Platforms
     class Ios < ::Notifications::Base
       APP_ID = 'com.helphub'.freeze
 
       def call
-        `#{curl_line}`
+        result, status = Open3.capture2e(curl_line)
+        unless status.to_s.ends_with?(" exit 0")
+          raise IosNotificationError.new(result, user.device_token, user.id)
+        end
       end
 
       private
