@@ -6,9 +6,11 @@
   <div class="col-12">
     <div class="row">
       <div class="col-6">
-        <div class="col-sm-9">
-          <div class="form-group row">
+        <div class="form-group row">
+          <label for="help_request_city_value" class="col-sm-3 col-form-label">Город</label>
+          <div class="col-sm-9">
             <input
+              id="help_request_city_value"
               class="form-control string optional"
               placeholder="Город"
               type="text"
@@ -16,9 +18,11 @@
             />
           </div>
         </div>
-        <div class="col-sm-9">
-          <div class="form-group row">
+        <div class="form-group row">
+          <label for="help_request_district_value" class="col-sm-3 col-form-label">Район</label>
+          <div class="col-sm-9">
             <input
+              id="help_request_district_value"
               class="form-control string optional"
               placeholder="Район"
               type="text"
@@ -26,9 +30,11 @@
             />
           </div>
         </div>
-        <div class="col-sm-9">
-          <div class="form-group row">
+        <div class="form-group row">
+          <label for="help_request_street_value" class="col-sm-3 col-form-label">Улица</label>
+          <div class="col-sm-9">
             <input
+              id="help_request_street_value"
               class="form-control string optional"
               placeholder="Улица"
               type="text"
@@ -36,8 +42,9 @@
             />
           </div>
         </div>
-        <div class="col-sm-9">
-          <div class="form-group row">
+        <div class="form-group row">
+          <label for="help_request_house_value" class="col-sm-3 col-form-label">Дом</label>
+          <div class="col-sm-9">
             <input
               class="form-control string optional"
               placeholder="Дом"
@@ -46,9 +53,11 @@
             />
           </div>
         </div>
-        <div class="col-sm-9">
-          <div class="form-group row">
+        <div class="form-group row">
+          <label for="help_request_apartment_value" class="col-sm-3 col-form-label">Квартира</label>
+          <div class="col-sm-9">
             <input
+              id="help_request_apartment_value"
               class="form-control string optional"
               placeholder="Квартира"
               type="text"
