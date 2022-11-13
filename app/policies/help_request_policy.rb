@@ -19,6 +19,10 @@ class HelpRequestPolicy < ApplicationPolicy
     standard_access(user, help_request)
   end
 
+  def bulk_assign?
+    standard_access(user, help_request)
+  end
+
   class Scope < Scope
     def resolve
       if user.moderator?

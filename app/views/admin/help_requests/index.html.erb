@@ -1,44 +1,61 @@
 
 <%= render 'filters' %>
-<div class="row">
-  <div class="col">
-    <div style="overflow: scroll;">
-      <table class="table table-bordered table-hover">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col" class="position-sticky" style="width: 15%; left: 0;"><%= sort_link 'state', t(".status") %></th>
-            <th scope="col"><%= sort_link 'created_at', t(".created") %></th>
-            <th scope="col"><%= t(".address") %></th>
-            <th scope="col"><%= t(".name") %></th>
-            <th scope="col"><%= t(".comment") %></th>
-            <th scope="col"><%= t(".volunteer") %></th>
-            <th scope="col"><%= sort_link 'period', t(".period") %></th>
-            <th scope="col"><%= sort_link 'updated_at', t(".last_update") %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @help_requests.each do |record| %>
-            <% help_request = HelpRequestPresenter.new(record) %>
+<%= form_tag bulk_assign_admin_help_requests_path, method: :post do %>
+  <p id='bulk-assign-container'>
+    <span><b>Выбранные просьбы назначить на </b></span>
+    <%= select_tag :volunteer_id,
+                  options_for_select(@volunteers.map{|v| [user_label(v), v.id] },
+                                      params[:volunteer_id]),
+                  include_blank: true,
+                  class: 'volunteer-select selectpicker' %>
+    <%= submit_tag 'Назначить', class: 'btn btn-sm btn-outline-success mr-2', id: 'bulk-assign-button' %>
+  </p>
+  <div class="row">
+    <div class="col">
+      <div style="overflow: scroll;">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
             <tr>
-              <td class="position-sticky" style="width: 15%; left: 0; background-color: #fff;">
-                <%= help_request_state_label(help_request).html_safe %>
-                <% title = help_request.title.present? ? "(#{help_request.title})" : '' %>
-                <div><%= link_to "#{t(".help_request_num")}#{help_request.number}" << " #{title}", edit_admin_help_request_path(help_request.id) %>
-                </div>
-              </td>
-              <td><%= print_datetime(help_request.created_at) %></td>
-              <td><%= help_request.address %></td>
-              <td><%= help_request.person %></td>
-              <td><%= truncate(help_request.comment, length: 50) %></td>
-              <% volunteer = help_request.volunteer %>
-              <td><%= link_to user_label(volunteer), edit_admin_user_path(volunteer) if volunteer %></td>
-              <td><%= help_request.period %></td>
-              <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
+              <th scope="col"></th>
+              <th scope="col" class="position-sticky" style="width: 15%; left: 0;"><%= sort_link 'state', t(".status") %></th>
+              <th scope="col"><%= sort_link 'created_at', t(".created") %></th>
+              <th scope="col"><%= t(".address") %></th>
+              <th scope="col"><%= t(".name") %></th>
+              <th scope="col"><%= t(".comment") %></th>
+              <th scope="col"><%= t(".volunteer") %></th>
+              <th scope="col"><%= sort_link 'period', t(".period") %></th>
+              <th scope="col"><%= sort_link 'updated_at', t(".last_update") %></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @help_requests, theme: 'twitter-bootstrap-4' if @help_requests.any? %>
+          </thead>
+          <tbody>
+            <% @help_requests.each do |record| %>
+              <% help_request = HelpRequestPresenter.new(record) %>
+              <tr>
+                <td>
+                  <% if record.active? || record.assigned? %>
+                    <%= check_box_tag "assign[]", record.id %>
+                  <% end %>
+                </td>
+                <td class="position-sticky" style="width: 15%; left: 0; background-color: #fff;">
+                  <%= help_request_state_label(help_request).html_safe %>
+                  <% title = help_request.title.present? ? "(#{help_request.title})" : '' %>
+                  <div><%= link_to "#{t(".help_request_num")}#{help_request.number}" << " #{title}", edit_admin_help_request_path(help_request.id) %>
+                  </div>
+                </td>
+                <td><%= print_datetime(help_request.created_at) %></td>
+                <td><%= help_request.address %></td>
+                <td><%= help_request.person %></td>
+                <td><%= truncate(help_request.comment, length: 50) %></td>
+                <% volunteer = help_request.volunteer %>
+                <td><%= link_to user_label(volunteer), edit_admin_user_path(volunteer) if volunteer %></td>
+                <td><%= help_request.period %></td>
+                <td><%= print_datetime(help_request.updated_at || help_request.created_at) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @help_requests, theme: 'twitter-bootstrap-4' if @help_requests.any? %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

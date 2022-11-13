@@ -77,6 +77,10 @@ Rails.application.routes.draw do
         get :custom_fields
         post :clone
       end
+
+      collection do
+        post :bulk_assign
+      end
     end
 
     resources :settings, only: %i[index] do
