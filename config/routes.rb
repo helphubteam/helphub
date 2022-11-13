@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       get '/profile', to: 'profiles#show'
       post '/subscribe', to: 'profiles#subscribe'
       delete '/unsubscribe', to: 'profiles#unsubscribe'
-      
+      delete '/remove_account', to: 'profiles#remove_account'
       resources :help_requests, only: :index do
         member do
           post :assign

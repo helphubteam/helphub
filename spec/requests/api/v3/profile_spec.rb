@@ -59,4 +59,32 @@ RSpec.describe 'Api::V3::Profile', type: :request do
       expect(user.reload.device_platform).to be_nil
     end
   end
+
+  describe 'DELETE /api/v3/remove_account' do
+
+    include_context 'jwt authenticated'
+
+    let(:user) do
+      create :user, :volunteer,
+             organization: organization,
+             device_token: 'testtoken',
+             device_platform: 'ios'
+    end
+
+    let(:user2) do
+      create :user, :volunteer,
+             organization: organization,
+             device_token: 'testtoken2',
+             device_platform: 'ios'
+    end
+
+    it 'removes user and now we can register another one with the same email' do
+      delete api_v3_remove_account_path
+      expect(response).to have_http_status(200)
+      expect(JSON.parse(response.body)).to eq({ 'removed' => 'ok' })
+      expect(user.reload.hidden).to be_truthy
+      user2.email = user.email
+      expect(user2.save).to be_truthy
+    end
+  end
 end
