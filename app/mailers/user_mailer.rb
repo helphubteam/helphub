@@ -14,4 +14,9 @@ class UserMailer < ApplicationMailer
     @organization = Organization.find(organization_id)
     mail(to: @moderator.email, subject: "Новый волонтер")
   end
+
+  def the_last_call(user_id: )
+    @user = User.find(user_id)
+    mail(to: @moderator.email, subject: "TODO: fill in this text")
+  end
 end
