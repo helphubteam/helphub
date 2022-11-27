@@ -7,6 +7,10 @@
 
   <%= f.error_notification %>
 
+  <% if user.hidden? %>
+  <p class='alert alert-warning'>Пользователь удален<p>
+  <% end %>
+
   <%= f.input :surname %>
   <%= f.input :name %>
   <%= f.input :phone %>
@@ -45,6 +49,7 @@
     <%= f.input :organization_id, 
       collection: Organization.active.pluck(:title, :id)
     %>
+    <%= f.input :hidden %>
   <% end %>
   <div class="form-group row mb-0">
     <div class="col-sm-9 offset-sm-3">

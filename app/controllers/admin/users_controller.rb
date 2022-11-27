@@ -90,8 +90,8 @@ module Admin
         permit_attributes << :moderator
       end
       
-      if policy(user).update_admin_role?
-        permit_attributes << :admin
+      if policy(user).restore?
+        permit_attributes << :hidden
       end
 
       params.require(:user).permit(*permit_attributes)

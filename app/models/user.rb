@@ -60,8 +60,6 @@ class User < ApplicationRecord
   include RolesHelpers
   include MobileDevices
 
-  default_scope { where(hidden: false) }
-
   has_many :activity, -> { reorder('created_at DESC') }, class_name: 'HelpRequestLog'
 
   paginates_per 20
@@ -102,6 +100,7 @@ class User < ApplicationRecord
   end
 
   def account_active?
+    return false if hidden?
     organization ? !organization.archive? : true
   end
 

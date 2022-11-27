@@ -25,6 +25,7 @@ ru:
         password: Пароль
         password_confirmation: Пароль
         role: Роль
+        hidden: Удален
         admin: Администратор
         moderator: Модератор
         volunteer: Волонтер
