@@ -25,7 +25,9 @@ class HelpRequestPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.moderator?
+      if user.admin?
+        return scope
+      elsif user.moderator?
         return scope.where(organization: current_organization)
       elsif user.content_manager?
         return scope.where(

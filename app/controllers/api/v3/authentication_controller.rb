@@ -6,7 +6,7 @@ module Api
 
       # POST /login
       def login
-        if @user&.valid_password?(params[:password]) && @user&.account_active? && @user&.volunteer?
+        if @user&.valid_password?(params[:password]) && !@user&.hidden? && @user&.account_active? && @user&.volunteer?
           unless @user.confirmed?
             return render json: error_response(I18n.t('authentication.errors.unconfirmed')), status: :forbidden
           end

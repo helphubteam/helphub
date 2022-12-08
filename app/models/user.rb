@@ -100,7 +100,6 @@ class User < ApplicationRecord
   end
 
   def account_active?
-    return false if hidden?
     organization ? !organization.archive? : true
   end
 
