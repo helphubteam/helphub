@@ -34,6 +34,10 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def restore?
+    user.admin?
+  end
+
   def update_moderator_role?
     user.admin? || (
       own_organization? &&

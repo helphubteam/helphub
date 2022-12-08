@@ -41,6 +41,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def verify_recaptcha?(token, recaptcha_action)
+    return true if Rails.env.development?
+
     secret_key = ENV["RECAPTCHA_SECRET_KEY"]
     uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?secret=#{secret_key}&response=#{token}")
     response = Net::HTTP.get_response(uri)

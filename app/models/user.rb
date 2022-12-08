@@ -11,6 +11,7 @@
 #  device_token           :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  hidden                 :boolean          default(FALSE)
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
 #  invitation_limit       :integer
@@ -37,7 +38,6 @@
 #
 # Indexes
 #
-#  index_users_on_email                 (email) UNIQUE
 #  index_users_on_invitation_token      (invitation_token) UNIQUE
 #  index_users_on_organization_id       (organization_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
@@ -70,6 +70,19 @@ class User < ApplicationRecord
   validates :phone, presence: true, if: -> { new_record? && volunteer? }
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  # Hack to override standard Devise validation
+  def will_save_change_to_email?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+  # ------------------------
+
+  validates_uniqueness_of :email, conditions: -> { where(hidden: false) }
+  
   validates :policy_confirmed, presence: true, if: :volunteer?
 
   enum status: { active: 0, pending: 1, blocked: 2 } do

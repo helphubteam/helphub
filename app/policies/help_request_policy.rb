@@ -19,9 +19,15 @@ class HelpRequestPolicy < ApplicationPolicy
     standard_access(user, help_request)
   end
 
+  def bulk_assign?
+    standard_access(user, help_request)
+  end
+
   class Scope < Scope
     def resolve
-      if user.moderator?
+      if user.admin?
+        return scope
+      elsif user.moderator?
         return scope.where(organization: current_organization)
       elsif user.content_manager?
         return scope.where(

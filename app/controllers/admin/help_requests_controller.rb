@@ -2,7 +2,7 @@ module Admin
   # rubocop:disable Metrics/ClassLength
   class HelpRequestsController < Admin::BaseController
     before_action :fill_help_request, only: %i[edit update destroy custom_fields clone]
-    before_action :fill_volunteers, only: %i[new edit update]
+    before_action :fill_volunteers, only: %i[index new edit update]
     helper_method :sort_column, :sort_direction, :help_request_kinds
 
     def index
@@ -129,6 +129,41 @@ module Admin
       redirect_to edit_admin_help_request_path(result)
     end
 
+    def bulk_assign
+      failed_help_request = nil
+      begin
+        HelpRequest.transaction do
+          help_request_ids = params[:assign]
+          volunteer_id = params[:volunteer_id]
+          
+          update_params = ActionController::Parameters.new(
+            help_request: {
+              volunteer_id: volunteer_id
+            }
+          )
+          help_requests = HelpRequest.where(id: help_request_ids)
+          help_requests.each do |help_request|
+            authorize help_request
+            unless Admin::HelpRequestCases::Update.new(
+              help_request, update_params, current_user
+            ).call
+              failed_help_request = help_request
+              raise ActiveRecord::Rollback
+            end
+          end
+          flash[:notice] = "Все просьбы успешно назначены"
+        end
+      rescue Error => e
+        if failed_help_request
+          label = failed_help_request.title || failed_help_request.number
+          flash[:error] = "Не удалось назначить просьбу #{label}"
+        else
+          flash[:error] = "Не удалось назначить просьбы"
+        end
+      end
+
+      redirect_to admin_help_requests_path
+    end
     private
 
     def fill_volunteers

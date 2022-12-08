@@ -49,6 +49,27 @@ RSpec.describe 'Admin::HelpRequests', type: :request do
     end
   end
 
+  describe 'POST /admin/help_requests/bulk_assign' do
+
+    let!(:help_request1) { create :help_request, organization: organization }
+    let!(:help_request2) { create :help_request, organization: organization }
+    let!(:volunteer) { create :user, :volunteer, organization: organization }
+
+    let(:valid_bulk_assign_params) do
+      {
+        assign: [help_request1.id, help_request2.id, ],
+        volunteer_id: volunteer.id
+      }
+    end
+
+    it 'assigns help requests to the volunteer' do
+      post bulk_assign_admin_help_requests_path, params: valid_bulk_assign_params
+      expect(response).to redirect_to(admin_help_requests_path)
+      expect(help_request1.reload.volunteer_id).to eql(volunteer.id)
+      expect(help_request2.reload.volunteer_id).to eql(volunteer.id)
+    end
+  end
+
   describe 'PUT /admin/help_requests/:id' do
     let!(:help_request) do
       create(:help_request, :active, organization: organization, phone: old_phone)

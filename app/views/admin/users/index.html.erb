@@ -18,8 +18,8 @@
   </tr>
   </thead>
   <% @users.each do |record| %>
-    <tr class="<%= "alert alert-warning" if record.pending? %>">
-      <td><%= record.surname %></td>
+    <tr class="<%= "alert alert-warning" if record.pending? %><%= "alert alert-light" if record.hidden? %>">
+      <td><%= record.surname %><%= record.hidden? ? " (УДАЛЕН)" : "" %></td>
       <td><%= record.name %></td>
       <td><%= record.phone %></td>
       <td><%= record.email %></td>
